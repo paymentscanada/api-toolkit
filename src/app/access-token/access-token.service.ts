@@ -16,6 +16,6 @@ export class AccessTokenService {
     };
     const body = `grant_type=client_credentials`;
 
-    return this.http.post(`${environment.apiBasuUrl}/accesstoken`, body, httpOptions);
+    return this.http.post(`${environment.apiBaseUrl}/accesstoken`, body, httpOptions);
   }
 }

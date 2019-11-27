@@ -4,9 +4,24 @@
 
 <div class="container-fluid">
   <ngb-tabset>
-    <ngb-tab title="DPRN Search">
+    <ngb-tab title="FIF - DPRN Search">
       <ng-template ngbTabContent>
         <app-dprn-search></app-dprn-search>
+      </ng-template>
+
+      <ng-template ngbTabContent>
+        <app-master></app-master>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="FIF - Master" >
+      <ng-template ngbTabContent>
+        <app-master></app-master>
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab title="FIF - Updated" >
+      <ng-template ngbTabContent>
+        <app-updated></app-updated>
       </ng-template>
     </ngb-tab>
   </ngb-tabset>

@@ -23,7 +23,7 @@ export class BranchService {
           })
         };
 
-        return this.http.get(`https://dev-api.payments.ca/fif-branch-live-dev/branches/${dprn}`, httpOptions);
+        return this.http.get(`${environment.apiBaseUrl}/fif-branch-live-dev/branches/${dprn}`, httpOptions);
       })
     );
   }

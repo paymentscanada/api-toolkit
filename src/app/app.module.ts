@@ -8,11 +8,16 @@ import {BranchService} from './branch/branch.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { DprnSearchComponent } from './dprn-search/dprn-search.component';
 import {AccessTokenService} from './access-token/access-token.service';
+import { MasterComponent } from './master/master.component';
+import {ExtractService} from './extracts/extracts.service';
+import { UpdatedComponent } from './updated/updated.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DprnSearchComponent,
+    MasterComponent,
+    UpdatedComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,6 +28,7 @@ import {AccessTokenService} from './access-token/access-token.service';
   providers: [
     BranchService,
     AccessTokenService,
+    ExtractService
   ],
   bootstrap: [AppComponent]
 })

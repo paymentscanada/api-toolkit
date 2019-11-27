@@ -1,0 +1,67 @@
+<form #dprnForm="ngForm" (ngSubmit)="onSubmit()">
+  <div class="card bg-light" style="margin-top: 1.5rem; margin-bottom: 1.5rem">
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <h3>Search</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-1">
+          Start Date:
+        </div>
+        <div class="col">
+          <ngb-datepicker #d [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}" [required]="true"></ngb-datepicker>
+        </div>
+        <div class="col-1">
+          End Date:
+        </div>
+        <div class="col">
+          <ngb-datepicker #d2 [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}" [required]="true"></ngb-datepicker>
+        </div>
+        <div class="col-2">
+          <button type="submit" class="btn btn-success" [disabled]="!dprnForm.form.valid">Submit</button>
+        </div>
+      </div>
+      <div class="row" style="margin-bottom: 1.5rem"></div>
+      <div class="row">
+        <div class="col">
+          <ngb-alert [type]="'danger'" [dismissible]="false" *ngIf="err$">
+            <h4 class="alert-heading">Failed Http call:</h4>
+            {{err$.status}} - {{err$.statusText}}
+            <hr />
+            <div *ngIf="err$.error">
+              {{err$.error.code}} - {{err$.error.message}}
+            </div>
+
+          </ngb-alert>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div *ngIf="result$">
+  <div class="row">
+    <div class="col">
+      <h3>Results</h3>
+    </div>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Branch DPRN</th>
+      <th>Institution</th>
+      <th>Branch Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let branch of result$">
+      <td>{{branch.identificationNumber.value}} - Changed? {{branch.identificationNumber.changed}}</td>
+      <td>{{branch.englishInstitutionName.value}} - Changed? {{branch.englishInstitutionName.changed}}</td>
+      <td>{{branch.branchDomicile.value}} - Changed? {{branch.branchDomicile.changed}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

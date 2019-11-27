@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiBasuUrl: 'https://dev-api.payments.ca',
+  apiBaseUrl: 'https://dev-api.payments.ca',
   branchesConsumerKey: '***REMOVED***',
   branchesConsumerSecret: '***REMOVED***',
   extractsConsumerKey: '***REMOVED***',
