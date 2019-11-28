@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {DprnSearch} from '../branch/DprnSearch';
-import {BranchService} from '../branch/branch.service';
+import {DprnSearch} from '../../services/branch/DprnSearch';
+import {BranchService} from '../../services/branch/branch.service';
 
 @Component({
   selector: 'app-dprn-search',

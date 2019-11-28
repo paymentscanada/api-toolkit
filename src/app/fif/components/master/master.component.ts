@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {DprnSearch} from '../branch/DprnSearch';
-import {ExtractService} from '../extracts/extracts.service';
+import {DprnSearch} from '../../services/branch/DprnSearch';
+import {ExtractService} from '../../services/extracts/extracts.service';
 
 @Component({
   selector: 'app-master',

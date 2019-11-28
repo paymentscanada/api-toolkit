@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ExtractService} from '../extracts/extracts.service';
+import {ExtractService} from '../../services/extracts/extracts.service';
 import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

@@ -8,7 +8,9 @@ export const environment = {
   branchesConsumerKey: '***REMOVED***',
   branchesConsumerSecret: '***REMOVED***',
   extractsConsumerKey: '***REMOVED***',
-  extractsConsumerSecret: '***REMOVED***'
+  extractsConsumerSecret: '***REMOVED***',
+  ccinLookupConsumerKey: '***REMOVED***',
+  ccinLookupConsumerSecret: '***REMOVED***'
 };
 
 /*

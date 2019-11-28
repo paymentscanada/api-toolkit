@@ -1,18 +1,15 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-
-import {mergeMap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
-import {AccessTokenService} from '../access-token/access-token.service';
-import {environment} from '../../environments/environment';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {AccessTokenService} from '../../../access-token/access-token.service';
+import {environment} from '../../../../environments/environment';
+import {mergeMap} from 'rxjs/operators';
 
 @Injectable()
-export class BranchService {
+export class CcinLookupService {
   constructor(private http: HttpClient, private accessTokenService: AccessTokenService) { }
 
-
-  getDprn(dprn: number): Observable<any> {
-    return this.accessTokenService.getOAuthToken(environment.branchesConsumerKey, environment.branchesConsumerSecret).pipe(
+  getCcin(ccin: string) {
+    return this.accessTokenService.getOAuthToken(environment.ccinLookupConsumerKey, environment.ccinLookupConsumerSecret).pipe(
       mergeMap((response) => {
         console.log(response.access_token);
 
@@ -23,9 +20,8 @@ export class BranchService {
           })
         };
 
-        return this.http.get(`${environment.apiBaseUrl}/fif-branch-live-dev/branches/${dprn}`, httpOptions);
+        return this.http.get(`${environment.apiBaseUrl}/ccin-lookup-live-dev/ccins/${ccin}`, httpOptions);
       })
     );
   }
-
 }
