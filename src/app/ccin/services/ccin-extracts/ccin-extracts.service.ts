@@ -4,15 +4,15 @@ import {AccessTokenService} from '../../../access-token/access-token.service';
 import {Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {mergeMap} from 'rxjs/operators';
-import {FifConstants} from '../fif.constants';
+import {CcinConstants} from '../ccin.constants';
 
 @Injectable()
-export class ExtractService {
+export class CcinExtractsService {
   constructor(private http: HttpClient, private accessTokenService: AccessTokenService) {
   }
 
   getUpdated(startDate: string, endDate: string): Observable<any> {
-    return this.accessTokenService.getOAuthToken(environment.extractsConsumerKey, environment.extractsConsumerSecret).pipe(
+    return this.accessTokenService.getOAuthToken(environment.ccinExtractsConsumerKey, environment.ccinExtractsConsumerSecret).pipe(
       mergeMap((response) => {
         console.log(response.access_token);
 
@@ -22,20 +22,20 @@ export class ExtractService {
 
         const httpOptions = {
           headers: new HttpHeaders({
-            'Content-Type': FifConstants.contentType,
+            'Content-Type': CcinConstants.contentType,
             Authorization: `Bearer ${response.access_token}`
           }),
           params
         };
 
-        return this.http.get(`${environment.apiBaseUrl}/fif-extracts-live-dev/extracts/updated`, httpOptions);
+        return this.http.get(`${environment.apiBaseUrl}/ccin-extracts-live-dev/extracts/updated`, httpOptions);
       })
     );
   }
 
 
   getMaster(asAtDate: string): Observable<any> {
-    return this.accessTokenService.getOAuthToken(environment.extractsConsumerKey, environment.extractsConsumerSecret).pipe(
+    return this.accessTokenService.getOAuthToken(environment.ccinExtractsConsumerKey, environment.ccinExtractsConsumerSecret).pipe(
       mergeMap((response) => {
         console.log(response.access_token);
 
@@ -51,7 +51,7 @@ export class ExtractService {
 
         const httpOptions = {
           headers: new HttpHeaders({
-            'Content-Type':  FifConstants.contentType,
+            'Content-Type':  CcinConstants.contentType,
             Authorization: `Bearer ${response.access_token}`
           }),
           params
@@ -59,7 +59,7 @@ export class ExtractService {
 
         console.log(httpOptions);
 
-        return this.http.get(`${environment.apiBaseUrl}/fif-extracts-live-dev/extracts/master`, httpOptions);
+        return this.http.get(`${environment.apiBaseUrl}/ccin-extracts-live-dev/extracts/master`, httpOptions);
       })
     );
   }

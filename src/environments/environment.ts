@@ -10,7 +10,9 @@ export const environment = {
   extractsConsumerKey: '***REMOVED***',
   extractsConsumerSecret: '***REMOVED***',
   ccinLookupConsumerKey: '***REMOVED***',
-  ccinLookupConsumerSecret: '***REMOVED***'
+  ccinLookupConsumerSecret: '***REMOVED***',
+  ccinExtractsConsumerKey: '***REMOVED***',
+  ccinExtractsConsumerSecret: '***REMOVED***',
 };
 
 /*

@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {AccessTokenService} from '../../../access-token/access-token.service';
 import {environment} from '../../../../environments/environment';
+import {FifConstants} from '../fif.constants';
 
 @Injectable()
 export class BranchService {
@@ -18,7 +19,7 @@ export class BranchService {
 
         const httpOptions = {
           headers: new HttpHeaders({
-            'Content-Type':  'application/vnd.fif.api.v1+json',
+            'Content-Type':  FifConstants.contentType,
             Authorization: `Bearer ${response.access_token}`
           })
         };

@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AccessTokenService} from '../../../access-token/access-token.service';
 import {environment} from '../../../../environments/environment';
 import {mergeMap} from 'rxjs/operators';
+import {CcinConstants} from '../ccin.constants';
 
 @Injectable()
 export class CcinLookupService {
@@ -15,7 +16,7 @@ export class CcinLookupService {
 
         const httpOptions = {
           headers: new HttpHeaders({
-            'Content-Type':  'application/vnd.fif.api.v1+json',
+            'Content-Type':  CcinConstants.contentType,
             Authorization: `Bearer ${response.access_token}`
           })
         };

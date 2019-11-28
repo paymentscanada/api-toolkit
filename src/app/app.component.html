@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
   <ngb-tabset>
-    <ngb-tab title="FIF - DPRN Search">
+    <ngb-tab title="FIF - DPRN Lookup">
       <ng-template ngbTabContent>
         <app-dprn-search></app-dprn-search>
       </ng-template>
@@ -25,6 +25,18 @@
     <ngb-tab title="CCIN - CCIN Lookup" >
       <ng-template ngbTabContent>
         <app-ccin-search></app-ccin-search>
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab title="CCIN - Master" >
+      <ng-template ngbTabContent>
+        <app-ccin-master></app-ccin-master>
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab title="CCIN - CCIN Updated" >
+      <ng-template ngbTabContent>
+        <app-ccin-updated></app-ccin-updated>
       </ng-template>
     </ngb-tab>
   </ngb-tabset>

@@ -13,6 +13,9 @@ import {ExtractService} from './fif/services/extracts/extracts.service';
 import { UpdatedComponent } from './fif/components/updated/updated.component';
 import { CcinSearchComponent } from './ccin/components/ccin-search/ccin-search.component';
 import {CcinLookupService} from './ccin/services/ccin-lookup/ccin-lookup.service';
+import { CcinMasterComponent } from './ccin/components/ccin-master/ccin-master.component';
+import { CcinUpdatedComponent } from './ccin/components/ccin-updated/ccin-updated.component';
+import {CcinExtractsService} from './ccin/services/ccin-extracts/ccin-extracts.service';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,8 @@ import {CcinLookupService} from './ccin/services/ccin-lookup/ccin-lookup.service
     MasterComponent,
     UpdatedComponent,
     CcinSearchComponent,
+    CcinMasterComponent,
+    CcinUpdatedComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +38,7 @@ import {CcinLookupService} from './ccin/services/ccin-lookup/ccin-lookup.service
     AccessTokenService,
     ExtractService,
     CcinLookupService,
+    CcinExtractsService,
   ],
   bootstrap: [AppComponent]
 })

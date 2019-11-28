@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {ExtractService} from '../../services/extracts/extracts.service';
+import {CcinExtractsService} from '../../services/ccin-extracts/ccin-extracts.service';
 import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
 import {Observable, of} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
+import * as moment from 'moment';
 
 @Component({
-  selector: 'app-updated',
-  templateUrl: './updated.component.html',
-  styleUrls: ['./updated.component.css']
+  selector: 'app-ccin-updated',
+  templateUrl: './ccin-updated.component.html',
+  styleUrls: ['./ccin-updated.component.css']
 })
-export class UpdatedComponent implements OnInit {
-
+export class CcinUpdatedComponent implements OnInit {
   startDate = new NgbDate(2019, 5, 1);
   endDate = new NgbDate(2019, 12, 31);
 
@@ -20,7 +20,7 @@ export class UpdatedComponent implements OnInit {
   result$: Observable<any[]>;
   err: any;
 
-  constructor(private extractService: ExtractService) { }
+  constructor(private extractService: CcinExtractsService) { }
 
   ngOnInit() {
   }
@@ -29,8 +29,8 @@ export class UpdatedComponent implements OnInit {
     this.loading = true;
     this.err = null;
     this.submitted = true;
-    const startDate = this.startDate ? `${this.startDate.year}-${this.startDate.month}-${this.startDate.day}` : null;
-    const endDate = this.endDate ? `${this.endDate.year}-${this.endDate.month}-${this.endDate.day}` : null;
+    const startDate = this.startDate ? this.getDate(this.startDate) : null;
+    const endDate = this.endDate ? this.getDate(this.endDate) : null;
 
     this.result$ = this.extractService.getUpdated(startDate, endDate)
       .pipe(
@@ -42,6 +42,10 @@ export class UpdatedComponent implements OnInit {
           return of();
         })
       );
+  }
+
+  getDate(date: NgbDate): string {
+    return moment().year(date.year).month(date.month).date(date.day).format('YYYY-MM-DD');
   }
 
 }
