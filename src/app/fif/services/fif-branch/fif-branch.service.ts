@@ -8,7 +8,7 @@ import {environment} from '../../../../environments/environment';
 import {FifConstants} from '../fif.constants';
 
 @Injectable()
-export class BranchService {
+export class FifBranchService {
   constructor(private http: HttpClient, private accessTokenService: AccessTokenService) { }
 
 

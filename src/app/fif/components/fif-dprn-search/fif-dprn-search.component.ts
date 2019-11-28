@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {DprnSearch} from '../../services/branch/DprnSearch';
-import {BranchService} from '../../services/branch/branch.service';
+import {DprnSearch} from '../../services/fif-branch/DprnSearch';
+import {FifBranchService} from '../../services/fif-branch/fif-branch.service';
 import {catchError, tap} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 
 @Component({
-  selector: 'app-dprn-search',
-  templateUrl: './dprn-search.component.html',
-  styleUrls: ['./dprn-search.component.css']
+  selector: 'app-fif-dprn-search',
+  templateUrl: './fif-dprn-search.component.html',
+  styleUrls: ['./fif-dprn-search.component.css']
 })
-export class DprnSearchComponent implements OnInit {
+export class FifDprnSearchComponent implements OnInit {
 
   model = new DprnSearch(0);
 
@@ -19,7 +19,7 @@ export class DprnSearchComponent implements OnInit {
   result$: Observable<any>;
   err: any;
 
-  constructor(protected branchService: BranchService) { }
+  constructor(protected branchService: FifBranchService) { }
 
   ngOnInit() {
   }

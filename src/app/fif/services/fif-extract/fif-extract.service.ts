@@ -7,7 +7,7 @@ import {mergeMap} from 'rxjs/operators';
 import {FifConstants} from '../fif.constants';
 
 @Injectable()
-export class ExtractService {
+export class FifExtractService {
   constructor(private http: HttpClient, private accessTokenService: AccessTokenService) {
   }
 

@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {DprnSearch} from '../../services/branch/DprnSearch';
-import {ExtractService} from '../../services/extracts/extracts.service';
 import {Observable, of} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {DateUtils} from '../../../common/date.utils';
+import {FifExtractService} from '../../services/fif-extract/fif-extract.service';
 
 @Component({
-  selector: 'app-master',
-  templateUrl: './master.component.html',
-  styleUrls: ['./master.component.css']
+  selector: 'app-fif-master',
+  templateUrl: './fif-master.component.html',
+  styleUrls: ['./fif-master.component.css']
 })
-export class MasterComponent implements OnInit {
+export class FifMasterComponent implements OnInit {
 
   date: any;
 
@@ -21,7 +20,7 @@ export class MasterComponent implements OnInit {
   err: any;
 
 
-  constructor(private extractService: ExtractService) { }
+  constructor(private extractService: FifExtractService) { }
 
   ngOnInit() {
   }

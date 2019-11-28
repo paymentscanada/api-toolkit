@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {ExtractService} from '../../services/extracts/extracts.service';
+import {FifExtractService} from '../../services/fif-extract/fif-extract.service';
 import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
 import {Observable, of} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {DateUtils} from '../../../common/date.utils';
 
 @Component({
-  selector: 'app-updated',
-  templateUrl: './updated.component.html',
-  styleUrls: ['./updated.component.css']
+  selector: 'app-fif-updated',
+  templateUrl: './fif-updated.component.html',
+  styleUrls: ['./fif-updated.component.css']
 })
-export class UpdatedComponent implements OnInit {
+export class FifUpdatedComponent implements OnInit {
 
   startDate = new NgbDate(2019, 5, 1);
   endDate = new NgbDate(2019, 12, 31);
@@ -21,7 +21,7 @@ export class UpdatedComponent implements OnInit {
   result$: Observable<any[]>;
   err: any;
 
-  constructor(private extractService: ExtractService) { }
+  constructor(private extractService: FifExtractService) { }
 
   ngOnInit() {
   }

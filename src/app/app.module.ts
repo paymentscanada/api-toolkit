@@ -4,13 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {BranchService} from './fif/services/branch/branch.service';
+import {FifBranchService} from './fif/services/fif-branch/fif-branch.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { DprnSearchComponent } from './fif/components/dprn-search/dprn-search.component';
+import { FifDprnSearchComponent } from './fif/components/fif-dprn-search/fif-dprn-search.component';
 import {AccessTokenService} from './access-token/access-token.service';
-import { MasterComponent } from './fif/components/master/master.component';
-import {ExtractService} from './fif/services/extracts/extracts.service';
-import { UpdatedComponent } from './fif/components/updated/updated.component';
+import { FifMasterComponent } from './fif/components/fif-master/fif-master.component';
+import {FifExtractService} from './fif/services/fif-extract/fif-extract.service';
+import { FifUpdatedComponent } from './fif/components/fif-updated/fif-updated.component';
 import { CcinSearchComponent } from './ccin/components/ccin-search/ccin-search.component';
 import {CcinLookupService} from './ccin/services/ccin-lookup/ccin-lookup.service';
 import { CcinMasterComponent } from './ccin/components/ccin-master/ccin-master.component';
@@ -21,9 +21,9 @@ import { ErrorComponent } from './common/error/error.component';
 @NgModule({
   declarations: [
     AppComponent,
-    DprnSearchComponent,
-    MasterComponent,
-    UpdatedComponent,
+    FifDprnSearchComponent,
+    FifMasterComponent,
+    FifUpdatedComponent,
     CcinSearchComponent,
     CcinMasterComponent,
     CcinUpdatedComponent,
@@ -36,9 +36,9 @@ import { ErrorComponent } from './common/error/error.component';
     NgbModule,
   ],
   providers: [
-    BranchService,
+    FifBranchService,
     AccessTokenService,
-    ExtractService,
+    FifExtractService,
     CcinLookupService,
     CcinExtractsService,
   ],
