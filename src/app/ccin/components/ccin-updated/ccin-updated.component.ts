@@ -4,6 +4,7 @@ import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
 import {Observable, of} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import * as moment from 'moment';
+import {DateUtils} from '../../../common/date.utils';
 
 @Component({
   selector: 'app-ccin-updated',
@@ -29,8 +30,8 @@ export class CcinUpdatedComponent implements OnInit {
     this.loading = true;
     this.err = null;
     this.submitted = true;
-    const startDate = this.startDate ? this.getDate(this.startDate) : null;
-    const endDate = this.endDate ? this.getDate(this.endDate) : null;
+    const startDate = DateUtils.convertNgbDateToString(this.startDate);
+    const endDate = DateUtils.convertNgbDateToString(this.endDate);
 
     this.result$ = this.extractService.getUpdated(startDate, endDate)
       .pipe(
@@ -42,10 +43,6 @@ export class CcinUpdatedComponent implements OnInit {
           return of();
         })
       );
-  }
-
-  getDate(date: NgbDate): string {
-    return moment().year(date.year).month(date.month).date(date.day).format('YYYY-MM-DD');
   }
 
 }

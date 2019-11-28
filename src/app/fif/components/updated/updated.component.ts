@@ -3,6 +3,7 @@ import {ExtractService} from '../../services/extracts/extracts.service';
 import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
 import {Observable, of} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
+import {DateUtils} from '../../../common/date.utils';
 
 @Component({
   selector: 'app-updated',
@@ -29,8 +30,8 @@ export class UpdatedComponent implements OnInit {
     this.loading = true;
     this.err = null;
     this.submitted = true;
-    const startDate = this.startDate ? `${this.startDate.year}-${this.startDate.month}-${this.startDate.day}` : null;
-    const endDate = this.endDate ? `${this.endDate.year}-${this.endDate.month}-${this.endDate.day}` : null;
+    const startDate = DateUtils.convertNgbDateToString(this.startDate);
+    const endDate = DateUtils.convertNgbDateToString(this.endDate);
 
     this.result$ = this.extractService.getUpdated(startDate, endDate)
       .pipe(

@@ -16,6 +16,7 @@ import {CcinLookupService} from './ccin/services/ccin-lookup/ccin-lookup.service
 import { CcinMasterComponent } from './ccin/components/ccin-master/ccin-master.component';
 import { CcinUpdatedComponent } from './ccin/components/ccin-updated/ccin-updated.component';
 import {CcinExtractsService} from './ccin/services/ccin-extracts/ccin-extracts.service';
+import { ErrorComponent } from './common/error/error.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {CcinExtractsService} from './ccin/services/ccin-extracts/ccin-extracts.s
     CcinSearchComponent,
     CcinMasterComponent,
     CcinUpdatedComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,

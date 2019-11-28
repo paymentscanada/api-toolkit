@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ExtractService} from '../../../fif/services/extracts/extracts.service';
 import {CcinExtractsService} from '../../services/ccin-extracts/ccin-extracts.service';
 import {Observable, of} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
+import {DateUtils} from '../../../common/date.utils';
 
 @Component({
   selector: 'app-ccin-master',
@@ -28,7 +28,7 @@ export class CcinMasterComponent implements OnInit {
     this.err = null;
     this.submitted = true;
     this.loading = true;
-    const date = this.date ? `${this.date.year}-${this.date.month}-${this.date.day}` : null;
+    const date = DateUtils.convertNgbDateToString(this.date);
 
     this.result$ = this.extractService.getMaster(date)
       .pipe(

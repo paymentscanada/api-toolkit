@@ -3,6 +3,7 @@ import {DprnSearch} from '../../services/branch/DprnSearch';
 import {ExtractService} from '../../services/extracts/extracts.service';
 import {Observable, of} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
+import {DateUtils} from '../../../common/date.utils';
 
 @Component({
   selector: 'app-master',
@@ -29,7 +30,7 @@ export class MasterComponent implements OnInit {
     this.err = null;
     this.submitted = true;
     this.loading = true;
-    const date = this.date ? `${this.date.year}-${this.date.month}-${this.date.day}` : null;
+    const date = DateUtils.convertNgbDateToString(this.date);
 
     this.result$ = this.extractService.getMaster(date)
       .pipe(

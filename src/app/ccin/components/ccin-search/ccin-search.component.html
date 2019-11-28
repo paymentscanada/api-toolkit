@@ -13,7 +13,7 @@
         <div class="col">
           <input type="text" class="form-control" id="name"
                  required name="name"
-                 [(ngModel)]="ccin" [ngModelOptions]="{standalone: true}"
+                 [(ngModel)]="ccin"
                  #name="ngModel">
         </div>
         <div class="col-2">
@@ -21,19 +21,7 @@
         </div>
       </div>
       <div class="row" style="margin-bottom: 1.5rem"></div>
-      <div class="row">
-        <div class="col">
-          <ngb-alert [type]="'danger'" [dismissible]="false" *ngIf="err">
-            <h4 class="alert-heading">Failed Http call:</h4>
-            {{err.status}} - {{err.statusText}}
-            <hr />
-            <div *ngIf="err.error">
-              {{err.error.code}} - {{err.error.message}}
-            </div>
-
-          </ngb-alert>
-        </div>
-      </div>
+      <app-error [error]="err"></app-error>
     </div>
   </div>
 </form>
