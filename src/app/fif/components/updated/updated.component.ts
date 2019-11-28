@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ExtractService} from '../../services/extracts/extracts.service';
 import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
 import {Observable, of} from 'rxjs';
-import {catchError} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-updated',
@@ -16,8 +16,9 @@ export class UpdatedComponent implements OnInit {
   endDate = new NgbDate(2019, 12, 31);
 
   submitted = false;
+  loading = false;
 
-  result$: Observable<any>;
+  result$: Observable<any[]>;
   err: any;
 
 
@@ -27,16 +28,22 @@ export class UpdatedComponent implements OnInit {
   }
 
   onSubmit() {
+    this.loading = true;
     this.err = null;
     this.submitted = true;
     const startDate = this.startDate ? `${this.startDate.year}-${this.startDate.month}-${this.startDate.day}` : null;
     const endDate = this.endDate ? `${this.endDate.year}-${this.endDate.month}-${this.endDate.day}` : null;
 
     this.result$ = this.extractService.getUpdated(startDate, endDate)
-      .pipe(catchError(err => {
-        this.err = err;
-        return of();
-      }));
+      .pipe(
+        tap(() => this.loading = false),
+        tap(response => console.log(response)),
+        catchError(err => {
+          this.loading = false;
+          this.err = err;
+          return of();
+        })
+      );
   }
 
 }

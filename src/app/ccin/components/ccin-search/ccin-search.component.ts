@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CcinLookupService} from '../../services/ccin-lookup/ccin-lookup.service';
-import {catchError} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 
 @Component({
@@ -11,6 +11,7 @@ import {Observable, of} from 'rxjs';
 export class CcinSearchComponent implements OnInit {
 
   submitted = false;
+  loading = false;
 
   result$: Observable<any>;
   err: any;
@@ -25,12 +26,18 @@ export class CcinSearchComponent implements OnInit {
   onSubmit() {
     this.err = null;
     this.submitted = true;
+    this.loading = true;
 
     this.result$ = this.ccinLookupService.getCcin(this.ccin)
-      .pipe(catchError(err => {
-        this.err = err;
-        return of();
-      }));
+      .pipe(
+        tap(() => this.loading = false),
+        tap(response => console.log(response)),
+        catchError(err => {
+          this.loading = false;
+          this.err = err;
+          return of();
+        })
+      );
   }
 
 }

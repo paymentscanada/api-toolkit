@@ -38,6 +38,8 @@
   </div>
 </form>
 
+<div *ngIf="loading">Loading...</div>
+
 <div *ngIf="result$ | async as result">
   <div class="row">
     <div class="col">
