@@ -20,12 +20,12 @@
       <div class="row" style="margin-bottom: 1.5rem"></div>
       <div class="row">
         <div class="col">
-          <ngb-alert [type]="'danger'" [dismissible]="false" *ngIf="err$">
+          <ngb-alert [type]="'danger'" [dismissible]="false" *ngIf="err">
             <h4 class="alert-heading">Failed Http call:</h4>
-            {{err$.status}} - {{err$.statusText}}
+            {{err.status}} - {{err.statusText}}
             <hr />
-            <div *ngIf="err$.error">
-              {{err$.error.code}} - {{err$.error.message}}
+            <div *ngIf="err.error">
+              {{err.error.code}} - {{err.error.message}}
             </div>
 
           </ngb-alert>
@@ -35,7 +35,7 @@
   </div>
 </form>
 
-<div *ngIf="result$">
+<div *ngIf="result$ | async as results">
   <div class="row">
     <div class="col">
       <h3>First 10 Results</h3>
@@ -51,7 +51,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let branch of result$">
+    <tr *ngFor="let branch of results">
       <td>{{branch.identificationNumber}}</td>
       <td>{{branch.englishInstitutionName}}</td>
       <td>{{branch.branchDomicile}}</td>

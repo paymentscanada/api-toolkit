@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {DprnSearch} from '../../services/branch/DprnSearch';
 import {BranchService} from '../../services/branch/branch.service';
+import {catchError} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
 
 @Component({
   selector: 'app-dprn-search',
@@ -13,8 +15,8 @@ export class DprnSearchComponent implements OnInit {
 
   submitted = false;
 
-  result$: any;
-  err$: any;
+  result$: Observable<any>;
+  err: any;
 
   constructor(protected branchService: BranchService) { }
 
@@ -22,17 +24,13 @@ export class DprnSearchComponent implements OnInit {
   }
 
   onSubmit() {
-    this.err$ = null;
+    this.err = null;
     this.submitted = true;
 
-    this.branchService.getDprn(this.model.dprn).subscribe(response => {
-      console.log(response);
-      this.result$ = response;
-    }, err => {
-      console.log(err);
-      this.err$ = err;
-      this.result$ = null;
-    });
+    this.result$ = this.branchService.getDprn(this.model.dprn).pipe(catchError(err => {
+      this.err = err;
+      return of();
+    }));
   }
 
   newDprn() {

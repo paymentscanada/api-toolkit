@@ -23,12 +23,12 @@
       <div class="row" style="margin-bottom: 1.5rem"></div>
       <div class="row">
         <div class="col">
-          <ngb-alert [type]="'danger'" [dismissible]="false" *ngIf="err$">
+          <ngb-alert [type]="'danger'" [dismissible]="false" *ngIf="err">
             <h4 class="alert-heading">Failed Http call:</h4>
-            {{err$.status}} - {{err$.statusText}}
+            {{err.status}} - {{err.statusText}}
             <hr />
-            <div *ngIf="err$.error">
-              {{err$.error.code}} - {{err$.error.message}}
+            <div *ngIf="err.error">
+              {{err.error.code}} - {{err.error.message}}
             </div>
 
           </ngb-alert>
@@ -38,7 +38,7 @@
   </div>
 </form>
 
-<div *ngIf="result$">
+<div *ngIf="result$ | async as result">
   <div class="row">
     <div class="col">
       <h3>Results</h3>
@@ -49,29 +49,29 @@
     <tbody>
     <tr>
       <td>Institution:</td>
-      <td>{{result$.englishInstitutionName}}</td>
+      <td>{{result.englishInstitutionName}}</td>
     </tr>
     <tr>
       <td>Branch:</td>
-      <td>{{result$.identificationNumber}} - {{result$.branchDomicile}}</td>
+      <td>{{result.identificationNumber}} - {{result.branchDomicile}}</td>
     </tr>
     <tr>
       <td>Status:</td>
-      <td>{{result$.status}}</td>
+      <td>{{result.status}}</td>
     </tr>
     <tr>
       <td>Address:</td>
       <td>
-        {{result$.civicAddress}}
-        <br *ngIf="result$.townCity" /> {{result$.townCity}}
-        <br *ngIf="result$.province" /> {{result$.province}}
-        <br *ngIf="result$.postalCode" />  {{result$.postalCode}}
+        {{result.civicAddress}}
+        <br *ngIf="result.townCity" /> {{result.townCity}}
+        <br *ngIf="result.province" /> {{result.province}}
+        <br *ngIf="result.postalCode" />  {{result.postalCode}}
       </td>
     </tr>
 
     <tr>
       <td>Exchange Point:</td>
-      <td>{{result$.exchangePoint}}</td>
+      <td>{{result.exchangePoint}}</td>
     </tr>
     </tbody>
   </table>

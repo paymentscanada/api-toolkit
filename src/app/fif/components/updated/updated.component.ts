@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ExtractService} from '../../services/extracts/extracts.service';
 import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
+import {Observable, of} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 
 @Component({
   selector: 'app-updated',
@@ -15,8 +17,8 @@ export class UpdatedComponent implements OnInit {
 
   submitted = false;
 
-  result$: any;
-  err$: any;
+  result$: Observable<any>;
+  err: any;
 
 
   constructor(private extractService: ExtractService) { }
@@ -25,18 +27,16 @@ export class UpdatedComponent implements OnInit {
   }
 
   onSubmit() {
-    this.err$ = null;
+    this.err = null;
     this.submitted = true;
     const startDate = this.startDate ? `${this.startDate.year}-${this.startDate.month}-${this.startDate.day}` : null;
     const endDate = this.endDate ? `${this.endDate.year}-${this.endDate.month}-${this.endDate.day}` : null;
-    this.extractService.getUpdated(startDate, endDate).subscribe(response => {
-      console.log(response[0]);
-      this.result$ = response;
-    }, err => {
-      console.log(err);
-      this.err$ = err;
-      this.result$ = null;
-    });
+
+    this.result$ = this.extractService.getUpdated(startDate, endDate)
+      .pipe(catchError(err => {
+        this.err = err;
+        return of();
+      }));
   }
 
 }
