@@ -1,53 +1,73 @@
 package ca.payments.example.restclient;
 
+import ca.payments.example.restclient.model.AccessTokenModel;
 import ca.payments.example.restclient.model.ExampleResponseModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.*;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
 
+import static java.lang.System.exit;
+
 @SpringBootApplication
-public class RestclientApplication {
+public class RestclientApplication implements CommandLineRunner {
 
 	private static final Logger log = LoggerFactory.getLogger(RestclientApplication.class);
-	private static MediaType fifMediaType = new MediaType("application", "vnd.fif.api.v1+json");
-	private static String gateway_auth_url = "https://api.payments.ca/accesstoken";
-	private static String fif_branch_url = "https://api.payments.ca/fif-branch-sandbox/branches/";
 
 	public static void main(String[] args) {
 		SpringApplication.run(RestclientApplication.class, args);
+		exit(0);
 	}
 
-	@Bean
-	public CommandLineRunner run()  {
-		return args -> {
+	@Override
+	public void run(String... args) {
+		RestTemplate restTemplate = new RestTemplate();
 
-			String url = fif_branch_url + "123456789";
-			String bearer = "BEARER_TOKEN";
+		String fif_branch_url = "https://api.payments.ca/fif-branch-sandbox/branches/";
+		MediaType fifMediaType = new MediaType("application", "vnd.fif.api.v1+json");
 
-			RestTemplate restTemplate = new RestTemplate();
-			HttpHeaders headers = new HttpHeaders();
+		String url = fif_branch_url + "123456789";
+		String bearer = getBearerToken(restTemplate);
 
-			headers.setAccept(Collections.singletonList(fifMediaType));
-			headers.setBearerAuth(bearer);
+		HttpHeaders headers = new HttpHeaders();
 
-			HttpEntity<?> entity = new HttpEntity<>(headers);
+		headers.setAccept(Collections.singletonList(fifMediaType));
+		headers.setBearerAuth(bearer);
 
-			try {
-				ResponseEntity<ExampleResponseModel> respEntity = restTemplate.exchange(url, HttpMethod.GET, entity, ExampleResponseModel.class);
-				log.info(respEntity.toString());
-			}catch (Exception ex){
-				log.error("Exception caught: ", ex);
-			}
+		HttpEntity<String> entity = new HttpEntity<>(headers);
 
-		};
+		ResponseEntity<ExampleResponseModel> respEntity = restTemplate.exchange(url, HttpMethod.GET, entity, ExampleResponseModel.class);
+		log.info("Branch details" + respEntity.toString());
+		return;
+	}
+
+
+	public String getBearerToken(RestTemplate restTemplate){
+
+		String gateway_auth_url = "https://api.payments.ca/accesstoken";
+		String CONSUMER_KEY = "nlocOqxPpCjBG3RnWfkAbFHIwVGXA2FT";
+		String CONSUMER_SECRET = "91muUGoA7ZNaoo1r";
+
+		HttpHeaders headers = new HttpHeaders();
+
+		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+		headers.setBasicAuth(CONSUMER_KEY, CONSUMER_SECRET);
+
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+		body.add("grant_type", "client_credentials");
+
+		HttpEntity<?> entity = new HttpEntity<>(body, headers);
+		ResponseEntity<AccessTokenModel> respEntity = restTemplate.exchange(gateway_auth_url, HttpMethod.POST, entity, AccessTokenModel.class);
+
+		log.info("Bearer token: " + respEntity.toString());
+		return respEntity.getBody().getAccess_token();
 	}
 
 }
