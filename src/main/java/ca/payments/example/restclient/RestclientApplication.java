@@ -45,7 +45,6 @@ public class RestclientApplication implements CommandLineRunner {
 
 		ResponseEntity<ExampleResponseModel> respEntity = restTemplate.exchange(url, HttpMethod.GET, entity, ExampleResponseModel.class);
 		log.info("Branch details" + respEntity.toString());
-		return;
 	}
 
 
