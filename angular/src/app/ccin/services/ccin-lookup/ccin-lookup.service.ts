@@ -17,6 +17,7 @@ export class CcinLookupService {
         const httpOptions = {
           headers: new HttpHeaders({
             'Content-Type':  CcinConstants.contentType,
+            Accept: CcinConstants.contentType,
             Authorization: `Bearer ${response.access_token}`
           })
         };

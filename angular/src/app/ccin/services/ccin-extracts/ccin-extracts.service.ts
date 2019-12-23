@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {mergeMap} from 'rxjs/operators';
 import {CcinConstants} from '../ccin.constants';
+import {FifConstants} from '../../../fif/services/fif.constants';
 
 @Injectable()
 export class CcinExtractsService {
@@ -23,6 +24,7 @@ export class CcinExtractsService {
         const httpOptions = {
           headers: new HttpHeaders({
             'Content-Type': CcinConstants.contentType,
+            Accept: CcinConstants.contentType,
             Authorization: `Bearer ${response.access_token}`
           }),
           params
@@ -52,6 +54,7 @@ export class CcinExtractsService {
         const httpOptions = {
           headers: new HttpHeaders({
             'Content-Type':  CcinConstants.contentType,
+            Accept: CcinConstants.contentType,
             Authorization: `Bearer ${response.access_token}`
           }),
           params

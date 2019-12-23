@@ -20,6 +20,7 @@ export class FifBranchService {
         const httpOptions = {
           headers: new HttpHeaders({
             'Content-Type':  FifConstants.contentType,
+            Accept: FifConstants.contentType,
             Authorization: `Bearer ${response.access_token}`
           })
         };
