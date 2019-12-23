@@ -1,36 +1,39 @@
 package ca.payments.example.restclient.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class AccessTokenModel {
-    private String refresh_token_expires_in;
-    private String organization_name;
+    private String refreshTokenExpiresIn;
+    private String organizationName;
     private String developerEmail;
     private String token_type;
-    private String issued_at;
-    private String client_id;
-    private String access_token;
-    private String application_name;
+    private String issuedAt;
+    private String clientId;
+    private String accessToken;
+    private String applicationName;
     private String scope;
-    private String expires_in;
-    private String refresh_count;
+    private String expiresIn;
+    private String refreshCount;
     private String status;
 
-    public String getRefresh_token_expires_in() {
-        return refresh_token_expires_in;
+    public String getRefreshTokenExpiresIn() {
+        return refreshTokenExpiresIn;
     }
 
-    public void setRefresh_token_expires_in(String refresh_token_expires_in) {
-        this.refresh_token_expires_in = refresh_token_expires_in;
+    public void setRefreshTokenExpiresIn(String refreshTokenExpiresIn) {
+        this.refreshTokenExpiresIn = refreshTokenExpiresIn;
     }
 
-    public String getOrganization_name() {
-        return organization_name;
+    public String getOrganizationName() {
+        return organizationName;
     }
 
-    public void setOrganization_name(String organization_name) {
-        this.organization_name = organization_name;
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
     }
 
     public String getDeveloperEmail() {
@@ -49,36 +52,36 @@ public class AccessTokenModel {
         this.token_type = token_type;
     }
 
-    public String getIssued_at() {
-        return issued_at;
+    public String getIssuedAt() {
+        return issuedAt;
     }
 
-    public void setIssued_at(String issued_at) {
-        this.issued_at = issued_at;
+    public void setIssuedAt(String issuedAt) {
+        this.issuedAt = issuedAt;
     }
 
-    public String getClient_id() {
-        return client_id;
+    public String getClientId() {
+        return clientId;
     }
 
-    public void setClient_id(String client_id) {
-        this.client_id = client_id;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
-    public String getAccess_token() {
-        return access_token;
+    public String getAccessToken() {
+        return accessToken;
     }
 
-    public void setAccess_token(String access_token) {
-        this.access_token = access_token;
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
-    public String getApplication_name() {
-        return application_name;
+    public String getApplicationName() {
+        return applicationName;
     }
 
-    public void setApplication_name(String application_name) {
-        this.application_name = application_name;
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
     }
 
     public String getScope() {
@@ -89,20 +92,20 @@ public class AccessTokenModel {
         this.scope = scope;
     }
 
-    public String getExpires_in() {
-        return expires_in;
+    public String getExpiresIn() {
+        return expiresIn;
     }
 
-    public void setExpires_in(String expires_in) {
-        this.expires_in = expires_in;
+    public void setExpiresIn(String expiresIn) {
+        this.expiresIn = expiresIn;
     }
 
-    public String getRefresh_count() {
-        return refresh_count;
+    public String getRefreshCount() {
+        return refreshCount;
     }
 
-    public void setRefresh_count(String refresh_count) {
-        this.refresh_count = refresh_count;
+    public void setRefreshCount(String refreshCount) {
+        this.refreshCount = refreshCount;
     }
 
     public String getStatus() {
@@ -116,17 +119,17 @@ public class AccessTokenModel {
     @Override
     public String toString() {
         return "AccessTokenModel{" +
-                "refresh_token_expires_in='" + refresh_token_expires_in + '\'' +
-                ", organization_name='" + organization_name + '\'' +
+                "refresh_token_expires_in='" + refreshTokenExpiresIn + '\'' +
+                ", organization_name='" + organizationName + '\'' +
                 ", developerEmail='" + developerEmail + '\'' +
                 ", token_type='" + token_type + '\'' +
-                ", issued_at='" + issued_at + '\'' +
-                ", client_id='" + client_id + '\'' +
-                ", access_token='" + access_token + '\'' +
-                ", application_name='" + application_name + '\'' +
+                ", issued_at='" + issuedAt + '\'' +
+                ", client_id='" + clientId + '\'' +
+                ", access_token='" + accessToken + '\'' +
+                ", application_name='" + applicationName + '\'' +
                 ", scope='" + scope + '\'' +
-                ", expires_in='" + expires_in + '\'' +
-                ", refresh_count='" + refresh_count + '\'' +
+                ", expires_in='" + expiresIn + '\'' +
+                ", refresh_count='" + refreshCount + '\'' +
                 ", status='" + status + '\'' +
                 '}';
     }
