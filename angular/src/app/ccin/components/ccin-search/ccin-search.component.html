@@ -1,0 +1,58 @@
+<form #dprnForm="ngForm" (ngSubmit)="onSubmit()">
+  <div class="card bg-light" style="margin-top: 1.5rem; margin-bottom: 1.5rem">
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <h3>Search</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-1">
+          CCIN:
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" id="name"
+                 required name="name"
+                 [(ngModel)]="ccin"
+                 #name="ngModel">
+        </div>
+        <div class="col-2">
+          <button type="submit" class="btn btn-success" [disabled]="!dprnForm.form.valid">Submit</button>
+        </div>
+      </div>
+      <div class="row" style="margin-bottom: 1.5rem"></div>
+      <app-error [error]="err"></app-error>
+    </div>
+  </div>
+</form>
+
+<div *ngIf="loading">Loading...</div>
+
+<div *ngIf="result$ | async as result">
+  <div class="row">
+    <div class="col">
+      <h3>Results</h3>
+    </div>
+  </div>
+
+  <table class="table table-striped">
+    <tbody>
+    <tr>
+      <td>CCIN:</td>
+      <td>{{result.ccin}}</td>
+    </tr>
+    <tr>
+      <td>Shortname:</td>
+      <td>{{result.shortname}}</td>
+    </tr>
+    <tr>
+      <td>Status:</td>
+      <td>{{result.status}}</td>
+    </tr>
+    <tr>
+      <td>Lead Financial Institution:</td>
+      <td>{{result.leadFiNum}} - {{result.leadFiName}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
