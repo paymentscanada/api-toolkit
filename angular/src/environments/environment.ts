@@ -5,14 +5,14 @@
 export const environment = {
   production: false,
   apiBaseUrl: 'https://dev-api.payments.ca',
-  branchesConsumerKey: '***REMOVED***',
-  branchesConsumerSecret: '***REMOVED***',
-  extractsConsumerKey: '***REMOVED***',
-  extractsConsumerSecret: '***REMOVED***',
-  ccinLookupConsumerKey: '***REMOVED***',
-  ccinLookupConsumerSecret: '***REMOVED***',
-  ccinExtractsConsumerKey: '***REMOVED***',
-  ccinExtractsConsumerSecret: '***REMOVED***',
+  branchesConsumerKey: 'REPLACE WITH CONSUMER KEY',
+  branchesConsumerSecret: 'REPLACE WITH CONSUMER SECRET',
+  extractsConsumerKey: 'REPLACE WITH CONSUMER KEY',
+  extractsConsumerSecret: 'REPLACE WITH CONSUMER SECRET',
+  ccinLookupConsumerKey: 'REPLACE WITH CONSUMER KEY',
+  ccinLookupConsumerSecret: 'REPLACE WITH CONSUMER SECRET',
+  ccinExtractsConsumerKey: 'REPLACE WITH CONSUMER KEY',
+  ccinExtractsConsumerSecret: 'REPLACE WITH CONSUMER SECRET',
 };
 
 /*
