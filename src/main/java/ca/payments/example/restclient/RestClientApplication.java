@@ -4,6 +4,7 @@ import ca.payments.example.restclient.model.AccessTokenModel;
 import ca.payments.example.restclient.model.ExampleResponseModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,13 +25,22 @@ import static java.lang.System.exit;
  * Values (consumer_key + secret), (dprn) will need to be replaced. For more information, visit
  * https://developer.payments.ca/getting-started
  */
-
 @SpringBootApplication
-public class RestclientApplication implements CommandLineRunner {
-	private static final Logger log = LoggerFactory.getLogger(RestclientApplication.class);
+public class RestClientApplication implements CommandLineRunner {
+	private static final Logger log = LoggerFactory.getLogger(RestClientApplication.class);
+
+	@Value("${api-consumer-key}")
+	private String CONSUMER_KEY;
+	@Value("${api-consumer-secret}")
+	private String CONSUMER_SECRET;
+	@Value("${api-branches-url}")
+	private String API_TEMPLATE_URL;
+	@Value("${api-branch-dprn}")
+	private String DPRN;
+
 
 	public static void main(String[] args) {
-		SpringApplication.run(RestclientApplication.class, args);
+		SpringApplication.run(RestClientApplication.class, args);
 		exit(0);
 	}
 
@@ -38,17 +48,24 @@ public class RestclientApplication implements CommandLineRunner {
 	public void run(String... args) {
 		RestTemplate restTemplate = new RestTemplate();
 
-		//base URL for the branch-sandbox
-		String fif_branch_sandbox_url = "https://api.payments.ca/fif-branch-sandbox/branches/";
+		//call the bearer token method and generate a bearer token
+		String bearer = getBearerToken(restTemplate);
+
+		//call API and print out API details
+		printBranchDetails(restTemplate, bearer);
+	}
+
+	/**
+	 *
+	 * @param restTemplate Spring RestTemplate to facilitate making REST calls to the APIs
+	 * @param bearer the bearer token used to determine if the caller is authenticated
+	 */
+	public void printBranchDetails(RestTemplate restTemplate, String bearer) {
+		//complete URL, comprised of sandbox_url and DPRN
+		String url = API_TEMPLATE_URL + DPRN;
 
 		//proper media type for the request
 		MediaType fifMediaType = new MediaType("application", "vnd.fif.api.v1+json");
-
-		//complete URL, comprised of sandbox_url and DPRN
-		String url = fif_branch_sandbox_url + "REPLACE_WITH_DPRN";
-
-		//call the bearer token method and generate a bearer token
-		String bearer = getBearerToken(restTemplate);
 
 		HttpHeaders headers = new HttpHeaders();
 
@@ -61,20 +78,17 @@ public class RestclientApplication implements CommandLineRunner {
 
 		//make the API call
 		ResponseEntity<ExampleResponseModel> respEntity = restTemplate.exchange(url, HttpMethod.GET, entity, ExampleResponseModel.class);
-		log.info("Branch details" + respEntity.toString());
+		log.info("Branch details: " + respEntity.toString());
 	}
 
-
+	/**
+	 * Make an API call to get the bearer token with provided consumer key and consumer secret.
+	 * @param restTemplate Spring RestTemplate to facilitate making REST calls to the APIs
+	 * @return a String that represents the bearer token
+	 */
 	public String getBearerToken(RestTemplate restTemplate){
-
 		//base URL for the access token URL
 		String gateway_auth_url = "https://api.payments.ca/accesstoken";
-
-		//your consumer key - this is generated when you create an 'app' for the product - in this example the fif branch sandbox
-		String CONSUMER_KEY = "REPLACE_CONSUMER_KEY";
-
-		//your consumer secret - this is generated when you create an 'app' for the product - in this example the fif branch sandbox
-		String CONSUMER_SECRET = "CONSUMER_SECRET";
 
 		HttpHeaders headers = new HttpHeaders();
 
@@ -94,7 +108,7 @@ public class RestclientApplication implements CommandLineRunner {
 		ResponseEntity<AccessTokenModel> respEntity = restTemplate.exchange(gateway_auth_url, HttpMethod.POST, entity, AccessTokenModel.class);
 
 		log.info("Bearer token: " + respEntity.toString());
-		return respEntity.getBody().getAccess_token();
+		return respEntity.getBody().getAccessToken();
 	}
 
 }
