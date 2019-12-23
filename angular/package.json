@@ -1,5 +1,5 @@
 {
-  "name": "apigee-cors-test",
+  "name": "angular-api-sample",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
