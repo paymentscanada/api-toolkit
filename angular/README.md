@@ -1,27 +1,15 @@
-# Test
+# Angular API Sample
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.12.
+This is a sample angular application that connects to the Payments Canada API and gets a sandboxed apis. The following happen depending on the page:
 
-## Development server
+1. Gets a bearer token with the provided consumer key and consumer secret.
+2. Fetches the requested resource from the sandbox item using the provided bearer token.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This is to be used as a guide only, with no guarantees made, and is NOT production ready code. Certain values, example: (consumer_key, consumer_secret) will need to be replaced. For more information, visit https://developer.payments.ca/getting-started
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Quick Guide to Execute the Application
+1. Run `npm install` to install the dependencies
+2. Edit the file src/environments/environment.ts to use your consumer key and consumer secret created from My Apps.
+   * **Note**: Not all values are needed, you only need the consumer key and consumer secret for the API you are interested in
+2. Run `npm start` to start the application.
+3. In your browser, navigate to `http://localhost:4200` to access the app.

@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiBaseUrl: 'https://dev-api.payments.ca',
+  environmentType: 'sandbox',
   branchesConsumerKey: 'REPLACE WITH CONSUMER KEY',
   branchesConsumerSecret: 'REPLACE WITH CONSUMER SECRET',
   extractsConsumerKey: 'REPLACE WITH CONSUMER KEY',
