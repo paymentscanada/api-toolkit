@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" href="#" [text]="title">angular-api-sample</a>
+</nav>
+
+<div class="container-fluid">
+  <ngb-tabset>
+    <ngb-tab title="FIF - DPRN Lookup">
+      <ng-template ngbTabContent>
+        <app-fif-dprn-search></app-fif-dprn-search>
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab title="FIF - Master" >
+      <ng-template ngbTabContent>
+        <app-fif-master></app-fif-master>
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab title="FIF - Updated" >
+      <ng-template ngbTabContent>
+        <app-fif-updated></app-fif-updated>
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab title="CCIN - CCIN Lookup" >
+      <ng-template ngbTabContent>
+        <app-ccin-search></app-ccin-search>
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab title="CCIN - Master" >
+      <ng-template ngbTabContent>
+        <app-ccin-master></app-ccin-master>
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab title="CCIN - Updated" >
+      <ng-template ngbTabContent>
+        <app-ccin-updated></app-ccin-updated>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>
