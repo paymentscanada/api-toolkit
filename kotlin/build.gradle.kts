@@ -2,6 +2,8 @@ val okhttp_version: String by project
 val retrofit_version: String by project
 val coroutines_version: String by project
 val jackson_version: String by project
+val slf4j_version: String by project
+val logback_version: String by project
 
 
 plugins {
@@ -27,6 +29,9 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
     implementation("com.squareup.retrofit2:converter-jackson:$retrofit_version")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jackson_version")
+    implementation("org.slf4j:slf4j-api:$slf4j_version")
+    implementation("ch.qos.logback:logback-classic:$logback_version")
+    implementation("ch.qos.logback:logback-core:$logback_version")
 }
 
 tasks {
