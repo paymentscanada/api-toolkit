@@ -1,0 +1,443 @@
+{
+	"info": {
+		"_postman_id": "d3dbebd6-7252-4e97-8eaa-b5ae188917d3",
+		"name": "CCIN-Sandbox Collection Git",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Single-CCIN-Lookup-Sandbox",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.ccin.api.v1+json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer [Update with Access Token Generated from Apigee-OAuth API]",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.payments.ca/ccin-lookup-sandbox/ccins/91234567",
+					"protocol": "https",
+					"host": [
+						"api",
+						"payments",
+						"ca"
+					],
+					"path": [
+						"ccin-lookup-sandbox",
+						"ccins",
+						"91234567"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Single-CCIN-Lookup-Sandbox-with-asAtDate",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.ccin.api.v1+json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer [Update with Access Token Generated from Apigee-OAuth API]",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.payments.ca/ccin-lookup-sandbox/ccins/91234567?asAtDate=2020-01-01",
+							"protocol": "https",
+							"host": [
+								"api",
+								"payments",
+								"ca"
+							],
+							"path": [
+								"ccin-lookup-sandbox",
+								"ccins",
+								"91234567"
+							],
+							"query": [
+								{
+									"key": "asAtDate",
+									"value": "2020-01-01"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 06 Jan 2020 15:37:44 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "773"
+						},
+						{
+							"key": "Host",
+							"value": "api.payments.ca"
+						},
+						{
+							"key": "X-Forwarded-For",
+							"value": "209.217.68.130"
+						},
+						{
+							"key": "X-Forwarded-Port",
+							"value": "9001"
+						},
+						{
+							"key": "X-Forwarded-Proto",
+							"value": "https"
+						},
+						{
+							"key": "Accept",
+							"value": "application/vnd.ccin.api.v1+json"
+						},
+						{
+							"key": "Authorization",
+							"value": "Bearer FfjDvYfbfIAmoAPuZCMJ7CdgPxf4"
+						},
+						{
+							"key": "User-Agent",
+							"value": "PostmanRuntime/7.20.1"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Postman-Token",
+							"value": "481a2800-d3c8-4d5d-9758-aae5a581f775"
+						},
+						{
+							"key": "Accept-Encoding",
+							"value": "gzip, deflate"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "fda4fe29ab6b96bd14c1d4141de4ff41/8566308978054753192"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 google, 1.1 google"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "clear"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"cycleNumber\": 1,\n    \"cycleDate\": \"2019-10-10\",\n    \"ccin\": \"91234567\",\n    \"dateCcinIssued\": \"1996-01-01\",\n    \"effectiveFrom\": \"1996-01-01\",\n    \"shortname\": \"TEST NAME\",\n    \"address1\": \"9999 Test Address\",\n    \"address2\": \"Address line 2\",\n    \"address3\": \"Address line 3\",\n    \"address4\": \"Address line 4\",\n    \"provCode\": \"ON\",\n    \"countryCode\": \"CANADA\",\n    \"postal\": \"H0H 0H0\",\n    \"acceptableMediaType\": \"2\",\n    \"leadFiNum\": 1,\n    \"leadFiName\": \"FI Name\",\n    \"returnCheckDprn\": \"0899999999\",\n    \"status\": \"A\",\n    \"statusDate\": \"1996-01-01\",\n    \"sicCode\": \"9999\"\n}"
+				}
+			]
+		},
+		{
+			"name": "CCIN-Sandbox-Master",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer [Update with Access Token Generated from Apigee-OAuth API]",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/vnd.ccin.api.v1+json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.payments.ca/ccin-extracts-sandbox/extracts/master",
+					"protocol": "https",
+					"host": [
+						"api",
+						"payments",
+						"ca"
+					],
+					"path": [
+						"ccin-extracts-sandbox",
+						"extracts",
+						"master"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "CCIN-Sandbox-with-asAtDate",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer [Update with Access Token Generated from Apigee-OAuth API]",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/vnd.ccin.api.v1+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.payments.ca/ccin-extracts-sandbox/extracts/master?asAtDate=2020-01-01",
+							"protocol": "https",
+							"host": [
+								"api",
+								"payments",
+								"ca"
+							],
+							"path": [
+								"ccin-extracts-sandbox",
+								"extracts",
+								"master"
+							],
+							"query": [
+								{
+									"key": "asAtDate",
+									"value": "2020-01-01"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 06 Jan 2020 15:46:51 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1353"
+						},
+						{
+							"key": "Host",
+							"value": "api.payments.ca"
+						},
+						{
+							"key": "X-Forwarded-For",
+							"value": "209.217.68.130"
+						},
+						{
+							"key": "X-Forwarded-Port",
+							"value": "9001"
+						},
+						{
+							"key": "X-Forwarded-Proto",
+							"value": "https"
+						},
+						{
+							"key": "Authorization",
+							"value": "Bearer 3eFt1NwcJMnzhFHEKNky1AEGD6Ad"
+						},
+						{
+							"key": "Accept",
+							"value": "application/vnd.ccin.api.v1+json"
+						},
+						{
+							"key": "User-Agent",
+							"value": "PostmanRuntime/7.20.1"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Postman-Token",
+							"value": "33e885c4-ce19-447e-8b36-1ae6f4839c17"
+						},
+						{
+							"key": "Accept-Encoding",
+							"value": "gzip, deflate"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "a7ee2aa585ebcb6fd1052e39d8b5b6c0/10523935030958584958"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 google, 1.1 google"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "clear"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"cycleNumber\": 1222,\n        \"cycleDate\": \"2019-12-26\",\n        \"ccin\": \"90000001\",\n        \"dateCcinIssued\": \"1996-01-01\",\n        \"effectiveFrom\": \"1996-01-01\",\n        \"shortname\": \"CCIN 1\",\n        \"address1\": \"9999 Address Street\",\n        \"address2\": \"Address Line 2\",\n        \"address3\": \"Address Line 3\",\n        \"address4\": \"Address Line 4\",\n        \"provCode\": \"ON\",\n        \"countryCode\": \"CANADA\",\n        \"postal\": \"H0H 0H0\",\n        \"acceptableMediaType\": \"2\",\n        \"leadFiNum\": 1,\n        \"leadFiName\": \"BANK OF BANK\",\n        \"returnCheckDprn\": \"0899999999\",\n        \"status\": \"A\",\n        \"statusDate\": \"1996-01-01\",\n        \"sicCode\": \"9999\"\n    },\n    {\n        \"cycleNumber\": 1222,\n        \"cycleDate\": \"2019-12-26\",\n        \"ccin\": \"90000002\",\n        \"dateCcinIssued\": \"1996-01-02\",\n        \"effectiveFrom\": \"1996-01-02\",\n        \"shortname\": \"CCIN 2\",\n        \"address1\": \"9999 Other Address Street\",\n        \"address2\": \"Ottawa\",\n        \"address3\": null,\n        \"address4\": null,\n        \"provCode\": \"ON\",\n        \"countryCode\": \"CANADA\",\n        \"postal\": \"P0J 1P0\",\n        \"acceptableMediaType\": \"2\",\n        \"leadFiNum\": 1,\n        \"leadFiName\": \"BANK OF BANK\",\n        \"returnCheckDprn\": \"0899999999\",\n        \"status\": \"A\",\n        \"statusDate\": \"1996-01-02\",\n        \"sicCode\": null\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "CCIN-Sandbox-Updated",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer [Update with Access Token Generated from Apigee-OAuth API]"
+					},
+					{
+						"key": "Accept",
+						"value": "application/vnd.ccin.api.v1+json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.payments.ca/ccin-extracts-sandbox/extracts/updated",
+					"protocol": "https",
+					"host": [
+						"api",
+						"payments",
+						"ca"
+					],
+					"path": [
+						"ccin-extracts-sandbox",
+						"extracts",
+						"updated"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "CCIN-Sandbox-Updated-with-Start_and_End_Date",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer [Update with Access Token Generated from Apigee-OAuth API]"
+							},
+							{
+								"key": "Accept",
+								"value": "application/vnd.ccin.api.v1+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.payments.ca/ccin-extracts-sandbox/extracts/updated?startDate=2020-01-01&endDate=2020-01-05",
+							"protocol": "https",
+							"host": [
+								"api",
+								"payments",
+								"ca"
+							],
+							"path": [
+								"ccin-extracts-sandbox",
+								"extracts",
+								"updated"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2020-01-01"
+								},
+								{
+									"key": "endDate",
+									"value": "2020-01-05"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 06 Jan 2020 15:52:06 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/vnd.fif.api.v1+json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3208"
+						},
+						{
+							"key": "Host",
+							"value": "api.payments.ca"
+						},
+						{
+							"key": "X-Forwarded-For",
+							"value": "209.217.68.130"
+						},
+						{
+							"key": "X-Forwarded-Port",
+							"value": "9001"
+						},
+						{
+							"key": "X-Forwarded-Proto",
+							"value": "https"
+						},
+						{
+							"key": "Authorization",
+							"value": "Bearer 3eFt1NwcJMnzhFHEKNky1AEGD6Ad"
+						},
+						{
+							"key": "Accept",
+							"value": "application/vnd.ccin.api.v1+json"
+						},
+						{
+							"key": "User-Agent",
+							"value": "PostmanRuntime/7.20.1"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Postman-Token",
+							"value": "568e62f8-7a84-4bde-85b5-c3897e59f0a8"
+						},
+						{
+							"key": "Accept-Encoding",
+							"value": "gzip, deflate"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "810b048e7d1d92f3ac87a826cc04f75c/12474986934692430537"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 google, 1.1 google"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "clear"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"ccin\": \"90000001\",\n        \"action\": \"C\",\n        \"cycleDate\": \"2019-10-03\",\n        \"dateCcinIssued\": {\n            \"value\": \"1996-01-01\",\n            \"changed\": false\n        },\n        \"shortname\": {\n            \"value\": \"Test CCIN\",\n            \"changed\": true\n        },\n        \"address1\": {\n            \"value\": \"9999 Address St.\",\n            \"changed\": false\n        },\n        \"address2\": {\n            \"value\": \"Ottawa\",\n            \"changed\": false\n        },\n        \"address3\": {\n            \"value\": null,\n            \"changed\": false\n        },\n        \"address4\": {\n            \"value\": null,\n            \"changed\": false\n        },\n        \"returnCheckDprn\": {\n            \"value\": \"0899999999\",\n            \"changed\": false\n        },\n        \"statusDate\": {\n            \"value\": \"2018-10-10\",\n            \"changed\": false\n        },\n        \"provCode\": {\n            \"value\": \"ON\",\n            \"changed\": false\n        },\n        \"acceptableMediaType\": {\n            \"value\": \"2\",\n            \"changed\": false\n        },\n        \"sicCode\": {\n            \"value\": null,\n            \"changed\": false\n        },\n        \"postal\": {\n            \"value\": \"G9A 4P1\",\n            \"changed\": false\n        },\n        \"countryCode\": {\n            \"value\": \"CANADA\",\n            \"changed\": false\n        },\n        \"status\": {\n            \"value\": \"I\",\n            \"changed\": false\n        },\n        \"leadFi\": {\n            \"value\": {\n                \"leadFiNum\": 6,\n                \"leadFiName\": \"BANK OF BANK\"\n            },\n            \"changed\": false\n        }\n    },\n    {\n        \"ccin\": \"90000002\",\n        \"action\": \"C\",\n        \"cycleDate\": \"2019-10-03\",\n        \"dateCcinIssued\": {\n            \"value\": \"1996-01-02-03-17\",\n            \"changed\": false\n        },\n        \"shortname\": {\n            \"value\": \"Test CCIN 2\",\n            \"changed\": true\n        },\n        \"address1\": {\n            \"value\": \"9999 Address St.\",\n            \"changed\": false\n        },\n        \"address2\": {\n            \"value\": \"Ottawa\",\n            \"changed\": false\n        },\n        \"address3\": {\n            \"value\": null,\n            \"changed\": false\n        },\n        \"address4\": {\n            \"value\": null,\n            \"changed\": false\n        },\n        \"returnCheckDprn\": {\n            \"value\": \"0899999999\",\n            \"changed\": false\n        },\n        \"statusDate\": {\n            \"value\": \"2018-10-10\",\n            \"changed\": false\n        },\n        \"provCode\": {\n            \"value\": \"ON\",\n            \"changed\": false\n        },\n        \"acceptableMediaType\": {\n            \"value\": \"2\",\n            \"changed\": false\n        },\n        \"sicCode\": {\n            \"value\": null,\n            \"changed\": false\n        },\n        \"postal\": {\n            \"value\": \"G9A 4P1\",\n            \"changed\": false\n        },\n        \"countryCode\": {\n            \"value\": \"CANADA\",\n            \"changed\": false\n        },\n        \"status\": {\n            \"value\": \"I\",\n            \"changed\": false\n        },\n        \"leadFi\": {\n            \"value\": {\n                \"leadFiNum\": 6,\n                \"leadFiName\": \"BANK OF BANK\"\n            },\n            \"changed\": false\n        }\n    }\n]"
+				}
+			]
+		}
+	],
+	"protocolProfileBehavior": {}
+}

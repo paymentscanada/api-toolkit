@@ -1,0 +1,431 @@
+{
+	"info": {
+		"_postman_id": "685a04e1-4140-4ae7-8365-204db550439b",
+		"name": "FIF-Sandbox Collection Git",
+		"description": "FIF Sanbox for Apigee",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Apigee-OAuth",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "[Update this field with Consumer Secret]",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "[Update this field with Consumer ID]",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.payments.ca/accesstoken",
+					"protocol": "https",
+					"host": [
+						"api",
+						"payments",
+						"ca"
+					],
+					"path": [
+						"accesstoken"
+					]
+				},
+				"description": "Retrieve Access Token"
+			},
+			"response": []
+		},
+		{
+			"name": "FIF-Sandbox-Dprn",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.fif.api.v1+json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer [Update with Access Token Generated from Apigee-OAuth API]",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.payments.ca/fif-branch-sandbox/branches/000100011",
+					"protocol": "https",
+					"host": [
+						"api",
+						"payments",
+						"ca"
+					],
+					"path": [
+						"fif-branch-sandbox",
+						"branches",
+						"000100011"
+					]
+				},
+				"description": "Retrieve DPRN Information"
+			},
+			"response": [
+				{
+					"name": "FIF-Sandbox-Dprn-with-asAtDate",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.fif.api.v1+json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer [Update with Access Token Generated from Apigee-OAuth API]",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.payments.ca/fif-branch-sandbox/branches/000100011?asAtDate=2020-01-01",
+							"protocol": "https",
+							"host": [
+								"api",
+								"payments",
+								"ca"
+							],
+							"path": [
+								"fif-branch-sandbox",
+								"branches",
+								"000100011"
+							],
+							"query": [
+								{
+									"key": "asAtDate",
+									"value": "2020-01-01"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "FIF-Sandbox-Master-Extract",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.fif.api.v1+json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 1Xw3MyTbjZueYoDBySt0R06EXvFy",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.payments.ca/fif-extracts-sandbox/extracts/master",
+					"protocol": "https",
+					"host": [
+						"api",
+						"payments",
+						"ca"
+					],
+					"path": [
+						"fif-extracts-sandbox",
+						"extracts",
+						"master"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "FIF-Sandbox-Master-Extract-with-asAtDate",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.fif.api.v1+json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer [Update with Access Token Generated from Apigee-OAuth API]",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.payments.ca/fif-extracts-sandbox/extracts/master?asAtDate=2020-01-01",
+							"protocol": "https",
+							"host": [
+								"api",
+								"payments",
+								"ca"
+							],
+							"path": [
+								"fif-extracts-sandbox",
+								"extracts",
+								"master"
+							],
+							"query": [
+								{
+									"key": "asAtDate",
+									"value": "2020-01-01"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 06 Jan 2020 14:24:22 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/vnd.fif.api.v1+json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "4282"
+						},
+						{
+							"key": "Host",
+							"value": "api.payments.ca"
+						},
+						{
+							"key": "X-Forwarded-For",
+							"value": "209.217.68.130"
+						},
+						{
+							"key": "X-Forwarded-Port",
+							"value": "9001"
+						},
+						{
+							"key": "X-Forwarded-Proto",
+							"value": "https"
+						},
+						{
+							"key": "Accept",
+							"value": "application/vnd.fif.api.v1+json"
+						},
+						{
+							"key": "Authorization",
+							"value": "Bearer 1Xw3MyTbjZueYoDBySt0R06EXvFy"
+						},
+						{
+							"key": "User-Agent",
+							"value": "PostmanRuntime/7.20.1"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Postman-Token",
+							"value": "e2b60e99-5d4d-494e-9777-a1ee6f8020b1"
+						},
+						{
+							"key": "Accept-Encoding",
+							"value": "gzip, deflate"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "05e4cbbd0c56d1a6afbe1d1c58fd2bb3/15624648258360802692"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 google, 1.1 google"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "clear"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"branchClassification\": \"99\",\n        \"identificationNumber\": \"1234567806\",\n        \"status\": \"V\",\n        \"crossReferenceNumber\": \"9999999999\",\n        \"languageCode\": \"E\",\n        \"englishInstitutionName\": \"English Institution Name\",\n        \"frenchInstitutionName\": \"Nom de linstitution francaise\",\n        \"branchDomicile\": \"Branch Name\",\n        \"civicAddress\": \"99 Civic Address\",\n        \"postalAddress\": \"99 Postal Address\",\n        \"townCity\": \"Town\",\n        \"provinceCode\": \"ZZ\",\n        \"postalCode\": \"A1A A1A\",\n        \"indirectCreditsBranchIDNumber\": \"9999999999\",\n        \"indirectCreditsAcctNumber\": \"12345678912\",\n        \"indirectMICRBranchIDNumber\": \"9999999999\",\n        \"indirectMICRAcctNumber\": \"12345678912\",\n        \"servicabilityCode\": \"0\",\n        \"exchangePoint\": \"999999\",\n        \"effectiveDate\": \"700101\"\n    },\n    {\n        \"branchClassification\": \"99\",\n        \"identificationNumber\": \"1234567814\",\n        \"status\": \"V\",\n        \"crossReferenceNumber\": \"9999999999\",\n        \"languageCode\": \"E\",\n        \"englishInstitutionName\": \"English Institution Name\",\n        \"frenchInstitutionName\": \"Nom de linstitution francaise\",\n        \"branchDomicile\": \"Branch Name\",\n        \"civicAddress\": \"99 Civic Address\",\n        \"postalAddress\": \"99 Postal Address\",\n        \"townCity\": \"Town\",\n        \"provinceCode\": \"ZZ\",\n        \"postalCode\": \"A1A A1A\",\n        \"indirectCreditsBranchIDNumber\": \"9999999999\",\n        \"indirectCreditsAcctNumber\": \"12345678912\",\n        \"indirectMICRBranchIDNumber\": \"9999999999\",\n        \"indirectMICRAcctNumber\": \"12345678912\",\n        \"servicabilityCode\": \"0\",\n        \"exchangePoint\": \"999999\",\n        \"effectiveDate\": \"700101\"\n    },\n    {\n        \"branchClassification\": \"99\",\n        \"identificationNumber\": \"1234567822\",\n        \"status\": \"V\",\n        \"crossReferenceNumber\": \"9999999999\",\n        \"languageCode\": \"E\",\n        \"englishInstitutionName\": \"English Institution Name\",\n        \"frenchInstitutionName\": \"Nom de linstitution francaise\",\n        \"branchDomicile\": \"Branch Name\",\n        \"civicAddress\": \"99 Civic Address\",\n        \"postalAddress\": \"99 Postal Address\",\n        \"townCity\": \"Town\",\n        \"provinceCode\": \"ZZ\",\n        \"postalCode\": \"A1A A1A\",\n        \"indirectCreditsBranchIDNumber\": \"9999999999\",\n        \"indirectCreditsAcctNumber\": \"12345678912\",\n        \"indirectMICRBranchIDNumber\": \"9999999999\",\n        \"indirectMICRAcctNumber\": \"12345678912\",\n        \"servicabilityCode\": \"0\",\n        \"exchangePoint\": \"999999\",\n        \"effectiveDate\": \"700101\"\n    },\n    {\n        \"branchClassification\": \"99\",\n        \"identificationNumber\": \"1234567897\",\n        \"status\": \"V\",\n        \"crossReferenceNumber\": \"9999999999\",\n        \"languageCode\": \"E\",\n        \"englishInstitutionName\": \"English Institution Name\",\n        \"frenchInstitutionName\": \"Nom de linstitution francaise\",\n        \"branchDomicile\": \"Branch Name\",\n        \"civicAddress\": \"99 Civic Address\",\n        \"postalAddress\": \"99 Postal Address\",\n        \"townCity\": \"Town\",\n        \"provinceCode\": \"ZZ\",\n        \"postalCode\": \"A1A A1A\",\n        \"indirectCreditsBranchIDNumber\": \"9999999999\",\n        \"indirectCreditsAcctNumber\": \"12345678912\",\n        \"indirectMICRBranchIDNumber\": \"9999999999\",\n        \"indirectMICRAcctNumber\": \"12345678912\",\n        \"servicabilityCode\": \"0\",\n        \"exchangePoint\": \"999999\",\n        \"effectiveDate\": \"700101\"\n    },\n    {\n        \"branchClassification\": \"99\",\n        \"identificationNumber\": \"9999999999\",\n        \"status\": \"V\",\n        \"crossReferenceNumber\": \"9999999999\",\n        \"languageCode\": \"E\",\n        \"englishInstitutionName\": \"English Institution Name\",\n        \"frenchInstitutionName\": \"Nom de linstitution francaise\",\n        \"branchDomicile\": \"Branch Name\",\n        \"civicAddress\": \"99 Civic Address\",\n        \"postalAddress\": \"99 Postal Address\",\n        \"townCity\": \"Town\",\n        \"provinceCode\": \"ZZ\",\n        \"postalCode\": \"A1A A1A\",\n        \"indirectCreditsBranchIDNumber\": \"9999999999\",\n        \"indirectCreditsAcctNumber\": \"12345678912\",\n        \"indirectMICRBranchIDNumber\": \"9999999999\",\n        \"indirectMICRAcctNumber\": \"12345678912\",\n        \"servicabilityCode\": \"0\",\n        \"exchangePoint\": \"999999\",\n        \"effectiveDate\": \"700101\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "FIF-Sandbox-Updated-Extract",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.fif.api.v1+json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer [Update with Access Token Generated from Apigee-OAuth API]",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.payments.ca/fif-extracts-sandbox/extracts/updated",
+					"protocol": "https",
+					"host": [
+						"api",
+						"payments",
+						"ca"
+					],
+					"path": [
+						"fif-extracts-sandbox",
+						"extracts",
+						"updated"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "FIF-Sandbox-Updated-Extract-with-Start_and_End_Date",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.fif.api.v1+json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer [Update with Access Token Generated from Apigee-OAuth API]",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.payments.ca/fif-extracts-sandbox/extracts/updated?startDate=2020-01-01&endDate=2020-01-05",
+							"protocol": "https",
+							"host": [
+								"api",
+								"payments",
+								"ca"
+							],
+							"path": [
+								"fif-extracts-sandbox",
+								"extracts",
+								"updated"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2020-01-01"
+								},
+								{
+									"key": "endDate",
+									"value": "2020-01-05"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 06 Jan 2020 14:26:52 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/vnd.fif.api.v1+json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2147"
+						},
+						{
+							"key": "Host",
+							"value": "api.payments.ca"
+						},
+						{
+							"key": "X-Forwarded-For",
+							"value": "209.217.68.130"
+						},
+						{
+							"key": "X-Forwarded-Port",
+							"value": "9001"
+						},
+						{
+							"key": "X-Forwarded-Proto",
+							"value": "https"
+						},
+						{
+							"key": "Accept",
+							"value": "application/vnd.fif.api.v1+json"
+						},
+						{
+							"key": "Authorization",
+							"value": "Bearer 1Xw3MyTbjZueYoDBySt0R06EXvFy"
+						},
+						{
+							"key": "User-Agent",
+							"value": "PostmanRuntime/7.20.1"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Postman-Token",
+							"value": "37d17cd2-c5a4-41c6-a847-2c4d7e132716"
+						},
+						{
+							"key": "Accept-Encoding",
+							"value": "gzip, deflate"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "e050add096ddbc40ae18eb1453683d46/16093225474134104222"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 google, 1.1 google"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "clear"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"transactionCode\": \"2\",\n        \"branchClassification\": {\n            \"value\": \"99\",\n            \"changed\": false\n        },\n        \"identificationNumber\": {\n            \"value\": \"1234567806\",\n            \"changed\": false\n        },\n        \"status\": {\n            \"value\": \"V\",\n            \"changed\": false\n        },\n        \"crossReferenceNumber\": {\n            \"value\": 9999999999,\n            \"changed\": false\n        },\n        \"languageCode\": {\n            \"value\": \"E\",\n            \"changed\": false\n        },\n        \"englishInstitutionName\": {\n            \"value\": \"English Institution Name\",\n            \"changed\": false\n        },\n        \"frenchInstitutionName\": {\n            \"value\": \"Nom de linstitution francaise\",\n            \"changed\": false\n        },\n        \"branchDomicile\": {\n            \"value\": \"Branch Name\",\n            \"changed\": false\n        },\n        \"civicAddress\": {\n            \"value\": \"99 Civic Address\",\n            \"changed\": false\n        },\n        \"postalAddress\": {\n            \"value\": \"99 Postal Address\",\n            \"changed\": false\n        },\n        \"townCity\": {\n            \"value\": \"Town\",\n            \"changed\": false\n        },\n        \"provinceCode\": {\n            \"value\": \"ZZ\",\n            \"changed\": false\n        },\n        \"postalCode\": {\n            \"value\": \"A1A A1A\",\n            \"changed\": false\n        },\n        \"indirectCreditsBranchIDNumber\": {\n            \"value\": \"9999999999\",\n            \"changed\": false\n        },\n        \"indirectCreditsAcctNumber\": {\n            \"value\": \"12345678912\",\n            \"changed\": false\n        },\n        \"indirectMICRBranchIDNumber\": {\n            \"value\": \"9999999999\",\n            \"changed\": false\n        },\n        \"indirectMICRAcctNumber\": {\n            \"value\": \"12345678912\",\n            \"changed\": false\n        },\n        \"servicabilityCode\": {\n            \"value\": \"0\",\n            \"changed\": false\n        },\n        \"exchangePoint\": {\n            \"value\": \"999999\",\n            \"changed\": false\n        },\n        \"effectiveDate\": {\n            \"value\": \"700101\",\n            \"changed\": true\n        }\n    }\n]"
+				}
+			]
+		}
+	],
+	"protocolProfileBehavior": {}
+}
