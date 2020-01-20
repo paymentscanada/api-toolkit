@@ -11,3 +11,6 @@ These API samples show how to make API calls to our FIF Branch sandbox through v
 
 ## Additional Documentation:
 Additional documentation in regards to Payments Canada APIs can be found on the developer portal: https://developer.payments.ca/
+
+## License
+The Payments Canada API Samples are released under the MIT License.
