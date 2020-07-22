@@ -1,28 +1,25 @@
-const client = require('./rest-client');
+const branch = require("./branch");
+const extract = require("./extract");
 
 //ensure params are passed in
-const argv = require('yargs')
-    .command('--dprn', '[9 digit dprn]')
-    .demand('dprn')
+const yargs = require('yargs');
+const argv = yargs
+    .command('branch', 'call branch api', (yargs) => {
+        const argv = yargs
+            .command('--dprn', '[9 digit dprn]')
+            .demand('dprn')
+            .argv;
+
+        branch.getBranches(argv.dprn);
+    })
+    .command('extract', 'call master extract api', (yargs) => {
+        extract.getMaster();
+    })
     .argv;
 
-var dprn = argv.dprn;
 
 
-const promise = Promise.resolve();
 
-promise
-    .then(() => {
-        console.log('getting token');
-        return client.getToken()
-    })
-    .then((token) => {
-        console.log('token received, getting branches');
-        return client.getBranch(dprn, token.access_token)
-    }).then((branch => {
-        console.log('Branch received:');
-        console.log(branch);
-    })).catch((e) => {
-        console.error(`Http call failed - Error code: ${e.statusCode}. Error is: `);
-        console.error(e.error);
-    });
+
+
+
