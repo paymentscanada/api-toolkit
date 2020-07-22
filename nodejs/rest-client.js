@@ -2,7 +2,7 @@ const request = require('request-promise-native');
 const config = require('./config');
 
 const restClient = {
-    getToken: () => {
+    getToken: (keys) => {
         const options = {
             method: 'POST',
             uri: `${config.apiBaseUrl}/accesstoken`,
@@ -10,8 +10,8 @@ const restClient = {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
             auth: {
-                'user': config.apiConsumerKey,
-                'pass': config.apiConsumerSecret
+                'user': keys.apiConsumerKey,
+                'pass': keys.apiConsumerSecret
             },
             form: {
                 'grant_type': 'client_credentials'
@@ -28,6 +28,24 @@ const restClient = {
     getBranch: (dprn, token) => {
         const options = {
             uri: `${config.apiBaseUrl}//fif-branch-sandbox/branches/${dprn}`,
+            headers: {
+                'Accept': 'application/vnd.fif.api.v1+json',
+            },
+            auth: {
+                'bearer': token,
+            },
+            json: true
+        };
+
+        return request(options)
+            .then((body) => {
+                return body;
+            });
+    },
+
+    getMaster: (token) => {
+        const options = {
+            uri: `${config.apiBaseUrl}/fif-extracts-sandbox/extracts/master`,
             headers: {
                 'Accept': 'application/vnd.fif.api.v1+json',
             },
