@@ -1,0 +1,49 @@
+{
+  "title": "Payments Rails Sandbox Sample Application",
+
+  "home.title": "Home",
+
+  "account-validation.title": "Account Validation",
+  "account-validation.financial-institution-id.label": "Financial Institution ID",
+  "account-validation.account-number.label": "Account Number",
+  "account-validation.validate.button": "Validate",
+  "account-validation.account-found.body": "{{name}} has an account!",
+  "account-validation.account-found.title": "Account Validated",
+
+  "error.title": "Error",
+  "error.http": "Failed to properly make HTTP call.",
+  "error.required": "This field is mandatory.",
+  "error.max-length": "Max length is {{max}}.",
+  "error.numeric": "This field must be numeric.",
+
+  "request-to-pay.title": "Request To Pay",
+  "request-to-pay.submit.button": "Send Request to Pay",
+  "request-to-pay.amount.label": "Amount",
+  "request-to-pay.remittance.label": "Remittance Details",
+  "request-to-pay.remittance.placeholder": "Ex. Invoice12345",
+  "request-to-pay.details.header": "Requested Payment Details",
+  "request-to-pay.details.subheader": "Requesting payment from {{name}} ({{accountNumber}}) at {{fiId}}",
+  "request-to-pay.debtor.header": "Payer Information",
+  "request-to-pay.success.body": "Request successfully sent and accepted, ${{amount}} added to your {{account}} account!",
+  "request-to-pay.success.title": "Successful",
+  "request-to-pay.error.title": "Rejected",
+  "request-to-pay.error.body": "Request was rejected because it is an incorrect amount (AM09). In this sample, the API rejects amounts ending with an odd digits.",
+
+
+  "payment-initiation.title": "Payment Initiation",
+  "payment-initiation.submit.button": "Send Payment",
+  "payment-initiation.amount.label": "Amount",
+  "payment-initiation.remittance.label": "Remittance Details",
+  "payment-initiation.remittance.placeholder": "Ex. Invoice12345",
+  "payment-initiation.details.header": "Requested Payment Details",
+  "payment-initiation.details.subheader": "Sending payment to {{name}} ({{accountNumber}}) at {{fiId}}",
+  "payment-initiation.creditor.header": "Payee Information",
+  "payment-initiation.success.body": "${{amount}} payment sent to {{name}}'s account!",
+  "payment-initiation.success.title": "Successful",
+  "payment-initiation.error.title": "Rejected",
+  "payment-initiation.error.body": "Request was rejected because Service was not Rendered(SVNR). In this sample, the API rejects amounts ending with an odd digits.",
+
+  "json.response.not-submitted": "Please submit a request to see response",
+  "json.request.payload": "JSON Request",
+  "json.response.payload": "JSON Response"
+}

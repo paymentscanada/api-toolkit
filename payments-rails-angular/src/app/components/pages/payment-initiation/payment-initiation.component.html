@@ -1,0 +1,91 @@
+<main class="form-container">
+  <form [formGroup]="form" (submit)="submitPayment()">
+    <p>Context here about the usage of this API.</p>
+
+    <mat-divider></mat-divider>
+
+    <div fxLayout="row" fxLayout.xs="column" fxFill>
+      <div fxFlex="50">
+        <ng-container formGroupName="accountGroup">
+          <h2 class="section-header">{{'payment-initiation.creditor.header' | translate}}</h2>
+          <mat-divider></mat-divider>
+
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>{{'account-validation.financial-institution-id.label' | translate}}</mat-label>
+            <input formControlName="fiId" required matInput>
+            <mat-error *ngIf="form.controls.fiId?.invalid">
+              <span *ngIf="form.controls.fiId?.errors?.required">{{'error.required' | translate}}</span>
+              <span *ngIf="form.controls.fiId?.errors?.maxlength">{{'error.max-length' | translate: {max: '35'} }}</span>
+            </mat-error>
+          </mat-form-field>
+
+          <br>
+
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>{{'account-validation.account-number.label' | translate}}</mat-label>
+            <input formControlName="accountNumber" required matInput>
+            <mat-error *ngIf="form.controls.accountNumber?.invalid">
+              <span *ngIf="form.controls.accountNumber?.errors?.required">{{'error.required' | translate}}</span>
+              <span *ngIf="form.controls.accountNumber?.errors?.maxlength">{{'error.max-length' | translate: {max: '34'} }}</span>
+            </mat-error>
+          </mat-form-field>
+        </ng-container>
+
+        <div *ngIf="this.accountGroup.valid && this.form.value.name !== null">
+
+          <h2>{{'payment-initiation.details.header' | translate}}</h2>
+          <mat-divider></mat-divider>
+
+          <p>{{'payment-initiation.details.subheader' | translate: {name: this.form.value.name, accountNumber: this.accountGroup.value.accountNumber, fiId: this.accountGroup.value.fiId} }}</p>
+
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>{{'payment-initiation.amount.label' | translate}}</mat-label>
+            <input formControlName="amount" required matInput>
+
+            <mat-error *ngIf="form.controls.amount?.invalid">
+              <span *ngIf="form.controls.amount?.errors?.required">{{'error.required' | translate}}</span>
+              <span *ngIf="form.controls.amount?.errors?.maxlength">{{'error.max-length' | translate: {max: '20'} }}</span>
+              <span *ngIf="form.controls.amount?.errors?.pattern">{{'error.numeric' |translate}}</span>
+            </mat-error>
+          </mat-form-field>
+
+          <br>
+
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>{{'payment-initiation.remittance.label' | translate}}</mat-label>
+            <textarea formControlName="remittance" matInput placeholder="{{'payment-initiation.remittance.placeholder' | translate}}"></textarea>
+            <mat-error *ngIf="form.controls.remittance?.invalid">
+              <span *ngIf="form.controls.remittance?.errors?.maxlength">{{'error.max-length' | translate: {max: '35'} }}</span>
+            </mat-error>
+          </mat-form-field>
+
+          <br>
+
+          <button mat-raised-button color="primary" type="submit" [disabled]="loading || form.invalid">{{'payment-initiation.submit.button' | translate}}</button>
+
+        </div>
+
+
+        <div *ngIf="displayMessage && message != ''">
+          <app-message [title]="'payment-initiation.success.title' | translate" [body]="message" [success]="true"></app-message>
+        </div>
+
+        <app-error-message [error]="error" [displayMessage]="displayMessage">
+        </app-error-message>
+      </div>
+
+      <div fxFlex="50">
+        <mat-tab-group>
+          <mat-tab [label]="'json.request.payload' | translate">
+            <app-json-content [data]="constructPaymentBody(form.value)"></app-json-content>
+          </mat-tab>
+          <mat-tab [label]="'json.response.payload' | translate" [disabled]="!response">
+            <app-json-content [data]="response"></app-json-content>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+
+
+  </form>
+</main>

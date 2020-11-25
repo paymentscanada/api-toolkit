@@ -1,0 +1,5 @@
+<div *ngIf="displayMessage && error.message != ''">
+  <app-message [title]="error.title" [body]="error.message" [success]="false">
+    <pre *ngIf="error.httpResult">{{error.httpResult | json}}</pre>
+  </app-message>
+</div>

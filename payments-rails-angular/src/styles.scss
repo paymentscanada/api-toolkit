@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+pre {
+  white-space: pre-wrap;
+}
+.form-container {
+  display: flex;
+}
+
+.form-field {
+  padding-top: 5px;
+}
+
+.section-header {
+  margin: 10px 0 6px;
+}
+
+@import '~highlight.js/styles/github.css';
+
+@import "src/theme";
+

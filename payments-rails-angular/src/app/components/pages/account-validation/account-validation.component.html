@@ -1,0 +1,59 @@
+
+<main class="form-container">
+  <form [formGroup]="form" (submit)="validateAccount()">
+    <p>Context here about the usage of this API.</p>
+
+    <mat-divider></mat-divider>
+
+    <div fxLayout="row" fxLayout.xs="column" fxFill>
+      <div fxFlex="50">
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>{{'account-validation.financial-institution-id.label' | translate}}</mat-label>
+          <input formControlName="fiId" required matInput>
+          <mat-error *ngIf="form.controls.fiId?.invalid">
+            <span *ngIf="form.controls.fiId?.errors?.required">{{'error.required' | translate}}</span>
+            <span *ngIf="form.controls.fiId?.errors?.maxlength">{{'error.max-length' | translate: {max: '35'} }}</span>
+          </mat-error>
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>{{'account-validation.account-number.label' | translate}}</mat-label>
+          <input formControlName="accountNumber" required matInput>
+          <mat-error *ngIf="form.controls.accountNumber?.invalid">
+            <span *ngIf="form.controls.accountNumber?.errors?.required">{{'error.required' | translate}}</span>
+            <span *ngIf="form.controls.accountNumber?.errors?.maxlength">{{'error.max-length' | translate: {max: '34'} }}</span>
+          </mat-error>
+        </mat-form-field>
+
+        <br>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="loading || form.invalid">{{'account-validation.validate.button' | translate}}</button>
+
+        <div *ngIf="message != ''">
+          <app-message [title]="'account-validation.account-found.title' | translate" [body]="message" [success]="true"></app-message>
+        </div>
+
+        <div *ngIf="error.message != ''">
+          <app-message [title]="error.title" [body]="error.message" [success]="false"></app-message>
+        </div>
+      </div>
+      <div fxFlex="50">
+        <mat-tab-group>
+          <mat-tab label="JSON Request">
+            <app-json-content [data]="constructRequest(form.value.fiId, form.value.accountNumber)"></app-json-content>
+          </mat-tab>
+          <mat-tab label="JSON Response">
+            <div *ngIf="response">
+              <app-json-content [data]="response"></app-json-content>
+            </div>
+            <div *ngIf="!response">
+              {{'request-to-pay.response.not-submitted' | translate}}
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </form>
+</main>
