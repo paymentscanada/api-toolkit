@@ -38,6 +38,7 @@ import { JsonContentComponent } from './components/common/json-content/json-cont
 import {HIGHLIGHT_OPTIONS, HighlightModule} from 'ngx-highlightjs';
 import {MomentModule} from 'ngx-moment';
 import { ErrorMessageComponent } from './components/common/error-message/error-message.component';
+import {MatChipsModule} from '@angular/material/chips';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -59,7 +60,9 @@ const materialModules = [
   MatDatepickerModule,
   MatDividerModule,
   MatGridListModule,
-  MatTabsModule
+  MatTabsModule,
+  MatListModule,
+  MatChipsModule
 ];
 
 @NgModule({

@@ -4,11 +4,16 @@
   "home.title": "Home",
 
   "account-validation.title": "Account Validation",
+  "account-validation.description": "This interface simulates an account validation scenario. This can be used for several items, including account verification, and account fraud detection.",
+  "account-validation.description.extended": "When a user enters the account details for a user and submits the form, the system sends out a request to account-validation API to validate the account details and provide the results to the end user. Any value for the account and financial institute will work.",
+  "account-validation.description.api.details": "More Details on the 'Account Validation' API can be here:",
   "account-validation.financial-institution-id.label": "Financial Institution ID",
   "account-validation.account-number.label": "Account Number",
   "account-validation.validate.button": "Validate",
   "account-validation.account-found.body": "{{name}} has an account!",
   "account-validation.account-found.title": "Account Validated",
+
+  "account-validation.enter-details": "Please enter account details prior to adding payment details.",
 
   "error.title": "Error",
   "error.http": "Failed to properly make HTTP call.",
@@ -17,6 +22,9 @@
   "error.numeric": "This field must be numeric.",
 
   "request-to-pay.title": "Request To Pay",
+  "request-to-pay.description": "This interface simulates what a request to pay may look like and will allow any business or individual wishing to receive a payment, to send an electronic request for that payment to the debtor account. The request will be received by the payer showing the requested amount and the due date.",
+  "request-to-pay.description.extended": "When a user enters the account details for a user, the system sends out a request to account-validation API to immediately validate the account details. Once validation is done, the user can enter their payment details and submit the request. The system will send out a request to the API to submit a payments, in this sample payments ending with an even number are successful and payments ending with an odd number are rejected.",
+  "request-to-pay.description.api.details": "More Details on the 'Request to Pay' API can be here:",
   "request-to-pay.submit.button": "Send Request to Pay",
   "request-to-pay.amount.label": "Amount",
   "request-to-pay.remittance.label": "Remittance Details",
@@ -31,6 +39,9 @@
 
 
   "payment-initiation.title": "Payment Initiation",
+  "payment-initiation.description": "This interface simulates a payment method that enables you to initiate a payment from your bank account. It is an alternative for e.g. Credit card, PayPal and other payments.",
+  "payment-initiation.description.extended": "When a user enters the account details for a user, the system sends out a request to account-validation API to immediately validate the account details. Once validation is done, the user can enter their payment details and submit the request. The system will send out a request to the API to submit a payments, in this sample payments ending with an even number are successful and payments ending with an odd number are rejected.",
+  "payment-initiation.description.api.details": "More Details on the 'Payment Initiation' API can be here:",
   "payment-initiation.submit.button": "Send Payment",
   "payment-initiation.amount.label": "Amount",
   "payment-initiation.remittance.label": "Remittance Details",
@@ -45,5 +56,12 @@
 
   "json.response.not-submitted": "Please submit a request to see response",
   "json.request.payload": "JSON Request",
-  "json.response.payload": "JSON Response"
+  "json.response.payload": "JSON Response",
+
+  "common.step.1": "Step 1:",
+  "common.step.2": "Step 2:",
+  "common.links.dev-portal": "Developer Portal",
+  "common.links.data-model": "Data Model",
+  "common.links.postman": "Postman Collection"
+
 }

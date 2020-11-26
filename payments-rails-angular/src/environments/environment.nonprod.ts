@@ -5,25 +5,10 @@
 export const environment = {
   production: false,
   local: false,
-  baseApiUrl: 'https://api.payments.ca/payments-rail',
-  accessTokenUrl: 'https://api.payments.ca/accesstoken',
+  baseApiUrl: 'https://dev-api.payments.ca/payments-rail',
+  accessTokenUrl: 'https://dev-api.payments.ca/accesstoken',
   consumerKey: 'REPLACE WITH CONSUMER KEY',
   consumerSecret: 'REPLACE WITH CONSUMER SECRET',
-  portal: {
-    baseUrl: 'https://developer.payments.ca',
-    accountValidation: {
-      portal: '/account-validation-data-model',
-      dataModel: '/account-validation-data-model'
-    },
-    requestToPay: {
-      portal: '/account-validation-data-model',
-      dataModel: '/account-validation-data-model'
-    },
-    paymentInitiation: {
-      portal: '/account-validation-data-model',
-      dataModel: '/account-validation-data-model'
-    },
-  }
 };
 
 /*

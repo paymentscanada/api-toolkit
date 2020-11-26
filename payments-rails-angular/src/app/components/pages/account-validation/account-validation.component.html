@@ -1,12 +1,26 @@
 
 <main class="form-container">
   <form [formGroup]="form" (submit)="validateAccount()">
-    <p>Context here about the usage of this API.</p>
+    <div>
+      <p>{{'account-validation.description' | translate}}</p>
+      <p>{{'account-validation.description.extended' | translate}}</p>
+      <p>
+        {{'account-validation.description.api.details' | translate}}
+      </p>
+      <ul>
+        <li><a href="#">{{'common.links.dev-portal' | translate}}</a></li>
+        <li><a href="#">{{'common.links.data-model' | translate}}</a></li>
+        <li><a href="#">{{'common.links.postman' | translate}}</a></li>
+      </ul>
+    </div>
 
     <mat-divider></mat-divider>
 
-    <div fxLayout="row" fxLayout.xs="column" fxFill>
+    <div fxLayout="row" fxLayout.xs="column" fxFill class="large_top_pad">
       <div fxFlex="50">
+        <h2 class="section-header">{{'common.step.1' | translate}} {{'payment-initiation.creditor.header' | translate}}</h2>
+        <mat-divider></mat-divider>
+
         <mat-form-field appearance="fill" class="form-field">
           <mat-label>{{'account-validation.financial-institution-id.label' | translate}}</mat-label>
           <input formControlName="fiId" required matInput>
