@@ -58,13 +58,8 @@
           <mat-tab label="JSON Request">
             <app-json-content [data]="constructRequest(form.value.fiId, form.value.accountNumber)"></app-json-content>
           </mat-tab>
-          <mat-tab label="JSON Response">
-            <div *ngIf="response">
-              <app-json-content [data]="response"></app-json-content>
-            </div>
-            <div *ngIf="!response">
-              {{'request-to-pay.response.not-submitted' | translate}}
-            </div>
+          <mat-tab label="JSON Response" [disabled]="!response">
+            <app-json-content [data]="response"></app-json-content>
           </mat-tab>
         </mat-tab-group>
       </div>
