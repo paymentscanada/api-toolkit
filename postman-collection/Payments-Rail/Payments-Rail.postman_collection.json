@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "779195b0-e760-4ea9-a361-537dcba893a3",
+		"name": "Rails Stub (Backend)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Validate Account",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"IdVrfctnReq\": {\n            \"Assgnmt\": {\n            \"MsgId\": \"1234567890D\",\n            \"CreDtTm\": \"2020-02-02T09:10:09.999-05:00\",\n            \"Assgnr\": {\n                \"Pty\": {\n                    \"Id\": {\n                        \"OrgId\": {\n                            \"Othr\": {\n                                \"Id\": \"999888777\"\n                            }\n                        }\n                    }\n                }\n            },\n            \"Assgne\": {\n                \"Pty\": {\n                    \"Id\": {\n                        \"OrgId\": {\n                            \"Othr\": {\n                                \"Id\": \"111222333\"\n                            }\n                        }\n                    }\n                }\n            }\n        },\n\t\t\"Vrfctn\": [\n            {\n\t\t\t\t\"Id\": \"635241\",\n\t\t\t\t\"PtyAndAcctId\": {\n\t\t\t\t\t\"Acct\": {\n\t\t\t\t\t\t\"Othr\": { \"Id\": \"987654321\"\t}\n\t\t\t\t\t},\n\t\t\t\t\t\"Agt\": {\n\t\t\t\t\t\t\"FinInstnId\": {\n\t\t\t\t\t\t\t\"ClrSysMmbId\": {\n\t\t\t\t\t\t\t\t\"MmbId\": \"999888777\"\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n        ]\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/account_validation",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"account_validation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request To Pay",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"CdtrPmtActvtnReq\": {\n\t\t\"GrpHdr\": {\n\t\t\t\"MsgId\": \"MSGID12345\",\n\t\t\t\"CreDtTm\": \"2020-02-02T09:09:09.999-05:00\",\n\t\t\t\"NbOfTxs\": \"1\",\n\t\t\t\"InitgPty\": {\n\t\t\t\t\"Nm\": \"Mr. Initiating Party\"\n\t\t\t}\n\t\t},\n\t\t\"PmtInf\": {\n\t\t\t\"PmtMtd\": \"TRF\",\n\t\t\t\"ReqdExctnDt\": {\n\t\t\t\t\"DtTm\": \"2021-06-02T09:09:09.999-05:00\"\n\t\t\t},\n\t\t\t\"Dbtr\": {\n\t\t\t\t\"Nm\": \"Ms. Debtor\",\n\t\t\t\t\"Id\": {\n\t\t\t\t\t\"PrvtId\": {\n\t\t\t\t\t\t\"Othr\": [\n                                {\n                                \"Id\": \"RtPID12345\"\n                            }\n                        ]\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"DbtrAgt\": {\n\t\t\t\t\"FinInstnId\": {\n\t\t\t\t\t\"ClrSysMmbId\": {\n\t\t\t\t\t\t\"MmbId\": \"123456789\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"CdtTrfTx\": {\n\t\t\t\t\"PmtId\": {\n\t\t\t\t\t\"EndToEndId\": \"E2EID12345\"\n\t\t\t\t},\n\t\t\t\t\"Amt\": {\n\t\t\t\t\t\"InstdAmt\": {\n\t\t\t\t\t\t\"Ccy\": \"CAD\",\n\t\t\t\t\t\t\"Value\": \"10,000.00\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t\"ChrgBr\": \"SLEV\",\n\t\t\t\t\"CdtrAgt\": {\n\t\t\t\t\t\"FinInstnId\": {\n\t\t\t\t\t\t\"ClrSysMmbId\": {\n\t\t\t\t\t\t\t\"MmbId\": \"987654321\"\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t\"Cdtr\": {\n\t\t\t\t\t\"Nm\": \"Ms. Creditor\"\n\t\t\t\t},\n\t\t\t\t\"CdtrAcct\": {\n\t\t\t\t\t\"Id\": {\n\t\t\t\t\t\t\"Othr\": {\n\t\t\t\t\t\t\t\"Id\": \"44556677\"\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t\"RmtInf\": {\n\t\t\t\t\t\"Strd\": [\n                        {\n                            \"RfrdDocInf\": [\n                                {\n                                    \"Nb\": \"InsurancePremium314159\"\n                                }\n                            ]\n                        }\n                    ]\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/request_to_pay",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"request_to_pay"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Initiation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"CstmrCdtTrfInitn\": {\n\t\t\"GrpHdr\": {\n\t\t\t\"MsgId\": \"MSGID12346\",\n\t\t\t\"CreDtTm\": \"2020-02-02T09:09:09.999-05:00\",\n\t\t\t\"NbOfTxs\": \"1\",\n\t\t\t\"InitgPty\": {\n\t\t\t\t\"Nm\": \"Mr. Initiating Party\"\n\t\t\t}\n\t\t},\n\t\t\"PmtInf\": {\n            \"PmtInfId\": \"PaymentInformationID12345\",\n            \"PmtMtd\": \"TRF\",\n            \"ReqdExctnDt\": {\n                \"DtTm\": \"2020-02-02T09:09:09.999-05:00\"\n            },\n            \"Dbtr\": {\n                \"Nm\": \"Ms. Debtor\"\n            },\n            \"DbtrAcct\": {\n                \"Id\": {\n                    \"Othr\": {\n                        \"Id\": \"123454321\"\n                    }\n                }\n            },\n            \"DbtrAgt\": {\n                \"FinInstnId\": {\n                    \"ClrSysMmbId\": {\n                        \"MmbId\": \"123456789\"\n                    }\n                }\n            },\n            \"CdtTrfTxInf\": {\n                \"PmtId\": {\n                    \"EndToEndId\": \"E2EID54321\"\n                },\n                \"Amt\": {\n                    \"InstdAmt\": {\n                        \"Ccy\": \"CAD\",\n                        \"Value\": \"100\"\n                    }\n                },\n                \"CdtrAgt\": {\n                    \"FinInstnId\": {\n                        \"ClrSysMmbId\": {\n                            \"MmbId\": \"987654321\"\n                        }\n                    }\n                },\n                \"Cdtr\": {\n                    \"Nm\": \"Ms. Creditor\"\n                },\n                \"CdtrAcct\": {\n                    \"Id\": {\n                        \"Othr\": {\n                            \"Id\": \"44556677\"\n                        }\n                    }\n                },\n                \"RmtInf\": {\n                    \"Strd\": {\n                        \"RfrdDocInf\": {\n                            \"Nb\": \"InsurancePremium730644219\"\n                        }\n                    }\n                }\n            }\n        }\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/payment_initiation",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"payment_initiation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Access Token Generation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "aaeead00-892c-4ee1-aa7e-e0c474cc98f2",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"var accessToken = jsonData.access_token;",
+							"pm.collectionVariables.set(\"token\", accessToken);",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{secret}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{accessTokenUrl}}",
+					"host": [
+						"{{accessTokenUrl}}"
+					]
+				},
+				"description": "API to generate the access token"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "1dc7da7b-84db-4c4a-9807-81337fe35e07",
+			"key": "token",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}
