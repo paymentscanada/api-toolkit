@@ -16,3 +16,12 @@ This is to be used as a guide only, with no guarantees made, and is NOT producti
 2. Edit the file src/environments/environment.ts to use your consumer key and consumer secret created from My Apps.
 2. Run `npm start` to start the application.
 3. In your browser, navigate to `http://localhost:4200` to access the app.
+
+
+## To Deploy Application to GCP
+
+1. set proper values in environment.prod.ts
+2. ng build --prod
+3. gcloud config set project `PROJECT_NAME`
+4. gcloud app deploy
+5. gcloud app browse
