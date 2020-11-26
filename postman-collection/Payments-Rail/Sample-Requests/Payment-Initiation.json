@@ -1,0 +1,71 @@
+{
+	"CstmrCdtTrfInitn": {
+		"GrpHdr": {
+			"MsgId": "MSGID12346",
+			"CreDtTm": "2020-02-02T09:09:09.999-05:00",
+			"NbOfTxs": "1",
+			"InitgPty": {
+				"Nm": "Mr. Initiating Party"
+			}
+		},
+		"PmtInf": {
+            "PmtInfId": "PaymentInformationID12345",
+            "PmtMtd": "TRF",
+            "ReqdExctnDt": {
+                "DtTm": "2020-02-02T09:09:09.999-05:00"
+            },
+            "Dbtr": {
+                "Nm": "Ms. Debtor"
+            },
+            "DbtrAcct": {
+                "Id": {
+                    "Othr": {
+                        "Id": "123454321"
+                    }
+                }
+            },
+            "DbtrAgt": {
+                "FinInstnId": {
+                    "ClrSysMmbId": {
+                        "MmbId": "123456789"
+                    }
+                }
+            },
+            "CdtTrfTxInf": {
+                "PmtId": {
+                    "EndToEndId": "E2EID54321"
+                },
+                "Amt": {
+                    "InstdAmt": {
+                        "Ccy": "CAD",
+                        "Value": "100"
+                    }
+                },
+                "CdtrAgt": {
+                    "FinInstnId": {
+                        "ClrSysMmbId": {
+                            "MmbId": "987654321"
+                        }
+                    }
+                },
+                "Cdtr": {
+                    "Nm": "Ms. Creditor"
+                },
+                "CdtrAcct": {
+                    "Id": {
+                        "Othr": {
+                            "Id": "44556677"
+                        }
+                    }
+                },
+                "RmtInf": {
+                    "Strd": {
+                        "RfrdDocInf": {
+                            "Nb": "InsurancePremium730644219"
+                        }
+                    }
+                }
+            }
+        }
+	}
+}
