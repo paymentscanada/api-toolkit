@@ -9,6 +9,22 @@ export const environment = {
   accessTokenUrl: 'https://api.payments.ca/accesstoken',
   consumerKey: 'REPLACE WITH CONSUMER KEY',
   consumerSecret: 'REPLACE WITH CONSUMER SECRET',
+  portal: {
+    baseUrl: 'https://developer.payments.ca',
+    accountValidation: {
+      portal: '/payments-rail-api/apis/post/payment_initiation',
+      dataModel: '/account-validation-data-model'
+    },
+    requestToPay: {
+      portal: '/payments-rail-api/apis/post/request_to_pay',
+      dataModel: 'not yet'
+    },
+    paymentInitiation: {
+      portal: '/payments-rail-api/apis/post/payment_initiation',
+      dataModel: 'not yet'
+    },
+  },
+  githubUrl: 'https://github.com/paymentscanada/api-samples/tree/feature/h-add-payments-rails/postman-collection/Payments-Rail'
 };
 /*
  * For easier debugging in development mode, you can import the following file

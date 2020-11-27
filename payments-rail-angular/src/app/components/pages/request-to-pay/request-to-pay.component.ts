@@ -7,6 +7,7 @@ import {AccountValidator} from '../../../validators/account.validator';
 import {filter, switchMap} from 'rxjs/operators';
 import {RequestToPayService} from '../../../services/request-to-pay.service';
 import {ErrorMessage} from '../../../models/error-message.model';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-request-to-pay',
@@ -14,6 +15,8 @@ import {ErrorMessage} from '../../../models/error-message.model';
   styleUrls: ['./request-to-pay.component.scss']
 })
 export class RequestToPayComponent implements OnInit {
+
+  env = environment;
 
   constructor(protected pageTitleService: PageTitleService,
               private fb: FormBuilder,

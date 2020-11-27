@@ -5,6 +5,7 @@ import {AccountValidationService} from '../../../services/account-validation.ser
 import {TranslateService} from '@ngx-translate/core';
 import * as moment from 'moment';
 import {ErrorMessage} from '../../../models/error-message.model';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-account-validation',
@@ -12,6 +13,7 @@ import {ErrorMessage} from '../../../models/error-message.model';
   styleUrls: ['./account-validation.component.scss']
 })
 export class AccountValidationComponent implements OnInit {
+  env = environment;
   title = 'account-validation.title';
 
   loading = false;

@@ -7,6 +7,7 @@ import {AccountValidator} from '../../../validators/account.validator';
 import {filter, switchMap} from 'rxjs/operators';
 import {PaymentInitiationService} from '../../../services/payment-initiation.service';
 import {ErrorMessage} from '../../../models/error-message.model';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-payment-initiation',
@@ -14,7 +15,7 @@ import {ErrorMessage} from '../../../models/error-message.model';
   styleUrls: ['./payment-initiation.component.scss']
 })
 export class PaymentInitiationComponent implements OnInit {
-
+  env = environment;
 
   title = 'payment-initiation.title';
 

@@ -12,7 +12,7 @@ export const environment = {
   portal: {
     baseUrl: 'https://developer.payments.ca',
     accountValidation: {
-      portal: '/account-validation-data-model',
+      portal: '/payments-rail-api/apis/post/payment_initiation',
       dataModel: '/account-validation-data-model'
     },
     requestToPay: {
@@ -23,7 +23,8 @@ export const environment = {
       portal: '/account-validation-data-model',
       dataModel: '/account-validation-data-model'
     },
-  }
+  },
+  githubUrl: 'https://github.com/paymentscanada/api-samples/tree/feature/h-add-payments-rails/postman-collection/Payments-Rail'
 };
 
 /*
