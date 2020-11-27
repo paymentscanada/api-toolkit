@@ -1,0 +1,9 @@
+# [START runtime]
+runtime: nodejs10
+handlers:
+- url: /
+  static_files: dist/payments-rail-angular/index.html
+  upload: dist/payments-rail-angular/index.html
+- url: /
+  static_dir: dist/payment-rails-angular
+# [END runtime]

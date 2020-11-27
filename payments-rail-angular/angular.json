@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "payments-rails-angular": {
+    "payments-rail-angular": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -33,7 +33,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/payments-rails-angular",
+            "outputPath": "dist/payments-rail-angular",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -98,24 +98,24 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "payments-rails-angular:build"
+            "browserTarget": "payments-rail-angular:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "payments-rails-angular:build:production"
+              "browserTarget": "payments-rail-angular:build:production"
             },
             "local": {
-              "browserTarget": "payments-rails-angular:build:local"
+              "browserTarget": "payments-rail-angular:build:local"
             },
             "nonprod": {
-              "browserTarget": "payments-rails-angular:build:nonprod"
+              "browserTarget": "payments-rail-angular:build:nonprod"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "payments-rails-angular:build"
+            "browserTarget": "payments-rail-angular:build"
           }
         },
         "lint": {
@@ -130,9 +130,9 @@
               "**/node_modules/**"
             ]
           }
-        },
+        }
       }
     }
   },
-  "defaultProject": "payments-rails-angular"
+  "defaultProject": "payments-rail-angular"
 }
