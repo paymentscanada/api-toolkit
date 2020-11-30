@@ -5,5 +5,5 @@ handlers:
   static_files: dist/payments-rail-angular/index.html
   upload: dist/payments-rail-angular/index.html
 - url: /
-  static_dir: dist/payment-rails-angular
+  static_dir: dist/payments-rail-angular
 # [END runtime]
