@@ -17,13 +17,14 @@
         color: rgba(0,0,0,.65);
 
         &:hover {
-          color: rgba(0,0,0,.87);
+          color: rgba(mat-color($accent, default),.87);
+          background: rgba(mat-color($primary, default), 0.15);
         }
       }
 
       &.sidenav-item-selected {
-        background: rgba(mat-color($primary, default), 0.15);
-        color: lighten(mat-color($primary, default), 0);
+        background: rgba(mat-color($accent, default), 0.15);
+        color: lighten(mat-color($accent, default), 0);
       }
     }
   }

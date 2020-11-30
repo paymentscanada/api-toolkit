@@ -2,7 +2,7 @@
 
 // Mixin to apply theme colors for docs generated from markdown files in the material2 repo.
 @mixin header-theme($theme) {
-  $primary: map-get($theme, primary);
+  $primary: map-get($theme, accent);
 
   .primary-header {
     padding: 20px 50px;

@@ -43,7 +43,7 @@
 
         <br>
 
-        <button mat-raised-button color="primary" type="submit" [disabled]="loading || form.invalid">{{'account-validation.validate.button' | translate}}</button>
+        <button mat-raised-button color="accent" type="submit" [disabled]="loading || form.invalid">{{'account-validation.validate.button' | translate}}</button>
 
         <div *ngIf="message != ''">
           <app-message [title]="'account-validation.account-found.title' | translate" [body]="message" [success]="true"></app-message>
@@ -54,7 +54,7 @@
         </div>
       </div>
       <div fxFlex="50">
-        <mat-tab-group>
+        <mat-tab-group color="accent">
           <mat-tab label="JSON Request">
             <app-json-content [data]="constructRequest(form.value.fiId, form.value.accountNumber)"></app-json-content>
           </mat-tab>
