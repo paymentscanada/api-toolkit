@@ -32,3 +32,11 @@ app-navbar {
 .sidenav {
   background: none;
 }
+
+.sidenav-opened {
+  min-width: 200px;
+}
+
+.sidenav-content-opened {
+  margin-left: 200px;
+}
