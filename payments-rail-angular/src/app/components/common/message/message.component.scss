@@ -3,6 +3,7 @@
 // Mixin to apply theme colors for docs generated from markdown files in the material2 repo.
 @mixin message-theme($theme) {
   $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
 
   .message-container {
@@ -25,6 +26,7 @@
   }
 
   .error {
-    background: lighten(mat-color($warn), 15%);
+    background: mat-color($accent);
+    color: mat-color($accent, default-contrast);
   }
 }

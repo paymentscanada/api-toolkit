@@ -32,7 +32,7 @@ export class RequestToPayService {
   constructRtpBody(data) {
     const d = moment().format();
 
-    return {
+    const body: any = {
       CdtrPmtActvtnReq: {
         GrpHdr: {
           MsgId: 'MSGID12345',
@@ -109,5 +109,21 @@ export class RequestToPayService {
         }
       }
     };
+
+    if (data.remittance !== '') {
+      body.CdtrPmtActvtnReq.PmtInf.CdtTrfTx.RmtInf = {
+        Strd: [
+          {
+            RfrdDocInf: [
+              {
+                Nb: data.remittance
+              }
+            ]
+          }
+        ]
+      };
+    }
+
+    return body;
   }
 }

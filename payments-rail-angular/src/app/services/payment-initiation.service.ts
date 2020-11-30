@@ -32,7 +32,7 @@ export class PaymentInitiationService {
   constructPaymentBody(data) {
     const d = moment().format();
 
-    return {
+    const body: any = {
       CstmrCdtTrfInitn: {
         GrpHdr: {
           MsgId: 'MSGID12346',
@@ -91,17 +91,22 @@ export class PaymentInitiationService {
                   Id: data.accountGroup.accountNumber
                 }
               }
-            },
-            RmtInf: {
-              Strd: {
-                RfrdDocInf: {
-                  Nb: data.remittance
-                }
-              }
             }
           }
         }
       }
     };
+
+    if (data.remittance !== '') {
+      body.CstmrCdtTrfInitn.PmtInf.CdtTrfTxInf.RmtInf = {
+        Strd: {
+          RfrdDocInf: {
+            Nb: data.remittance
+          }
+        }
+      };
+    }
+
+    return body;
   }
 }
