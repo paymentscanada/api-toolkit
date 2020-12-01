@@ -5,7 +5,7 @@
 
   "account-validation.title": "Account Validation",
   "account-validation.description": "This interface simulates an account validation scenario. This can be used for several items, including account verification, and account fraud detection.",
-  "account-validation.description.extended": "When a user enters the account details and submits the form, the system sends out a request to account-validation API to validate the account details and provide the results to the end user. Any value for the account and financial institution will work.",
+  "account-validation.description.extended": "When a user enters the account details and submits the form, a request is sent to the account-validation API to validate the account details and provide the results to the end user. Any value for the account and financial institution will work.",
   "account-validation.description.api.details": "More Details on the 'Account Validation' API can be found here:",
   "account-validation.financial-institution-id.label": "Financial Institution ID",
   "account-validation.account-number.label": "Account Number",
@@ -23,7 +23,7 @@
 
   "request-to-pay.title": "Request To Pay",
   "request-to-pay.description": "This interface simulates what a request to pay may look like and will allow any business or individual wishing to receive a payment, to send an electronic request for that payment to the debtor account. The request will be received by the payer showing the requested amount and the due date.",
-  "request-to-pay.description.extended": "When a user enters the account details the system sends out a request to account-validation API to immediately validate the account details. Once validation is done, the user can enter their payment details and submit the Request to Pay. The system will send out a request to the API to submit a payment. In this sample payments ending with an even number are successful and payments ending with an odd number are rejected.",
+  "request-to-pay.description.extended": "When a user enters the account details the system sends out a request to account-validation API to immediately validate the account details. Once validation is done, the user can enter their payment details and submit the Request to Pay. In this sample payments ending with an even number are successful and payments ending with an odd number are rejected.",
   "request-to-pay.description.api.details": "More Details on the 'Request to Pay' API can be found here:",
   "request-to-pay.submit.button": "Send Request to Pay",
   "request-to-pay.amount.label": "Amount",
@@ -40,7 +40,7 @@
 
   "payment-initiation.title": "Payment Initiation",
   "payment-initiation.description": "This interface simulates a payment method that enables you to initiate a payment from your bank account. It is an alternative for e.g. Credit card, PayPal and other payments.",
-  "payment-initiation.description.extended": "When a user enters the account details , the system sends out a request to account-validation API to immediately validate the account details. Once validation is done, the user can enter their payment details and submit the  payment initiation. The system will send out a request to the API to submit a payment. In this sample payments ending with an even number are successful and payments ending with an odd number are rejected.",
+  "payment-initiation.description.extended": "When a user enters the account details , the system sends out a request to account-validation API to immediately validate the account details. Once validation is done, the user can enter their payment details and submit the  payment initiation. In this sample payments ending with an even number are successful and payments ending with an odd number are rejected.",
   "payment-initiation.description.api.details": "More Details on the 'Payment Initiation' API can be found here:",
   "payment-initiation.submit.button": "Send Payment",
   "payment-initiation.amount.label": "Amount",
