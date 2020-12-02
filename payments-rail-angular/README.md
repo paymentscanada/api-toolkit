@@ -1,4 +1,4 @@
-# Payments Rails Angular API Sample
+# Payments Rail Angular API Sample
 
 This is a sample angular application that connects to the Payments Canada API and retrieves the data 
 from the fictionalized APIs. 
