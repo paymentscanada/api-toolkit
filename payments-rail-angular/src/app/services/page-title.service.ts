@@ -8,7 +8,7 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class PageTitleService {
   private internalTitle = '';
-  private originalTitle = 'Payment Rails Stub';
+  private originalTitle = 'Payments Rail Stub';
   titleSubject = new Subject<string>();
 
   get title(): string { return this.internalTitle; }
@@ -17,7 +17,7 @@ export class PageTitleService {
     this.translate.get(title).subscribe((res: string) => {
       this.internalTitle = res;
       if (res !== '') {
-        res = `${res} | Payment Rails Stub`;
+        res = `${res} | Payments Rail Stub`;
       } else {
         res = this.originalTitle;
       }
