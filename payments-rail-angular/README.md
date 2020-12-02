@@ -11,6 +11,10 @@ The following happen depending on the page:
 
 This is to be used as a guide only, with no guarantees made, and is NOT production ready code. Certain values, example: (consumer_key, consumer_secret) will need to be replaced. For more information, visit https://developer.payments.ca/getting-started
 
+## Requirements
+* [NodeJS](https://nodejs.org/en/) must be installed
+
+
 ## Quick Guide to Execute the Application
 1. Run `npm install` to install the dependencies
 2. Edit the file src/environments/environment.ts to use your consumer key and consumer secret created from My Apps.

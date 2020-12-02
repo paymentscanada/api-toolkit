@@ -1,7 +1,9 @@
 {
-  "title": "Payments Rails Sandbox Sample Application",
+  "title": "Payments Rail Sandbox Sample Application",
 
   "home.title": "Home",
+  "home.description": "This is a sample angular application that connects to the Payments Canada API and retrieves the data\n          from the fictionalized APIs. This sample and the APIs are built for the purpose of allowing consumers to envision what a futuristic payments rail may look like and function.",
+  "home.description.bullets": "This sample includes the following sample APIs:",
 
   "account-validation.title": "Account Validation",
   "account-validation.description": "This interface simulates an account validation scenario. This can be used for several items, including account verification, and account fraud detection.",
