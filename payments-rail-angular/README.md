@@ -17,7 +17,7 @@ This is to be used as a guide only, with no guarantees made, and is NOT producti
 
 ## Quick Guide to Execute the Application
 1. Run `npm install` to install the dependencies
-2. Edit the file src/environments/environment.ts to use your consumer key and consumer secret created from My Apps.
+2. Edit the file src/environments/environment.ts to use your consumer key and consumer secret created from My Apps in the developer portal.
 2. Run `npm start` to start the application.
 3. In your browser, navigate to `http://localhost:4200` to access the app.
 
@@ -29,3 +29,8 @@ This is to be used as a guide only, with no guarantees made, and is NOT producti
 3. gcloud config set project `PROJECT_NAME`
 4. gcloud app deploy
 5. gcloud app browse
+
+
+## App screenshots and descriptions
+
+These can be found on the [docs](docs/home.md) page.

@@ -93,17 +93,6 @@ export class RequestToPayService {
                   Id: '44556677'
                 }
               }
-            },
-            RmtInf: {
-              Strd: [
-                {
-                  RfrdDocInf: [
-                    {
-                      Nb: data.remittance
-                    }
-                  ]
-                }
-              ]
             }
           }
         }
