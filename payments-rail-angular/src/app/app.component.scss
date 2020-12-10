@@ -1,0 +1,42 @@
+
+app-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+
+.sidenav-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.sidenav-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+
+  .sidenav-content-router {
+    padding: 20px 50px;
+  }
+}
+
+
+.sidenav {
+  background: none;
+}
+
+.sidenav-opened {
+  min-width: 200px;
+}
+
+.sidenav-content-opened {
+  margin-left: 200px;
+}

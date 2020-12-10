@@ -1,0 +1,69 @@
+{
+  "title": "Payments Rail Sandbox Sample Application",
+
+  "home.title": "Home",
+  "home.description": "This is a sample angular application that connects to the Payments Canada API and retrieves the data\n          from the fictionalized APIs. This sample and the APIs are built for the purpose of allowing consumers to envision what a futuristic payments rail may look like and function.",
+  "home.description.bullets": "This sample includes the following sample APIs:",
+
+  "account-validation.title": "Account Validation",
+  "account-validation.description": "This interface simulates an account validation scenario. This can be used for several items, including account verification, and account fraud detection.",
+  "account-validation.description.extended": "When a user enters the account details and submits the form, a request is sent to the account-validation API to validate the account details and provide the results to the end user. Any value for the account and financial institution will work.",
+  "account-validation.description.api.details": "More Details on the 'Account Validation' API can be found here:",
+  "account-validation.financial-institution-id.label": "Financial Institution ID",
+  "account-validation.account-number.label": "Account Number",
+  "account-validation.validate.button": "Validate",
+  "account-validation.account-found.body": "{{name}} has an account!",
+  "account-validation.account-found.title": "Account Validated",
+
+  "account-validation.enter-details": "Please enter account details prior to adding payment details.",
+
+  "error.title": "Error",
+  "error.http": "Failed to properly make HTTP call.",
+  "error.required": "This field is mandatory.",
+  "error.max-length": "Max length is {{max}}.",
+  "error.numeric": "This field must be numeric.",
+
+  "request-to-pay.title": "Request To Pay",
+  "request-to-pay.description": "This interface simulates what a request to pay may look like and will allow any business or individual wishing to receive a payment, to send an electronic request for that payment to the debtor account. The request will be received by the payer showing the requested amount and the due date.",
+  "request-to-pay.description.extended": "When a user enters the account details the system sends out a request to account-validation API to immediately validate the account details. Once validation is done, the user can enter their payment details and submit the Request to Pay. In this sample payments ending with an even number are successful and payments ending with an odd number are rejected.",
+  "request-to-pay.description.api.details": "More Details on the 'Request to Pay' API can be found here:",
+  "request-to-pay.submit.button": "Send Request to Pay",
+  "request-to-pay.amount.label": "Amount",
+  "request-to-pay.remittance.label": "Remittance Details",
+  "request-to-pay.remittance.placeholder": "Ex. Invoice12345",
+  "request-to-pay.details.header": "Requested Payment Details",
+  "request-to-pay.details.subheader": "Requesting payment from {{name}} ({{accountNumber}}) at {{fiId}}",
+  "request-to-pay.debtor.header": "Creditor Information",
+  "request-to-pay.success.body": "Request successfully sent and accepted, ${{amount}} added to your {{account}} account!",
+  "request-to-pay.success.title": "Successful",
+  "request-to-pay.error.title": "Rejected",
+  "request-to-pay.error.body": "Request was rejected because it is an incorrect amount (AM09). In this sample, the API rejects amounts ending with an odd digits.",
+
+
+  "payment-initiation.title": "Payment Initiation",
+  "payment-initiation.description": "This interface simulates a payment method that enables you to initiate a payment from your bank account. It is an alternative for e.g. Credit card, PayPal and other payments.",
+  "payment-initiation.description.extended": "When a user enters the account details , the system sends out a request to account-validation API to immediately validate the account details. Once validation is done, the user can enter their payment details and submit the  payment initiation. In this sample payments ending with an even number are successful and payments ending with an odd number are rejected.",
+  "payment-initiation.description.api.details": "More Details on the 'Payment Initiation' API can be found here:",
+  "payment-initiation.submit.button": "Send Payment",
+  "payment-initiation.amount.label": "Amount",
+  "payment-initiation.remittance.label": "Remittance Details",
+  "payment-initiation.remittance.placeholder": "Ex. Invoice12345",
+  "payment-initiation.details.header": "Requested Payment Details",
+  "payment-initiation.details.subheader": "Sending payment to {{name}} ({{accountNumber}}) at {{fiId}}",
+  "payment-initiation.creditor.header": "Creditor Information",
+  "payment-initiation.success.body": "${{amount}} payment sent to {{name}}'s account!",
+  "payment-initiation.success.title": "Successful",
+  "payment-initiation.error.title": "Rejected",
+  "payment-initiation.error.body": "Request was rejected because Service was not Rendered(SVNR). In this sample, the API rejects amounts ending with an odd digits.",
+
+  "json.response.not-submitted": "Please submit a request to see response",
+  "json.request.payload": "JSON Request",
+  "json.response.payload": "JSON Response",
+
+  "common.step.1": "Step 1:",
+  "common.step.2": "Step 2:",
+  "common.links.dev-portal": "Developer Portal",
+  "common.links.data-model": "Data Model",
+  "common.links.postman": "Postman Collection"
+
+}
