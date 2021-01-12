@@ -1,0 +1,119 @@
+swagger: '2.0'
+info:
+  description: Api to retrieve branch extract data.  This is the same data previously provided by the weekly extract files from FIF.
+  version: '1.0'
+  title: FIF Output API
+host: api.payments.ca
+basePath: /fif-branch
+tags:
+  - name: fif-branches-resource
+    description: Fif Branches Resource
+schemes:
+  - https
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header  
+paths:
+  '/branches/{dprn}':
+    get:
+      security:
+        - Bearer: []        
+      tags:
+        - fif-branches-resource
+      summary: 'Get branch details by DPRN from a given asAtDate - if no date is provided, latest completed cycle is used.'
+      operationId: getBranchById
+      produces:
+        - application/vnd.fif.api.v1+json
+        - application/vnd.fif.api.v1+text
+      parameters:
+        - name: asAtDate
+          in: query
+          description: 'Retrieve the extract record(s) in effective as at this date (yyyy-MM-dd). If not provided, then the effective date from latest completed cycle is used.'
+          required: false
+          type: string
+          format: date-time
+          allowEmptyValue: false
+        - name: dprn
+          in: path
+          description: dprn
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MasterRecord'
+        '400':
+          description: DPRN not formatted properly - needs to be numerical and 6-9 in length
+        '404':
+          description: Branch not found
+      deprecated: false
+definitions:
+  MasterRecord:
+    type: object
+    properties:
+      branchClassification:
+        type: string
+        description: This field identifies the type of branch.
+      branchDomicile:
+        type: string
+        description: 'To identify the commonly known name of the branch within a particular Town/City, e.g. Main and First Branch, or, as it would appear on a cheque.'
+      civicAddress:
+        type: string
+        description: To identify the street address of the branch.
+      crossReferenceNumber:
+        type: string
+        description: 'When a branch is being closed, a Cross-Reference should be input in order that credit and debit items destined for that branch may be re-routed to an open branch. Also, for all sub-branches (02, 03, 05, 12, 13, 15, 22 or 25), it is mandatory that the parent branch be identified in the Cross- Reference field.'
+      effectiveDate:
+        type: string
+        description: This field identifies the date when the input is in effect.
+      englishInstitutionName:
+        type: string
+        description: To identify the English version of the name of the financial institution.
+      exchangePoint:
+        type: string
+        description: To indicate where payment instructions (tape and/or bulk paper) are to be exchanged.
+      frenchInstitutionName:
+        type: string
+        description: To identify the French version of the name of the institution.
+      identificationNumber:
+        type: string
+        description: 'Direct Payment Routing Numbers - To identify the branch of the institution,'
+      indirectCreditsAcctNumber:
+        type: string
+        description: This field identifies the Branch Number and Account Number of a Direct Clearer where an Indirect Clearer maintains an account for effecting credit payments.
+      indirectCreditsBranchIDNumber:
+        type: string
+        description: This field identifies the Branch Number and Account Number of a Direct Clearer where an Indirect Clearer maintains an account for effecting credit payments.
+      indirectMICRAcctNumber:
+        type: string
+        description: 'This field identifies the Institution Account Number of a Direct Clearer for the purpose of Magnetic Ink Character Recognition (MICR) encoding debit vouchers that are being drawn on Indirect Clearers.  '
+      indirectMICRBranchIDNumber:
+        type: string
+        description: This field identifies the Institution Branch of a Direct Clearer for the purpose of Magnetic Ink Character Recognition (MICR) encoding debit vouchers that are being drawn on Indirect Clearers.
+      languageCode:
+        type: string
+        description: To identify the working language of the branch.
+      postalAddress:
+        type: string
+        description: To identify the postal address of the branch.
+      postalCode:
+        type: string
+        description: |-
+          To identify the postal code of the branch office.
+          The postal code to be entered in this field is the code identified with the postal address. Postal Codes may be obtained from the Directory of Postal Codes Published by Canada Post.
+      provinceCode:
+        type: string
+        description: To identify the province in which the branch is located.
+      servicabilityCode:
+        type: string
+        description: To indicate the lead time required to deliver credit items on paper from the exchange point designated in the Exchange Point No. to the branch.
+      status:
+        type: string
+        description: 'Indicates status of a branch, whether opened, closed, or requiring a Cross-Reference.'
+      townCity:
+        type: string
+        description: To identify the town or city in which the branch is located.
+    title: MasterRecord
