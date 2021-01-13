@@ -46,9 +46,16 @@ paths:
           schema:
             $ref: '#/definitions/MasterRecord'
         '400':
-          description: DPRN not formatted properly - needs to be numerical and 6-9 in length
+          description: Bad Request. Possible explanations DPRN not formatted properly - needs to be numerical and 9 digits in length  / asAtDate should be of type date (yyyy-MM-dd). 
+        '401':
+          description: Unauthorized User (Please check the access token).
         '404':
           description: Branch not found
+        '406':
+          description: Not Acceptable. Possible explanation Accept header is not correct.
+        '500':
+          description: Internal Server Error (E.g. Quota Violation)
+
       deprecated: false
 definitions:
   MasterRecord:
