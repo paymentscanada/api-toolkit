@@ -50,8 +50,14 @@ paths:
               $ref: '#/definitions/MasterRecord'
         '400':
           description: Date parameter is not formatted correctly or is invalid.
+        '401':
+          description: Unauthorized User (Please check the access token).  
         '404':
           description: provided date is not found
+        '406':
+          description: Not Acceptable. Possible explanation Accept header is not correct.
+        '500':
+          description: Internal Server Error (E.g. Quota Violation)
       deprecated: false
   /extracts/updated:
     get:
@@ -88,9 +94,15 @@ paths:
             items:
               $ref: '#/definitions/UpdatesRecord'
         '400':
-          description: Date parameter(s) is not formatted correctly or is invalid.
+          description: Date parameter is not formatted correctly or is invalid.
+        '401':
+          description: Unauthorized User (Please check the access token).  
         '404':
-          description: Provided date is not found
+          description: updated extract file is not found
+        '406':
+          description: Not Acceptable. Possible explanation Accept header is not correct.
+        '500':
+          description: Internal Server Error (E.g. Quota Violation)
       deprecated: false
 definitions:
   MasterRecord:
