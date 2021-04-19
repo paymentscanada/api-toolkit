@@ -1,0 +1,26 @@
+[
+    {
+        "id": 4,
+        "accountType": {
+            "id": 1,
+            "name": "Chequing"
+        },
+        "interestRate": 0.1100
+    },
+    {
+        "id": 5,
+        "accountType": {
+            "id": 2,
+            "name": "Savings"
+        },
+        "interestRate": 2.6500
+    },
+    {
+        "id": 6,
+        "accountType": {
+            "id": 3,
+            "name": "TFSA"
+        },
+        "interestRate": 2.4500
+    }
+]

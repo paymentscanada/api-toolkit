@@ -1,0 +1,18 @@
+{
+	"paymentInformation":{
+		"paymentMethod": "CHK",
+		"debtor": {
+			"name": "A",
+			"accountId": 5,
+			"dprn": 100001
+		}
+	},
+	"creditTransferTransactionInformation":{
+		"amount": 3.00,
+		"creditor": {
+			"ccin": "90000001"
+		},
+		"remittanceInformation": "Testing"
+	}
+	
+}
