@@ -5,7 +5,7 @@ These samples are tailored towards the hackathon and should not be used for prod
 
 ## Code sample
 
-* [payments-rail-angular](payments-rail-api): A set of sample JSONs and swagger/OAS for the Payments Rail application.
+* [payments-rail-api](payments-rail-api): A set of sample JSONs and swagger/OAS for the Payments Rail application.
 * [java](java): Uses Spring Boot and Spring Rest Templates to query FIF.
 * [angular](angular): Uses the angular http class to make calls to the sandbox APIs to query FIF.
 * [kotlin](kotlin): Uses OkHttp and Retrofit2 to make calls to the sandbox APIs to query FIF.
