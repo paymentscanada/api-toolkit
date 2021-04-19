@@ -1,0 +1,14 @@
+{
+    "clientId": 5,
+    "clientUsername": "test",
+    "dprn": 100001,
+    "firstName": "test",
+    "lastName": "test",
+    "address": "Ottawa",
+    "phoneNumber": "000-000-0000",
+    "accountNickname": "CAD",
+    "accountType": "Savings",
+    "amount": 10000,
+    "interestRate": 2.7500,
+    "accountId": 6
+}

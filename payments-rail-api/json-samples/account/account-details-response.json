@@ -1,0 +1,12 @@
+{
+    "clientId": 1,
+    "dprn": 100001,
+    "firstName": "Hydro",
+    "lastName": "Account",
+    "address": "123 Address",
+    "accountNickname": "Bills",
+    "accountType": "Chequing",
+    "amount": 100000008.00,
+    "interestRate": 0.1000,
+    "accountId": 1
+}

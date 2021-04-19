@@ -1,0 +1,11 @@
+{
+    "clientUsername": "test",
+    "dprn": 100001,
+    "firstName": "test",
+    "lastName": "test",
+    "address": "123 address ",
+    "phoneNumber": "000-000-000",
+    "accountNickname": "CAD",
+    "accountType": "Savings",
+    "amount": "10000"
+}
