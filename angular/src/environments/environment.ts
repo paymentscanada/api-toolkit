@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://api.payments.ca',
-  environmentType: 'sandbox',
+  apiBaseUrl: 'https://hackathon-api.payments.ca',
+  environmentType: 'hackathon',
   branchesConsumerKey: 'REPLACE WITH CONSUMER KEY',
   branchesConsumerSecret: 'REPLACE WITH CONSUMER SECRET',
   extractsConsumerKey: 'REPLACE WITH CONSUMER KEY',

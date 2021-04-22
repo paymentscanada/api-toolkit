@@ -1,0 +1,944 @@
+swagger: '2.0'
+info:
+  description: 'A set of APIs designed to allow payments overlays to create accounts, get accounts details, send payments and send payments requests'
+  version: '1.0'
+  title: Hackathon Payments Rails APIs
+host: hackathon-api.payments.ca
+basePath: /paymentsrail
+tags:
+  - name: account-controller
+    description: Account Controller
+  - name: client-controller
+    description: Client Controller
+  - name: payment-initiation-controller
+    description: Payment Initiation Controller
+  - name: request-to-pay-controller
+    description: Request To Pay Controller
+schemes:
+  - https
+paths:
+  /accounts:
+    post:
+      tags:
+        - account-controller
+      summary: This API is used to create an account.
+      operationId: create-account
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: accountCreationRequest
+          description: accountCreationRequest
+          required: true
+          schema:
+            $ref: '#/definitions/AccountCreationRequest'
+        - name: Authorization
+          in: header
+          description: 'Bearer Token from Access token API (must start with Bearer, see example)'
+          required: true
+          type: string
+          x-example: Bearer aBc123
+        - name: overlayId
+          in: header
+          description: 'Assigned overlayId, must match the overlayId for the given account'
+          required: true
+          type: string
+          x-example: 123-123-123
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AccountResponse'
+        '400':
+          description: Error Validating request. The body should contain additional details as to what failed.
+        '403':
+          description: The provided overlayId does not have permissions to work with the given clientId/clientUsername
+        '404':
+          description: 'An account, client or account type was not found.'
+  '/accounts/type/interest_rates/inst/{irn}':
+    get:
+      tags:
+        - account-controller
+      summary: This API provides of interest rates per institution. A correct Overlay ID is required to get details
+      operationId: interest-rates
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: 'Bearer Token from Access token API (must start with Bearer, see example)'
+          required: true
+          type: string
+          x-example: Bearer aBc123
+        - name: irn
+          in: path
+          description: Represents the Institution IRN
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AccountTypeInterestRate'
+        '404':
+          description: No interest rates found for this institution
+  /accounts/validate:
+    get:
+      tags:
+        - account-controller
+      summary: This API is used to validate an existing account.
+      operationId: validate-account
+      produces:
+        - application/json
+      parameters:
+        - name: accountId
+          in: query
+          description: This represents the accountId that one needs to validate.
+          required: true
+          type: integer
+          format: int64
+        - name: Authorization
+          in: header
+          description: 'Bearer Token from Access token API (must start with Bearer, see example)'
+          required: true
+          type: string
+          x-example: Bearer aBc123
+        - name: dprn
+          in: query
+          description: This represents the Branch's DPRN for the account that is being validated.
+          required: true
+          type: integer
+          maximum: 999999999
+          exclusiveMaximum: false
+          minimum: 100001
+          exclusiveMinimum: false
+          format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AccountValidationResponse'
+        '400':
+          description: Error Validating request. The body should contain additional details as to what failed.
+        '404':
+          description: Account was not found.
+  '/accounts/{accountId}':
+    get:
+      tags:
+        - account-controller
+      summary: This API provides details on a specific account. A correct Overlay ID is required to get details.
+      operationId: get-account-details
+      produces:
+        - application/json
+      parameters:
+        - name: accountId
+          in: path
+          description: accountId
+          required: true
+          type: integer
+          format: int64
+        - name: Authorization
+          in: header
+          description: 'Bearer Token from Access token API (must start with Bearer, see example)'
+          required: true
+          type: string
+          x-example: Bearer aBc123
+        - name: overlayId
+          in: header
+          description: 'Assigned overlayId, must match the overlayId for the given account'
+          required: true
+          type: string
+          x-example: 123-123-123
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AccountResponse'
+        '403':
+          description: The overlay ID did not match the account or transaction details
+        '404':
+          description: Account was not found.
+  '/accounts/{accountId}/transaction':
+    get:
+      tags:
+        - account-controller
+      summary: This API provides a list transaction details for a specific account. A correct Overlay ID is required to get details.
+      operationId: get-transactions
+      produces:
+        - application/json
+      parameters:
+        - name: accountId
+          in: path
+          description: Represents an this account id.
+          required: true
+          type: integer
+          format: int64
+        - name: Authorization
+          in: header
+          description: 'Bearer Token from Access token API (must start with Bearer, see example)'
+          required: true
+          type: string
+          x-example: Bearer aBc123
+        - name: overlayId
+          in: header
+          description: 'Assigned overlayId, must match the overlayId for the given account'
+          required: true
+          type: string
+          x-example: 123-123-123
+        - name: page
+          in: query
+          required: false
+          type: integer
+          maximum: 100000
+          exclusiveMaximum: false
+          minimum: 0
+          exclusiveMinimum: false
+          format: int32
+        - name: size
+          in: query
+          required: false
+          type: integer
+          maximum: 10000
+          exclusiveMaximum: false
+          minimum: 1
+          exclusiveMinimum: false
+          format: int32
+        - name: status
+          in: query
+          description: 'Represents the status of the payment (PENDING, COMPLETED, REJECTED)'
+          required: false
+          type: string
+        - name: transactionDirection
+          in: query
+          description: 'Represents whether the payment is incoming, outgoing or all of them'
+          required: false
+          type: string
+          pattern: all|incoming|outgoing
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TransactionResponse'
+        '400':
+          description: Error Validating request. The body should contain additional details as to what failed.
+        '403':
+          description: The overlay ID did not match the account or transaction details
+        '404':
+          description: Transaction was not found
+  /clients:
+    get:
+      tags:
+        - client-controller
+      summary: This API is used to get client details.
+      operationId: get-client-details
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: 'Bearer Token from Access token API (must start with Bearer, see example)'
+          required: true
+          type: string
+          x-example: Bearer aBc123
+        - name: clientId
+          in: query
+          description: clientId
+          required: false
+          type: integer
+          format: int64
+        - name: clientUsername
+          in: query
+          description: clientUsername
+          required: false
+          type: string
+        - name: overlayId
+          in: header
+          description: 'Assigned overlayId, must match the overlayId for the given account'
+          required: true
+          type: string
+          x-example: 123-123-123
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ClientResponse'
+        '403':
+          description: The overlay ID did not match the account or transaction details
+        '404':
+          description: A client was not found.
+    post:
+      tags:
+        - client-controller
+      summary: 'This API is used to create an account. A client may be created here, this client may be used when creating an account. Alternatively, a client can created during the account creation.'
+      operationId: create-client
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: 'Bearer Token from Access token API (must start with Bearer, see example)'
+          required: true
+          type: string
+          x-example: Bearer aBc123
+        - in: body
+          name: clientCreationRequest
+          description: clientCreationRequest
+          required: true
+          schema:
+            $ref: '#/definitions/ClientCreationRequest'
+        - name: overlayId
+          in: header
+          description: 'Assigned overlayId, must match the overlayId for the given account'
+          required: true
+          type: string
+          x-example: 123-123-123
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ClientResponse'
+        '400':
+          description: Error Validating request. The body should contain additional details as to what failed.
+    put:
+      tags:
+        - client-controller
+      summary: This API is used to update an existing client.
+      operationId: update-client
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: 'Bearer Token from Access token API (must start with Bearer, see example)'
+          required: true
+          type: string
+          x-example: Bearer aBc123
+        - in: body
+          name: clientUpdateRequest
+          description: clientUpdateRequest
+          required: true
+          schema:
+            $ref: '#/definitions/ClientUpdateRequest'
+        - name: overlayId
+          in: header
+          description: 'Assigned overlayId, must match the overlayId for the given account'
+          required: true
+          type: string
+          x-example: 123-123-123
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ClientResponse'
+        '400':
+          description: Error Validating request. The body should contain additional details as to what failed.
+        '403':
+          description: The overlay ID did not match the account or transaction details
+        '404':
+          description: A client was not found.
+  '/clients/{clientId}':
+    get:
+      tags:
+        - client-controller
+      summary: This API is used to get client details.
+      operationId: get-client-details_1
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: 'Bearer Token from Access token API (must start with Bearer, see example)'
+          required: true
+          type: string
+          x-example: Bearer aBc123
+        - name: clientId
+          in: path
+          description: clientId
+          required: true
+          type: integer
+          format: int64
+        - name: overlayId
+          in: header
+          description: 'Assigned overlayId, must match the overlayId for the given account'
+          required: true
+          type: string
+          x-example: 123-123-123
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ClientResponse'
+        '403':
+          description: The overlay ID did not match the account or transaction details
+        '404':
+          description: A client was not found.
+  /payment/initiate:
+    post:
+      tags:
+        - payment-initiation-controller
+      summary: This API is used to send a payment from this account (debtor) to another account (creditor)
+      operationId: send-payments
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: 'Bearer Token from Access token API (must start with Bearer, see example)'
+          required: true
+          type: string
+          x-example: Bearer aBc123
+        - name: overlayId
+          in: header
+          description: 'Assigned overlayId, must match the overlayId for the given account'
+          required: true
+          type: string
+          x-example: 123-123-123
+        - in: body
+          name: paymentInitiationRequest
+          description: paymentInitiationRequest
+          required: true
+          schema:
+            $ref: '#/definitions/PaymentInitiationRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PaymentInitiationResponse'
+        '400':
+          description: Error Validating request. The body should contain additional details as to what failed.
+        '403':
+          description: The overlay ID did not match the account or transaction details
+        '404':
+          description: An account was not found.
+  /payment/requests:
+    post:
+      tags:
+        - request-to-pay-controller
+      summary: This API is used to send a request for payment from this account (creditor) to a debtor.
+      operationId: send-a-request-to-pay
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: 'Bearer Token from Access token API (must start with Bearer, see example)'
+          required: true
+          type: string
+          x-example: Bearer aBc123
+        - name: overlayId
+          in: header
+          description: 'Assigned overlayId, must match the overlayId for the given account'
+          required: true
+          type: string
+          x-example: 123-123-123
+        - in: body
+          name: request
+          description: request
+          required: true
+          schema:
+            $ref: '#/definitions/RequestToPayRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RequestToPayResponse'
+        '400':
+          description: Error Validating request. The body should contain additional details as to what failed.
+        '403':
+          description: The overlay ID did not match the account or transaction details
+        '404':
+          description: An account was not found.
+    put:
+      tags:
+        - request-to-pay-controller
+      summary: This API is used to allow the debtor to complete or reject a request for payment received from a creditor. The debtor must be the one to complete the transaction.
+      operationId: complete-request-to-pay
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: 'Bearer Token from Access token API (must start with Bearer, see example)'
+          required: true
+          type: string
+          x-example: Bearer aBc123
+        - name: overlayId
+          in: header
+          description: 'Assigned overlayId, must match the overlayId for the given account'
+          required: true
+          type: string
+          x-example: 123-123-123
+        - in: body
+          name: request
+          description: request
+          required: true
+          schema:
+            $ref: '#/definitions/RequestToPayClientResponse'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Error Validating request. The body should contain additional details as to what failed.
+        '403':
+          description: The overlay ID did not match the account or transaction details
+        '404':
+          description: An account or transaction was not found.
+definitions:
+  AccountCreationRequest:
+    type: object
+    properties:
+      accountNickname:
+        type: string
+        description: 'A nickname for the client to identify this name, the default value is the account nickname.'
+        minLength: 0
+        maxLength: 3000
+      accountType:
+        type: string
+        description: 'Represents the account type, in this hackathon, there are no restrictions to how an account behaves.'
+        pattern: Chequing|Savings|TFSA
+      address:
+        type: string
+        description: Represents the last name of the individual.
+        minLength: 0
+        maxLength: 3000
+      amount:
+        type: number
+        description: 'The starting balance for this account, must be a positive value.'
+        minimum: 0
+        exclusiveMinimum: false
+      clientId:
+        type: integer
+        format: int64
+        description: 'An optional unique client id, this can be used to link multiple accounts together, leaving this blank will create a new client, given that the client username doesn''t exist. The system will check if this overlayId can add an account or modify that client.'
+      clientUsername:
+        type: string
+        description: 'A unique client username, this can be used to link multiple accounts to the same client without knowing the ID. When provided, the system will fetch and check if the client exists and if this overlayId can add an account or modify that client.'
+      dprn:
+        type: integer
+        format: int32
+        description: 'The identifier for this branch, branches can be queried and identified using the FIF APIs.'
+        minimum: 100001
+        maximum: 999999999
+        exclusiveMinimum: false
+        exclusiveMaximum: false
+      firstName:
+        type: string
+        description: Represents the first name of the individual.
+        minLength: 0
+        maxLength: 3000
+      lastName:
+        type: string
+        description: Represents the last name of the individual.
+        minLength: 0
+        maxLength: 3000
+      phoneNumber:
+        type: string
+        description: Represents the phone number of the individual.
+        minLength: 0
+        maxLength: 3000
+    title: AccountCreationRequest
+  AccountResponse:
+    type: object
+    properties:
+      accountId:
+        type: integer
+        format: int64
+        description: The accountId for this account.
+      accountNickname:
+        type: string
+        description: 'A nickname for the client to identify this name, the default value is the account nickname.'
+      accountType:
+        type: string
+        description: 'A string representation of the account type, may be either: Chequing, Savings, TFSA.'
+      address:
+        type: string
+        description: Represents the address of the individual.
+      amount:
+        type: number
+        description: 'The starting balance for this account. On transaction APIs, the amount is not returned'
+      clientId:
+        type: integer
+        format: int64
+        description: 'Represents a unique client''s ID, multiple accounts may be attached to this client.'
+      clientUsername:
+        type: string
+        description: 'Represents a unique client''s username, multiple accounts may be attached to this client.'
+      creationDateTime:
+        type: string
+        format: date-time
+      dprn:
+        type: integer
+        format: int32
+        description: The identifier for this branch.
+      firstName:
+        type: string
+        description: Represents the first name of the individual.
+      interestRate:
+        type: number
+        description: The interest rate for the given account.
+      lastName:
+        type: string
+        description: Represents the last name of the individual.
+      msgId:
+        type: string
+      overlayId:
+        type: string
+      phoneNumber:
+        type: string
+        description: Represents the phone number of the individual.
+      reasonCode:
+        type: string
+        description: Represents a readable error.
+    title: AccountResponse
+  AccountType:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+    title: AccountType
+  AccountTypeInterestRate:
+    type: object
+    properties:
+      accountType:
+        description: Represents the account type
+        $ref: '#/definitions/AccountType'
+      id:
+        type: integer
+        format: int64
+      interestRate:
+        type: number
+    title: AccountTypeInterestRate
+  AccountValidationResponse:
+    type: object
+    properties:
+      accountId:
+        type: integer
+        format: int64
+        description: The account id that was sent in to be validated.
+      creationDateTime:
+        type: string
+        format: date-time
+      msgId:
+        type: string
+        description: A unique ID associated with this call.
+      overlayId:
+        type: string
+      reasonCode:
+        type: string
+        description: Represents a readable error.
+      verification:
+        type: boolean
+        description: A valid account will receive a true value.
+    title: AccountValidationResponse
+  ClientCreationRequest:
+    type: object
+    properties:
+      address:
+        type: string
+        description: Represents address of the individual.
+        minLength: 0
+        maxLength: 3000
+      clientUsername:
+        type: string
+        description: 'Represents a unique client''s username, multiple accounts may be attached to this client.'
+      firstName:
+        type: string
+        description: Represents the first name of the individual.
+        minLength: 0
+        maxLength: 3000
+      lastName:
+        type: string
+        description: Represents the last name of the individual.
+        minLength: 0
+        maxLength: 3000
+      phoneNumber:
+        type: string
+        description: Represents the phone number of the individual.
+        minLength: 0
+        maxLength: 3000
+    title: ClientCreationRequest
+  ClientResponse:
+    type: object
+    properties:
+      address:
+        type: string
+        description: Represents the address of the individual.
+      clientId:
+        type: integer
+        format: int64
+        description: The unique client id.
+      clientUsername:
+        type: string
+        description: 'Represents a unique client''s username, multiple accounts may be attached to this client.'
+      firstName:
+        type: string
+        description: Represents the first name of the individual.
+      lastName:
+        type: string
+        description: Represents the last name of the individual.
+      phoneNumber:
+        type: string
+        description: Represents the phone number of the individual.
+    title: ClientResponse
+  ClientUpdateRequest:
+    type: object
+    properties:
+      address:
+        type: string
+        description: Represents the address of the individual.
+        minLength: 0
+        maxLength: 3000
+      clientId:
+        type: integer
+        format: int64
+        description: The unique client id.
+      firstName:
+        type: string
+        description: Represents the first name of the individual.
+        minLength: 0
+        maxLength: 3000
+      lastName:
+        type: string
+        description: Represents the last name of the individual.
+        minLength: 0
+        maxLength: 3000
+      phoneNumber:
+        type: string
+        description: Represents the phone number of the individual.
+        minLength: 0
+        maxLength: 3000
+    title: ClientUpdateRequest
+  CreditTransferTransactionInformation:
+    type: object
+    properties:
+      amount:
+        type: number
+        description: Amount represents the amount of money that will be deducted from the debtor account. The debtor account must have enough funds for the payment or request to go through and the value must be positive.
+      creditor:
+        $ref: '#/definitions/PaymentParty'
+      remittanceInformation:
+        type: string
+        description: 'Remittance Information is field used to provide more context on this payment, this can be an invoice or something similar.'
+        minLength: 0
+        maxLength: 3000
+    title: CreditTransferTransactionInformation
+    description: This object represents who the debtor is and the amount that will be deducted.
+  Pageable:
+    type: object
+    properties:
+      offset:
+        type: integer
+        format: int64
+      pageNumber:
+        type: integer
+        format: int32
+      pageSize:
+        type: integer
+        format: int32
+      paged:
+        type: boolean
+      sort:
+        $ref: '#/definitions/Sort'
+      unpaged:
+        type: boolean
+    title: Pageable
+  Page«TransactionResponse»:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/TransactionResponse'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      pageable:
+        $ref: '#/definitions/Pageable'
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: Page«TransactionResponse»
+  PaymentInformation:
+    type: object
+    properties:
+      debtor:
+        $ref: '#/definitions/PaymentParty'
+      paymentMethod:
+        type: string
+        description: 'This value may be one of the following CHK(cheque), TRF(credit transfer) or TRA (transfer advice).'
+        pattern: CHK|TRF|TRA
+    title: PaymentInformation
+    description: This represents the information from where the payment has or will come from and what the payment method is.
+  PaymentInitiationRequest:
+    type: object
+    properties:
+      creditTransferTransactionInformation:
+        $ref: '#/definitions/CreditTransferTransactionInformation'
+      paymentInformation:
+        $ref: '#/definitions/PaymentInformation'
+    title: PaymentInitiationRequest
+    description: 'This object represents a Payment Initiation request, and contains the data necessary to send a payment from a debtor to a creditor.'
+  PaymentInitiationResponse:
+    type: object
+    properties:
+      creationDateTime:
+        type: string
+        format: date-time
+        description: The date time that this request was submitted on.
+      msgId:
+        type: string
+        description: The id associated with this transaction.
+      overlayId:
+        type: string
+        description: The date time that this request was submitted on.
+      paymentInformationStatus:
+        type: boolean
+        description: 'Status of the Payment Initialization, true is a success and false is a failure.'
+    title: PaymentInitiationResponse
+  PaymentParty:
+    type: object
+    properties:
+      accountId:
+        type: integer
+        format: int64
+        description: This represents the accountId for this payment party. Use this in conjunction with the DPRN.
+      ccin:
+        type: string
+        description: 'The CCIN for a biller, querying the CCIN APIs can get you a list of billers. Cannot be used in conjunction with the DPRN and accountId.'
+      dprn:
+        type: integer
+        format: int32
+        description: The identifier for this branch. Use this in conjunction with the accountId.
+        minimum: 100001
+        maximum: 999999999
+        exclusiveMinimum: false
+        exclusiveMaximum: false
+    title: PaymentParty
+    description: 'This may represent a debtor or creditor depending on context. In the Payment Initiation scenario, the debtor is sending money to the creditor. In the Request to Pay scenario, the creditor is requesting money from the debtor, a debtor must then approve the payment. CCIN may be used only in the payment initiation scenario as the creditor.'
+  RequestToPayClientResponse:
+    type: object
+    properties:
+      acceptRequest:
+        type: boolean
+        description: 'This represents the response from the debtor to the Request to Pay from the creditor. Passing in True will deduct money from the debtor, passing in False will reject the Request to Pay and no action transfer will occur.'
+      accountId:
+        type: integer
+        format: int64
+        description: This accountId for this request to pay request.
+      msgId:
+        type: string
+        description: 'The id associated with this transaction, when used with a PENDING payment, it can approve or reject transaction with that msgId.'
+    title: RequestToPayClientResponse
+    description: This object represents a debtor's response to a Request to Pay.
+  RequestToPayRequest:
+    type: object
+    properties:
+      creditTransferTransactionInformation:
+        $ref: '#/definitions/CreditTransferTransactionInformation'
+      paymentInformation:
+        $ref: '#/definitions/PaymentInformation'
+    title: RequestToPayRequest
+    description: 'This object represents a Request To Pay request, and contains the data necessary to send a request to payment from a creditor to a debtor.'
+  RequestToPayResponse:
+    type: object
+    properties:
+      creationDateTime:
+        type: string
+        format: date-time
+        description: The date time that this request was submitted on.
+      msgId:
+        type: string
+        description: The id associated with this transaction.
+      overlayId:
+        type: string
+        description: The overlayId associated with this transaction.
+    title: RequestToPayResponse
+  Sort:
+    type: object
+    properties:
+      empty:
+        type: boolean
+      sorted:
+        type: boolean
+      unsorted:
+        type: boolean
+    title: Sort
+  TransactionResponse:
+    type: object
+    properties:
+      amount:
+        type: number
+        description: 'Amount represents the amount that the thisAccount has changed by. Positive amounts represent a deposit/incoming payment, whereas a negative amount represents a withdrawal/outgoing payment.'
+      msgId:
+        type: string
+        description: The id associated with this transaction.
+      otherAccount:
+        description: otherAccount represents the other participant in the transaction.
+        $ref: '#/definitions/AccountResponse'
+      status:
+        $ref: '#/definitions/TransactionStatus'
+      thisAccount:
+        description: thisAccount represents the owner of this transaction.
+        $ref: '#/definitions/AccountResponse'
+      type:
+        $ref: '#/definitions/TransactionType'
+    title: TransactionResponse
+  TransactionStatus:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: The id associated with this TransactionStatus.
+      name:
+        type: string
+        description: The name of this TransactionStatus.
+    title: TransactionStatus
+    description: 'The TransactionStatus represents the status of this transaction. The potential values are COMPLETED for fully completed and the money was transferred, REJECTED for the payment being reject and no money was transfered or PENDING meaning that the payment hasn''t been completed yet.'
+  TransactionType:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: The id associated with this TransactionType.
+      name:
+        type: string
+        description: The name of this TransactionType.
+    title: TransactionType
+    description: 'The TransactionType represents what kind of transaction this was, it will either be PAIN for payment initiation or RTP for request to pay.'

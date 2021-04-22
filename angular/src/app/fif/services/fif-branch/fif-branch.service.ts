@@ -25,7 +25,7 @@ export class FifBranchService {
           })
         };
 
-        return this.http.get(`${environment.apiBaseUrl}/fif-branch-${environment.environmentType}/branches/${dprn}`, httpOptions);
+        return this.http.get(`${environment.apiBaseUrl}/fif-branch/branches/${dprn}`, httpOptions);
       })
     );
   }

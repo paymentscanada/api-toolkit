@@ -30,7 +30,7 @@ export class CcinExtractsService {
           params
         };
 
-        return this.http.get(`${environment.apiBaseUrl}/ccin-extracts-${environment.environmentType}/extracts/updated`, httpOptions);
+        return this.http.get(`${environment.apiBaseUrl}/ccin-extracts/extracts/updated`, httpOptions);
       })
     );
   }
@@ -62,7 +62,7 @@ export class CcinExtractsService {
 
         console.log(httpOptions);
 
-        return this.http.get(`${environment.apiBaseUrl}/ccin-extracts-${environment.environmentType}/extracts/master`, httpOptions);
+        return this.http.get(`${environment.apiBaseUrl}/ccin-extracts/extracts/master`, httpOptions);
       })
     );
   }

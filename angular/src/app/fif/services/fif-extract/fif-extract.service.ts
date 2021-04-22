@@ -29,7 +29,7 @@ export class FifExtractService {
           params
         };
 
-        return this.http.get(`${environment.apiBaseUrl}/fif-extracts-${environment.environmentType}/extracts/updated`, httpOptions);
+        return this.http.get(`${environment.apiBaseUrl}/fif-extracts/extracts/updated`, httpOptions);
       })
     );
   }
@@ -61,7 +61,7 @@ export class FifExtractService {
 
         console.log(httpOptions);
 
-        return this.http.get(`${environment.apiBaseUrl}/fif-extracts-${environment.environmentType}/extracts/master`, httpOptions);
+        return this.http.get(`${environment.apiBaseUrl}/fif-extracts/extracts/master`, httpOptions);
       })
     );
   }

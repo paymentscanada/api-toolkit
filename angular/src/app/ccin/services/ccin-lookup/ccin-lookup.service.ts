@@ -22,7 +22,7 @@ export class CcinLookupService {
           })
         };
 
-        return this.http.get(`${environment.apiBaseUrl}/ccin-lookup-${environment.environmentType}/ccins/${ccin}`, httpOptions);
+        return this.http.get(`${environment.apiBaseUrl}/ccin-lookup/ccins/${ccin}`, httpOptions);
       })
     );
   }
