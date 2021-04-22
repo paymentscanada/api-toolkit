@@ -9,8 +9,8 @@ object ApiProperties {
     val apiConsumerKey: String
     val apiConsumerSecret: String
     val apiBaseUrl: String
-    const val apiTokenUrl: String = "/accesstoken"
-    const val apiBranchesUrl: String = "/fif-branch-sandbox/branches/"
+    const val apiTokenUrl: String = "/v1/token"
+    const val apiBranchesUrl: String = "/fif-branch/branches/"
 
     init {
         val reader = FileReader(javaClass.classLoader.getResource("application.properties").toURI().path)
