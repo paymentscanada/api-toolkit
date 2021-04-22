@@ -5,7 +5,7 @@ const restClient = {
     getToken: (keys) => {
         const options = {
             method: 'POST',
-            uri: `${config.apiBaseUrl}/accesstoken`,
+            uri: `${config.apiBaseUrl}/v1/token`,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
@@ -27,7 +27,7 @@ const restClient = {
 
     getBranch: (dprn, token) => {
         const options = {
-            uri: `${config.apiBaseUrl}//fif-branch-sandbox/branches/${dprn}`,
+            uri: `${config.apiBaseUrl}/fif-branch/branches/${dprn}`,
             headers: {
                 'Accept': 'application/vnd.fif.api.v1+json',
             },
@@ -45,7 +45,7 @@ const restClient = {
 
     getMaster: (token) => {
         const options = {
-            uri: `${config.apiBaseUrl}/fif-extracts-sandbox/extracts/master`,
+            uri: `${config.apiBaseUrl}/fif-extracts/extracts/master`,
             headers: {
                 'Accept': 'application/vnd.fif.api.v1+json',
             },
