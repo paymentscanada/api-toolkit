@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "685a04e1-4140-4ae7-8365-204db550439b",
-		"name": "FIF-Sandbox Collection Git",
+		"_postman_id": "e21a4f5d-64d1-4c82-ab30-5dd45a36623e",
+		"name": "FIF Collection Git - Hackathon",
 		"description": "FIF Sanbox for Apigee",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -44,10 +44,10 @@
 					]
 				},
 				"url": {
-					"raw": "https://api.payments.ca/accesstoken",
+					"raw": "https://hackathon-api.payments.ca/accesstoken",
 					"protocol": "https",
 					"host": [
-						"api",
+						"hackathon-api",
 						"payments",
 						"ca"
 					],
@@ -76,15 +76,15 @@
 					}
 				],
 				"url": {
-					"raw": "https://api.payments.ca/fif-branch-sandbox/branches/000100011",
+					"raw": "https://hackathon-api.payments.ca/fif-branch/branches/000100011",
 					"protocol": "https",
 					"host": [
-						"api",
+						"hackathon-api",
 						"payments",
 						"ca"
 					],
 					"path": [
-						"fif-branch-sandbox",
+						"fif-branch",
 						"branches",
 						"000100011"
 					]
@@ -109,15 +109,15 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.payments.ca/fif-branch-sandbox/branches/000100011?asAtDate=2020-01-01",
+							"raw": "https://hackathon-api.payments.ca/fif-branch/branches/000100011?asAtDate=2020-01-01",
 							"protocol": "https",
 							"host": [
-								"api",
+								"hackathon-api",
 								"payments",
 								"ca"
 							],
 							"path": [
-								"fif-branch-sandbox",
+								"fif-branch",
 								"branches",
 								"000100011"
 							],
@@ -153,15 +153,15 @@
 					}
 				],
 				"url": {
-					"raw": "https://api.payments.ca/fif-extracts-sandbox/extracts/master",
+					"raw": "https://hackathon-api.payments.ca/fif-extracts/extracts/master",
 					"protocol": "https",
 					"host": [
-						"api",
+						"hackathon-api",
 						"payments",
 						"ca"
 					],
 					"path": [
-						"fif-extracts-sandbox",
+						"fif-extracts",
 						"extracts",
 						"master"
 					]
@@ -185,15 +185,15 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.payments.ca/fif-extracts-sandbox/extracts/master?asAtDate=2020-01-01",
+							"raw": "https://hackathon-api.payments.ca/fif-extracts/extracts/master?asAtDate=2020-01-01",
 							"protocol": "https",
 							"host": [
-								"api",
+								"hackathon-api",
 								"payments",
 								"ca"
 							],
 							"path": [
-								"fif-extracts-sandbox",
+								"fif-extracts",
 								"extracts",
 								"master"
 							],
@@ -296,15 +296,15 @@
 					}
 				],
 				"url": {
-					"raw": "https://api.payments.ca/fif-extracts-sandbox/extracts/updated",
+					"raw": "https://hackathon-api.payments.ca/fif-extracts/extracts/updated",
 					"protocol": "https",
 					"host": [
-						"api",
+						"hackathon-api",
 						"payments",
 						"ca"
 					],
 					"path": [
-						"fif-extracts-sandbox",
+						"fif-extracts",
 						"extracts",
 						"updated"
 					]
@@ -328,15 +328,15 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.payments.ca/fif-extracts-sandbox/extracts/updated?startDate=2020-01-01&endDate=2020-01-05",
+							"raw": "https://hackathon-api.payments.ca/fif-extracts/extracts/updated?startDate=2020-01-01&endDate=2020-01-05",
 							"protocol": "https",
 							"host": [
-								"api",
+								"hackathon-api",
 								"payments",
 								"ca"
 							],
 							"path": [
-								"fif-extracts-sandbox",
+								"fif-extracts",
 								"extracts",
 								"updated"
 							],
@@ -426,6 +426,5 @@
 				}
 			]
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

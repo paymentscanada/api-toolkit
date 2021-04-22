@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "d3dbebd6-7252-4e97-8eaa-b5ae188917d3",
-		"name": "CCIN-Sandbox Collection Git",
+		"_postman_id": "6907fd7f-f7a9-4c4f-bd62-46f562acd881",
+		"name": "CCIN Collection Git - Hackathon",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -22,15 +22,15 @@
 					}
 				],
 				"url": {
-					"raw": "https://api.payments.ca/ccin-lookup-sandbox/ccins/91234567",
+					"raw": "https://hackathon-api.payments.ca/ccin-lookup/ccins/91234567",
 					"protocol": "https",
 					"host": [
-						"api",
+						"hackathon-api",
 						"payments",
 						"ca"
 					],
 					"path": [
-						"ccin-lookup-sandbox",
+						"ccin-lookup",
 						"ccins",
 						"91234567"
 					]
@@ -54,15 +54,15 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.payments.ca/ccin-lookup-sandbox/ccins/91234567?asAtDate=2020-01-01",
+							"raw": "https://hackathon-api.payments.ca/ccin-lookup/ccins/91234567?asAtDate=2020-01-01",
 							"protocol": "https",
 							"host": [
-								"api",
+								"hackathon-api",
 								"payments",
 								"ca"
 							],
 							"path": [
-								"ccin-lookup-sandbox",
+								"ccin-lookup",
 								"ccins",
 								"91234567"
 							],
@@ -165,15 +165,15 @@
 					}
 				],
 				"url": {
-					"raw": "https://api.payments.ca/ccin-extracts-sandbox/extracts/master",
+					"raw": "https://hackathon-api.payments.ca/ccin-extracts/extracts/master",
 					"protocol": "https",
 					"host": [
-						"api",
+						"hackathon-api",
 						"payments",
 						"ca"
 					],
 					"path": [
-						"ccin-extracts-sandbox",
+						"ccin-extracts",
 						"extracts",
 						"master"
 					]
@@ -197,15 +197,15 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.payments.ca/ccin-extracts-sandbox/extracts/master?asAtDate=2020-01-01",
+							"raw": "https://hackathon-api.payments.ca/ccin-extracts/extracts/master?asAtDate=2020-01-01",
 							"protocol": "https",
 							"host": [
-								"api",
+								"hackathon-api",
 								"payments",
 								"ca"
 							],
 							"path": [
-								"ccin-extracts-sandbox",
+								"ccin-extracts",
 								"extracts",
 								"master"
 							],
@@ -308,15 +308,15 @@
 					}
 				],
 				"url": {
-					"raw": "https://api.payments.ca/ccin-extracts-sandbox/extracts/updated",
+					"raw": "https://hackathon-api.payments.ca/ccin-extracts/extracts/updated",
 					"protocol": "https",
 					"host": [
-						"api",
+						"hackathon-api",
 						"payments",
 						"ca"
 					],
 					"path": [
-						"ccin-extracts-sandbox",
+						"ccin-extracts",
 						"extracts",
 						"updated"
 					]
@@ -340,15 +340,15 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.payments.ca/ccin-extracts-sandbox/extracts/updated?startDate=2020-01-01&endDate=2020-01-05",
+							"raw": "https://hackathon-api.payments.ca/ccin-extracts/extracts/updated?startDate=2020-01-01&endDate=2020-01-05",
 							"protocol": "https",
 							"host": [
-								"api",
+								"hackathon-api",
 								"payments",
 								"ca"
 							],
 							"path": [
-								"ccin-extracts-sandbox",
+								"ccin-extracts",
 								"extracts",
 								"updated"
 							],
@@ -438,6 +438,5 @@
 				}
 			]
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
