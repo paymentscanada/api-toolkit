@@ -1,8 +1,8 @@
 This is a sample nodejs based application using request and it connects to the Payments Canada API and gets a sandboxed branch. The following happen:
 1. Gets a bearer token with the provided consumer key and consumer secret.
-2. Fetches a branch from the hackathon branch item using the provided bearer token.
+2. Fetches a branch from the hackathon branch api using the provided bearer token.
 
-This is to be used as a guide only, with no guarantees made, and is NOT production ready code. Certain values, example: (consumer_key, consumer_secret) will need to be replaced. For more information, visit https://developer.payments.ca/getting-started
+This is to be used as a guide only, with no guarantees made, and is NOT production ready code. Certain values, example: (consumer_key, consumer_secret) will need to be replaced. For more information, visit https://hackathon.payments.ca/getting-started
 
 ### Quick Guide to Execute the Application
 - Update the Consumer Key and Consumer Secret in the config.js
