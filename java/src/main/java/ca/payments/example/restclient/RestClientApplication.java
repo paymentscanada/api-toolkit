@@ -88,7 +88,7 @@ public class RestClientApplication implements CommandLineRunner {
 	 */
 	public String getBearerToken(RestTemplate restTemplate){
 		//base URL for the access token URL
-		String gateway_auth_url = "https://api.payments.ca/accesstoken";
+		String gateway_auth_url = "https://hackathon-api.payments.ca/v1/token";
 
 		HttpHeaders headers = new HttpHeaders();
 
