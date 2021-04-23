@@ -4,8 +4,10 @@ info:
   version: '1.0'
   title: Hackathon Payments Rails APIs
 host: hackathon-api.payments.ca
-basePath: /paymentsrail
+basePath: /
 tags:
+  - name: token-generation
+    description: Token Generation
   - name: account-controller
     description: Account Controller
   - name: client-controller
@@ -17,7 +19,37 @@ tags:
 schemes:
   - https
 paths:
-  /accounts:
+  /v1/token:
+    post:
+      tags:
+        - token-generation
+      summary: This is used to generate an API token
+      operationId: token-generation
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: 'A base64 encoded string that is in the following format: {consumerKey}:{consumerSecret}, where {consumerKey} is your applications consumer key and the {consumerSecret} is your applications consumer secret The value must start with "Basic "'
+          required: true
+          type: string
+          x-example: Basic aBc123
+        - name: grant_type
+          in: formData
+          description: The grant type of the token, this should be client_credentials
+          type: string
+          x-example: client_credentials
+          required: true
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Token'
+        '401':
+          description: Unauthorized / invalid credentials
+  /paymentsrail/accounts:
     post:
       tags:
         - account-controller
@@ -57,7 +89,7 @@ paths:
           description: The provided overlayId does not have permissions to work with the given clientId/clientUsername
         '404':
           description: 'An account, client or account type was not found.'
-  '/accounts/type/interest_rates/inst/{irn}':
+  '/paymentsrail/accounts/type/interest_rates/inst/{irn}':
     get:
       tags:
         - account-controller
@@ -87,7 +119,7 @@ paths:
               $ref: '#/definitions/AccountTypeInterestRate'
         '404':
           description: No interest rates found for this institution
-  /accounts/validate:
+  /paymentsrail/accounts/validate:
     get:
       tags:
         - account-controller
@@ -127,7 +159,7 @@ paths:
           description: Error Validating request. The body should contain additional details as to what failed.
         '404':
           description: Account was not found.
-  '/accounts/{accountId}':
+  '/paymentsrail/accounts/{accountId}':
     get:
       tags:
         - account-controller
@@ -163,7 +195,7 @@ paths:
           description: The overlay ID did not match the account or transaction details
         '404':
           description: Account was not found.
-  '/accounts/{accountId}/transaction':
+  '/paymentsrail/accounts/{accountId}/transaction':
     get:
       tags:
         - account-controller
@@ -230,7 +262,7 @@ paths:
           description: The overlay ID did not match the account or transaction details
         '404':
           description: Transaction was not found
-  /clients:
+  /paymentsrail/clients:
     get:
       tags:
         - client-controller
@@ -345,7 +377,7 @@ paths:
           description: The overlay ID did not match the account or transaction details
         '404':
           description: A client was not found.
-  '/clients/{clientId}':
+  '/paymentsrail/clients/{clientId}':
     get:
       tags:
         - client-controller
@@ -381,7 +413,7 @@ paths:
           description: The overlay ID did not match the account or transaction details
         '404':
           description: A client was not found.
-  /payment/initiate:
+  /paymentsrail/payment/initiate:
     post:
       tags:
         - payment-initiation-controller
@@ -421,7 +453,7 @@ paths:
           description: The overlay ID did not match the account or transaction details
         '404':
           description: An account was not found.
-  /payment/requests:
+  /paymentsrail/payment/requests:
     post:
       tags:
         - request-to-pay-controller
@@ -942,3 +974,53 @@ definitions:
         description: The name of this TransactionType.
     title: TransactionType
     description: 'The TransactionType represents what kind of transaction this was, it will either be PAIN for payment initiation or RTP for request to pay.'
+  Token:
+    type: object
+    properties:
+      refresh_token_expires_in:
+        type: integer
+        format: int64
+        description: When will the refresh token expire, always 0 in this scenario.
+      api_product_list:
+        type: string
+        description: A string representation of the products list.
+      organization_name:
+        type: string
+        description: Set to payments canada
+      developer.email:
+        type: string
+        description: The developers email
+      token_type:
+        type: string
+        description: Always set to BearerToken
+      issued_at:
+        type: string
+        description: The unix timestamp that this token was generated on.
+      client_id:
+        type: string
+        description: The client id for this token
+      access_token:
+        type: string
+        description: The access token to be used in future API calls.
+      application_name:
+        type: string
+        description: The application ID.
+      scope:
+        type: string
+      expires_in:
+        type: string
+        description: In how many seconds does the access token expire in.
+      refresh_count:
+        type: string
+        description: Always 0 since refreshing isn't supported in this scenario.
+      status:
+        type: string
+        description: Whether this app was approved (should always be true)
+    title: Token
+    description: 'The token contains the access_token for future API calls, the most important item is the access_token'
+  TokenType:
+    type: object
+    properties:
+      grant_type:
+        type: string
+        description: When will the refresh token expire, always 0 in this scenario.
