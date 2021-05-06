@@ -7,8 +7,8 @@ export const environment = {
   local: true,
   baseApiUrl: 'http://localhost:9000',
   accessTokenUrl: 'http://localhost:9000/accesstoken',
-  consumerKey: 'NONE',
-  consumerSecret: 'NONE',
+  consumerKey: 'BN0zvKSojktADFsxwzaBh9GByCQc8aA4',
+  consumerSecret: 'UnbYBGCIy04EYCD8',
   portal: {
     baseUrl: 'https://nonprod-developer.payments.ca',
     accountValidation: {
