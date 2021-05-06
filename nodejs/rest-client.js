@@ -1,28 +1,27 @@
-const request = require('request-promise-native');
 const config = require('./config');
+const fetch = require('node-fetch');
 
 const restClient = {
     getToken: (keys) => {
+        const formData = new URLSearchParams({
+            'grant_type': 'client_credentials'
+        });
+
+        const base64Auth = Buffer.from(`${keys.apiConsumerKey}:${keys.apiConsumerSecret}`).toString('base64');
+
         const options = {
             method: 'POST',
-            uri: `${config.apiBaseUrl}/accesstoken`,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `Basic ${base64Auth}`
             },
-            auth: {
-                'user': keys.apiConsumerKey,
-                'pass': keys.apiConsumerSecret
-            },
-            form: {
-                'grant_type': 'client_credentials'
-            },
-            json: true
+            body: formData,
+            json: true,
         };
 
-        return request(options)
-            .then((body) => {
-                return body;
-            });
+        return fetch(`${config.apiBaseUrl}/accesstoken`, options)
+            .then(response => response.json())
+            .then(body => body);
     },
 
     getBranch: (dprn, token) => {
@@ -30,35 +29,29 @@ const restClient = {
             uri: `${config.apiBaseUrl}//fif-branch-sandbox/branches/${dprn}`,
             headers: {
                 'Accept': 'application/vnd.fif.api.v1+json',
-            },
-            auth: {
-                'bearer': token,
+                'Authorization': `Bearer ${token}`
+
             },
             json: true
         };
 
-        return request(options)
-            .then((body) => {
-                return body;
-            });
+        return fetch(`${config.apiBaseUrl}//fif-branch-sandbox/branches/${dprn}`, options)
+            .then(response => response.json())
+            .then(body => body);
     },
 
     getMaster: (token) => {
         const options = {
-            uri: `${config.apiBaseUrl}/fif-extracts-sandbox/extracts/master`,
             headers: {
                 'Accept': 'application/vnd.fif.api.v1+json',
-            },
-            auth: {
-                'bearer': token,
+                'Authorization': `Bearer ${token}`
             },
             json: true
         };
 
-        return request(options)
-            .then((body) => {
-                return body;
-            });
+        return fetch(`${config.apiBaseUrl}/fif-extracts-sandbox/extracts/master`, options)
+            .then(response => response.json())
+            .then(body => body);
     }
 };
 
