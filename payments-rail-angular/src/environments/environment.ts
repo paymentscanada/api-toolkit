@@ -7,8 +7,8 @@ export const environment = {
   local: false,
   baseApiUrl: 'https://api.payments.ca/payments-rail',
   accessTokenUrl: 'https://api.payments.ca/accesstoken',
-  consumerKey: 'REPLACE WITH CONSUMER KEY',
-  consumerSecret: 'REPLACE WITH CONSUMER SECRET',
+  consumerKey: 'BN0zvKSojktADFsxwzaBh9GByCQc8aA4',
+  consumerSecret: 'UnbYBGCIy04EYCD8',
   portal: {
     baseUrl: 'https://developer.payments.ca',
     accountValidation: {

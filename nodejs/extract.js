@@ -8,11 +8,11 @@ module.exports = {
         return promise
             .then(() => {
                 console.log('getting token');
-                return client.getToken(config.extractsKeys)
+                return client.getToken(config.extractsKeys);
             })
             .then((token) => {
                 console.log('token received, getting branch extracts');
-                return client.getMaster(token.access_token)
+                return client.getMaster(token.access_token);
             }).then(extracts => {
                 console.log('=============================');
                 console.log('Branch Extracts received:');

@@ -3,41 +3,45 @@
 </nav>
 
 <div class="container-fluid">
-  <ngb-tabset>
-    <ngb-tab title="FIF - DPRN Lookup">
-      <ng-template ngbTabContent>
+  <ul ngbNav #nav="ngbNav" class="nav-tabs">
+    <li ngbNavItem >
+      <a ngbNavLink>FIF - DPRN Lookup</a>
+      <ng-template ngbNavContent>
         <app-fif-dprn-search></app-fif-dprn-search>
       </ng-template>
-    </ngb-tab>
-
-    <ngb-tab title="FIF - Master" >
-      <ng-template ngbTabContent>
+    </li>
+    <li ngbNavItem>
+      <a ngbNavLink>FIF - Master</a>
+      <ng-template ngbNavContent>
         <app-fif-master></app-fif-master>
       </ng-template>
-    </ngb-tab>
-
-    <ngb-tab title="FIF - Updated" >
-      <ng-template ngbTabContent>
+    </li>
+    <li ngbNavItem>
+      <a ngbNavLink>FIF - Updated</a>
+      <ng-template ngbNavContent>
         <app-fif-updated></app-fif-updated>
       </ng-template>
-    </ngb-tab>
-
-    <ngb-tab title="CCIN - CCIN Lookup" >
-      <ng-template ngbTabContent>
+    </li>
+    <li ngbNavItem>
+      <a ngbNavLink>CCIN - CCIN Lookup</a>
+      <ng-template ngbNavContent>
         <app-ccin-search></app-ccin-search>
       </ng-template>
-    </ngb-tab>
-
-    <ngb-tab title="CCIN - Master" >
-      <ng-template ngbTabContent>
+    </li>
+    <li ngbNavItem>
+      <a ngbNavLink>CCIN - Master</a>
+      <ng-template ngbNavContent>
         <app-ccin-master></app-ccin-master>
       </ng-template>
-    </ngb-tab>
-
-    <ngb-tab title="CCIN - Updated" >
-      <ng-template ngbTabContent>
+    </li>
+    <li ngbNavItem>
+      <a ngbNavLink>CCIN - Updated</a>
+      <ng-template ngbNavContent>
         <app-ccin-updated></app-ccin-updated>
       </ng-template>
-    </ngb-tab>
-  </ngb-tabset>
+    </li>
+
+  </ul>
+
+  <div [ngbNavOutlet]="nav"></div>
 </div>
