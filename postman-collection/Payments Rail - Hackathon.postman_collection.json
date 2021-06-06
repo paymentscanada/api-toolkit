@@ -640,7 +640,7 @@
 							]
 						},
 						"url": {
-							"raw": "https://hackathon-api.payments.ca/token",
+							"raw": "https://hackathon-api.payments.ca/v1/token",
 							"protocol": "https",
 							"host": [
 								"hackathon-api",
