@@ -1,0 +1,91 @@
+$id: RTR_FINAL_V1_1_AdministrationMessages_SR2019_%28Aug__RTR_MessageRejectV01_admi_002_001_01_20210826_1915_enriched.json
+$schema: 'http://json-schema.org/draft-07/schema#'
+description: 'Schema tag attributes: xmlns=''urn:iso:std:iso:20022:tech:xsd:admi.002.001.01'' xmlns:xs=''http://www.w3.org/2001/XMLSchema'' elementFormDefault=''qualified'' targetNamespace=''urn:iso:std:iso:20022:tech:xsd:admi.002.001.01'''
+properties:
+  message_reference:
+    $ref: '#/definitions/message_reference'
+  message_reject:
+    $ref: '#/definitions/message_reject'
+  rejection_reason2_1:
+    $ref: '#/definitions/rejection_reason2_1'
+  max350text:
+    $ref: '#/definitions/max350text'
+  max35text:
+    $ref: '#/definitions/max35text'
+type: object
+anyOf:
+  -
+    required:
+      - message_reference
+  -
+    required:
+      - message_reject
+  -
+    required:
+      - rejection_reason2_1
+  -
+    required:
+      - max350text
+  -
+    required:
+      - max35text
+definitions:
+  message_reference:
+    description: 'Message reference of relevance to the present message.'
+    required:
+      - reference
+    properties:
+      reference:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Business reference of the present message assigned by the party issuing the message. This reference must be unique amongst all messages of the same name sent by the same party.'
+    type: object
+  message_reject:
+    description: 'Scope The MessageReject message is sent by a central system to notify the rejection of a previously received message. Usage The message provides specific information about the rejection reason.'
+    required:
+      - related_reference
+      - reason
+    properties:
+      related_reference:
+        allOf:
+          -
+            $ref: '#/definitions/message_reference'
+          -
+            description: 'Refers to the identification of the message previously received and for which the rejection is notified.'
+      reason:
+        allOf:
+          -
+            $ref: '#/definitions/rejection_reason2_1'
+          -
+            description: 'General information about the reason of the message rejection.'
+    type: object
+  rejection_reason2_1:
+    description: 'General information about the reason of the rejection.'
+    required:
+      - rejecting_party_reason
+    properties:
+      rejecting_party_reason:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Reason of the rejection provided by the rejecting party.'
+      reason_description:
+        allOf:
+          -
+            $ref: '#/definitions/max350text'
+          -
+            description: 'Detailed description of the rejection reason.'
+    type: object
+  max350text:
+    description: 'Specifies a character string with a maximum length of 350 characters.'
+    maxLength: 350
+    minLength: 1
+    type: string
+  max35text:
+    description: 'Specifies a character string with a maximum length of 35 characters.'
+    maxLength: 35
+    minLength: 1
+    type: string

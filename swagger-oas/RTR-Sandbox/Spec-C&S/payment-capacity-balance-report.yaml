@@ -1,0 +1,649 @@
+openapi: 3.0.3
+info:
+  title: 'Payment Capacity Balance Report'
+  description: |
+    These APIs calls the C&S system to generate an balance report.
+
+    # Pre-requisites:
+    * A `access_token` that is still valid - See [Auth](https://storage.googleapis.com/prod-apigee-bucket-swagger/index.html?urls.primaryName=Auth) for more details.
+  version: 1.0.0
+servers:
+- url: "https://api.payments.ca"   #Review
+  description: Sandbox Environment   #Review
+
+paths:
+  /payment-capacity-balance-report:
+    post:
+      summary: 'Request a payment capacity balance report'
+      tags:
+        - 'Payment Capacity Report'
+      parameters:
+        -
+          $ref: '#/components/parameters/jwsSignature'
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json;version=1.0.0:
+            schema:
+              $ref: '#/components/schemas/camt003Request'
+      responses:
+        '200':
+          description: 'Message received'
+          headers:
+            x-jws-signature:
+              $ref: '#/components/headers/jwsSignature'
+          content:
+            application/json;version=1.0.0:
+              schema:
+                oneOf:
+                  -
+                    $ref: '#/components/schemas/BalRprtResponse'
+                  -
+                    $ref: '#/components/schemas/admi002Response'
+        '401':
+          description: 'Unauthorized. Requesting party has not been authenticated'
+          content:
+            application/json;version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/error'
+        '403':
+          description: 'Forbidden. Requesting party is authenticated but does not have permissions to access the resource'
+          content:
+            application/json;version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/error'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT  
+  headers:
+    jwsSignature:
+      description: 'Outbound JSON Web Signature, created using the "detached content" method'
+      schema:
+        type: string
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+  parameters:
+    jwsSignature:
+      name: x-jws-signature
+      description: 'Inbound JSON Web Signature, created using the "detached content" method'
+      in: header
+      schema:
+        type: string
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+      required: true
+  schemas:
+    error:
+      type: object
+      properties:
+        source:
+          type: string
+          description: 'The application that generated this error'
+        reason_code:
+          type: string
+          description: 'The code of the error.'
+        description:
+          type: string
+          description: 'In some scenarios includes description of the error'
+        recoverable:
+          type: boolean
+          description: 'Indicates whether this error will always be returned for this request, or retrying could change the outcome'
+        details:
+          type: string
+          description: 'Where appropriate, indicates detailed information about data received and calculated during request processing, to help the user with diagnosing errors'
+    camt003Request:
+      type: object
+      required:
+        - business_application_header
+        - get_account
+      properties:
+        business_application_header:
+          type: object
+          properties:
+            from:
+              description: "Usage Rules:\n\n1.The sending MessagingEndpoint that has created this Business Message for the receiving MessagingEndpoint that will process this Business Message.\n2.This block must be  present with all sub components as defined below  and schema and structural checks applied on all mandatory fields and their formats\n3. 'From' component is a choice, it must have either 'Organisation Identification' or 'Financial Institution Identification' , it cannot have both blocks as part of structural validation.\n\n\n\n"
+              type: object
+              properties:
+                financial_institution_identification:
+                  description: 'Sender of the message is a participant'
+                  type: object
+                  properties:
+                    financial_institution_identification:
+                      type: object
+                      properties:
+                        clearing_system_member_identification:
+                          type: object
+                          properties:
+                            member_identification:
+                              description: "Usage Rules:\n\nThis is the Participant ID of the member who requested the report\n\nBusiness Rules/Comments:\n\n1. Business Rule to check that the  ID is valid\n2.  This will be a static ID for each sender, this data will be stored in the registry.\n\nValidation Rule reference: B-001, B-009\n\n"
+                              type: string
+                              minLength: 1
+                              maxLength: 35
+                          required:
+                            - member_identification
+                      required:
+                        - clearing_system_member_identification
+                  required:
+                    - financial_institution_identification
+              required:
+                - financial_institution_identification
+            to:
+              description: 'The receiver of the message is RTR C&S'
+              type: object
+              properties:
+                organisation_identification:
+                  type: object
+                  properties:
+                    identification:
+                      type: object
+                      properties:
+                        organisation_identification:
+                          type: object
+                          properties:
+                            other:
+                              type: object
+                              properties:
+                                identification:
+                                  description: "Usage Rules:\n\nThis is the RTRC&S Id \n\n\nBusiness Rules/Comments:\n\n1. Business Rule to check that the ID is valid\n2.  This will be a static ID for RTR C&S.\n\nValidation Rule reference: B-006\n"
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 35
+                              required:
+                                - identification
+                          required:
+                            - other
+                      required:
+                        - organisation_identification
+                  required:
+                    - identification
+              required:
+                - organisation_identification
+            business_message_identifier:
+              description: "Unambiguously identifies the Business Message to the MessagingEndpoint that has created the Business Message.\n"
+              type: string
+              minLength: 1
+              maxLength: 35
+            message_definition_identifier:
+              description: "Usage Rules:\n\nThe value will be camt.003.001.07\n\nBusiness Rules/Comments:\n\nBusiness Rule to validate that only 'camt.003.001.07' is populated in the header for a camt.003 message payload\n\nValidation Rule reference: B-007\n"
+              type: string
+              minLength: 1
+              maxLength: 35
+            creation_date:
+              description: "Usage Rules:\n\nThe timestamp when the Participant created the camt.003\nFormat: UTC i.e. '2020-02-02T09:09:09.999z'\n\nBusiness Rules/Comments:\n\nRule to verify that Message creation date is equal to today's date or today-1.\n\nValidation Rule reference: B-008\n"
+              type: string
+              format: date-time
+              pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z$'
+          required:
+            - from
+            - to
+            - business_message_identifier
+            - message_definition_identifier
+            - creation_date
+        get_account:
+          type: object
+          properties:
+            message_header:
+              type: object
+              properties:
+                message_identification:
+                  description: "Usage Rules:\n\nThis ID is created by the message sender\n\nBusiness Rules/Comments:\n\nNo duplicate check will be done on camt.003 messages.\n"
+                  type: string
+                  minLength: 1
+                  maxLength: 35
+                creation_date_time:
+                  description: "Usage Rules:\n\nUTC Format : UTC i.e. '2020-02-02T09:09:09.999z'\n\nBusiness Rules/Comments:\n\nRule to verify that Message creation date is equal to today's date or today-1.\n\nValidation Rule reference: B-008\n"
+                  type: string
+                  format: date-time
+                  pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z$'
+              required:
+                - message_identification
+                - creation_date_time
+            account_query_definition:
+              type: object
+              properties:
+                account_criteria:
+                  type: object
+                  properties:
+                    query_name:
+                      description: "Usage Rules:\n\n1. For Balance Report , the value will be ParticipantID_CurBalReport or  'ParticipantID_BalReport_20210203001' where 001 is the cycle ID\n2021-02-03 is the reconciliation cycle date in the format YYYYMMDD\n2.For Interest Report, the value will be  ' ParticipantID_IntRep_20210203001, where Date is in the UTC Format and comprises of the Date of the Total Payment Capacity Balance against which the Interest Rate is calculated, and where 001 is the cycle ID\n3. Participant ID – currently 3 characters but might be extended (Participant ID cannot be too long to avoid violation of the field length)\n\n\nBusiness Rules/Comments:\n\nComment: \nThe Balance report for Participants should return the following, depending on Participant type:\n- For a DSP: return DSP own balances\n     -> if a DSP is also acting as an SA - return balances for each of its ISPs\n- For an SA: return balances for each of its ISPs\n- For an ISP: return ISP's net positions with each of its SAs\n\nThe Interest report will provide the data of a specific DSP (including DSPs acting as SAs)\n\nValidation Rule reference: B-002, B-003, B-005, B-009\n\n"
+                      type: string
+                      minLength: 1
+                      maxLength: 35
+                  required:
+                    - query_name
+              required:
+                - account_criteria
+          required:
+            - message_header
+            - account_query_definition
+    BalRprtResponse:
+      type: object
+      required:
+        - business_application_header
+        - return_account
+      properties:
+        business_application_header:
+          type: object
+          properties:
+            from:
+              description: "The sending MessagingEndpoint that has created this Business Message for the receiving MessagingEndpoint that will process this Business Message.\n\n"
+              type: object
+              properties:
+                organisation_identification:
+                  description: "This is the sender of the message - i.e. RTR C&S\n"
+                  type: object
+                  properties:
+                    identification:
+                      type: object
+                      properties:
+                        organisation_identification:
+                          type: object
+                          properties:
+                            other:
+                              type: object
+                              properties:
+                                identification:
+                                  description: "This is the RTRC&S Id \n\n"
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 35
+                              required:
+                                - identification
+                          required:
+                            - other
+                      required:
+                        - organisation_identification
+                  required:
+                    - identification
+              required:
+                - organisation_identification
+            to:
+              description: 'This is a receiver of the message - Participant'
+              type: object
+              properties:
+                financial_institution_identification:
+                  type: object
+                  properties:
+                    financial_institution_identification:
+                      type: object
+                      properties:
+                        clearing_system_member_identification:
+                          type: object
+                          properties:
+                            member_identification:
+                              description: "This is the Participant ID of the member who requested the report\n"
+                              type: string
+                              minLength: 1
+                              maxLength: 35
+                          required:
+                            - member_identification
+                      required:
+                        - clearing_system_member_identification
+                  required:
+                    - financial_institution_identification
+              required:
+                - financial_institution_identification
+            business_message_identifier:
+              description: "Unambiguously identifies the Business Message to the MessagingEndpoint that has created the Business Message.\n"
+              type: string
+              minLength: 1
+              maxLength: 35
+            message_definition_identifier:
+              description: 'The value will be camt.004.001.08'
+              type: string
+              minLength: 1
+              maxLength: 35
+            creation_date:
+              description: "The timestamp when the RTR C&S created the camt.004\nFormat: UTC i.e. '2020-02-02T09:09:09.999z'"
+              type: string
+              format: date-time
+              pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z$'
+          required:
+            - from
+            - to
+            - business_message_identifier
+            - message_definition_identifier
+            - creation_date
+        return_account:
+          type: object
+          properties:
+            message_header:
+              type: object
+              properties:
+                message_identification:
+                  description: "This ID is created by the message sender\n"
+                  type: string
+                  minLength: 1
+                  maxLength: 35
+                creation_date_time:
+                  description: "1. UTC Format : UTC i.e. '2020-02-02T09:09:09.999z'\n2. The Report generated date and time\n"
+                  type: string
+                  format: date-time
+                  pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z$'
+                original_business_query:
+                  type: object
+                  properties:
+                    message_identification:
+                      description: "This is the Original Id submitted in the camt.003  by the message sender Participant\n"
+                      type: string
+                      minLength: 1
+                      maxLength: 35
+                    message_name_identification:
+                      description: 'This will be the name of the original message that RTR C&S is responding to . The value in this case will be camt.003.001.07'
+                      type: string
+                      minLength: 1
+                      maxLength: 35
+                  required:
+                    - message_identification
+                    - message_name_identification
+                query_name:
+                  description: "1. For Balance Report , the naming convention will be ParticipantID_CurBalReport or  'ParticipantID_BalReport_20210203001' where 001 is the cycle ID\n20210203 is the reconciliation cycle date in the format YYYYMMDD\n2. Participant ID – currently 3 characters but might be extended (Participant ID cannot be too long to avoid exceeding the element length of 35 characters)\n\n"
+                  type: string
+                  minLength: 1
+                  maxLength: 35
+              required:
+                - message_identification
+                - creation_date_time
+            report_or_error:
+              oneOf:
+                -
+                  type: object
+                  required:
+                    - account_report
+                  properties:
+                    account_report:
+                      description: "This block might be repeated, if: \n- Participant is a DSP that is also acting an SA - repeated for DSPs own balances, and for each of its ISPs\n- Participant in an SA - for each of its ISPs\n- Participant in an ISP that has more than one SA - repeated for each of its SAs"
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          account_identification:
+                            type: object
+                            properties:
+                              other:
+                                type: object
+                                properties:
+                                  identification:
+                                    description: 'Participant Id in FIF 3 digit format,  this will be used for DSP, ISP or SA (Participant ID – currently 3 characters but might be extended - Participant ID cannot be too long to avoid violation of the field length)'
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 34
+                                required:
+                                  - identification
+                            required:
+                              - other
+                          account_or_error:
+                            type: object
+                            properties:
+                              account:
+                                type: object
+                                properties:
+                                  name:
+                                    description: 'Participant Name - this will be used for DSP, ISP or SA'
+                                    type: string
+                                    minLength: 1
+                                    maxLength: 70
+                                  type:
+                                    type: object
+                                    properties:
+                                      proprietary:
+                                        description: "This will determine what the Participant  type is  - i.e. DSP, ISP or SA.\nCodes/values to be used:\nDirect Settlement Participant\nIndirect Settlement Participant\nSettlement Agent\n"
+                                        type: string
+                                        minLength: 1
+                                        maxLength: 35
+                                    required:
+                                      - proprietary
+                                  servicer:
+                                    description: 'This block is only applicable if Participant is ISP or an SA.'
+                                    type: object
+                                    properties:
+                                      financial_institution_identification:
+                                        type: object
+                                        properties:
+                                          clearing_system_member_identification:
+                                            type: object
+                                            properties:
+                                              member_identification:
+                                                description: 'This will be the "Settlement Agent ID", where the requesting party is a Settlement Agent'
+                                                type: string
+                                                minLength: 1
+                                                maxLength: 35
+                                            required:
+                                              - member_identification
+                                          name:
+                                            description: 'This will be the "Settlement Agent Name", where the requesting party is a Settlement Agent'
+                                            type: string
+                                            minLength: 1
+                                            maxLength: 140
+                                        required:
+                                          - clearing_system_member_identification
+                                          - name
+                                    required:
+                                      - financial_institution_identification
+                                  multilateral_balance:
+                                    description: 'Multilateral Balance block  will be repeated for each balance type in the report - i.e.  ''Total Payment Capacity'' and '' Payment Capacity'' '
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        amount:
+                                          description: 'The balance amount. Max allowed digits are 18 including two decimal places i.e. 16 digits.00 CAD'
+                                          type: number
+                                          minimum: 0
+                                        xml_attribute_currency:
+                                          description: 'The currency of the report. This be will CAD only for the first phase of the Project'
+                                          type: string
+                                          pattern: '[A-Z]{3,3}'
+                                        credit_debit_indicator:
+                                          description: 'This will be used to indicate the balance if it''s debit or credit'
+                                          type: string
+                                          enum:
+                                            - CRDT
+                                            - DBIT
+                                        type:
+                                          description: "\n"
+                                          type: object
+                                          properties:
+                                            proprietary:
+                                              description: "A. The following balances will be presented when CURRENT balance report is requested:\n\n          A1. If the Participant is a DSP, or DSP that is also SA (DSPs own balances), the following balances will be reported back:\n                    A1.1. CUTP --> Current Total Payment Capacity\n                    A1.2. CUPC --> Current Payment Capacity\n\n          A2. If the Participant is SA, or DSP that is also SA , the following balances will be reported back (all balances repeated for each of the Participants' ISPs):\n                    A2.1. CTNP --> Current Completed Transactions Net position (for the moment of time of the balance being reported)\n                    A2.2. CUNP --> Current Net position (for the moment of time of the balance being reported)\n\n          A3. If the Participant is an ISP, the following balances will be reported back (all balances repeated for each SA, in case ISP has different Settlement Agents):\n                    A3.1. CTNP --> Completed Transactions Net position (for the moment of time of the balance being reported)\n                    A3.2. CUNP --> Current Net position (for the moment of time of the balance being reported)\n\n----------\nB. The following balances will be presented when balance report at the end of the specific Reconciliation Cycle is being sent:\n\n          B1. If the Participant is a DSP, or DSP that is also SA (DSPs own balances), the following balances will be reported back:\n                    B1.1. OTPC --> Open Total Payment Capacity\n                    B1.2. OPPC --> Open Payment Capacity\n                    B1.3. CLTP --> Close Total Payment Capacity\n                    B1.4. CLPC --> Close Payment Capacity\n\n          B2. If the Participant is SA, or DSP that is also SA , the following balances will be reported back (all balances repeated for each of the Participants' ISPs):\n                    B2.1. OCNP --> Open Completed Transactions Net position (balance as of the start of the reconciliation cycle)\n                    B2.2. OPNP --> Open Net position (balance as of the start of the reconciliation cycle)\n                    B2.3. CCNP --> Close Completed Transactions Net position (balance as of the end of the reconciliation cycle)\n                    B2.4. CLNP --> Close Net position (balance as of the end of the reconciliation cycle)\n\n          B3. If the Participant is an ISP, the following balances will be reported back (all balances repeated for each SA, in case ISP has different Settlement Agents):\n                    B3.1. OCNP --> Open Completed Transactions Net position (balance as of the start of the reconciliation cycle)\n                    B3.2. OPNP --> Open Net position (balance as of the start of the reconciliation cycle)\n                    B3.3. CCNP --> Close Completed Transactions Net position (balance as of the end of the reconciliation cycle)\n                    B3.4. CLNP --> Close Net position (balance as of the end of the reconciliation cycle)"
+                                              type: string
+                                              minLength: 1
+                                              maxLength: 35
+                                          required:
+                                            - proprietary
+                                        value_date:
+                                          type: object
+                                          properties:
+                                            date_time:
+                                              description: "1. UTC Format : UTC i.e. '2020-02-02T09:09:09.999z'\n2. This shows the date and time of the given type of the balance\n3. Closing balance types must have later date/time than opening balance types\n4. Current balances should reflect timestamp of the current balance snapshot\n"
+                                              type: string
+                                              format: date-time
+                                              pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z$'
+                                          required:
+                                            - date_time
+                                      required:
+                                        - amount
+                                        - xml_attribute_currency
+                                        - credit_debit_indicator
+                                        - type
+                                        - value_date
+                                required:
+                                  - name
+                                  - type
+                                  - servicer
+                                  - multilateral_balance
+                            required:
+                              - account
+                        required:
+                          - account_identification
+                          - account_or_error
+                -
+                  type: object
+                  required:
+                    - operational_error
+                  properties:
+                    operational_error:
+                      type: object
+                      properties:
+                        error:
+                          oneOf:
+                            -
+                              type: object
+                              required:
+                                - code
+                              properties:
+                                code:
+                                  description: "The ISO error code to be presented where a camt.003 fails validation - please see \"Validations - camt.003\" tab.\nFor non-ISO codes, \"Proprietary\" element will be used instead."
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 4
+                            -
+                              type: object
+                              required:
+                                - proprietary
+                              properties:
+                                proprietary:
+                                  description: "This will only be used if ISO codes cannot be found for the appropriate validation rule - please see \"Validation Rules & error codes\" tab.\nThis element will provide the rejection reason code for any business validation rule failure, or in the scenario of internal technical RTR C&S processing error.\n\nList of rejection codes that may be present in the field in case of business rule validation failure (Note: only CODE will be included in the field as a value):\n- Code: DT02; Description: InvalidCreationDate; Rule details: Check if the Creation Date Time is equal to the current system date or system date -1 day; Validation Rules reference: B-008\n- Code: RC08; Description: InvalidClearingSystemMemberIdentifier; Rule details: Check if Participant ID is correct/valid; Validation Rules reference: B-001\n- Code: BE06; Description: UnknownEndCustomer; Rule details: Check if RTR C&S Id is correct; Validation Rules reference: B-006\n- Code: MS03; Description: NotSpecifiedReasonAgentGenerated; Rule details: Check if Message Definition Identifier is correct; Validation Rules reference: B-007\n- Code: RC08; Description: InvalidClearingSystemMemberIdentifier; Rule details: Check if Participant ID in the Query name is correct/valid; Validation Rules reference: B-002\n- Code: DS0H; Description: NotAllowedAccount; Rule details: Participants relationship check; Validation Rules reference: B-009\n- Code: RDOR; Description: ReportingDateOutOfRange; Rule details: Check if requested report date is within last 30 days; Validation Rules reference: B-003\n- Code: X050; Description: DataNotAvailable; Rule details: Check if Participant existed at the date for which report is requested; Validation Rules reference: B-005\n- Code: 1100; Description: Any Other Reason; Rule details: this error code will be provided in case of any internal IPS processing error encountered\n\n"
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 35
+                        description:
+                          description: 'Description of the error code'
+                          type: string
+                          minLength: 1
+                          maxLength: 140
+                      required:
+                        - error
+          required:
+            - message_header
+            - report_or_error
+    admi002Response:
+      type: object
+      required:
+        - business_application_header
+        - message_reject
+      properties:
+        business_application_header:
+          type: object
+          properties:
+            from:
+              description: "1.The sending MessagingEndpoint that has created this Business Message for the receiving MessagingEndpoint that will process this Business Message.\n2.This block must be  present with all sub components as defined below  and schema and structural checks applied on all mandatory fields and their formats\n3. 'From' component is a choice, it must have either 'Organisation Identification' or 'Financial Institution Identification' , it cannot have both blocks as part of structural validation (i.e. it can have either Identification or Member Id not both)\n\n"
+              type: object
+              properties:
+                organisation_identification:
+                  description: 'Identification of a person or an organisation.'
+                  type: object
+                  properties:
+                    name:
+                      description: 'The name of the sender of the message. Format: Regular expression, max 140 characters, no special characters (including French special characters).If present, it will be checked for correct formatting.'
+                      type: string
+                      minLength: 1
+                      maxLength: 140
+                    identification:
+                      description: 'Unique and unambiguous identification of a party.'
+                      type: object
+                      properties:
+                        organisation_identification:
+                          description: 'Unique and unambiguous way to identify an organisation.'
+                          type: object
+                          properties:
+                            other:
+                              description: 'Unique identification of an organisation, as assigned by an institution, using an identification scheme.'
+                              type: object
+                              properties:
+                                identification:
+                                  description: "Identification assigned by an institution - the sender of the message. \nThis will be  RTR C&S \nFormat: Regular expression, max 35 characters, no special characters (including French special characters)"
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 35
+                              required:
+                                - identification
+                          required:
+                            - other
+                      required:
+                        - organisation_identification
+                  required:
+                    - identification
+              required:
+                - organisation_identification
+            to:
+              description: "1.The sending MessagingEndpoint that has created this Business Message for the receiving MessagingEndpoint that will process this Business Message.\n2.This block must be  present with all sub components as defined below  and schema and structural checks applied on all mandatory fields and their formats\n3. 'From' component is a choice, it must have either 'Organisation Identification' or 'Financial Institution Identification' , it cannot have both blocks as part of structural validation (i.e. it can have either Identification or Member Id not both)\n4. This will be a static ID for each sender, this data will be stored in the registry.\n"
+              type: object
+              properties:
+                financial_institution_identification:
+                  description: 'Receiver of the message is a participant'
+                  type: object
+                  properties:
+                    financial_institution_identification:
+                      type: object
+                      properties:
+                        clearing_system_member_identification:
+                          type: object
+                          properties:
+                            member_identification:
+                              description: "1. This is the Participant ID \n"
+                              type: string
+                              minLength: 1
+                              maxLength: 35
+                          required:
+                            - member_identification
+                      required:
+                        - clearing_system_member_identification
+                  required:
+                    - financial_institution_identification
+              required:
+                - financial_institution_identification
+            business_message_identifier:
+              description: "This block must be  present and schema and structural checks applied on all mandatory fields and their formats \nUnambiguously identifies the Business Message to the MessagingEndpoint that has created the Business Message.\nFormat: Regular expression, max 35 characters, no special characters (including French special characters)"
+              type: string
+              minLength: 1
+              maxLength: 35
+            message_definition_identifier:
+              description: "1. Format  Regular expression, max 35 characters, no special characters (including French special characters)\n2. The value will be admi.002.001.01"
+              type: string
+              minLength: 1
+              maxLength: 35
+            creation_date:
+              description: "The timestamp when the RTR C&S created the admi.002\nFormat: UTC i.e. '2020-02-02T09:09:09.999z'"
+              type: string
+              format: date-time
+              pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z$'
+          required:
+            - from
+            - to
+            - business_message_identifier
+            - message_definition_identifier
+            - creation_date
+        message_reject:
+          type: object
+          properties:
+            related_reference:
+              type: object
+              properties:
+                reference:
+                  description: 'Reference to the original message that failed validation'
+                  type: string
+                  minLength: 1
+                  maxLength: 35
+              required:
+                - reference
+            reason:
+              type: object
+              properties:
+                rejecting_party_reason:
+                  description: "E.g. structural validation failure, signature failure\nCodes:\n650 for Schema validation error;\n690 for Digital Signature validation error;\n"
+                  type: string
+                  minLength: 1
+                  maxLength: 35
+                additional_data:
+                  description: "First 20000 characters of the request message; applicable where Rejecting Party Reason = 650;\n\nISO Description: Additional information related to the rejection and meant to allow for the precise identification of the\nrejection reason. This could include a copy of the rejected message in part or in full.\nProduct Usage: Original Message captured in CDATA to allow the message contents to be examined by the instructing party\n(Participant that sent the message that is now being rejected).\nNote: CDATA stands for Character Data and any data in between the CDATA TAGS / element identifies data that\ncould be interpreted as XML.\nProvided data can be read as XML but will not be parsed as an XML information even it is part of the overall\nmessage. While all text in an XML document will be parsed by the parser, the information inside a CDATA\nsection will be seen as free text.\nExample: <![CDATA[<Message xmlns=\"urn:tch\"><AppHdr><head:Fr xmlns:head=\"urn:iso:std:iso:20022:tech:xsd:head.\n001.001.01\"><head:FIId><head:FinInstnId> ...... </ps:FIToFIPmtStsRpt></PaymentStatus></Message>]]"
+                  type: string
+                  minLength: 1
+                  maxLength: 20000
+              required:
+                - rejecting_party_reason
+          required:
+            - related_reference
+            - reason

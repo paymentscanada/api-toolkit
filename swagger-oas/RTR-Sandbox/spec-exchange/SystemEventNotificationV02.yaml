@@ -1,0 +1,68 @@
+$id: RTR_FINAL_V1_1_AdministrationMessages_SR2019_%28Aug__RTR_SystemEventNotificationV02_admi_004_001_02_20210826_1915_enriched.json
+$schema: 'http://json-schema.org/draft-07/schema#'
+description: 'Schema tag attributes: xmlns=''urn:iso:std:iso:20022:tech:xsd:admi.004.001.02'' xmlns:xs=''http://www.w3.org/2001/XMLSchema'' elementFormDefault=''qualified'' targetNamespace=''urn:iso:std:iso:20022:tech:xsd:admi.004.001.02'''
+properties:
+  event2_1:
+    $ref: '#/definitions/event2_1'
+  system_event_notification:
+    $ref: '#/definitions/system_event_notification'
+  max350text:
+    $ref: '#/definitions/max350text'
+  max4alpha_numeric_text_fixed:
+    $ref: '#/definitions/max4alpha_numeric_text_fixed'
+type: object
+anyOf:
+  -
+    required:
+      - event2_1
+  -
+    required:
+      - system_event_notification
+  -
+    required:
+      - max350text
+  -
+    required:
+      - max4alpha_numeric_text_fixed
+definitions:
+  event2_1:
+    description: 'Provides information on an event that happened in a system.'
+    required:
+      - event_code
+      - event_description
+    properties:
+      event_code:
+        allOf:
+          -
+            $ref: '#/definitions/max4alpha_numeric_text_fixed'
+          -
+            description: 'Proprietary code used to specify an event that occurred in a system.'
+      event_description:
+        allOf:
+          -
+            $ref: '#/definitions/max350text'
+          -
+            description: 'Free text used to describe an event which occurred in a system.'
+    type: object
+  system_event_notification:
+    description: 'Scope The SystemEventNotification message is sent by a central system to notify the occurrence of an event in a central system. Usage The message can be used by a central settlement system to inform its participants of an event that is going to occur in the system, for instance that the system will be down at a certain time, etc.'
+    required:
+      - event_information
+    properties:
+      event_information:
+        allOf:
+          -
+            $ref: '#/definitions/event2_1'
+          -
+            description: 'Detailed information about a system event.'
+    type: object
+  max350text:
+    description: 'Specifies a character string with a maximum length of 350 characters.'
+    maxLength: 350
+    minLength: 1
+    type: string
+  max4alpha_numeric_text_fixed:
+    description: Max4AlphaNumericText_fixed
+    enum:
+      - HBRT
+    type: string

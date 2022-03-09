@@ -1,0 +1,31 @@
+x-linker-objects:
+  standard-errors:
+    "401": { $ref: "#/401-unauthorized" }
+    "403": { $ref: "#/403-forbidden" }
+    "404": { $ref: "#/404-not-found" }
+    "429": { $ref: "#/429-too-many-requests"}
+    "500": { $ref: "#/500-internal-server-error" }
+    "503": { $ref: "#/503-service-unavailable" }
+400-bad-request:
+  description: Bad Request - Validation Errors
+401-unauthorized:
+  description: Unauthorized
+403-forbidden:
+  description: Forbidden
+  content:
+    application/json; version=1.0.0:
+      schema:
+        $ref: "./types.yaml#/ErrorModel"
+404-not-found:
+  description: Resources Not Found
+429-too-many-requests:
+  description: Too many requests; blocked due to rate limiting.
+500-internal-server-error:
+  description: Internal Server Error
+  content:
+    application/json; version=1.0.0:
+      schema:
+        $ref: "./types.yaml#/ErrorModel"
+503-service-unavailable:
+  description: Service Unavailable - The server cannot handle the request for a service due to temporary maintenance.
+  

@@ -1,0 +1,3315 @@
+$id: RTR_FINAL_V1_1_CoreMessages_SR2019%28Aug_2021-Pen_RTR_FIToFICustomerCreditTransferIncomingV08_pacs_008_001_08_20210826_1915_enriched.json
+$schema: 'http://json-schema.org/draft-07/schema#'
+description: 'Schema tag attributes: xmlns=''urn:iso:std:iso:20022:tech:xsd:pacs.008.001.08'' xmlns:xs=''http://www.w3.org/2001/XMLSchema'' elementFormDefault=''qualified'' targetNamespace=''urn:iso:std:iso:20022:tech:xsd:pacs.008.001.08'''
+properties:
+  account_identification4choice_1:
+    $ref: '#/definitions/account_identification4choice_1'
+  active_currency_and_amount_2decimals:
+    $ref: '#/definitions/active_currency_and_amount_2decimals'
+  active_or_historic_currency_and_amount:
+    $ref: '#/definitions/active_or_historic_currency_and_amount'
+  address_type3choice:
+    $ref: '#/definitions/address_type3choice'
+  branch_and_financial_institution_identification6_1:
+    $ref: '#/definitions/branch_and_financial_institution_identification6_1'
+  branch_and_financial_institution_identification6_2:
+    $ref: '#/definitions/branch_and_financial_institution_identification6_2'
+  cash_account38_1:
+    $ref: '#/definitions/cash_account38_1'
+  category_purpose1choice_1:
+    $ref: '#/definitions/category_purpose1choice_1'
+  clearing_system_identification2choice:
+    $ref: '#/definitions/clearing_system_identification2choice'
+  clearing_system_identification3choice_1:
+    $ref: '#/definitions/clearing_system_identification3choice_1'
+  clearing_system_member_identification2:
+    $ref: '#/definitions/clearing_system_member_identification2'
+  clearing_system_member_identification2_1:
+    $ref: '#/definitions/clearing_system_member_identification2_1'
+  contact4_1:
+    $ref: '#/definitions/contact4_1'
+  contact4_2:
+    $ref: '#/definitions/contact4_2'
+  contact4_3:
+    $ref: '#/definitions/contact4_3'
+  credit_transfer_transaction39_1:
+    $ref: '#/definitions/credit_transfer_transaction39_1'
+  creditor_reference_information2:
+    $ref: '#/definitions/creditor_reference_information2'
+  creditor_reference_type1choice:
+    $ref: '#/definitions/creditor_reference_type1choice'
+  creditor_reference_type2:
+    $ref: '#/definitions/creditor_reference_type2'
+  date_and_place_of_birth1:
+    $ref: '#/definitions/date_and_place_of_birth1'
+  date_period2:
+    $ref: '#/definitions/date_period2'
+  discount_amount_and_type1:
+    $ref: '#/definitions/discount_amount_and_type1'
+  discount_amount_type1choice:
+    $ref: '#/definitions/discount_amount_type1choice'
+  document_adjustment1:
+    $ref: '#/definitions/document_adjustment1'
+  document_line_identification1:
+    $ref: '#/definitions/document_line_identification1'
+  document_line_information1_1:
+    $ref: '#/definitions/document_line_information1_1'
+  document_line_type1:
+    $ref: '#/definitions/document_line_type1'
+  document_line_type1choice:
+    $ref: '#/definitions/document_line_type1choice'
+  fi_to_fi_customer_credit_transfer:
+    $ref: '#/definitions/fi_to_fi_customer_credit_transfer'
+  financial_identification_scheme_name1choice:
+    $ref: '#/definitions/financial_identification_scheme_name1choice'
+  financial_institution_identification18:
+    $ref: '#/definitions/financial_institution_identification18'
+  financial_institution_identification18_1:
+    $ref: '#/definitions/financial_institution_identification18_1'
+  garnishment3_1:
+    $ref: '#/definitions/garnishment3_1'
+  garnishment_type1:
+    $ref: '#/definitions/garnishment_type1'
+  garnishment_type1choice:
+    $ref: '#/definitions/garnishment_type1choice'
+  generic_account_identification1_1:
+    $ref: '#/definitions/generic_account_identification1_1'
+  generic_financial_identification1:
+    $ref: '#/definitions/generic_financial_identification1'
+  generic_identification30:
+    $ref: '#/definitions/generic_identification30'
+  generic_organisation_identification1:
+    $ref: '#/definitions/generic_organisation_identification1'
+  generic_person_identification1:
+    $ref: '#/definitions/generic_person_identification1'
+  group_header93_1:
+    $ref: '#/definitions/group_header93_1'
+  local_instrument2choice_1:
+    $ref: '#/definitions/local_instrument2choice_1'
+  name_and_address16_1:
+    $ref: '#/definitions/name_and_address16_1'
+  organisation_identification29_1:
+    $ref: '#/definitions/organisation_identification29_1'
+  organisation_identification_scheme_name1choice:
+    $ref: '#/definitions/organisation_identification_scheme_name1choice'
+  party38choice_1:
+    $ref: '#/definitions/party38choice_1'
+  party_identification135_1:
+    $ref: '#/definitions/party_identification135_1'
+  party_identification135_2:
+    $ref: '#/definitions/party_identification135_2'
+  party_identification135_3:
+    $ref: '#/definitions/party_identification135_3'
+  party_identification135_4:
+    $ref: '#/definitions/party_identification135_4'
+  party_identification135_5:
+    $ref: '#/definitions/party_identification135_5'
+  party_identification135_6:
+    $ref: '#/definitions/party_identification135_6'
+  payment_identification7_1:
+    $ref: '#/definitions/payment_identification7_1'
+  payment_type_information28_1:
+    $ref: '#/definitions/payment_type_information28_1'
+  person_identification13_1:
+    $ref: '#/definitions/person_identification13_1'
+  person_identification_scheme_name1choice:
+    $ref: '#/definitions/person_identification_scheme_name1choice'
+  postal_address24:
+    $ref: '#/definitions/postal_address24'
+  postal_address24_1:
+    $ref: '#/definitions/postal_address24_1'
+  postal_address24_2:
+    $ref: '#/definitions/postal_address24_2'
+  postal_address24_3:
+    $ref: '#/definitions/postal_address24_3'
+  proxy_account_identification1:
+    $ref: '#/definitions/proxy_account_identification1'
+  proxy_account_type1choice:
+    $ref: '#/definitions/proxy_account_type1choice'
+  purpose2choice:
+    $ref: '#/definitions/purpose2choice'
+  referred_document_information7_1:
+    $ref: '#/definitions/referred_document_information7_1'
+  referred_document_type3choice:
+    $ref: '#/definitions/referred_document_type3choice'
+  referred_document_type4:
+    $ref: '#/definitions/referred_document_type4'
+  remittance_amount2:
+    $ref: '#/definitions/remittance_amount2'
+  remittance_amount3:
+    $ref: '#/definitions/remittance_amount3'
+  remittance_information16_1:
+    $ref: '#/definitions/remittance_information16_1'
+  remittance_location7_1:
+    $ref: '#/definitions/remittance_location7_1'
+  remittance_location_data1_1:
+    $ref: '#/definitions/remittance_location_data1_1'
+  service_level8choice:
+    $ref: '#/definitions/service_level8choice'
+  settlement_instruction7_1:
+    $ref: '#/definitions/settlement_instruction7_1'
+  structured_remittance_information16_1:
+    $ref: '#/definitions/structured_remittance_information16_1'
+  tax_amount2:
+    $ref: '#/definitions/tax_amount2'
+  tax_amount_and_type1:
+    $ref: '#/definitions/tax_amount_and_type1'
+  tax_amount_type1choice:
+    $ref: '#/definitions/tax_amount_type1choice'
+  tax_authorisation1:
+    $ref: '#/definitions/tax_authorisation1'
+  tax_information7:
+    $ref: '#/definitions/tax_information7'
+  tax_party1:
+    $ref: '#/definitions/tax_party1'
+  tax_party2:
+    $ref: '#/definitions/tax_party2'
+  tax_period2:
+    $ref: '#/definitions/tax_period2'
+  tax_record2:
+    $ref: '#/definitions/tax_record2'
+  tax_record_details2:
+    $ref: '#/definitions/tax_record_details2'
+  active_or_historic_currency_code:
+    $ref: '#/definitions/active_or_historic_currency_code'
+  active_or_historic_currency_code_fixed:
+    $ref: '#/definitions/active_or_historic_currency_code_fixed'
+  address_type2code:
+    $ref: '#/definitions/address_type2code'
+  any_bicdec2014identifier:
+    $ref: '#/definitions/any_bicdec2014identifier'
+  bicfidec2014identifier:
+    $ref: '#/definitions/bicfidec2014identifier'
+  base_one_rate:
+    $ref: '#/definitions/base_one_rate'
+  charge_bearer_type1code_1:
+    $ref: '#/definitions/charge_bearer_type1code_1'
+  country_code:
+    $ref: '#/definitions/country_code'
+  credit_debit_code:
+    $ref: '#/definitions/credit_debit_code'
+  document_type3code:
+    $ref: '#/definitions/document_type3code'
+  document_type6code:
+    $ref: '#/definitions/document_type6code'
+  exact4alpha_numeric_text:
+    $ref: '#/definitions/exact4alpha_numeric_text'
+  external_cash_clearing_system1code_fixed:
+    $ref: '#/definitions/external_cash_clearing_system1code_fixed'
+  external_category_purpose1code:
+    $ref: '#/definitions/external_category_purpose1code'
+  external_clearing_system_identification1code:
+    $ref: '#/definitions/external_clearing_system_identification1code'
+  external_discount_amount_type1code:
+    $ref: '#/definitions/external_discount_amount_type1code'
+  external_document_line_type1code:
+    $ref: '#/definitions/external_document_line_type1code'
+  external_financial_institution_identification1code:
+    $ref: '#/definitions/external_financial_institution_identification1code'
+  external_garnishment_type1code:
+    $ref: '#/definitions/external_garnishment_type1code'
+  external_organisation_identification1code:
+    $ref: '#/definitions/external_organisation_identification1code'
+  external_person_identification1code:
+    $ref: '#/definitions/external_person_identification1code'
+  external_proxy_account_type1code:
+    $ref: '#/definitions/external_proxy_account_type1code'
+  external_purpose1code:
+    $ref: '#/definitions/external_purpose1code'
+  external_service_level1code:
+    $ref: '#/definitions/external_service_level1code'
+  external_tax_amount_type1code:
+    $ref: '#/definitions/external_tax_amount_type1code'
+  isodate:
+    $ref: '#/definitions/isodate'
+  isonormalised_date_time:
+    $ref: '#/definitions/isonormalised_date_time'
+  leiidentifier:
+    $ref: '#/definitions/leiidentifier'
+  max140text:
+    $ref: '#/definitions/max140text'
+  max15numeric_text_fixed:
+    $ref: '#/definitions/max15numeric_text_fixed'
+  max16text:
+    $ref: '#/definitions/max16text'
+  max2048text:
+    $ref: '#/definitions/max2048text'
+  max34text:
+    $ref: '#/definitions/max34text'
+  max35text:
+    $ref: '#/definitions/max35text'
+  max4text:
+    $ref: '#/definitions/max4text'
+  max70text:
+    $ref: '#/definitions/max70text'
+  number:
+    $ref: '#/definitions/number'
+  percentage_rate:
+    $ref: '#/definitions/percentage_rate'
+  phone_number:
+    $ref: '#/definitions/phone_number'
+  remittance_location_method2code:
+    $ref: '#/definitions/remittance_location_method2code'
+  settlement_method1code_1:
+    $ref: '#/definitions/settlement_method1code_1'
+  tax_record_period1code:
+    $ref: '#/definitions/tax_record_period1code'
+  true_false_indicator:
+    $ref: '#/definitions/true_false_indicator'
+  uuidv4identifier:
+    $ref: '#/definitions/uuidv4identifier'
+  active_currency_and_amount_2decimals_simple_type:
+    $ref: '#/definitions/active_currency_and_amount_2decimals_simple_type'
+  active_or_historic_currency_and_amount_simple_type:
+    $ref: '#/definitions/active_or_historic_currency_and_amount_simple_type'
+type: object
+anyOf:
+  -
+    required:
+      - account_identification4choice_1
+  -
+    required:
+      - active_currency_and_amount_2decimals
+  -
+    required:
+      - active_or_historic_currency_and_amount
+  -
+    required:
+      - address_type3choice
+  -
+    required:
+      - branch_and_financial_institution_identification6_1
+  -
+    required:
+      - branch_and_financial_institution_identification6_2
+  -
+    required:
+      - cash_account38_1
+  -
+    required:
+      - category_purpose1choice_1
+  -
+    required:
+      - clearing_system_identification2choice
+  -
+    required:
+      - clearing_system_identification3choice_1
+  -
+    required:
+      - clearing_system_member_identification2
+  -
+    required:
+      - clearing_system_member_identification2_1
+  -
+    required:
+      - contact4_1
+  -
+    required:
+      - contact4_2
+  -
+    required:
+      - contact4_3
+  -
+    required:
+      - credit_transfer_transaction39_1
+  -
+    required:
+      - creditor_reference_information2
+  -
+    required:
+      - creditor_reference_type1choice
+  -
+    required:
+      - creditor_reference_type2
+  -
+    required:
+      - date_and_place_of_birth1
+  -
+    required:
+      - date_period2
+  -
+    required:
+      - discount_amount_and_type1
+  -
+    required:
+      - discount_amount_type1choice
+  -
+    required:
+      - document_adjustment1
+  -
+    required:
+      - document_line_identification1
+  -
+    required:
+      - document_line_information1_1
+  -
+    required:
+      - document_line_type1
+  -
+    required:
+      - document_line_type1choice
+  -
+    required:
+      - fi_to_fi_customer_credit_transfer
+  -
+    required:
+      - financial_identification_scheme_name1choice
+  -
+    required:
+      - financial_institution_identification18
+  -
+    required:
+      - financial_institution_identification18_1
+  -
+    required:
+      - garnishment3_1
+  -
+    required:
+      - garnishment_type1
+  -
+    required:
+      - garnishment_type1choice
+  -
+    required:
+      - generic_account_identification1_1
+  -
+    required:
+      - generic_financial_identification1
+  -
+    required:
+      - generic_identification30
+  -
+    required:
+      - generic_organisation_identification1
+  -
+    required:
+      - generic_person_identification1
+  -
+    required:
+      - group_header93_1
+  -
+    required:
+      - local_instrument2choice_1
+  -
+    required:
+      - name_and_address16_1
+  -
+    required:
+      - organisation_identification29_1
+  -
+    required:
+      - organisation_identification_scheme_name1choice
+  -
+    required:
+      - party38choice_1
+  -
+    required:
+      - party_identification135_1
+  -
+    required:
+      - party_identification135_2
+  -
+    required:
+      - party_identification135_3
+  -
+    required:
+      - party_identification135_4
+  -
+    required:
+      - party_identification135_5
+  -
+    required:
+      - party_identification135_6
+  -
+    required:
+      - payment_identification7_1
+  -
+    required:
+      - payment_type_information28_1
+  -
+    required:
+      - person_identification13_1
+  -
+    required:
+      - person_identification_scheme_name1choice
+  -
+    required:
+      - postal_address24
+  -
+    required:
+      - postal_address24_1
+  -
+    required:
+      - postal_address24_2
+  -
+    required:
+      - postal_address24_3
+  -
+    required:
+      - proxy_account_identification1
+  -
+    required:
+      - proxy_account_type1choice
+  -
+    required:
+      - purpose2choice
+  -
+    required:
+      - referred_document_information7_1
+  -
+    required:
+      - referred_document_type3choice
+  -
+    required:
+      - referred_document_type4
+  -
+    required:
+      - remittance_amount2
+  -
+    required:
+      - remittance_amount3
+  -
+    required:
+      - remittance_information16_1
+  -
+    required:
+      - remittance_location7_1
+  -
+    required:
+      - remittance_location_data1_1
+  -
+    required:
+      - service_level8choice
+  -
+    required:
+      - settlement_instruction7_1
+  -
+    required:
+      - structured_remittance_information16_1
+  -
+    required:
+      - tax_amount2
+  -
+    required:
+      - tax_amount_and_type1
+  -
+    required:
+      - tax_amount_type1choice
+  -
+    required:
+      - tax_authorisation1
+  -
+    required:
+      - tax_information7
+  -
+    required:
+      - tax_party1
+  -
+    required:
+      - tax_party2
+  -
+    required:
+      - tax_period2
+  -
+    required:
+      - tax_record2
+  -
+    required:
+      - tax_record_details2
+  -
+    required:
+      - active_currency_and_amount_2decimals_simple_type
+  -
+    required:
+      - active_or_historic_currency_and_amount_simple_type
+  -
+    required:
+      - active_or_historic_currency_code
+  -
+    required:
+      - active_or_historic_currency_code_fixed
+  -
+    required:
+      - address_type2code
+  -
+    required:
+      - any_bicdec2014identifier
+  -
+    required:
+      - bicfidec2014identifier
+  -
+    required:
+      - base_one_rate
+  -
+    required:
+      - charge_bearer_type1code_1
+  -
+    required:
+      - country_code
+  -
+    required:
+      - credit_debit_code
+  -
+    required:
+      - document_type3code
+  -
+    required:
+      - document_type6code
+  -
+    required:
+      - exact4alpha_numeric_text
+  -
+    required:
+      - external_cash_clearing_system1code_fixed
+  -
+    required:
+      - external_category_purpose1code
+  -
+    required:
+      - external_clearing_system_identification1code
+  -
+    required:
+      - external_discount_amount_type1code
+  -
+    required:
+      - external_document_line_type1code
+  -
+    required:
+      - external_financial_institution_identification1code
+  -
+    required:
+      - external_garnishment_type1code
+  -
+    required:
+      - external_organisation_identification1code
+  -
+    required:
+      - external_person_identification1code
+  -
+    required:
+      - external_proxy_account_type1code
+  -
+    required:
+      - external_purpose1code
+  -
+    required:
+      - external_service_level1code
+  -
+    required:
+      - external_tax_amount_type1code
+  -
+    required:
+      - isodate
+  -
+    required:
+      - isonormalised_date_time
+  -
+    required:
+      - leiidentifier
+  -
+    required:
+      - max140text
+  -
+    required:
+      - max15numeric_text_fixed
+  -
+    required:
+      - max16text
+  -
+    required:
+      - max2048text
+  -
+    required:
+      - max34text
+  -
+    required:
+      - max35text
+  -
+    required:
+      - max4text
+  -
+    required:
+      - max70text
+  -
+    required:
+      - number
+  -
+    required:
+      - percentage_rate
+  -
+    required:
+      - phone_number
+  -
+    required:
+      - remittance_location_method2code
+  -
+    required:
+      - settlement_method1code_1
+  -
+    required:
+      - tax_record_period1code
+  -
+    required:
+      - true_false_indicator
+  -
+    required:
+      - uuidv4identifier
+definitions:
+  account_identification4choice_1:
+    description: 'Specifies the unique identification of an account as assigned by the account servicer.'
+    type: object
+    anyOf:
+      -
+        required:
+          - other
+        properties:
+          other:
+            allOf:
+              - {$ref: '#/definitions/generic_account_identification1_1'}
+              - {description: 'Unique identification of an account, as assigned by the account servicer, using an identification scheme.'}
+  active_currency_and_amount_2decimals:
+    description: ActiveCurrencyAndAmount_2decimals
+    type: object
+    allOf:
+      -
+        $ref: '#/definitions/active_currency_and_amount_2decimals_simple_type'
+      -
+        description: Currency
+        required:
+          - currency
+        properties:
+          currency:
+            $ref: '#/definitions/active_or_historic_currency_code_fixed'
+  active_or_historic_currency_and_amount:
+    description: 'A number of monetary units specified in an active or a historic currency where the unit of currency is explicit and compliant with ISO 4217.'
+    type: object
+    allOf:
+      -
+        $ref: '#/definitions/active_or_historic_currency_and_amount_simple_type'
+      -
+        description: 'Medium of exchange of currency.'
+        required:
+          - currency
+        properties:
+          currency:
+            $ref: '#/definitions/active_or_historic_currency_code'
+  address_type3choice:
+    description: 'Choice of formats for the type of address.'
+    type: object
+    oneOf:
+      -
+        required:
+          - code
+        properties:
+          code:
+            allOf:
+              - {$ref: '#/definitions/address_type2code'}
+              - {description: "Type of address expressed as a code.\nSpecifies the type of address.\nADDR: Address is the complete postal address.\nPBOX: Address is a postal office (PO) box.\nHOME: Address is the home address.\nBIZZ: Address is the business address.\nMLTO: Address is the address to which mail is sent.\nDLVY: Address is the address to which delivery is to take place."}
+      -
+        required:
+          - proprietary
+        properties:
+          proprietary:
+            allOf:
+              - {$ref: '#/definitions/generic_identification30'}
+              - {description: 'Type of address expressed as a proprietary code.'}
+  branch_and_financial_institution_identification6_1:
+    description: 'Unique and unambiguous identification of a financial institution or a branch of a financial institution.'
+    required:
+      - financial_institution_identification
+    properties:
+      financial_institution_identification:
+        allOf:
+          -
+            $ref: '#/definitions/financial_institution_identification18'
+          -
+            description: 'Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme.'
+    type: object
+  branch_and_financial_institution_identification6_2:
+    description: 'Unique and unambiguous identification of a financial institution or a branch of a financial institution.'
+    required:
+      - financial_institution_identification
+    properties:
+      financial_institution_identification:
+        allOf:
+          -
+            $ref: '#/definitions/financial_institution_identification18_1'
+          -
+            description: 'Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme.'
+    type: object
+  cash_account38_1:
+    description: 'Provides the details to identify an account.'
+    required:
+      - identification
+    properties:
+      identification:
+        allOf:
+          -
+            $ref: '#/definitions/account_identification4choice_1'
+          -
+            description: 'Unique and unambiguous identification for the account between the account owner and the account servicer.'
+      proxy:
+        allOf:
+          -
+            $ref: '#/definitions/proxy_account_identification1'
+          -
+            description: 'Specifies an alternate assumed name for the identification of the account.'
+    type: object
+  category_purpose1choice_1:
+    description: 'Specifies the high level purpose of the instruction based on a set of pre-defined categories. Usage: This is used by the initiating party to provide information concerning the processing of the payment. It is likely to trigger special processing by any of the agents involved in the payment chain.'
+    type: object
+    anyOf:
+      -
+        required:
+          - code
+        properties:
+          code:
+            allOf:
+              - {$ref: '#/definitions/external_category_purpose1code'}
+              - {description: 'Category purpose, as published in an external category purpose code list.'}
+  clearing_system_identification2choice:
+    description: 'Choice of a clearing system identifier.'
+    type: object
+    oneOf:
+      -
+        required:
+          - code
+        properties:
+          code:
+            allOf:
+              - {$ref: '#/definitions/external_clearing_system_identification1code'}
+              - {description: 'Identification of a clearing system, in a coded form as published in an external list.'}
+      -
+        required:
+          - proprietary
+        properties:
+          proprietary:
+            allOf:
+              - {$ref: '#/definitions/max35text'}
+              - {description: 'Identification code for a clearing system, that has not yet been identified in the list of clearing systems.'}
+  clearing_system_identification3choice_1:
+    description: 'Specifies the clearing system identification.'
+    type: object
+    anyOf:
+      -
+        required:
+          - code
+        properties:
+          code:
+            allOf:
+              - {$ref: '#/definitions/external_cash_clearing_system1code_fixed'}
+              - {description: 'Infrastructure through which the payment instruction is processed, as published in an external clearing system identification code list.'}
+  clearing_system_member_identification2:
+    description: 'Unique identification, as assigned by a clearing system, to unambiguously identify a member of the clearing system.'
+    required:
+      - member_identification
+    properties:
+      clearing_system_identification:
+        allOf:
+          -
+            $ref: '#/definitions/clearing_system_identification2choice'
+          -
+            description: 'Specification of a pre-agreed offering between clearing agents or the channel through which the payment instruction is processed.'
+      member_identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Identification of a member of a clearing system.'
+    type: object
+  clearing_system_member_identification2_1:
+    description: 'Unique identification, as assigned by a clearing system, to unambiguously identify a member of the clearing system.'
+    required:
+      - member_identification
+    properties:
+      member_identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Identification of a member of a clearing system.'
+    type: object
+  contact4_1:
+    description: 'Specifies the details of the contact person.'
+    properties:
+      name:
+        allOf:
+          -
+            $ref: '#/definitions/max140text'
+          -
+            description: 'Name by which a party is known and which is usually used to identify that party.'
+      phone_number:
+        allOf:
+          -
+            $ref: '#/definitions/phone_number'
+          -
+            description: 'Collection of information that identifies a phone number, as defined by telecom services.'
+      mobile_number:
+        allOf:
+          -
+            $ref: '#/definitions/phone_number'
+          -
+            description: 'Collection of information that identifies a mobile phone number, as defined by telecom services.'
+      fax_number:
+        allOf:
+          -
+            $ref: '#/definitions/phone_number'
+          -
+            description: 'Collection of information that identifies a FAX number, as defined by telecom services.'
+      email_address:
+        allOf:
+          -
+            $ref: '#/definitions/max2048text'
+          -
+            description: 'Address for electronic mail (e-mail).'
+    type: object
+  contact4_2:
+    description: 'Specifies the details of the contact person.'
+    properties:
+      mobile_number:
+        allOf:
+          -
+            $ref: '#/definitions/phone_number'
+          -
+            description: 'Collection of information that identifies a mobile phone number, as defined by telecom services.'
+      email_address:
+        allOf:
+          -
+            $ref: '#/definitions/max2048text'
+          -
+            description: 'Address for electronic mail (e-mail).'
+    type: object
+  contact4_3:
+    description: 'Specifies the details of the contact person.'
+    properties:
+      name:
+        allOf:
+          -
+            $ref: '#/definitions/max140text'
+          -
+            description: 'Name by which a party is known and which is usually used to identify that party.'
+      phone_number:
+        allOf:
+          -
+            $ref: '#/definitions/phone_number'
+          -
+            description: 'Collection of information that identifies a phone number, as defined by telecom services.'
+      mobile_number:
+        allOf:
+          -
+            $ref: '#/definitions/phone_number'
+          -
+            description: 'Collection of information that identifies a mobile phone number, as defined by telecom services.'
+      fax_number:
+        allOf:
+          -
+            $ref: '#/definitions/phone_number'
+          -
+            description: 'Collection of information that identifies a FAX number, as defined by telecom services.'
+      email_address:
+        allOf:
+          -
+            $ref: '#/definitions/max2048text'
+          -
+            description: 'Address for electronic mail (e-mail).'
+      department:
+        allOf:
+          -
+            $ref: '#/definitions/max70text'
+          -
+            description: 'Identification of a division of a large organisation or building.'
+    type: object
+  credit_transfer_transaction39_1:
+    description: 'Provides further details specific to the individual transaction(s) included in the message.'
+    required:
+      - payment_identification
+      - payment_type_information
+      - interbank_settlement_amount
+      - interbank_settlement_date
+      - charge_bearer
+      - instructing_agent
+      - instructed_agent
+      - debtor
+      - debtor_account
+      - debtor_agent
+      - creditor_agent
+      - creditor
+      - creditor_account
+    properties:
+      payment_identification:
+        allOf:
+          -
+            $ref: '#/definitions/payment_identification7_1'
+          -
+            description: 'Set of elements used to reference a payment instruction.'
+      payment_type_information:
+        allOf:
+          -
+            $ref: '#/definitions/payment_type_information28_1'
+          -
+            description: 'Set of elements used to further specify the type of transaction.'
+      interbank_settlement_amount:
+        allOf:
+          -
+            $ref: '#/definitions/active_currency_and_amount_2decimals'
+          -
+            description: 'Amount of money moved between the instructing agent and the instructed agent.'
+      interbank_settlement_date:
+        allOf:
+          -
+            $ref: '#/definitions/isodate'
+          -
+            description: 'Date on which the amount of money ceases to be available to the agent that owes it and when the amount of money becomes available to the agent to which it is due.'
+      instructed_amount:
+        allOf:
+          -
+            $ref: '#/definitions/active_or_historic_currency_and_amount'
+          -
+            description: 'Amount of money to be moved between the debtor and creditor, before deduction of charges, expressed in the currency as ordered by the initiating party. Usage: This amount has to be transported unchanged through the transaction chain.'
+      exchange_rate:
+        allOf:
+          -
+            $ref: '#/definitions/base_one_rate'
+          -
+            description: 'Factor used to convert an amount from one currency into another. This reflects the price at which one currency was bought with another currency.'
+      charge_bearer:
+        allOf:
+          -
+            $ref: '#/definitions/charge_bearer_type1code_1'
+          -
+            description: "Specifies which party/parties will bear the charges associated with the processing of the payment transaction.\nSpecifies which party(ies) will pay charges due for processing of the instruction.\nSLEV: Charges are to be applied following the rules agreed in the service level and/or scheme."
+      previous_instructing_agent1:
+        allOf:
+          -
+            $ref: '#/definitions/branch_and_financial_institution_identification6_1'
+          -
+            description: 'Agent immediately prior to the instructing agent.'
+      instructing_agent:
+        allOf:
+          -
+            $ref: '#/definitions/branch_and_financial_institution_identification6_2'
+          -
+            description: 'Agent that instructs the next party in the chain to carry out the (set of) instruction(s).'
+      instructed_agent:
+        allOf:
+          -
+            $ref: '#/definitions/branch_and_financial_institution_identification6_2'
+          -
+            description: 'Agent that is instructed by the previous party in the chain to carry out the (set of) instruction(s).'
+      ultimate_debtor:
+        allOf:
+          -
+            $ref: '#/definitions/party_identification135_1'
+          -
+            description: 'Ultimate party that owes an amount of money to the (ultimate) creditor.'
+      initiating_party:
+        allOf:
+          -
+            $ref: '#/definitions/party_identification135_2'
+          -
+            description: 'Party that initiates the payment. Usage: This can be either the debtor or a party that initiates the credit transfer on behalf of the debtor.'
+      debtor:
+        allOf:
+          -
+            $ref: '#/definitions/party_identification135_3'
+          -
+            description: 'Party that owes an amount of money to the (ultimate) creditor.'
+      debtor_account:
+        allOf:
+          -
+            $ref: '#/definitions/cash_account38_1'
+          -
+            description: 'Unambiguous identification of the account of the debtor to which a debit entry will be made as a result of the transaction.'
+      debtor_agent:
+        allOf:
+          -
+            $ref: '#/definitions/branch_and_financial_institution_identification6_2'
+          -
+            description: 'Financial institution servicing an account for the debtor.'
+      creditor_agent:
+        allOf:
+          -
+            $ref: '#/definitions/branch_and_financial_institution_identification6_2'
+          -
+            description: 'Financial institution servicing an account for the creditor.'
+      creditor:
+        allOf:
+          -
+            $ref: '#/definitions/party_identification135_3'
+          -
+            description: 'Party to which an amount of money is due.'
+      creditor_account:
+        allOf:
+          -
+            $ref: '#/definitions/cash_account38_1'
+          -
+            description: 'Unambiguous identification of the account of the creditor to which a credit entry will be posted as a result of the payment transaction.'
+      ultimate_creditor:
+        allOf:
+          -
+            $ref: '#/definitions/party_identification135_4'
+          -
+            description: 'Ultimate party to which an amount of money is due.'
+      purpose:
+        allOf:
+          -
+            $ref: '#/definitions/purpose2choice'
+          -
+            description: 'Underlying reason for the payment transaction. Usage: Purpose is used by the end-customers, that is initiating party, (ultimate) debtor, (ultimate) creditor to provide information concerning the nature of the payment. Purpose is a content element, which is not used for processing by any of the agents involved in the payment chain.'
+      related_remittance_information:
+        allOf:
+          -
+            $ref: '#/definitions/remittance_location7_1'
+          -
+            description: 'Provides information related to the handling of the remittance information by any of the agents in the transaction processing chain.'
+      remittance_information:
+        allOf:
+          -
+            $ref: '#/definitions/remittance_information16_1'
+          -
+            description: 'Information supplied to enable the matching of an entry with the items that the transfer is intended to settle, such as commercial invoices in an accounts'' receivable system.'
+    type: object
+  creditor_reference_information2:
+    description: 'Reference information provided by the creditor to allow the identification of the underlying documents.'
+    properties:
+      type:
+        allOf:
+          -
+            $ref: '#/definitions/creditor_reference_type2'
+          -
+            description: 'Specifies the type of creditor reference.'
+      reference:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Unique reference, as assigned by the creditor, to unambiguously refer to the payment transaction. Usage: If available, the initiating party should provide this reference in the structured remittance information, to enable reconciliation by the creditor upon receipt of the amount of money. If the business context requires the use of a creditor reference or a payment remit identification, and only one identifier can be passed through the end-to-end chain, the creditor''s reference or payment remittance identification should be quoted in the end-to-end transaction identification.'
+    type: object
+  creditor_reference_type1choice:
+    description: 'Specifies the type of document referred by the creditor.'
+    type: object
+    oneOf:
+      -
+        required:
+          - code
+        properties:
+          code:
+            allOf:
+              - {$ref: '#/definitions/document_type3code'}
+              - {description: "Type of creditor reference, in a coded form.\nSpecifies a type of financial or commercial document.\nRADM: Document is a remittance advice sent separately from the current transaction.\nRPIN: Document is a linked payment instruction to which the current payment instruction is related, for example, in a cover scenario.\nFXDR: Document is a pre-agreed or pre-arranged foreign exchange transaction to which the payment transaction refers.\nDISP: Document is a dispatch advice.\nPUOR: Document is a purchase order.\nSCOR: Document is a structured communication reference provided by the creditor to identify the referred transaction."}
+      -
+        required:
+          - proprietary
+        properties:
+          proprietary:
+            allOf:
+              - {$ref: '#/definitions/max35text'}
+              - {description: 'Creditor reference type, in a proprietary form.'}
+  creditor_reference_type2:
+    description: 'Specifies the type of creditor reference.'
+    required:
+      - code_or_proprietary
+    properties:
+      code_or_proprietary:
+        allOf:
+          -
+            $ref: '#/definitions/creditor_reference_type1choice'
+          -
+            description: 'Coded or proprietary format creditor reference type.'
+      issuer:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Entity that assigns the credit reference type.'
+    type: object
+  date_and_place_of_birth1:
+    description: 'Date and place of birth of a person.'
+    required:
+      - birth_date
+      - city_of_birth
+      - country_of_birth
+    properties:
+      birth_date:
+        allOf:
+          -
+            $ref: '#/definitions/isodate'
+          -
+            description: 'Date on which a person is born.'
+      province_of_birth:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Province where a person was born.'
+      city_of_birth:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'City where a person was born.'
+      country_of_birth:
+        allOf:
+          -
+            $ref: '#/definitions/country_code'
+          -
+            description: 'Country where a person was born.'
+    type: object
+  date_period2:
+    description: 'Range of time defined by a start date and an end date.'
+    required:
+      - from_date
+      - to_date
+    properties:
+      from_date:
+        allOf:
+          -
+            $ref: '#/definitions/isodate'
+          -
+            description: 'Start date of the range.'
+      to_date:
+        allOf:
+          -
+            $ref: '#/definitions/isodate'
+          -
+            description: 'End date of the range.'
+    type: object
+  discount_amount_and_type1:
+    description: 'Specifies the amount with a specific type.'
+    required:
+      - amount
+    properties:
+      type:
+        allOf:
+          -
+            $ref: '#/definitions/discount_amount_type1choice'
+          -
+            description: 'Specifies the type of the amount.'
+      amount:
+        allOf:
+          -
+            $ref: '#/definitions/active_or_historic_currency_and_amount'
+          -
+            description: 'Amount of money, which has been typed.'
+    type: object
+  discount_amount_type1choice:
+    description: 'Specifies the amount type.'
+    type: object
+    oneOf:
+      -
+        required:
+          - code
+        properties:
+          code:
+            allOf:
+              - {$ref: '#/definitions/external_discount_amount_type1code'}
+              - {description: 'Specifies the amount type, in a coded form.'}
+      -
+        required:
+          - proprietary
+        properties:
+          proprietary:
+            allOf:
+              - {$ref: '#/definitions/max35text'}
+              - {description: 'Specifies the amount type, in a free-text form.'}
+  document_adjustment1:
+    description: 'Set of elements used to provide information on the amount and reason of the document adjustment.'
+    required:
+      - amount
+    properties:
+      amount:
+        allOf:
+          -
+            $ref: '#/definitions/active_or_historic_currency_and_amount'
+          -
+            description: 'Amount of money of the document adjustment.'
+      credit_debit_indicator:
+        allOf:
+          -
+            $ref: '#/definitions/credit_debit_code'
+          -
+            description: "Specifies whether the adjustment must be subtracted or added to the total amount.\nSpecifies if an operation is an increase or a decrease.\nCRDT: Operation is an increase.\nDBIT: Operation is a decrease."
+      reason:
+        allOf:
+          -
+            $ref: '#/definitions/max4text'
+          -
+            description: 'Specifies the reason for the adjustment.'
+      additional_information:
+        allOf:
+          -
+            $ref: '#/definitions/max140text'
+          -
+            description: 'Provides further details on the document adjustment.'
+    type: object
+  document_line_identification1:
+    description: 'Identifies the documents referred to in the remittance information.'
+    properties:
+      type:
+        allOf:
+          -
+            $ref: '#/definitions/document_line_type1'
+          -
+            description: 'Specifies the type of referred document line identification.'
+      number:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Identification of the type specified for the referred document line.'
+      related_date:
+        allOf:
+          -
+            $ref: '#/definitions/isodate'
+          -
+            description: 'Date associated with the referred document line.'
+    type: object
+  document_line_information1_1:
+    description: 'Provides document line information.'
+    required:
+      - identification
+    properties:
+      identification:
+        description: 'Provides identification of the document line.'
+        items:
+          $ref: '#/definitions/document_line_identification1'
+        minItems: 1
+        type: array
+      description:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Description associated with the document line.'
+      amount:
+        allOf:
+          -
+            $ref: '#/definitions/remittance_amount3'
+          -
+            description: 'Provides details on the amounts of the document line.'
+    type: object
+  document_line_type1:
+    description: 'Specifies the type of the document line identification.'
+    required:
+      - code_or_proprietary
+    properties:
+      code_or_proprietary:
+        allOf:
+          -
+            $ref: '#/definitions/document_line_type1choice'
+          -
+            description: 'Provides the type details of the referred document line identification.'
+      issuer:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Identification of the issuer of the reference document line identificationtype.'
+    type: object
+  document_line_type1choice:
+    description: 'Specifies the type of the document line identification.'
+    type: object
+    oneOf:
+      -
+        required:
+          - code
+        properties:
+          code:
+            allOf:
+              - {$ref: '#/definitions/external_document_line_type1code'}
+              - {description: 'Line identification type in a coded form.'}
+      -
+        required:
+          - proprietary
+        properties:
+          proprietary:
+            allOf:
+              - {$ref: '#/definitions/max35text'}
+              - {description: 'Proprietary identification of the type of the remittance document.'}
+  fi_to_fi_customer_credit_transfer:
+    description: 'Scope The FinancialInstitutionToFinancialInstitutionCustomerCreditTransfer message is sent by the debtor agent to the creditor agent, directly or through other agents and/or a payment clearing and settlement system. It is used to move funds from a debtor account to a creditor. Usage The FIToFICustomerCreditTransfer message is exchanged between agents and can contain one or more customer credit transfer instructions. The FIToFICustomerCreditTransfer message does not allow for grouping: a CreditTransferTransactionInformation block must be present for each credit transfer transaction. The FIToFICustomerCreditTransfer message can be used in different ways: - If the instructing agent and the instructed agent wish to use their direct account relationship in the currency of the transfer then the message contains both the funds for the customer transfer(s) as well as the payment details; - If the instructing agent and the instructed agent have no direct account relationship in the currency of the transfer, or do not wish to use their account relationship, then other (reimbursement) agents will be involved to cover for the customer transfer(s). The FIToFICustomerCreditTransfer contains only the payment details and the instructing agent must cover the customer transfer by sending a FinancialInstitutionCreditTransfer to a reimbursement agent. This payment method is called the Cover method; - If more than two financial institutions are involved in the payment chain and if the FIToFICustomerCreditTransfer is sent from one financial institution to the next financial institution in the payment chain, then the payment method is called the Serial method. The FIToFICustomerCreditTransfer message can be used in domestic and cross-border scenarios.'
+    required:
+      - group_header
+      - credit_transfer_transaction_information
+    properties:
+      group_header:
+        allOf:
+          -
+            $ref: '#/definitions/group_header93_1'
+          -
+            description: 'Set of characteristics shared by all individual transactions included in the message.'
+      credit_transfer_transaction_information:
+        allOf:
+          -
+            $ref: '#/definitions/credit_transfer_transaction39_1'
+          -
+            description: 'Set of elements providing information specific to the individual credit transfer(s).'
+    type: object
+  financial_identification_scheme_name1choice:
+    description: 'Sets of elements to identify a name of the organisation identification scheme.'
+    type: object
+    oneOf:
+      -
+        required:
+          - code
+        properties:
+          code:
+            allOf:
+              - {$ref: '#/definitions/external_financial_institution_identification1code'}
+              - {description: 'Name of the identification scheme, in a coded form as published in an external list.'}
+      -
+        required:
+          - proprietary
+        properties:
+          proprietary:
+            allOf:
+              - {$ref: '#/definitions/max35text'}
+              - {description: 'Name of the identification scheme, in a free text form.'}
+  financial_institution_identification18:
+    description: 'Specifies the details to identify a financial institution.'
+    properties:
+      bicfi:
+        allOf:
+          -
+            $ref: '#/definitions/bicfidec2014identifier'
+          -
+            description: 'Code allocated to a financial institution by the ISO 9362 Registration Authority as described in ISO 9362 "Banking - Banking telecommunication messages - Business identifier code (BIC)".'
+      clearing_system_member_identification:
+        allOf:
+          -
+            $ref: '#/definitions/clearing_system_member_identification2'
+          -
+            description: 'Information used to identify a member within a clearing system.'
+      lei:
+        allOf:
+          -
+            $ref: '#/definitions/leiidentifier'
+          -
+            description: 'Legal entity identifier of the financial institution.'
+      name:
+        allOf:
+          -
+            $ref: '#/definitions/max140text'
+          -
+            description: 'Name by which an agent is known and which is usually used to identify that agent.'
+      postal_address:
+        allOf:
+          -
+            $ref: '#/definitions/postal_address24'
+          -
+            description: 'Information that locates and identifies a specific address, as defined by postal services.'
+      other:
+        allOf:
+          -
+            $ref: '#/definitions/generic_financial_identification1'
+          -
+            description: 'Unique identification of an agent, as assigned by an institution, using an identification scheme.'
+    type: object
+  financial_institution_identification18_1:
+    description: 'Specifies the details to identify a financial institution.'
+    required:
+      - clearing_system_member_identification
+    properties:
+      clearing_system_member_identification:
+        allOf:
+          -
+            $ref: '#/definitions/clearing_system_member_identification2_1'
+          -
+            description: 'Information used to identify a member within a clearing system.'
+    type: object
+  garnishment3_1:
+    description: 'Provides remittance information about a payment for garnishment-related purposes.'
+    required:
+      - type
+    properties:
+      type:
+        allOf:
+          -
+            $ref: '#/definitions/garnishment_type1'
+          -
+            description: 'Specifies the type of garnishment.'
+      garnishee:
+        allOf:
+          -
+            $ref: '#/definitions/party_identification135_6'
+          -
+            description: 'Ultimate party that owes an amount of money to the (ultimate) creditor, in this case, to the garnisher.'
+      garnishment_administrator:
+        allOf:
+          -
+            $ref: '#/definitions/party_identification135_6'
+          -
+            description: 'Party on the credit side of the transaction who administers the garnishment on behalf of the ultimate beneficiary.'
+      reference_number:
+        allOf:
+          -
+            $ref: '#/definitions/max140text'
+          -
+            description: 'Reference information that is specific to the agency receiving the garnishment.'
+      date:
+        allOf:
+          -
+            $ref: '#/definitions/isodate'
+          -
+            description: 'Date of payment which garnishment was taken from.'
+      remitted_amount:
+        allOf:
+          -
+            $ref: '#/definitions/active_or_historic_currency_and_amount'
+          -
+            description: 'Amount of money remitted for the referred document.'
+      family_medical_insurance_indicator:
+        allOf:
+          -
+            $ref: '#/definitions/true_false_indicator'
+          -
+            description: 'Indicates if the person to whom the garnishment applies (that is, the ultimate debtor) has family medical insurance coverage available.'
+      employee_termination_indicator:
+        allOf:
+          -
+            $ref: '#/definitions/true_false_indicator'
+          -
+            description: 'Indicates if the employment of the person to whom the garnishment applies (that is, the ultimate debtor) has been terminated.'
+    type: object
+  garnishment_type1:
+    description: 'Specifies the type of garnishment.'
+    required:
+      - code_or_proprietary
+    properties:
+      code_or_proprietary:
+        allOf:
+          -
+            $ref: '#/definitions/garnishment_type1choice'
+          -
+            description: 'Provides the type details of the garnishment.'
+      issuer:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Identification of the issuer of the garnishment type.'
+    type: object
+  garnishment_type1choice:
+    description: 'Specifies the type of garnishment.'
+    type: object
+    oneOf:
+      -
+        required:
+          - code
+        properties:
+          code:
+            allOf:
+              - {$ref: '#/definitions/external_garnishment_type1code'}
+              - {description: 'Garnishment type in a coded form. Would suggest this to be an External Code List to contain: GNCS Garnishment from a third party payer for Child Support GNDP Garnishment from a Direct Payer for Child Support GTPP Garnishment from a third party payer to taxing agency.'}
+      -
+        required:
+          - proprietary
+        properties:
+          proprietary:
+            allOf:
+              - {$ref: '#/definitions/max35text'}
+              - {description: 'Proprietary identification of the type of garnishment.'}
+  generic_account_identification1_1:
+    description: 'Information related to a generic account identification.'
+    required:
+      - identification
+    properties:
+      identification:
+        allOf:
+          -
+            $ref: '#/definitions/max34text'
+          -
+            description: 'Identification assigned by an institution.'
+    type: object
+  generic_financial_identification1:
+    description: 'Information related to an identification of a financial institution.'
+    required:
+      - identification
+    properties:
+      identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Unique and unambiguous identification of a person.'
+      scheme_name:
+        allOf:
+          -
+            $ref: '#/definitions/financial_identification_scheme_name1choice'
+          -
+            description: 'Name of the identification scheme.'
+      issuer:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Entity that assigns the identification.'
+    type: object
+  generic_identification30:
+    description: 'Information related to an identification, for example, party identification or account identification.'
+    required:
+      - identification
+      - issuer
+    properties:
+      identification:
+        allOf:
+          -
+            $ref: '#/definitions/exact4alpha_numeric_text'
+          -
+            description: 'Proprietary information, often a code, issued by the data source scheme issuer.'
+      issuer:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Entity that assigns the identification.'
+      scheme_name:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Short textual description of the scheme.'
+    type: object
+  generic_organisation_identification1:
+    description: 'Information related to an identification of an organisation.'
+    required:
+      - identification
+    properties:
+      identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Identification assigned by an institution.'
+      scheme_name:
+        allOf:
+          -
+            $ref: '#/definitions/organisation_identification_scheme_name1choice'
+          -
+            description: 'Name of the identification scheme.'
+      issuer:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Entity that assigns the identification.'
+    type: object
+  generic_person_identification1:
+    description: 'Information related to an identification of a person.'
+    required:
+      - identification
+    properties:
+      identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Unique and unambiguous identification of a person.'
+      scheme_name:
+        allOf:
+          -
+            $ref: '#/definitions/person_identification_scheme_name1choice'
+          -
+            description: 'Name of the identification scheme.'
+      issuer:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Entity that assigns the identification.'
+    type: object
+  group_header93_1:
+    description: 'Set of characteristics shared by all individual transactions included in the message.'
+    required:
+      - message_identification
+      - creation_date_time
+      - number_of_transactions
+      - settlement_information
+    properties:
+      message_identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Point to point reference, as assigned by the instructing party, and sent to the next party in the chain to unambiguously identify the message. Usage: The instructing party has to make sure that MessageIdentification is unique per instructed party for a pre-agreed period.'
+      creation_date_time:
+        allOf:
+          -
+            $ref: '#/definitions/isonormalised_date_time'
+          -
+            description: 'Date and time at which the message was created.'
+      number_of_transactions:
+        allOf:
+          -
+            $ref: '#/definitions/max15numeric_text_fixed'
+          -
+            description: 'Number of individual transactions contained in the message.'
+      settlement_information:
+        allOf:
+          -
+            $ref: '#/definitions/settlement_instruction7_1'
+          -
+            description: 'Specifies the details on how the settlement of the transaction(s) between the instructing agent and the instructed agent is completed.'
+    type: object
+  local_instrument2choice_1:
+    description: 'Set of elements that further identifies the type of local instruments being requested by the initiating party.'
+    type: object
+    anyOf:
+      -
+        required:
+          - proprietary
+        properties:
+          proprietary:
+            allOf:
+              - {$ref: '#/definitions/max35text'}
+              - {description: 'Specifies the local instrument, as a proprietary code.'}
+  name_and_address16_1:
+    description: 'Information that locates and identifies a party.'
+    required:
+      - name
+      - address
+    properties:
+      name:
+        allOf:
+          -
+            $ref: '#/definitions/max140text'
+          -
+            description: 'Name by which a party is known and is usually used to identify that party.'
+      address:
+        allOf:
+          -
+            $ref: '#/definitions/postal_address24_2'
+          -
+            description: 'Postal address of a party.'
+    type: object
+  organisation_identification29_1:
+    description: 'Unique and unambiguous way to identify an organisation.'
+    properties:
+      any_bic:
+        allOf:
+          -
+            $ref: '#/definitions/any_bicdec2014identifier'
+          -
+            description: 'Business identification code of the organisation.'
+      lei:
+        allOf:
+          -
+            $ref: '#/definitions/leiidentifier'
+          -
+            description: 'Legal entity identification as an alternate identification for a party.'
+      other:
+        description: 'Unique identification of an organisation, as assigned by an institution, using an identification scheme.'
+        items:
+          $ref: '#/definitions/generic_organisation_identification1'
+        maxItems: 2
+        type: array
+    type: object
+  organisation_identification_scheme_name1choice:
+    description: 'Sets of elements to identify a name of the organisation identification scheme.'
+    type: object
+    oneOf:
+      -
+        required:
+          - code
+        properties:
+          code:
+            allOf:
+              - {$ref: '#/definitions/external_organisation_identification1code'}
+              - {description: 'Name of the identification scheme, in a coded form as published in an external list.'}
+      -
+        required:
+          - proprietary
+        properties:
+          proprietary:
+            allOf:
+              - {$ref: '#/definitions/max35text'}
+              - {description: 'Name of the identification scheme, in a free text form.'}
+  party38choice_1:
+    description: 'Nature or use of the account.'
+    type: object
+    oneOf:
+      -
+        required:
+          - organisation_identification
+        properties:
+          organisation_identification:
+            allOf:
+              - {$ref: '#/definitions/organisation_identification29_1'}
+              - {description: 'Unique and unambiguous way to identify an organisation.'}
+      -
+        required:
+          - private_identification
+        properties:
+          private_identification:
+            allOf:
+              - {$ref: '#/definitions/person_identification13_1'}
+              - {description: 'Unique and unambiguous identification of a person, for example a passport.'}
+  party_identification135_1:
+    description: 'Specifies the identification of a person or an organisation.'
+    required:
+      - name
+    properties:
+      name:
+        allOf:
+          -
+            $ref: '#/definitions/max140text'
+          -
+            description: 'Name by which a party is known and which is usually used to identify that party.'
+      postal_address:
+        allOf:
+          -
+            $ref: '#/definitions/postal_address24_1'
+          -
+            description: 'Information that locates and identifies a specific address, as defined by postal services.'
+      identification:
+        allOf:
+          -
+            $ref: '#/definitions/party38choice_1'
+          -
+            description: 'Unique and unambiguous identification of a party.'
+      country_of_residence:
+        allOf:
+          -
+            $ref: '#/definitions/country_code'
+          -
+            description: 'Country in which a person resides (the place of a person''s home). In the case of a company, it is the country from which the affairs of that company are directed.'
+    type: object
+  party_identification135_2:
+    description: 'Specifies the identification of a person or an organisation.'
+    required:
+      - name
+    properties:
+      name:
+        allOf:
+          -
+            $ref: '#/definitions/max140text'
+          -
+            description: 'Name by which a party is known and which is usually used to identify that party.'
+      postal_address:
+        allOf:
+          -
+            $ref: '#/definitions/postal_address24_1'
+          -
+            description: 'Information that locates and identifies a specific address, as defined by postal services.'
+      identification:
+        allOf:
+          -
+            $ref: '#/definitions/party38choice_1'
+          -
+            description: 'Unique and unambiguous identification of a party.'
+      country_of_residence:
+        allOf:
+          -
+            $ref: '#/definitions/country_code'
+          -
+            description: 'Country in which a person resides (the place of a person''s home). In the case of a company, it is the country from which the affairs of that company are directed.'
+      contact_details:
+        allOf:
+          -
+            $ref: '#/definitions/contact4_1'
+          -
+            description: 'Set of elements used to indicate how to contact the party.'
+    type: object
+  party_identification135_3:
+    description: 'Specifies the identification of a person or an organisation.'
+    required:
+      - name
+    properties:
+      name:
+        allOf:
+          -
+            $ref: '#/definitions/max140text'
+          -
+            description: 'Name by which a party is known and which is usually used to identify that party.'
+      postal_address:
+        allOf:
+          -
+            $ref: '#/definitions/postal_address24_2'
+          -
+            description: 'Information that locates and identifies a specific address, as defined by postal services.'
+      identification:
+        allOf:
+          -
+            $ref: '#/definitions/party38choice_1'
+          -
+            description: 'Unique and unambiguous identification of a party.'
+      country_of_residence:
+        allOf:
+          -
+            $ref: '#/definitions/country_code'
+          -
+            description: 'Country in which a person resides (the place of a person''s home). In the case of a company, it is the country from which the affairs of that company are directed.'
+      contact_details:
+        allOf:
+          -
+            $ref: '#/definitions/contact4_2'
+          -
+            description: 'Set of elements used to indicate how to contact the party.'
+    type: object
+  party_identification135_4:
+    description: 'Specifies the identification of a person or an organisation.'
+    required:
+      - name
+    properties:
+      name:
+        allOf:
+          -
+            $ref: '#/definitions/max140text'
+          -
+            description: 'Name by which a party is known and which is usually used to identify that party.'
+      postal_address:
+        allOf:
+          -
+            $ref: '#/definitions/postal_address24_3'
+          -
+            description: 'Information that locates and identifies a specific address, as defined by postal services.'
+      identification:
+        allOf:
+          -
+            $ref: '#/definitions/party38choice_1'
+          -
+            description: 'Unique and unambiguous identification of a party.'
+      country_of_residence:
+        allOf:
+          -
+            $ref: '#/definitions/country_code'
+          -
+            description: 'Country in which a person resides (the place of a person''s home). In the case of a company, it is the country from which the affairs of that company are directed.'
+    type: object
+  party_identification135_5:
+    description: 'Specifies the identification of a person or an organisation.'
+    properties:
+      name:
+        allOf:
+          -
+            $ref: '#/definitions/max140text'
+          -
+            description: 'Name by which a party is known and which is usually used to identify that party.'
+      postal_address:
+        allOf:
+          -
+            $ref: '#/definitions/postal_address24'
+          -
+            description: 'Information that locates and identifies a specific address, as defined by postal services.'
+      identification:
+        allOf:
+          -
+            $ref: '#/definitions/party38choice_1'
+          -
+            description: 'Unique and unambiguous identification of a party.'
+      country_of_residence:
+        allOf:
+          -
+            $ref: '#/definitions/country_code'
+          -
+            description: 'Country in which a person resides (the place of a person''s home). In the case of a company, it is the country from which the affairs of that company are directed.'
+      contact_details:
+        allOf:
+          -
+            $ref: '#/definitions/contact4_3'
+          -
+            description: 'Set of elements used to indicate how to contact the party.'
+    type: object
+  party_identification135_6:
+    description: 'Specifies the identification of a person or an organisation.'
+    properties:
+      name:
+        allOf:
+          -
+            $ref: '#/definitions/max140text'
+          -
+            description: 'Name by which a party is known and which is usually used to identify that party.'
+      postal_address:
+        allOf:
+          -
+            $ref: '#/definitions/postal_address24_1'
+          -
+            description: 'Information that locates and identifies a specific address, as defined by postal services.'
+      identification:
+        allOf:
+          -
+            $ref: '#/definitions/party38choice_1'
+          -
+            description: 'Unique and unambiguous identification of a party.'
+      country_of_residence:
+        allOf:
+          -
+            $ref: '#/definitions/country_code'
+          -
+            description: 'Country in which a person resides (the place of a person''s home). In the case of a company, it is the country from which the affairs of that company are directed.'
+    type: object
+  payment_identification7_1:
+    description: 'Provides further means of referencing a payment transaction.'
+    required:
+      - end_to_end_identification
+      - uetr
+    properties:
+      instruction_identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Unique identification, as assigned by an instructing party for an instructed party, to unambiguously identify the instruction. Usage: The instruction identification is a point to point reference that can be used between the instructing party and the instructed party to refer to the individual instruction. It can be included in several messages related to the instruction.'
+      end_to_end_identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Unique identification, as assigned by the initiating party, to unambiguously identify the transaction. This identification is passed on, unchanged, throughout the entire end-to-end chain. Usage: The end-to-end identification can be used for reconciliation or to link tasks relating to the transaction. It can be included in several messages related to the transaction. Usage: In case there are technical limitations to pass on multiple references, the end-to-end identification must be passed on throughout the entire end-to-end chain.'
+      uetr:
+        allOf:
+          -
+            $ref: '#/definitions/uuidv4identifier'
+          -
+            description: 'Universally unique identifier to provide an end-to-end reference of a payment transaction.'
+    type: object
+  payment_type_information28_1:
+    description: 'Provides further details of the type of payment.'
+    required:
+      - local_instrument
+    properties:
+      service_level:
+        description: 'Agreement under which or rules under which the transaction should be processed.'
+        items:
+          $ref: '#/definitions/service_level8choice'
+        maxItems: 3
+        type: array
+      local_instrument:
+        allOf:
+          -
+            $ref: '#/definitions/local_instrument2choice_1'
+          -
+            description: 'User community specific instrument. Usage: This element is used to specify a local instrument, local clearing option and/or further qualify the service or service level.'
+      category_purpose:
+        allOf:
+          -
+            $ref: '#/definitions/category_purpose1choice_1'
+          -
+            description: 'Specifies the high level purpose of the instruction based on a set of pre-defined categories. Usage: This is used by the initiating party to provide information concerning the processing of the payment. It is likely to trigger special processing by any of the agents involved in the payment chain.'
+    type: object
+  person_identification13_1:
+    description: 'Unique and unambiguous way to identify a person.'
+    properties:
+      date_and_place_of_birth:
+        allOf:
+          -
+            $ref: '#/definitions/date_and_place_of_birth1'
+          -
+            description: 'Date and place of birth of a person.'
+      other:
+        description: 'Unique identification of a person, as assigned by an institution, using an identification scheme.'
+        items:
+          $ref: '#/definitions/generic_person_identification1'
+        maxItems: 2
+        type: array
+    type: object
+  person_identification_scheme_name1choice:
+    description: 'Sets of elements to identify a name of the identification scheme.'
+    type: object
+    oneOf:
+      -
+        required:
+          - code
+        properties:
+          code:
+            allOf:
+              - {$ref: '#/definitions/external_person_identification1code'}
+              - {description: 'Name of the identification scheme, in a coded form as published in an external list.'}
+      -
+        required:
+          - proprietary
+        properties:
+          proprietary:
+            allOf:
+              - {$ref: '#/definitions/max35text'}
+              - {description: 'Name of the identification scheme, in a free text form.'}
+  postal_address24:
+    description: 'Information that locates and identifies a specific address, as defined by postal services.'
+    properties:
+      address_type:
+        allOf:
+          -
+            $ref: '#/definitions/address_type3choice'
+          -
+            description: 'Identifies the nature of the postal address.'
+      department:
+        allOf:
+          -
+            $ref: '#/definitions/max70text'
+          -
+            description: 'Identification of a division of a large organisation or building.'
+      sub_department:
+        allOf:
+          -
+            $ref: '#/definitions/max70text'
+          -
+            description: 'Identification of a sub-division of a large organisation or building.'
+      street_name:
+        allOf:
+          -
+            $ref: '#/definitions/max70text'
+          -
+            description: 'Name of a street or thoroughfare.'
+      building_number:
+        allOf:
+          -
+            $ref: '#/definitions/max16text'
+          -
+            description: 'Number that identifies the position of a building on a street.'
+      building_name:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Name of the building or house.'
+      floor:
+        allOf:
+          -
+            $ref: '#/definitions/max70text'
+          -
+            description: 'Floor or storey within a building.'
+      post_box:
+        allOf:
+          -
+            $ref: '#/definitions/max16text'
+          -
+            description: 'Numbered box in a post office, assigned to a person or organisation, where letters are kept until called for.'
+      room:
+        allOf:
+          -
+            $ref: '#/definitions/max70text'
+          -
+            description: 'Building room number.'
+      post_code:
+        allOf:
+          -
+            $ref: '#/definitions/max16text'
+          -
+            description: 'Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.'
+      town_name:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Name of a built-up area, with defined boundaries, and a local government.'
+      town_location_name:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Specific location name within the town.'
+      district_name:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Identifies a subdivision within a country sub-division.'
+      country_sub_division:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Identifies a subdivision of a country such as state, region, county.'
+      country:
+        allOf:
+          -
+            $ref: '#/definitions/country_code'
+          -
+            description: 'Nation with its own government.'
+      address_line:
+        description: 'Information that locates and identifies a specific address, as defined by postal services, presented in free format text.'
+        items:
+          $ref: '#/definitions/max70text'
+        maxItems: 7
+        type: array
+    type: object
+  postal_address24_1:
+    description: 'Information that locates and identifies a specific address, as defined by postal services.'
+    required:
+      - town_name
+      - country
+    properties:
+      department:
+        allOf:
+          -
+            $ref: '#/definitions/max70text'
+          -
+            description: 'Identification of a division of a large organisation or building.'
+      sub_department:
+        allOf:
+          -
+            $ref: '#/definitions/max70text'
+          -
+            description: 'Identification of a sub-division of a large organisation or building.'
+      street_name:
+        allOf:
+          -
+            $ref: '#/definitions/max70text'
+          -
+            description: 'Name of a street or thoroughfare.'
+      building_number:
+        allOf:
+          -
+            $ref: '#/definitions/max16text'
+          -
+            description: 'Number that identifies the position of a building on a street.'
+      building_name:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Name of the building or house.'
+      floor:
+        allOf:
+          -
+            $ref: '#/definitions/max70text'
+          -
+            description: 'Floor or storey within a building.'
+      post_box:
+        allOf:
+          -
+            $ref: '#/definitions/max16text'
+          -
+            description: 'Numbered box in a post office, assigned to a person or organisation, where letters are kept until called for.'
+      room:
+        allOf:
+          -
+            $ref: '#/definitions/max70text'
+          -
+            description: 'Building room number.'
+      post_code:
+        allOf:
+          -
+            $ref: '#/definitions/max16text'
+          -
+            description: 'Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.'
+      town_name:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Name of a built-up area, with defined boundaries, and a local government.'
+      town_location_name:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Specific location name within the town.'
+      district_name:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Identifies a subdivision within a country sub-division.'
+      country_sub_division:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Identifies a subdivision of a country such as state, region, county.'
+      country:
+        allOf:
+          -
+            $ref: '#/definitions/country_code'
+          -
+            description: 'Nation with its own government.'
+    type: object
+  postal_address24_2:
+    description: 'Information that locates and identifies a specific address, as defined by postal services.'
+    properties:
+      department:
+        allOf:
+          -
+            $ref: '#/definitions/max70text'
+          -
+            description: 'Identification of a division of a large organisation or building.'
+      sub_department:
+        allOf:
+          -
+            $ref: '#/definitions/max70text'
+          -
+            description: 'Identification of a sub-division of a large organisation or building.'
+      street_name:
+        allOf:
+          -
+            $ref: '#/definitions/max70text'
+          -
+            description: 'Name of a street or thoroughfare.'
+      building_number:
+        allOf:
+          -
+            $ref: '#/definitions/max16text'
+          -
+            description: 'Number that identifies the position of a building on a street.'
+      building_name:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Name of the building or house.'
+      floor:
+        allOf:
+          -
+            $ref: '#/definitions/max70text'
+          -
+            description: 'Floor or storey within a building.'
+      post_box:
+        allOf:
+          -
+            $ref: '#/definitions/max16text'
+          -
+            description: 'Numbered box in a post office, assigned to a person or organisation, where letters are kept until called for.'
+      room:
+        allOf:
+          -
+            $ref: '#/definitions/max70text'
+          -
+            description: 'Building room number.'
+      post_code:
+        allOf:
+          -
+            $ref: '#/definitions/max16text'
+          -
+            description: 'Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.'
+      town_name:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Name of a built-up area, with defined boundaries, and a local government.'
+      town_location_name:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Specific location name within the town.'
+      district_name:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Identifies a subdivision within a country sub-division.'
+      country_sub_division:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Identifies a subdivision of a country such as state, region, county.'
+      country:
+        allOf:
+          -
+            $ref: '#/definitions/country_code'
+          -
+            description: 'Nation with its own government.'
+      address_line:
+        description: 'Information that locates and identifies a specific address, as defined by postal services, presented in free format text.'
+        items:
+          $ref: '#/definitions/max35text'
+        maxItems: 3
+        type: array
+    type: object
+  postal_address24_3:
+    description: 'Information that locates and identifies a specific address, as defined by postal services.'
+    required:
+      - country
+    properties:
+      department:
+        allOf:
+          -
+            $ref: '#/definitions/max70text'
+          -
+            description: 'Identification of a division of a large organisation or building.'
+      sub_department:
+        allOf:
+          -
+            $ref: '#/definitions/max70text'
+          -
+            description: 'Identification of a sub-division of a large organisation or building.'
+      street_name:
+        allOf:
+          -
+            $ref: '#/definitions/max70text'
+          -
+            description: 'Name of a street or thoroughfare.'
+      building_number:
+        allOf:
+          -
+            $ref: '#/definitions/max16text'
+          -
+            description: 'Number that identifies the position of a building on a street.'
+      building_name:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Name of the building or house.'
+      floor:
+        allOf:
+          -
+            $ref: '#/definitions/max70text'
+          -
+            description: 'Floor or storey within a building.'
+      post_box:
+        allOf:
+          -
+            $ref: '#/definitions/max16text'
+          -
+            description: 'Numbered box in a post office, assigned to a person or organisation, where letters are kept until called for.'
+      room:
+        allOf:
+          -
+            $ref: '#/definitions/max70text'
+          -
+            description: 'Building room number.'
+      post_code:
+        allOf:
+          -
+            $ref: '#/definitions/max16text'
+          -
+            description: 'Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.'
+      town_name:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Name of a built-up area, with defined boundaries, and a local government.'
+      town_location_name:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Specific location name within the town.'
+      district_name:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Identifies a subdivision within a country sub-division.'
+      country_sub_division:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Identifies a subdivision of a country such as state, region, county.'
+      country:
+        allOf:
+          -
+            $ref: '#/definitions/country_code'
+          -
+            description: 'Nation with its own government.'
+    type: object
+  proxy_account_identification1:
+    description: 'Information related to a proxy identification of the account.'
+    required:
+      - identification
+    properties:
+      type:
+        allOf:
+          -
+            $ref: '#/definitions/proxy_account_type1choice'
+          -
+            description: 'Type of the proxy identification.'
+      identification:
+        allOf:
+          -
+            $ref: '#/definitions/max2048text'
+          -
+            description: 'Identification used to indicate the account identification under another specified name.'
+    type: object
+  proxy_account_type1choice:
+    description: 'Specifies the scheme used for the identification of an account alias.'
+    type: object
+    oneOf:
+      -
+        required:
+          - code
+        properties:
+          code:
+            allOf:
+              - {$ref: '#/definitions/external_proxy_account_type1code'}
+              - {description: 'Name of the identification scheme, in a coded form as published in an external list.'}
+      -
+        required:
+          - proprietary
+        properties:
+          proprietary:
+            allOf:
+              - {$ref: '#/definitions/max35text'}
+              - {description: 'Name of the identification scheme, in a free text form.'}
+  purpose2choice:
+    description: 'Specifies the underlying reason for the payment transaction. Usage: Purpose is used by the end-customers, that is initiating party, (ultimate) debtor, (ultimate) creditor to provide information concerning the nature of the payment. Purpose is a content element, which is not used for processing by any of the agents involved in the payment chain.'
+    type: object
+    oneOf:
+      -
+        required:
+          - code
+        properties:
+          code:
+            allOf:
+              - {$ref: '#/definitions/external_purpose1code'}
+              - {description: 'Underlying reason for the payment transaction, as published in an external purpose code list.'}
+      -
+        required:
+          - proprietary
+        properties:
+          proprietary:
+            allOf:
+              - {$ref: '#/definitions/max35text'}
+              - {description: 'Purpose, in a proprietary form.'}
+  referred_document_information7_1:
+    description: 'Set of elements used to identify the documents referred to in the remittance information.'
+    properties:
+      type:
+        allOf:
+          -
+            $ref: '#/definitions/referred_document_type4'
+          -
+            description: 'Specifies the type of referred document.'
+      number:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Unique and unambiguous identification of the referred document.'
+      related_date:
+        allOf:
+          -
+            $ref: '#/definitions/isodate'
+          -
+            description: 'Date associated with the referred document.'
+      line_details:
+        description: 'Set of elements used to provide the content of the referred document line.'
+        items:
+          $ref: '#/definitions/document_line_information1_1'
+        type: array
+    type: object
+  referred_document_type3choice:
+    description: 'Specifies the type of the document referred in the remittance information.'
+    type: object
+    oneOf:
+      -
+        required:
+          - code
+        properties:
+          code:
+            allOf:
+              - {$ref: '#/definitions/document_type6code'}
+              - {description: "Document type in a coded form.\nSpecifies a type of financial or commercial document.\nMSIN: Document is an invoice claiming payment for the supply of metered services, for example gas or electricity supplied to a fixed meter.\nCNFA: Document is a credit note for the final amount settled for a commercial transaction.\nDNFA: Document is a debit note for the final amount settled for a commercial transaction.\nCINV: Document is an invoice.\nCREN: Document is a credit note.\nDEBN: Document is a debit note.\nHIRI: Document is an invoice for the hiring of human resources or renting goods or equipment.\nSBIN: Document is an invoice issued by the debtor.\nCMCN: Document is an agreement between the parties, stipulating the terms and conditions of the delivery of goods or services.\nSOAC: Document is a statement of the transactions posted to the debtor's account at the supplier.\nDISP: Document is a dispatch advice.\nBOLD: Document is a shipping notice.\nVCHR: Document is an electronic payment document.\nAROI: Document is a payment that applies to a specific source document.\nTSUT: Document is a transaction identifier as assigned by the Trade Services Utility.\nPUOR: Document is a purchase order."}
+      -
+        required:
+          - proprietary
+        properties:
+          proprietary:
+            allOf:
+              - {$ref: '#/definitions/max35text'}
+              - {description: 'Proprietary identification of the type of the remittance document.'}
+  referred_document_type4:
+    description: 'Specifies the type of the document referred in the remittance information.'
+    required:
+      - code_or_proprietary
+    properties:
+      code_or_proprietary:
+        allOf:
+          -
+            $ref: '#/definitions/referred_document_type3choice'
+          -
+            description: 'Provides the type details of the referred document.'
+      issuer:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Identification of the issuer of the reference document type.'
+    type: object
+  remittance_amount2:
+    description: 'Nature of the amount and currency on a document referred to in the remittance section, typically either the original amount due/payable or the amount actually remitted for the referenced document.'
+    properties:
+      due_payable_amount:
+        allOf:
+          -
+            $ref: '#/definitions/active_or_historic_currency_and_amount'
+          -
+            description: 'Amount specified is the exact amount due and payable to the creditor.'
+      discount_applied_amount:
+        description: 'Amount specified for the referred document is the amount of discount to be applied to the amount due and payable to the creditor.'
+        items:
+          $ref: '#/definitions/discount_amount_and_type1'
+        type: array
+      credit_note_amount:
+        allOf:
+          -
+            $ref: '#/definitions/active_or_historic_currency_and_amount'
+          -
+            description: 'Amount specified for the referred document is the amount of a credit note.'
+      tax_amount:
+        description: 'Quantity of cash resulting from the calculation of the tax.'
+        items:
+          $ref: '#/definitions/tax_amount_and_type1'
+        type: array
+      adjustment_amount_and_reason:
+        description: 'Specifies detailed information on the amount and reason of the document adjustment.'
+        items:
+          $ref: '#/definitions/document_adjustment1'
+        type: array
+      remitted_amount:
+        allOf:
+          -
+            $ref: '#/definitions/active_or_historic_currency_and_amount'
+          -
+            description: 'Amount of money remitted for the referred document.'
+    type: object
+  remittance_amount3:
+    description: 'Nature of the amount and currency on a document referred to in the remittance section, typically either the original amount due/payable or the amount actually remitted for the referenced document.'
+    properties:
+      due_payable_amount:
+        allOf:
+          -
+            $ref: '#/definitions/active_or_historic_currency_and_amount'
+          -
+            description: 'Amount specified is the exact amount due and payable to the creditor.'
+      discount_applied_amount:
+        description: 'Amount of discount to be applied to the amount due and payable to the creditor.'
+        items:
+          $ref: '#/definitions/discount_amount_and_type1'
+        type: array
+      credit_note_amount:
+        allOf:
+          -
+            $ref: '#/definitions/active_or_historic_currency_and_amount'
+          -
+            description: 'Amount of a credit note.'
+      tax_amount:
+        description: 'Amount of the tax.'
+        items:
+          $ref: '#/definitions/tax_amount_and_type1'
+        type: array
+      adjustment_amount_and_reason:
+        description: 'Specifies detailed information on the amount and reason of the adjustment.'
+        items:
+          $ref: '#/definitions/document_adjustment1'
+        type: array
+      remitted_amount:
+        allOf:
+          -
+            $ref: '#/definitions/active_or_historic_currency_and_amount'
+          -
+            description: 'Amount of money remitted.'
+    type: object
+  remittance_information16_1:
+    description: 'Information supplied to enable the matching/reconciliation of an entry with the items that the payment is intended to settle, such as commercial invoices in an accounts'' receivable system.'
+    properties:
+      unstructured:
+        description: 'Information supplied to enable the matching/reconciliation of an entry with the items that the payment is intended to settle, such as commercial invoices in an accounts'' receivable system, in an unstructured form.'
+        items:
+          $ref: '#/definitions/max140text'
+        maxItems: 3
+        type: array
+      structured:
+        description: 'Information supplied to enable the matching/reconciliation of an entry with the items that the payment is intended to settle, such as commercial invoices in an accounts'' receivable system, in a structured form.'
+        items:
+          $ref: '#/definitions/structured_remittance_information16_1'
+        type: array
+    type: object
+  remittance_location7_1:
+    description: 'Provides information on the remittance advice.'
+    properties:
+      remittance_identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Unique identification, as assigned by the initiating party, to unambiguously identify the remittance information sent separately from the payment instruction, such as a remittance advice.'
+      remittance_location_details:
+        description: 'Set of elements used to provide information on the location and/or delivery of the remittance information.'
+        items:
+          $ref: '#/definitions/remittance_location_data1_1'
+        maxItems: 2
+        type: array
+    type: object
+  remittance_location_data1_1:
+    description: 'Provides additional details on the remittance advice.'
+    required:
+      - method
+    properties:
+      method:
+        allOf:
+          -
+            $ref: '#/definitions/remittance_location_method2code'
+          -
+            description: "Method used to deliver the remittance advice information.\nSpecifies the method used to deliver the remittance advice information.\nFAXI: Remittance advice information must be faxed.\nEDIC: Remittance advice information must be sent through Electronic Data Interchange (EDI).\nURID: Remittance advice information needs to be sent to a Uniform Resource Identifier (URI). URI is a compact string of characters that uniquely identify an abstract or physical resource. URI's are the super-set of identifiers, such as URLs, email addresses, ftp sites, etc, and as such, provide the syntax for all of the identification schemes.\nEMAL: Remittance advice information must be sent through e-mail.\nPOST: Remittance advice information must be sent through postal services.\nSMSM: Remittance advice information must be sent through by phone as a short message service (SMS)."
+      electronic_address:
+        allOf:
+          -
+            $ref: '#/definitions/max2048text'
+          -
+            description: 'Electronic address to which an agent is to send the remittance information.'
+      postal_address:
+        allOf:
+          -
+            $ref: '#/definitions/name_and_address16_1'
+          -
+            description: 'Postal address to which an agent is to send the remittance information.'
+    type: object
+  service_level8choice:
+    description: 'Specifies the service level of the transaction.'
+    type: object
+    oneOf:
+      -
+        required:
+          - code
+        properties:
+          code:
+            allOf:
+              - {$ref: '#/definitions/external_service_level1code'}
+              - {description: 'Specifies a pre-agreed service or level of service between the parties, as published in an external service level code list.'}
+      -
+        required:
+          - proprietary
+        properties:
+          proprietary:
+            allOf:
+              - {$ref: '#/definitions/max35text'}
+              - {description: 'Specifies a pre-agreed service or level of service between the parties, as a proprietary code.'}
+  settlement_instruction7_1:
+    description: 'Provides further details on the settlement of the instruction.'
+    required:
+      - settlement_method
+      - clearing_system
+    properties:
+      settlement_method:
+        allOf:
+          -
+            $ref: '#/definitions/settlement_method1code_1'
+          -
+            description: "Method used to settle the (batch of) payment instructions.\nSpecifies the method used to settle the credit transfer instruction.\nCLRG: Settlement is done through a payment clearing system."
+      clearing_system:
+        allOf:
+          -
+            $ref: '#/definitions/clearing_system_identification3choice_1'
+          -
+            description: 'Specification of a pre-agreed offering between clearing agents or the channel through which the payment instruction is processed.'
+    type: object
+  structured_remittance_information16_1:
+    description: 'Information supplied to enable the matching/reconciliation of an entry with the items that the payment is intended to settle, such as commercial invoices in an accounts'' receivable system, in a structured form.'
+    properties:
+      referred_document_information:
+        description: 'Provides the identification and the content of the referred document.'
+        items:
+          $ref: '#/definitions/referred_document_information7_1'
+        type: array
+      referred_document_amount:
+        allOf:
+          -
+            $ref: '#/definitions/remittance_amount2'
+          -
+            description: 'Provides details on the amounts of the referred document.'
+      creditor_reference_information:
+        allOf:
+          -
+            $ref: '#/definitions/creditor_reference_information2'
+          -
+            description: 'Reference information provided by the creditor to allow the identification of the underlying documents.'
+      invoicer:
+        allOf:
+          -
+            $ref: '#/definitions/party_identification135_5'
+          -
+            description: 'Identification of the organisation issuing the invoice, when it is different from the creditor or ultimate creditor.'
+      invoicee:
+        allOf:
+          -
+            $ref: '#/definitions/party_identification135_5'
+          -
+            description: 'Identification of the party to whom an invoice is issued, when it is different from the debtor or ultimate debtor.'
+      tax_remittance:
+        allOf:
+          -
+            $ref: '#/definitions/tax_information7'
+          -
+            description: 'Provides remittance information about a payment made for tax-related purposes.'
+      garnishment_remittance:
+        allOf:
+          -
+            $ref: '#/definitions/garnishment3_1'
+          -
+            description: 'Provides remittance information about a payment for garnishment-related purposes.'
+      additional_remittance_information:
+        description: 'Additional information, in free text form, to complement the structured remittance information.'
+        items:
+          $ref: '#/definitions/max140text'
+        maxItems: 3
+        type: array
+    type: object
+  tax_amount2:
+    description: 'Set of elements used to provide information on the tax amount(s) of tax record.'
+    properties:
+      rate:
+        allOf:
+          -
+            $ref: '#/definitions/percentage_rate'
+          -
+            description: 'Rate used to calculate the tax.'
+      taxable_base_amount:
+        allOf:
+          -
+            $ref: '#/definitions/active_or_historic_currency_and_amount'
+          -
+            description: 'Amount of money on which the tax is based.'
+      total_amount:
+        allOf:
+          -
+            $ref: '#/definitions/active_or_historic_currency_and_amount'
+          -
+            description: 'Total amount that is the result of the calculation of the tax for the record.'
+      details:
+        description: 'Set of elements used to provide details on the tax period and amount.'
+        items:
+          $ref: '#/definitions/tax_record_details2'
+        type: array
+    type: object
+  tax_amount_and_type1:
+    description: 'Specifies the amount with a specific type.'
+    required:
+      - amount
+    properties:
+      type:
+        allOf:
+          -
+            $ref: '#/definitions/tax_amount_type1choice'
+          -
+            description: 'Specifies the type of the amount.'
+      amount:
+        allOf:
+          -
+            $ref: '#/definitions/active_or_historic_currency_and_amount'
+          -
+            description: 'Amount of money, which has been typed.'
+    type: object
+  tax_amount_type1choice:
+    description: 'Specifies the amount type.'
+    type: object
+    oneOf:
+      -
+        required:
+          - code
+        properties:
+          code:
+            allOf:
+              - {$ref: '#/definitions/external_tax_amount_type1code'}
+              - {description: 'Specifies the amount type, in a coded form.'}
+      -
+        required:
+          - proprietary
+        properties:
+          proprietary:
+            allOf:
+              - {$ref: '#/definitions/max35text'}
+              - {description: 'Specifies the amount type, in a free-text form.'}
+  tax_authorisation1:
+    description: 'Details of the authorised tax paying party.'
+    properties:
+      title:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Title or position of debtor or the debtor''s authorised representative.'
+      name:
+        allOf:
+          -
+            $ref: '#/definitions/max140text'
+          -
+            description: 'Name of the debtor or the debtor''s authorised representative.'
+    type: object
+  tax_information7:
+    description: 'Details about tax paid, or to be paid, to the government in accordance with the law, including pre-defined parameters such as thresholds and type of account.'
+    properties:
+      creditor:
+        allOf:
+          -
+            $ref: '#/definitions/tax_party1'
+          -
+            description: 'Party on the credit side of the transaction to which the tax applies.'
+      debtor:
+        allOf:
+          -
+            $ref: '#/definitions/tax_party2'
+          -
+            description: 'Identifies the party on the debit side of the transaction to which the tax applies.'
+      ultimate_debtor:
+        allOf:
+          -
+            $ref: '#/definitions/tax_party2'
+          -
+            description: 'Ultimate party that owes an amount of money to the (ultimate) creditor, in this case, to the taxing authority.'
+      administration_zone:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Territorial part of a country to which the tax payment is related.'
+      reference_number:
+        allOf:
+          -
+            $ref: '#/definitions/max140text'
+          -
+            description: 'Tax reference information that is specific to a taxing agency.'
+      method:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Method used to indicate the underlying business or how the tax is paid.'
+      total_taxable_base_amount:
+        allOf:
+          -
+            $ref: '#/definitions/active_or_historic_currency_and_amount'
+          -
+            description: 'Total amount of money on which the tax is based.'
+      total_tax_amount:
+        allOf:
+          -
+            $ref: '#/definitions/active_or_historic_currency_and_amount'
+          -
+            description: 'Total amount of money as result of the calculation of the tax.'
+      date:
+        allOf:
+          -
+            $ref: '#/definitions/isodate'
+          -
+            description: 'Date by which tax is due.'
+      sequence_number:
+        allOf:
+          -
+            $ref: '#/definitions/number'
+          -
+            description: 'Sequential number of the tax report.'
+      record:
+        description: 'Record of tax details.'
+        items:
+          $ref: '#/definitions/tax_record2'
+        type: array
+    type: object
+  tax_party1:
+    description: 'Details about the entity involved in the tax paid or to be paid.'
+    properties:
+      tax_identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Tax identification number of the creditor.'
+      registration_identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Unique identification, as assigned by an organisation, to unambiguously identify a party.'
+      tax_type:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Type of tax payer.'
+    type: object
+  tax_party2:
+    description: 'Details about the entity involved in the tax paid or to be paid.'
+    properties:
+      tax_identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Tax identification number of the debtor.'
+      registration_identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Unique identification, as assigned by an organisation, to unambiguously identify a party.'
+      tax_type:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Type of tax payer.'
+      authorisation:
+        allOf:
+          -
+            $ref: '#/definitions/tax_authorisation1'
+          -
+            description: 'Details of the authorised tax paying party.'
+    type: object
+  tax_period2:
+    description: 'Period of time details related to the tax payment.'
+    properties:
+      year:
+        allOf:
+          -
+            $ref: '#/definitions/isodate'
+          -
+            description: 'Year related to the tax payment.'
+      type:
+        allOf:
+          -
+            $ref: '#/definitions/tax_record_period1code'
+          -
+            description: "Identification of the period related to the tax payment.\nSpecifies the period related to the tax payment.\nMM01: Tax is related to the second month of the period.\nMM02: Tax is related to the first month of the period.\nMM03: Tax is related to the third month of the period.\nMM04: Tax is related to the fourth month of the period.\nMM05: Tax is related to the fifth month of the period.\nMM06: Tax is related to the sixth month of the period.\nMM07: Tax is related to the seventh month of the period.\nMM08: Tax is related to the eighth month of the period.\nMM09: Tax is related to the ninth month of the period.\nMM10: Tax is related to the tenth month of the period.\nMM11: Tax is related to the eleventh month of the period.\nMM12: Tax is related to the twelfth month of the period.\nQTR1: Tax is related to the first quarter of the period.\nQTR2: Tax is related to the second quarter of the period.\nQTR3: Tax is related to the third quarter of the period.\nQTR4: Tax is related to the forth quarter of the period.\nHLF1: Tax is related to the first half of the period.\nHLF2: Tax is related to the second half of the period."
+      from_to_date:
+        allOf:
+          -
+            $ref: '#/definitions/date_period2'
+          -
+            description: 'Range of time between a start date and an end date for which the tax report is provided.'
+    type: object
+  tax_record2:
+    description: 'Set of elements used to define the tax record.'
+    properties:
+      type:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'High level code to identify the type of tax details.'
+      category:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Specifies the tax code as published by the tax authority.'
+      category_details:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Provides further details of the category tax code.'
+      debtor_status:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Code provided by local authority to identify the status of the party that has drawn up the settlement document.'
+      certificate_identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Identification number of the tax report as assigned by the taxing authority.'
+      forms_code:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Identifies, in a coded form, on which template the tax report is to be provided.'
+      period:
+        allOf:
+          -
+            $ref: '#/definitions/tax_period2'
+          -
+            description: 'Set of elements used to provide details on the period of time related to the tax payment.'
+      tax_amount:
+        allOf:
+          -
+            $ref: '#/definitions/tax_amount2'
+          -
+            description: 'Set of elements used to provide information on the amount of the tax record.'
+      additional_information:
+        allOf:
+          -
+            $ref: '#/definitions/max140text'
+          -
+            description: 'Further details of the tax record.'
+    type: object
+  tax_record_details2:
+    description: 'Provides information on the individual tax amount(s) per period of the tax record.'
+    required:
+      - amount
+    properties:
+      period:
+        allOf:
+          -
+            $ref: '#/definitions/tax_period2'
+          -
+            description: 'Set of elements used to provide details on the period of time related to the tax payment.'
+      amount:
+        allOf:
+          -
+            $ref: '#/definitions/active_or_historic_currency_and_amount'
+          -
+            description: 'Underlying tax amount related to the specified period.'
+    type: object
+  active_or_historic_currency_code:
+    description: 'A code allocated to a currency by a Maintenance Agency under an international identification scheme, as described in the latest edition of the international standard ISO 4217 "Codes for the representation of currencies and funds".'
+    pattern: '[A-Z]{3,3}'
+    type: string
+  active_or_historic_currency_code_fixed:
+    description: ActiveOrHistoricCurrencyCode_fixed
+    enum:
+      - CAD
+    type: string
+  address_type2code:
+    description: "Specifies the type of address.\nADDR: Address is the complete postal address.\nPBOX: Address is a postal office (PO) box.\nHOME: Address is the home address.\nBIZZ: Address is the business address.\nMLTO: Address is the address to which mail is sent.\nDLVY: Address is the address to which delivery is to take place."
+    enum:
+      - ADDR
+      - PBOX
+      - HOME
+      - BIZZ
+      - MLTO
+      - DLVY
+    type: string
+  any_bicdec2014identifier:
+    description: 'Code allocated to a financial or non-financial institution by the ISO 9362 Registration Authority, as described in ISO 9362: 2014 - "Banking - Banking telecommunication messages - Business identifier code (BIC)".'
+    pattern: '[A-Z0-9]{4,4}[A-Z]{2,2}[A-Z0-9]{2,2}([A-Z0-9]{3,3}){0,1}'
+    type: string
+  bicfidec2014identifier:
+    description: 'Code allocated to a financial institution by the ISO 9362 Registration Authority as described in ISO 9362: 2014 - "Banking - Banking telecommunication messages - Business identifier code (BIC)".'
+    pattern: '[A-Z0-9]{4,4}[A-Z]{2,2}[A-Z0-9]{2,2}([A-Z0-9]{3,3}){0,1}'
+    type: string
+  base_one_rate:
+    description: 'Rate expressed as a decimal, for example, 0.7 is 7/10 and 70%.'
+    multipleOf: 1e-10
+    exclusiveMaximum: 100000000000
+    type: number
+  charge_bearer_type1code_1:
+    description: "Specifies which party(ies) will pay charges due for processing of the instruction.\nSLEV: Charges are to be applied following the rules agreed in the service level and/or scheme."
+    enum:
+      - SLEV
+    type: string
+  country_code:
+    description: 'Code to identify a country, a dependency, or another area of particular geopolitical interest, on the basis of country names obtained from the United Nations (ISO 3166, Alpha-2 code).'
+    pattern: '[A-Z]{2,2}'
+    type: string
+  credit_debit_code:
+    description: "Specifies if an operation is an increase or a decrease.\nCRDT: Operation is an increase.\nDBIT: Operation is a decrease."
+    enum:
+      - CRDT
+      - DBIT
+    type: string
+  document_type3code:
+    description: "Specifies a type of financial or commercial document.\nRADM: Document is a remittance advice sent separately from the current transaction.\nRPIN: Document is a linked payment instruction to which the current payment instruction is related, for example, in a cover scenario.\nFXDR: Document is a pre-agreed or pre-arranged foreign exchange transaction to which the payment transaction refers.\nDISP: Document is a dispatch advice.\nPUOR: Document is a purchase order.\nSCOR: Document is a structured communication reference provided by the creditor to identify the referred transaction."
+    enum:
+      - RADM
+      - RPIN
+      - FXDR
+      - DISP
+      - PUOR
+      - SCOR
+    type: string
+  document_type6code:
+    description: "Specifies a type of financial or commercial document.\nMSIN: Document is an invoice claiming payment for the supply of metered services, for example gas or electricity supplied to a fixed meter.\nCNFA: Document is a credit note for the final amount settled for a commercial transaction.\nDNFA: Document is a debit note for the final amount settled for a commercial transaction.\nCINV: Document is an invoice.\nCREN: Document is a credit note.\nDEBN: Document is a debit note.\nHIRI: Document is an invoice for the hiring of human resources or renting goods or equipment.\nSBIN: Document is an invoice issued by the debtor.\nCMCN: Document is an agreement between the parties, stipulating the terms and conditions of the delivery of goods or services.\nSOAC: Document is a statement of the transactions posted to the debtor's account at the supplier.\nDISP: Document is a dispatch advice.\nBOLD: Document is a shipping notice.\nVCHR: Document is an electronic payment document.\nAROI: Document is a payment that applies to a specific source document.\nTSUT: Document is a transaction identifier as assigned by the Trade Services Utility.\nPUOR: Document is a purchase order."
+    enum:
+      - MSIN
+      - CNFA
+      - DNFA
+      - CINV
+      - CREN
+      - DEBN
+      - HIRI
+      - SBIN
+      - CMCN
+      - SOAC
+      - DISP
+      - BOLD
+      - VCHR
+      - AROI
+      - TSUT
+      - PUOR
+    type: string
+  exact4alpha_numeric_text:
+    description: 'Specifies an alphanumeric string with a length of 4 characters.'
+    pattern: '[a-zA-Z0-9]{4}'
+    type: string
+  external_cash_clearing_system1code_fixed:
+    description: ExternalCashClearingSystem1Code_fixed
+    enum:
+      - RTR
+    type: string
+  external_category_purpose1code:
+    description: 'Specifies the category purpose, as published in an external category purpose code list. External code sets can be downloaded from www.iso20022.org.'
+    maxLength: 4
+    minLength: 1
+    type: string
+  external_clearing_system_identification1code:
+    description: 'Specifies the clearing system identification code, as published in an external clearing system identification code list. External code sets can be downloaded from www.iso20022.org.'
+    maxLength: 5
+    minLength: 1
+    type: string
+  external_discount_amount_type1code:
+    description: 'Specifies the nature, or use, of the amount in the format of character string with a maximum length of 4 characters. The list of valid codes is an external code list published separately. External code sets can be downloaded from www.iso20022.org.'
+    maxLength: 4
+    minLength: 1
+    type: string
+  external_document_line_type1code:
+    description: 'Specifies the document line type as published in an external document type code list.'
+    maxLength: 4
+    minLength: 1
+    type: string
+  external_financial_institution_identification1code:
+    description: 'Specifies the external financial institution identification scheme name code in the format of character string with a maximum length of 4 characters. The list of valid codes is an external code list published separately. External code sets can be downloaded from www.iso20022.org.'
+    maxLength: 4
+    minLength: 1
+    type: string
+  external_garnishment_type1code:
+    description: 'Specifies the garnishment type as published in an external document type code list.'
+    maxLength: 4
+    minLength: 1
+    type: string
+  external_organisation_identification1code:
+    description: 'Specifies the external organisation identification scheme name code in the format of character string with a maximum length of 4 characters. The list of valid codes is an external code list published separately. External code sets can be downloaded from www.iso20022.org.'
+    maxLength: 4
+    minLength: 1
+    type: string
+  external_person_identification1code:
+    description: 'Specifies the external person identification scheme name code in the format of character string with a maximum length of 4 characters. The list of valid codes is an external code list published separately. External code sets can be downloaded from www.iso20022.org.'
+    maxLength: 4
+    minLength: 1
+    type: string
+  external_proxy_account_type1code:
+    description: 'Specifies the external proxy account type code, as published in the proxy account type external code set. External code sets can be downloaded from www.iso20022.org.'
+    maxLength: 4
+    minLength: 1
+    type: string
+  external_purpose1code:
+    description: 'Specifies the external purpose code in the format of character string with a maximum length of 4 characters. The list of valid codes is an external code list published separately. External code sets can be downloaded from www.iso20022.org.'
+    maxLength: 4
+    minLength: 1
+    type: string
+  external_service_level1code:
+    description: 'Specifies the external service level code in the format of character string with a maximum length of 4 characters. The list of valid codes is an external code list published separately. External code sets can be downloaded from www.iso20022.org.'
+    maxLength: 4
+    minLength: 1
+    type: string
+  external_tax_amount_type1code:
+    description: 'Specifies the nature, or use, of the amount in the format of character string with a maximum length of 4 characters. The list of valid codes is an external code list published separately. External code sets can be downloaded from www.iso20022.org.'
+    maxLength: 4
+    minLength: 1
+    type: string
+  isodate:
+    description: 'A particular point in the progression of time in a calendar year expressed in the YYYY-MM-DD format. This representation is defined in "XML Schema Part 2: Datatypes Second Edition - W3C Recommendation 28 October 2004" which is aligned with ISO 8601.'
+    pattern: '[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])'
+    type: string
+  isonormalised_date_time:
+    description: 'an ISODateTime whereby all timezoned dateTime values are UTC.'
+    pattern: '[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T(0[0-9]|1[0-9]|2[0-4]):(0[0-9]|[12345][0-9]):(0[0-9]|[12345][0-9])["."]([0-9]{3})([zZ])'
+    type: string
+  leiidentifier:
+    description: 'Legal Entity Identifier is a code allocated to a party as described in ISO 17442 "Financial Services - Legal Entity Identifier (LEI)".'
+    pattern: '[A-Z0-9]{18,18}[0-9]{2,2}'
+    type: string
+  max140text:
+    description: 'Specifies a character string with a maximum length of 140 characters.'
+    maxLength: 140
+    minLength: 1
+    type: string
+  max15numeric_text_fixed:
+    description: Max15NumericText_fixed
+    enum:
+      - '1'
+    type: string
+  max16text:
+    description: 'Specifies a character string with a maximum length of 16 characters.'
+    maxLength: 16
+    minLength: 1
+    type: string
+  max2048text:
+    description: 'Specifies a character string with a maximum length of 2048 characters.'
+    maxLength: 2048
+    minLength: 1
+    type: string
+  max34text:
+    description: 'Specifies a character string with a maximum length of 34 characters.'
+    maxLength: 34
+    minLength: 1
+    type: string
+  max35text:
+    description: 'Specifies a character string with a maximum length of 35 characters.'
+    maxLength: 35
+    minLength: 1
+    type: string
+  max4text:
+    description: 'Specifies a character string with a maximum length of 4 characters.'
+    maxLength: 4
+    minLength: 1
+    type: string
+  max70text:
+    description: 'Specifies a character string with a maximum length of 70characters.'
+    maxLength: 70
+    minLength: 1
+    type: string
+  number:
+    description: 'Number of objects represented as an integer.'
+    exclusiveMaximum: 1000000000000000000
+    type: number
+  percentage_rate:
+    description: 'Rate expressed as a percentage, that is, in hundredths, for example, 0.7 is 7/10 of a percent, and 7.0 is 7%.'
+    multipleOf: 1e-10
+    exclusiveMaximum: 100000000000
+    type: number
+  phone_number:
+    description: 'The collection of information which identifies a specific phone or FAX number as defined by telecom services. It consists of a "+" followed by the country code (from 1 to 3 characters) then a "-" and finally, any combination of numbers, "(", ")", "+" and "-" (up to 30 characters).'
+    pattern: '\+[0-9]{1,3}-[0-9()+\-]{1,30}'
+    type: string
+  remittance_location_method2code:
+    description: "Specifies the method used to deliver the remittance advice information.\nFAXI: Remittance advice information must be faxed.\nEDIC: Remittance advice information must be sent through Electronic Data Interchange (EDI).\nURID: Remittance advice information needs to be sent to a Uniform Resource Identifier (URI). URI is a compact string of characters that uniquely identify an abstract or physical resource. URI's are the super-set of identifiers, such as URLs, email addresses, ftp sites, etc, and as such, provide the syntax for all of the identification schemes.\nEMAL: Remittance advice information must be sent through e-mail.\nPOST: Remittance advice information must be sent through postal services.\nSMSM: Remittance advice information must be sent through by phone as a short message service (SMS)."
+    enum:
+      - FAXI
+      - EDIC
+      - URID
+      - EMAL
+      - POST
+      - SMSM
+    type: string
+  settlement_method1code_1:
+    description: "Specifies the method used to settle the credit transfer instruction.\nCLRG: Settlement is done through a payment clearing system."
+    enum:
+      - CLRG
+    type: string
+  tax_record_period1code:
+    description: "Specifies the period related to the tax payment.\nMM01: Tax is related to the second month of the period.\nMM02: Tax is related to the first month of the period.\nMM03: Tax is related to the third month of the period.\nMM04: Tax is related to the fourth month of the period.\nMM05: Tax is related to the fifth month of the period.\nMM06: Tax is related to the sixth month of the period.\nMM07: Tax is related to the seventh month of the period.\nMM08: Tax is related to the eighth month of the period.\nMM09: Tax is related to the ninth month of the period.\nMM10: Tax is related to the tenth month of the period.\nMM11: Tax is related to the eleventh month of the period.\nMM12: Tax is related to the twelfth month of the period.\nQTR1: Tax is related to the first quarter of the period.\nQTR2: Tax is related to the second quarter of the period.\nQTR3: Tax is related to the third quarter of the period.\nQTR4: Tax is related to the forth quarter of the period.\nHLF1: Tax is related to the first half of the period.\nHLF2: Tax is related to the second half of the period."
+    enum:
+      - MM01
+      - MM02
+      - MM03
+      - MM04
+      - MM05
+      - MM06
+      - MM07
+      - MM08
+      - MM09
+      - MM10
+      - MM11
+      - MM12
+      - QTR1
+      - QTR2
+      - QTR3
+      - QTR4
+      - HLF1
+      - HLF2
+    type: string
+  true_false_indicator:
+    description: 'A flag indicating a True or False value.'
+    type: boolean
+  uuidv4identifier:
+    description: 'Universally Unique IDentifier (UUID) version 4, as described in IETC RFC 4122 "Universally Unique IDentifier (UUID) URN Namespace".'
+    pattern: '[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}'
+    type: string
+  active_currency_and_amount_2decimals_simple_type:
+    type: object
+    required:
+      - amount
+    properties:
+      amount:
+        multipleOf: 0.01
+        exclusiveMaximum: 100000000000000
+        minimum: 0
+        type: number
+  active_or_historic_currency_and_amount_simple_type:
+    type: object
+    required:
+      - amount
+    properties:
+      amount:
+        multipleOf: 0.00001
+        exclusiveMaximum: 1000000000000000000
+        minimum: 0
+        type: number

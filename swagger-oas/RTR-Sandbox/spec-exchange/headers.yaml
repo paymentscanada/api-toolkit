@@ -1,0 +1,12 @@
+x-linker-objects:
+  payment-engine:
+    x-jws-signature:
+      $ref: '#/x-jws-signature'
+x-jws-signature:
+  description: >-
+    The JWS signature of response payload.
+  schema: 
+    type: string
+    minLength: 1
+  required: true
+  example: eyJjcml0IjpbImlhdCJdLCJpYXQiOjE2MzcyNzIxMzUyNTIsImFsZyI6IlJTMjU2Iiwia2lkIjoic2lnbi1rZXktY2EwMDAwMDEtMDAxIn0.V7skMzl3rUZK7N5pYVlicNt3TWXNBZyX-rtNV7n5rOc.hBDcIL9ptXWfOsg2pRSTy5dzFsowqjvE0G8dglODTSFpRM-iL1khjomuaYx_LnZV_lTnwkfMHknLdJuG5ucM7gpTZ98a1egjTcQisWHRO0fCr-sxqZXusGIB-hgAnB16Fn9UtdNdzsl447C0c3sSmytYn6eeMu5c6RWVrq-xB5KD9_JGexpyTw3IBvXavpd7h7QgnNzmcdWjV0yVXh74x4gmD8hTSbRkv54MYzap2BSFXLgxCwOrS7Jw0tQzCcP8a7gcOunO9Zr3ArgH-4Ur0VRWxIH4GaDksCBKdx1JdXFUToqG5Ben-FNyAzxkVxtuuwYMCbT1I3-8mCoj7nTtYw
