@@ -4,8 +4,8 @@ from the fictionalized APIs. These pages show you how this application looks lik
 
 From the home page, you may navigate to the following pages:
 
-* [Account Validation](account_validation.md)
-* [Request To Pay](request_to_pay.md)
-* [Payment Initiation](payment_initiation.md)
+* [Account Validation](docs/account_validation.md)
+* [Request To Pay](docs/request_to_pay.md)
+* [Payment Initiation](docs/payment_initiation.md)
 
-![Screenshot of home page](images/home.png)
+![Screenshot of home page](docs/images/home.png)
