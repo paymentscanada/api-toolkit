@@ -1,4 +1,4 @@
-[< Back](home.md)
+[< Back](docs/home.md)
 
 # Payment Initiation
 
@@ -12,9 +12,9 @@ sent and received from the API.
 The user must enter any fake Financial Institution ID and 
 Account Number before moving onto the second step.
 The user will see the JSON request that will be sent modified live.
-![Screenshot of initial Payment Initiation page](images/pay_init_initial.png)
-![Screenshot of initial account details filled in](images/pay_init_acc_filled.png)
+![Screenshot of initial Payment Initiation page](docs/images/pay_init_initial.png)
+![Screenshot of initial account details filled in](docs/images/pay_init_acc_filled.png)
 Below is an example of a successful payment.
-![Screenshot of initial successful Payment Initiation](images/pay_init_valid.png)
+![Screenshot of initial successful Payment Initiation](docs/images/pay_init_valid.png)
 Below is an example of a failed payment.
-![Screenshot of initial successful Payment Initiation](images/pay_init_invalid.png)
+![Screenshot of initial successful Payment Initiation](docs/images/pay_init_invalid.png)
