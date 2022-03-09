@@ -1,7 +1,7 @@
 # Payments Canada API Samples
-These API samples show how to make API calls to our FIF Branch sandbox through various programming languages and frameworks to help developers get started.
-
+The 'API samples' repo contains various code samples, postman collections and swagger/oas for various Payments Canada APIs. 
 ## Code sample
+Code samples are designed to demonstrate how to make API calls to our APIs, using the FIF Branch sandbox API, through various programming languages and frameworks to help developers get started.
 
 * [java](java): Uses Spring Boot and Spring Rest Templates.
 * [angular](angular): Uses the angular http class to make calls to the sandbox APIs.
