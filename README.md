@@ -1,7 +1,8 @@
-# Payments Canada API Samples
+# Payments Canada API Toolkit
 The 'API samples' repo contains various code samples, postman collections and swagger/oas for various Payments Canada APIs. 
+
 ## Code sample
-Code samples are designed to demonstrate how to make API calls to our APIs, using the FIF Branch sandbox API, through various programming languages and frameworks to help developers get started.
+Code samples are designed to help developers get started by demonstrating how to make API calls using a variety of programming languages. They are leveraging the FIF Branch sandbox API. 
 
 * [java](java): Uses Spring Boot and Spring Rest Templates.
 * [angular](angular): Uses the angular http class to make calls to the sandbox APIs.
@@ -12,7 +13,7 @@ Code samples are designed to demonstrate how to make API calls to our APIs, usin
 * [swagger-oas](swagger-oas): A collection of swagger/openAPI specifications for APIs available on our developer portal.  
 
 ## Additional Documentation:
-Additional documentation in regards to Payments Canada APIs can be found on the developer portal: https://developer.payments.ca/
+Additional documentation related to Payments Canada APIs can be found on the developer portal: https://developer.payments.ca/
 
 ## License
 The Payments Canada API Samples are released under the MIT License.
