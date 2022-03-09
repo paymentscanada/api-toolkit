@@ -1,0 +1,238 @@
+---
+# Generated-By: OA3 Linker Tool
+# Input-File: R1-Inbound/R1-Inbound-Participant-PaymentAPI.yml
+# Options: --encoding=utf-8; --log-level=DEBUG; --oa3fix; --overwrite
+# -----
+openapi: 3.0.3
+info:
+  title: Inbound Participant Payment API
+  description: |
+    Payments Related Endpoints for RTR Exchange, including Credit Transfer,
+    and associated Enquiries.
+
+    # Pre-requisites:
+    * A `access_token` that is still valid - See [Auth](https://storage.googleapis.com/prod-apigee-bucket-swagger/index.html?urls.primaryName=Auth) for more details.
+  version: 1.0.0
+servers:
+- url: "https://api.payments.ca/rtr-sandbox"   #Review
+  description: Sandbox Environment   #Review
+paths:
+  /payments: #pacs.008 - pacs.002
+    parameters:
+    - $ref: "#/components/parameters/TraceabilityId"
+    - $ref: "#/components/parameters/Signature"
+    - $ref: "#/components/parameters/RequestId"
+    post:
+      summary: Send Single Credit Transfer
+      description: This service can be used by a Debtor Agent to send a new RTR Payment
+        to RTR Exchange using ISO 20022 pacs.008 message format.
+      tags:
+      - single credit transfer
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json; version=1.0.0:
+            schema:
+              $ref: "#/components/schemas/SendPayment"
+      responses:
+        "401": {$ref: "#/components/responses/401-unauthorized"}
+        "403": {$ref: "#/components/responses/403-forbidden"}
+        "404": {$ref: "#/components/responses/404-not-found"}
+        "429": {$ref: "#/components/responses/429-too-many-requests"}
+        "500": {$ref: "#/components/responses/500-internal-server-error"}
+        "503": {$ref: "#/components/responses/503-service-unavailable"}
+        "200":
+          description: Single Credit Transfer sent by Debtor Agent
+          headers:
+            x-jws-signature:
+              $ref: '#/components/headers/x-jws-signature'
+          content:
+            application/json; version=1.0.0:
+              schema:
+                $ref: "#/components/schemas/PacsResponse"
+
+  /payments/status: #pacs.028 - pacs.002
+    parameters:
+    - $ref: "#/components/parameters/TraceabilityId"
+    - $ref: "#/components/parameters/Signature"
+    - $ref: "#/components/parameters/RequestId"
+
+
+    post:
+      summary: Send Payment Status Report Enquiry
+      description: This service can be used by a Debtor Agent or Creditor Agent to
+        send a Payment Status Report Enquiry using ISO 20022 pacs.028 message format
+      tags:
+      - single credit transfer status enquiry
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json; version=1.0.0:
+            schema:
+              $ref: "#/components/schemas/SendStatusEnquiry"
+      responses:
+        "401": {$ref: "#/components/responses/401-unauthorized"}
+        "403": {$ref: "#/components/responses/403-forbidden"}
+        "404": {$ref: "#/components/responses/404-not-found"}
+        "429": {$ref: "#/components/responses/429-too-many-requests"}
+        "500": {$ref: "#/components/responses/500-internal-server-error"}
+        "503": {$ref: "#/components/responses/503-service-unavailable"}
+        "200":
+          description: Payment Status Report Enquiry sent by Debtor Agent or Creditor
+            Agent
+          headers:
+            x-jws-signature:
+              $ref: '#/components/headers/x-jws-signature'
+          content:
+            application/json; version=1.0.0:
+              schema:
+                $ref: "#/components/schemas/PacsResponse"
+
+
+
+#Components Section
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT  
+  headers:
+    x-jws-signature:
+      description: >-
+        The JWS signature of response payload.
+      schema:
+        type: string
+        minLength: 1
+      required: true
+      example: eyJjcml0IjpbImlhdCJdLCJpYXQiOjE2MzcyNzIxMzUyNTIsImFsZyI6IlJTMjU2Iiwia2lkIjoic2lnbi1rZXktY2EwMDAwMDEtMDAxIn0.V7skMzl3rUZK7N5pYVlicNt3TWXNBZyX-rtNV7n5rOc.hBDcIL9ptXWfOsg2pRSTy5dzFsowqjvE0G8dglODTSFpRM-iL1khjomuaYx_LnZV_lTnwkfMHknLdJuG5ucM7gpTZ98a1egjTcQisWHRO0fCr-sxqZXusGIB-hgAnB16Fn9UtdNdzsl447C0c3sSmytYn6eeMu5c6RWVrq-xB5KD9_JGexpyTw3IBvXavpd7h7QgnNzmcdWjV0yVXh74x4gmD8hTSbRkv54MYzap2BSFXLgxCwOrS7Jw0tQzCcP8a7gcOunO9Zr3ArgH-4Ur0VRWxIH4GaDksCBKdx1JdXFUToqG5Ben-FNyAzxkVxtuuwYMCbT1I3-8mCoj7nTtYw
+  parameters:
+    RequestId:
+      in: header
+      name: x-uetr
+      description: >-
+        This is the UETR, a unique ID generated for each Credit Transfer (pacs.008)
+        used for message tracking purposes.
+        This header is required for the following ISO specs:
+          - pacs.008
+          - pacs.004 (post-R1 scope)
+          - pacs.028
+          - camt.029 (post-R1 scope)
+          - camt.056 (post-R1 scope)
+          - camt.006
+        Note that this header may be required in new ISO messages that are not listed
+        above in future releases, the list will be updated per release.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 36
+      required: false
+      example: eb6305c9-1f7f-49de-aed0-16487c27b42d
+    Signature:
+      in: header
+      name: x-jws-signature
+      description: >-
+        The JWS signature of request payload.
+      schema:
+        type: string
+        minLength: 1
+      required: true
+      example: eyJjcml0IjpbImlhdCJdLCJpYXQiOjE2MzcyNzIxMzUyNTIsImFsZyI6IlJTMjU2Iiwia2lkIjoic2lnbi1rZXktY2EwMDAwMDEtMDAxIn0.V7skMzl3rUZK7N5pYVlicNt3TWXNBZyX-rtNV7n5rOc.hBDcIL9ptXWfOsg2pRSTy5dzFsowqjvE0G8dglODTSFpRM-iL1khjomuaYx_LnZV_lTnwkfMHknLdJuG5ucM7gpTZ98a1egjTcQisWHRO0fCr-sxqZXusGIB-hgAnB16Fn9UtdNdzsl447C0c3sSmytYn6eeMu5c6RWVrq-xB5KD9_JGexpyTw3IBvXavpd7h7QgnNzmcdWjV0yVXh74x4gmD8hTSbRkv54MYzap2BSFXLgxCwOrS7Jw0tQzCcP8a7gcOunO9Zr3ArgH-4Ur0VRWxIH4GaDksCBKdx1JdXFUToqG5Ben-FNyAzxkVxtuuwYMCbT1I3-8mCoj7nTtYw
+    TraceabilityId:
+      description: >-
+        A unique identifier per RTR Exchange API call for purpose of tracing a request
+        through all systems. For example, traceability-id can be a GUID without dashes.
+        All the messages sent to other systems will have the same traceability-id
+        as the message that originated them. For example, a PACS.002 (payment commit)
+        sent to the creditor agent will have the same traceability-id as the PACS.008
+        that originated the payment.
+      in: header
+      name: traceability-id
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 35
+      required: true
+      example: 41e709f601214b5bb11a28d458863f4e
+  responses:
+    401-unauthorized:
+      description: Unauthorized
+    403-forbidden:
+      description: Forbidden
+      content:
+        application/json; version=1.0.0:
+          schema:
+            $ref: "types.yaml#/ErrorModel"
+    404-not-found:
+      description: Resources Not Found
+    429-too-many-requests:
+      description: Too many requests; blocked due to rate limiting.
+    500-internal-server-error:
+      description: Internal Server Error
+      content:
+        application/json; version=1.0.0:
+          schema:
+            $ref: "types.yaml#/ErrorModel"
+    503-service-unavailable:
+      description: Service Unavailable - The server cannot handle the request for
+        a service due to temporary maintenance.
+
+  schemas:
+    IsoHeader:
+      type: object
+      required:
+      - business_application_header
+      properties:
+        business_application_header:
+          $ref: "BusinessApplicationHeaderV02.yaml#/definitions/business_application_header"
+
+    PacsResponse:
+      allOf:
+      - $ref: "#/components/schemas/IsoHeader"
+      - oneOf:
+        - $ref: "#/components/schemas/SyntaxError"
+        - $ref: "#/components/schemas/PaymentStatusReport"
+    PaymentStatusReport: #pacs.002
+      description: >
+        pacs.002 message wrapper - There are 2 possible scenarios of pacs.002 response:  1.
+        Validation or Business Error - Transaction Status is RJCT,  2. Successful
+        response - Transaction Status is not RJCT
+      type: object
+      required:
+      - fi_to_fi_payment_status_report
+      properties:
+        fi_to_fi_payment_status_report:
+          $ref: "FIToFIPaymentStatusReportV10.yaml#/definitions/fi_to_fi_payment_status_report"
+
+    SendPayment: #pacs.008
+      description: pacs.008 message wrapper
+      allOf:
+      - $ref: '#/components/schemas/IsoHeader'
+      - type: object
+        required:
+        - fi_to_fi_customer_credit_transfer
+        properties:
+          fi_to_fi_customer_credit_transfer:
+            $ref: "FIToFICustomerCreditTransferIncomingV08.yaml#/definitions/fi_to_fi_customer_credit_transfer"
+    SendStatusEnquiry: #pacs.028
+      description: pacs.028 message wrapper
+      allOf:
+      - $ref: '#/components/schemas/IsoHeader'
+      - type: object
+        required:
+        - fi_to_fi_payment_status_request
+        properties:
+          fi_to_fi_payment_status_request:
+            $ref: "FIToFIPaymentStatusRequestV03.yaml#/definitions/fi_to_fi_payment_status_request"
+
+    SyntaxError: #admi.002
+      description: >
+        admi.002 message wrapper for syntax errors in API request payload.      
+      type: object
+      required:
+      - message_reject
+      properties:
+        message_reject:
+          $ref: 'MessageRejectV01.yaml#/definitions/message_reject'

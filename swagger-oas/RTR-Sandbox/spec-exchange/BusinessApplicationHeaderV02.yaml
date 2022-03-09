@@ -1,0 +1,394 @@
+$id: RTR_FINAL_V1_1_CoreMessages_SR2019_%28Aug_2021-_Pen_RTR_BusinessApplicationHeaderV02_head_001_001_02_20210826_1915_enriched.json
+$schema: 'http://json-schema.org/draft-07/schema#'
+description: 'Schema tag attributes: xmlns=''urn:iso:std:iso:20022:tech:xsd:head.001.001.02'' xmlns:xs=''http://www.w3.org/2001/XMLSchema'' elementFormDefault=''qualified'' targetNamespace=''urn:iso:std:iso:20022:tech:xsd:head.001.001.02'''
+properties:
+  AppHdr:
+    $ref: '#/definitions/business_application_header'
+  branch_and_financial_institution_identification6_1:
+    $ref: '#/definitions/branch_and_financial_institution_identification6_1'
+  branch_and_financial_institution_identification6_2:
+    $ref: '#/definitions/branch_and_financial_institution_identification6_2'
+  business_application_header5_1:
+    $ref: '#/definitions/business_application_header5_1'
+  business_application_header:
+    $ref: '#/definitions/business_application_header'
+  clearing_system_member_identification2_1:
+    $ref: '#/definitions/clearing_system_member_identification2_1'
+  financial_institution_identification18_1:
+    $ref: '#/definitions/financial_institution_identification18_1'
+  financial_institution_identification18_2:
+    $ref: '#/definitions/financial_institution_identification18_2'
+  generic_organisation_identification1_1:
+    $ref: '#/definitions/generic_organisation_identification1_1'
+  organisation_identification29_1:
+    $ref: '#/definitions/organisation_identification29_1'
+  party38choice_1:
+    $ref: '#/definitions/party38choice_1'
+  party44choice_1:
+    $ref: '#/definitions/party44choice_1'
+  party44choice_2:
+    $ref: '#/definitions/party44choice_2'
+  party_identification135_1:
+    $ref: '#/definitions/party_identification135_1'
+  signature_envelope:
+    $ref: '#/definitions/signature_envelope'
+  copy_duplicate1code_1:
+    $ref: '#/definitions/copy_duplicate1code_1'
+  isonormalised_date_time:
+    $ref: '#/definitions/isonormalised_date_time'
+  max35text:
+    $ref: '#/definitions/max35text'
+  yes_no_indicator:
+    $ref: '#/definitions/yes_no_indicator'
+type: object
+anyOf:
+  -
+    required:
+      - AppHdr
+  -
+    required:
+      - branch_and_financial_institution_identification6_1
+  -
+    required:
+      - branch_and_financial_institution_identification6_2
+  -
+    required:
+      - business_application_header5_1
+  -
+    required:
+      - business_application_header
+  -
+    required:
+      - clearing_system_member_identification2_1
+  -
+    required:
+      - financial_institution_identification18_1
+  -
+    required:
+      - financial_institution_identification18_2
+  -
+    required:
+      - generic_organisation_identification1_1
+  -
+    required:
+      - organisation_identification29_1
+  -
+    required:
+      - party38choice_1
+  -
+    required:
+      - party44choice_1
+  -
+    required:
+      - party44choice_2
+  -
+    required:
+      - party_identification135_1
+  -
+    required:
+      - signature_envelope
+  -
+    required:
+      - copy_duplicate1code_1
+  -
+    required:
+      - isonormalised_date_time
+  -
+    required:
+      - max35text
+  -
+    required:
+      - yes_no_indicator
+definitions:
+  AppHdr:
+    $ref: '#/definitions/business_application_header'
+  branch_and_financial_institution_identification6_1:
+    description: 'Unique and unambiguous identification of a financial institution or a branch of a financial institution.'
+    required:
+      - financial_institution_identification
+    properties:
+      financial_institution_identification:
+        allOf:
+          -
+            $ref: '#/definitions/financial_institution_identification18_1'
+          -
+            description: 'Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme.'
+    type: object
+  branch_and_financial_institution_identification6_2:
+    description: 'Unique and unambiguous identification of a financial institution or a branch of a financial institution.'
+    required:
+      - financial_institution_identification
+    properties:
+      financial_institution_identification:
+        allOf:
+          -
+            $ref: '#/definitions/financial_institution_identification18_2'
+          -
+            description: 'Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme.'
+    type: object
+  business_application_header5_1:
+    description: 'Specifies the Business Application Header of the Business Message. Can be used when replying to a query; can also be used when canceling or amending.'
+    required:
+      - from
+      - to
+      - business_message_identifier
+      - message_definition_identifier
+      - creation_date
+    properties:
+      from:
+        allOf:
+          -
+            $ref: '#/definitions/party44choice_1'
+          -
+            description: 'The sending MessagingEndpoint that has created this Business Message for the receiving MessagingEndpoint that will process this Business Message. Note the sending MessagingEndpoint might be different from the sending address potentially contained in the transport header (as defined in the transport layer).'
+      to:
+        allOf:
+          -
+            $ref: '#/definitions/party44choice_2'
+          -
+            description: 'The MessagingEndpoint designated by the sending MessagingEndpoint to be the recipient who will ultimately process this Business Message. Note the receiving MessagingEndpoint might be different from the receiving address potentially contained in the transport header (as defined in the transport layer).'
+      business_message_identifier:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Unambiguously identifies the Business Message to the MessagingEndpoint that has created the Business Message.'
+      message_definition_identifier:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Contains the MessageIdentifier that defines the BusinessMessage. It must contain a MessageIdentifier published on the ISO 20022 website. example camt.001.001.03.'
+      creation_date:
+        allOf:
+          -
+            $ref: '#/definitions/isonormalised_date_time'
+          -
+            description: 'Date and time when this Business Message (header) was created. Note Times must be normalized, using the "Z" annotation.'
+      copy_duplicate:
+        allOf:
+          -
+            $ref: '#/definitions/copy_duplicate1code_1'
+          -
+            description: "Indicates whether the message is a Copy, a Duplicate or a copy of a duplicate of a previously sent ISO 20022 Message. Message is for information/confirmation purposes. COPY: It is a copy of a message previously sent. DUPL: It is a duplicate of a message previously sent\nSpecifies if this document is a copy, a duplicate, or a duplicate of a copy.\nCOPY: Message is being sent as a copy to a party other than the account owner, for information purposes.\nDUPL: Message is for information/confirmation purposes. It is a duplicate of a message previously sent."
+      possible_duplicate:
+        allOf:
+          -
+            $ref: '#/definitions/yes_no_indicator'
+          -
+            description: 'Flag indicating if the Business Message exchanged between the MessagingEndpoints is possibly a duplicate. If the receiving MessagingEndpoint did not receive the original, then this Business Message should be processed as if it were the original. If the receiving MessagingEndpoint did receive the original, then it should perform necessary actions to avoid processing this Business Message again. This will guarantee business idempotent behaviour. NOTE: this is named "PossResend" in FIX - this is an application level resend not a network level retransmission.'
+      signature:
+        allOf:
+          -
+            $ref: '#/definitions/signature_envelope'
+          -
+            description: 'Contains the digital signature of the Business Entity authorised to sign this Business Message.'
+    type: object
+  business_application_header:
+    description: 'The Business Layer deals with Business Messages. The behaviour of the Business Messages is fully described by the Business Transaction and the structure of the Business Messages is fully described by the Message Definitions and related Message Rules, Rules and Market Practices. All of which are registered in the ISO 20022 Repository. A single new Business Message (with its accompagnying business application header) is created - by the sending MessagingEndpoint - for each business event; that is each interaction in a Business Transaction. A Business Message adheres to the following principles: " A Business Message (and its business application header) must not contain information about the Message Transport System or the mechanics or mechanism of message sending, transportation, or receipt. " A Business Message must be comprehensible outside of the context of the Transport Message. That is the Business Message must not require knowledge of the Transport Message to be understood. " A Business Message may contain headers, footers, and envelopes that are meaningful for the business. When present, they are treated as any other message content, which means that they are considered part of the Message Definition of the Business Message and as such will be part of the ISO 20022 Repository. " A Business Message refers to Business Actors by their Name. Each instance of a Business Actor has one Name. The Business Actor must not be referred to in the Transport Layer. Specific usage of this BusinessMessageHeader may be defined by the relevant SEG.'
+    required:
+      - from
+      - to
+      - business_message_identifier
+      - message_definition_identifier
+      - creation_date
+    properties:
+      from:
+        allOf:
+          -
+            $ref: '#/definitions/party44choice_1'
+          -
+            description: 'The sending MessagingEndpoint that has created this Business Message for the receiving MessagingEndpoint that will process this Business Message. Note the sending MessagingEndpoint might be different from the sending address potentially contained in the transport header (as defined in the transport layer).'
+      to:
+        allOf:
+          -
+            $ref: '#/definitions/party44choice_1'
+          -
+            description: 'The MessagingEndpoint designated by the sending MessagingEndpoint to be the recipient who will ultimately process this Business Message. Note the receiving MessagingEndpoint might be different from the receiving address potentially contained in the transport header (as defined in the transport layer).'
+      business_message_identifier:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Unambiguously identifies the Business Message to the MessagingEndpoint that has created the Business Message.'
+      message_definition_identifier:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Contains the MessageIdentifier that defines the BusinessMessage. It must contain a MessageIdentifier published on the ISO 20022 website. example camt.001.001.03.'
+      creation_date:
+        allOf:
+          -
+            $ref: '#/definitions/isonormalised_date_time'
+          -
+            description: 'Date and time when this Business Message (header) was created.'
+      copy_duplicate:
+        allOf:
+          -
+            $ref: '#/definitions/copy_duplicate1code_1'
+          -
+            description: "Indicates whether the message is a Copy, a Duplicate or a copy of a duplicate of a previously sent ISO 20022 Message.\nSpecifies if this document is a copy, a duplicate, or a duplicate of a copy.\nCOPY: Message is being sent as a copy to a party other than the account owner, for information purposes.\nDUPL: Message is for information/confirmation purposes. It is a duplicate of a message previously sent."
+      possible_duplicate:
+        allOf:
+          -
+            $ref: '#/definitions/yes_no_indicator'
+          -
+            description: 'Flag indicating if the Business Message exchanged between the MessagingEndpoints is possibly a duplicate. If the receiving MessagingEndpoint did not receive the original, then this Business Message should be processed as if it were the original. If the receiving MessagingEndpoint did receive the original, then it should perform necessary actions to avoid processing this Business Message again. This will guarantee business idempotent behaviour. NOTE: this is named "PossResend" in FIX - this is an application level resend not a network level retransmission.'
+      signature:
+        allOf:
+          -
+            $ref: '#/definitions/signature_envelope'
+          -
+            description: 'Contains the digital signature of the Business Entity authorised to sign this Business Message.'
+      related:
+        allOf:
+          -
+            $ref: '#/definitions/business_application_header5_1'
+          -
+            description: 'Specifies the Business Application Header(s) of the Business Message(s) to which this Business Message relates. Can be used when replying to a query; can also be used when canceling or amending.'
+    type: object
+  clearing_system_member_identification2_1:
+    description: 'Unique identification, as assigned by a clearing system, to unambiguously identify a member of the clearing system.'
+    required:
+      - member_identification
+    properties:
+      member_identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Identification of a member of a clearing system.'
+    type: object
+  financial_institution_identification18_1:
+    description: 'Specifies the details to identify a financial institution.'
+    required:
+      - clearing_system_member_identification
+    properties:
+      clearing_system_member_identification:
+        allOf:
+          -
+            $ref: '#/definitions/clearing_system_member_identification2_1'
+          -
+            description: 'Information used to identify a member within a clearing system.'
+    type: object
+  financial_institution_identification18_2:
+    description: 'Specifies the details to identify a financial institution.'
+    properties:
+      clearing_system_member_identification:
+        allOf:
+          -
+            $ref: '#/definitions/clearing_system_member_identification2_1'
+          -
+            description: 'Information used to identify a member within a clearing system.'
+    type: object
+  generic_organisation_identification1_1:
+    description: 'Information related to an identification of an organisation.'
+    required:
+      - identification
+    properties:
+      identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Identification assigned by an institution.'
+    type: object
+  organisation_identification29_1:
+    description: 'Unique and unambiguous way to identify an organisation.'
+    required:
+      - other
+    properties:
+      other:
+        allOf:
+          -
+            $ref: '#/definitions/generic_organisation_identification1_1'
+          -
+            description: 'Unique identification of an organisation, as assigned by an institution, using an identification scheme.'
+    type: object
+  party38choice_1:
+    description: 'Nature or use of the account.'
+    type: object
+    anyOf:
+      -
+        required:
+          - organisation_identification
+        properties:
+          organisation_identification:
+            allOf:
+              - {$ref: '#/definitions/organisation_identification29_1'}
+              - {description: 'Unique and unambiguous way to identify an organisation.'}
+  party44choice_1:
+    description: 'Identification of a person, an organisation or a financial institution.'
+    type: object
+    oneOf:
+      -
+        required:
+          - organisation_identification
+        properties:
+          organisation_identification:
+            allOf:
+              - {$ref: '#/definitions/party_identification135_1'}
+              - {description: 'Identification of a person or an organisation.'}
+      -
+        required:
+          - financial_institution_identification
+        properties:
+          financial_institution_identification:
+            allOf:
+              - {$ref: '#/definitions/branch_and_financial_institution_identification6_1'}
+              - {description: 'Identification of a financial institution.'}
+  party44choice_2:
+    description: 'Identification of a person, an organisation or a financial institution.'
+    type: object
+    oneOf:
+      -
+        required:
+          - organisation_identification
+        properties:
+          organisation_identification:
+            allOf:
+              - {$ref: '#/definitions/party_identification135_1'}
+              - {description: 'Identification of a person or an organisation.'}
+      -
+        required:
+          - financial_institution_identification
+        properties:
+          financial_institution_identification:
+            allOf:
+              - {$ref: '#/definitions/branch_and_financial_institution_identification6_2'}
+              - {description: 'Identification of a financial institution.'}
+  party_identification135_1:
+    description: 'Specifies the identification of a person or an organisation.'
+    required:
+      - identification
+    properties:
+      identification:
+        allOf:
+          -
+            $ref: '#/definitions/party38choice_1'
+          -
+            description: 'Unique and unambiguous identification of a party.'
+    type: object
+  signature_envelope:
+    description: 'The W3C XML Schema that specifies following standard signature: XML Signature Syntax and Processing (Second Edition) W3C Recommendation 10 June 2008 http://www.w3.org/TR/2008/REC-xmldsig-core-20080610/.'
+    maxLength: 4000
+    type: string
+  copy_duplicate1code_1:
+    description: "Specifies if this document is a copy, a duplicate, or a duplicate of a copy.\nCOPY: Message is being sent as a copy to a party other than the account owner, for information purposes.\nDUPL: Message is for information/confirmation purposes. It is a duplicate of a message previously sent."
+    enum:
+      - COPY
+      - DUPL
+    type: string
+  isonormalised_date_time:
+    description: 'an ISODateTime whereby all timezoned dateTime values are UTC.'
+    pattern: '[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T(0[0-9]|1[0-9]|2[0-4]):(0[0-9]|[12345][0-9]):(0[0-9]|[12345][0-9])["."]([0-9]{3})([zZ])'
+    type: string
+  max35text:
+    description: 'Specifies a character string with a maximum length of 35 characters.'
+    maxLength: 35
+    minLength: 1
+    type: string
+  yes_no_indicator:
+    description: 'Indicates a "Yes" or "No" type of answer for an element.'
+    type: boolean

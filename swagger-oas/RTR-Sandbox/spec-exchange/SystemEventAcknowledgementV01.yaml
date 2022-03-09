@@ -1,0 +1,85 @@
+$id: RTR_FINAL_V1_1_AdministrationMessages_SR2019_%28Aug__RTR_SystemEventAcknowledgementV01_admi_011_001_01_20210826_1915_enriched.json
+$schema: 'http://json-schema.org/draft-07/schema#'
+description: 'Schema tag attributes: xmlns=''urn:iso:std:iso:20022:tech:xsd:admi.011.001.01'' xmlns:xs=''http://www.w3.org/2001/XMLSchema'' elementFormDefault=''qualified'' targetNamespace=''urn:iso:std:iso:20022:tech:xsd:admi.011.001.01'''
+properties:
+  event1_1:
+    $ref: '#/definitions/event1_1'
+  system_event_acknowledgement:
+    $ref: '#/definitions/system_event_acknowledgement'
+  max350text:
+    $ref: '#/definitions/max350text'
+  max35text:
+    $ref: '#/definitions/max35text'
+  max4alpha_numeric_text_fixed:
+    $ref: '#/definitions/max4alpha_numeric_text_fixed'
+type: object
+anyOf:
+  -
+    required:
+      - event1_1
+  -
+    required:
+      - system_event_acknowledgement
+  -
+    required:
+      - max350text
+  -
+    required:
+      - max35text
+  -
+    required:
+      - max4alpha_numeric_text_fixed
+definitions:
+  event1_1:
+    description: 'Provides information on an event that happened in a system.'
+    required:
+      - event_code
+      - event_description
+    properties:
+      event_code:
+        allOf:
+          -
+            $ref: '#/definitions/max4alpha_numeric_text_fixed'
+          -
+            description: 'Proprietary code used to specify an event that occurred in a system.'
+      event_description:
+        allOf:
+          -
+            $ref: '#/definitions/max350text'
+          -
+            description: 'Free text used to describe an event which occurred in a system.'
+    type: object
+  system_event_acknowledgement:
+    description: 'The SystemEventAcknowledgement message is sent by a participant of a central system to the central system to acknowledge the notification of an occurrence of an event in a central system.'
+    required:
+      - message_identification
+      - acknowledgement_details
+    properties:
+      message_identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Unique and unambiguous identifier for the message, as assigned by the sender.'
+      acknowledgement_details:
+        allOf:
+          -
+            $ref: '#/definitions/event1_1'
+          -
+            description: 'Details of the system event being acknowledged.'
+    type: object
+  max350text:
+    description: 'Specifies a character string with a maximum length of 350 characters.'
+    maxLength: 350
+    minLength: 1
+    type: string
+  max35text:
+    description: 'Specifies a character string with a maximum length of 35 characters.'
+    maxLength: 35
+    minLength: 1
+    type: string
+  max4alpha_numeric_text_fixed:
+    description: Max4AlphaNumericText_fixed
+    enum:
+      - HBRT
+    type: string

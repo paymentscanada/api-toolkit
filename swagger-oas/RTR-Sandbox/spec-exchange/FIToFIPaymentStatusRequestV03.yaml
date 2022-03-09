@@ -1,0 +1,219 @@
+$id: RTR_FINAL_V1_1_SupportingMessages_SR2019_%28Aug_2021_RTR_FIToFIPaymentStatusRequestV03_pacs_028_001_03_20210826_1915_enriched.json
+$schema: 'http://json-schema.org/draft-07/schema#'
+description: 'Schema tag attributes: xmlns=''urn:iso:std:iso:20022:tech:xsd:pacs.028.001.03'' xmlns:xs=''http://www.w3.org/2001/XMLSchema'' elementFormDefault=''qualified'' targetNamespace=''urn:iso:std:iso:20022:tech:xsd:pacs.028.001.03'''
+properties:
+  branch_and_financial_institution_identification6_1:
+    $ref: '#/definitions/branch_and_financial_institution_identification6_1'
+  clearing_system_member_identification2_1:
+    $ref: '#/definitions/clearing_system_member_identification2_1'
+  fi_to_fi_payment_status_request:
+    $ref: '#/definitions/fi_to_fi_payment_status_request'
+  financial_institution_identification18_1:
+    $ref: '#/definitions/financial_institution_identification18_1'
+  group_header91_1:
+    $ref: '#/definitions/group_header91_1'
+  original_group_information29_1:
+    $ref: '#/definitions/original_group_information29_1'
+  payment_transaction113_1:
+    $ref: '#/definitions/payment_transaction113_1'
+  isonormalised_date_time:
+    $ref: '#/definitions/isonormalised_date_time'
+  max35text:
+    $ref: '#/definitions/max35text'
+  uuidv4identifier:
+    $ref: '#/definitions/uuidv4identifier'
+type: object
+anyOf:
+  -
+    required:
+      - branch_and_financial_institution_identification6_1
+  -
+    required:
+      - clearing_system_member_identification2_1
+  -
+    required:
+      - fi_to_fi_payment_status_request
+  -
+    required:
+      - financial_institution_identification18_1
+  -
+    required:
+      - group_header91_1
+  -
+    required:
+      - original_group_information29_1
+  -
+    required:
+      - payment_transaction113_1
+  -
+    required:
+      - isonormalised_date_time
+  -
+    required:
+      - max35text
+  -
+    required:
+      - uuidv4identifier
+definitions:
+  branch_and_financial_institution_identification6_1:
+    description: 'Unique and unambiguous identification of a financial institution or a branch of a financial institution.'
+    required:
+      - financial_institution_identification
+    properties:
+      financial_institution_identification:
+        allOf:
+          -
+            $ref: '#/definitions/financial_institution_identification18_1'
+          -
+            description: 'Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme.'
+    type: object
+  clearing_system_member_identification2_1:
+    description: 'Unique identification, as assigned by a clearing system, to unambiguously identify a member of the clearing system.'
+    required:
+      - member_identification
+    properties:
+      member_identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Identification of a member of a clearing system.'
+    type: object
+  fi_to_fi_payment_status_request:
+    description: 'Scope The FinancialInstitutionToFinancialInstitutionPaymentStatusRequest message is sent by the debtor agent to the creditor agent, directly or through other agents and/or a payment clearing and settlement system. It is used to request a FIToFIPaymentStatusReport message containing information on the status of a previously sent instruction. Usage The FIToFIPaymentStatusRequest message is exchanged between agents to request status information about instructions previously sent. Its usage will always be governed by a bilateral agreement between the agents. The FIToFIPaymentStatusRequest message can be used to request information about the status (e.g. rejection, acceptance) of a credit transfer instruction, a direct debit instruction, as well as other intra-agent instructions (for example FIToFIPaymentCancellationRequest). The FIToFIPaymentStatusRequest message refers to the original instruction(s) by means of references only or by means of references and a set of elements from the original instruction. The FIToFIPaymentStatusRequest message can be used in domestic and cross-border scenarios.'
+    required:
+      - group_header
+      - transaction_information
+    properties:
+      group_header:
+        allOf:
+          -
+            $ref: '#/definitions/group_header91_1'
+          -
+            description: 'Set of characteristics shared by all individual transactions included in the status request message.'
+      transaction_information:
+        allOf:
+          -
+            $ref: '#/definitions/payment_transaction113_1'
+          -
+            description: 'Information concerning the original transaction, to which the status request message refers.'
+    type: object
+  financial_institution_identification18_1:
+    description: 'Specifies the details to identify a financial institution.'
+    required:
+      - clearing_system_member_identification
+    properties:
+      clearing_system_member_identification:
+        allOf:
+          -
+            $ref: '#/definitions/clearing_system_member_identification2_1'
+          -
+            description: 'Information used to identify a member within a clearing system.'
+    type: object
+  group_header91_1:
+    description: 'Set of characteristics shared by all individual transactions included in the message.'
+    required:
+      - message_identification
+      - creation_date_time
+    properties:
+      message_identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Point to point reference, as assigned by the instructing party, and sent to the next party in the chain to unambiguously identify the message. Usage: The instructing party has to make sure that MessageIdentification is unique per instructed party for a pre-agreed period.'
+      creation_date_time:
+        allOf:
+          -
+            $ref: '#/definitions/isonormalised_date_time'
+          -
+            description: 'Date and time at which the message was created.'
+    type: object
+  original_group_information29_1:
+    description: 'Unique and unambiguous identifier of the group of transactions as assigned by the original instructing party.'
+    required:
+      - original_message_identification
+      - original_message_name_identification
+    properties:
+      original_message_identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Point to point reference assigned by the original instructing party to unambiguously identify the original message.'
+      original_message_name_identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Specifies the original message name identifier to which the message refers, for example, pacs.003.001.01 or MT103.'
+    type: object
+  payment_transaction113_1:
+    description: 'Provides further details on the original transactions, to which the status report message refers.'
+    required:
+      - original_group_information
+      - original_end_to_end_identification
+      - original_uetr
+    properties:
+      original_group_information:
+        allOf:
+          -
+            $ref: '#/definitions/original_group_information29_1'
+          -
+            description: 'Point to point reference, as assigned by the original instructing party, to unambiguously identify the original message.'
+      original_instruction_identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Unique identification, as assigned by the original instructing party for the original instructed party, to unambiguously identify the original instruction.'
+      original_end_to_end_identification:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Unique identification, as assigned by the original initiating party, to unambiguously identify the original transaction.'
+      original_uetr:
+        allOf:
+          -
+            $ref: '#/definitions/uuidv4identifier'
+          -
+            description: 'Universally unique identifier to provide the original end-to-end reference of a payment transaction.'
+      acceptance_date_time:
+        allOf:
+          -
+            $ref: '#/definitions/isonormalised_date_time'
+          -
+            description: 'Point in time when the payment order from the initiating party meets the processing conditions of the account servicing agent. This means that the account servicing agent has received the payment order and has applied checks such as authorisation, availability of funds.'
+      clearing_system_reference:
+        allOf:
+          -
+            $ref: '#/definitions/max35text'
+          -
+            description: 'Unique reference, as assigned by a clearing system, to unambiguously identify the instruction.'
+      instructing_agent:
+        allOf:
+          -
+            $ref: '#/definitions/branch_and_financial_institution_identification6_1'
+          -
+            description: 'Agent that instructs the next party in the chain to carry out the (set of) instruction(s).'
+      instructed_agent:
+        allOf:
+          -
+            $ref: '#/definitions/branch_and_financial_institution_identification6_1'
+          -
+            description: 'Agent that is instructed by the previous party in the chain to carry out the (set of) instruction(s).'
+    type: object
+  isonormalised_date_time:
+    description: 'an ISODateTime whereby all timezoned dateTime values are UTC.'
+    pattern: '[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T(0[0-9]|1[0-9]|2[0-4]):(0[0-9]|[12345][0-9]):(0[0-9]|[12345][0-9])["."]([0-9]{3})([zZ])'
+    type: string
+  max35text:
+    description: 'Specifies a character string with a maximum length of 35 characters.'
+    maxLength: 35
+    minLength: 1
+    type: string
+  uuidv4identifier:
+    description: 'Universally Unique IDentifier (UUID) version 4, as described in IETC RFC 4122 "Universally Unique IDentifier (UUID) URN Namespace".'
+    pattern: '[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}'
+    type: string

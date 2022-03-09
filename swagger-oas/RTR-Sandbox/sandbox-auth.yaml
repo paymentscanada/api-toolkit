@@ -1,0 +1,100 @@
+openapi: 3.0.3
+info:
+  title: Sandbox Auth
+  description: |
+    This API call generates an access token that can be used in the RTR exchange and C&S API calls for sandbox calls.
+    
+    # Pre-requisites:
+    1. Create an app with the `rtr-sandbox-product` on the [Developer Portal](https://developer.payments.ca/)
+    2. Mark down the `Consumer Key` and `Consumer Secret`
+    
+    # Calling this API on this page
+    1. Click the Authorize button.
+    2. Fill in the username with your Consumer Key and fill in the password with your Consumer Secret.
+    3. Click Authorize
+    4. Expand /accesstoken and click "Try it out"
+    5. Click "Execute"
+    6. In Server Response section, find the `access_token` in their and mark it down. This token will be used in the other APIs calls, this token expires in 5 minutes.
+  version: 1.0.0
+servers:
+  - url: "https://api.payments.ca/" 
+    description: Sandbox Environment 
+
+paths:
+  /accesstoken:
+     post:
+      summary: Generates an access token
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                grant_type: 
+                  type: string
+                  description: 'Always client_credentials'
+                  default: 'client_credentials'
+      responses:
+        '200':
+          description: 'Received Token'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+
+
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        refresh_token_expires_in:
+          type: string
+          example: "0"
+        api_product_list:
+          type: string
+          example: "[rtr-sandbox-product]"
+        api_product_list_json:
+          type: array
+          items:
+            type: string
+        organization_name:
+          type: string
+          example: "Organization Name"
+        developer.email:
+          type: string
+          example: "email@example.com"
+        token_type:
+          type: string
+          example: "Bearer"
+        issued_at:
+          type: string
+          description: Unix timestamp
+          example: "1646844617932"
+        client_id:
+          type: string
+          example: "client_id"
+        access_token:
+          type: string
+          example: "access token"
+        application_name:
+          type: string
+          example: "application UUID"
+        scope:
+          type: string
+          example: ""
+        expires_in:
+          type: string
+          example: "1799"
+        refresh_count:
+          type: string
+          example: "0"
+        status:
+          type: string
+          example: approved

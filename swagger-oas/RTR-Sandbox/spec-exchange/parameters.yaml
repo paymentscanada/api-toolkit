@@ -1,0 +1,51 @@
+x-linker-objects:
+  standard:
+    - $ref: "#/TraceabilityId"
+  payment-engine:
+    - $ref: "#/TraceabilityId"
+    - $ref: "#/Signature"
+    - $ref: "#/RequestId"
+    
+
+TraceabilityId:
+  description: >-
+    A unique identifier per RTR Exchange API call for purpose of tracing a request through all systems. For example, traceability-id can be a GUID without dashes.
+    All the messages sent to other systems will have the same traceability-id as the message that originated them. For example, a PACS.002 (payment commit)
+    sent to the creditor agent will have the same traceability-id as the PACS.008 that originated the payment.
+  in: header
+  name: traceability-id
+  schema: 
+    type: string
+    minLength: 1
+    maxLength: 35
+  required: true
+  example: 41e709f601214b5bb11a28d458863f4e
+Signature:
+  in: header
+  name: x-jws-signature
+  description: >-
+    The JWS signature of request payload.
+  schema:
+    type: string
+    minLength: 1
+  required: true
+  example: eyJjcml0IjpbImlhdCJdLCJpYXQiOjE2MzcyNzIxMzUyNTIsImFsZyI6IlJTMjU2Iiwia2lkIjoic2lnbi1rZXktY2EwMDAwMDEtMDAxIn0.V7skMzl3rUZK7N5pYVlicNt3TWXNBZyX-rtNV7n5rOc.hBDcIL9ptXWfOsg2pRSTy5dzFsowqjvE0G8dglODTSFpRM-iL1khjomuaYx_LnZV_lTnwkfMHknLdJuG5ucM7gpTZ98a1egjTcQisWHRO0fCr-sxqZXusGIB-hgAnB16Fn9UtdNdzsl447C0c3sSmytYn6eeMu5c6RWVrq-xB5KD9_JGexpyTw3IBvXavpd7h7QgnNzmcdWjV0yVXh74x4gmD8hTSbRkv54MYzap2BSFXLgxCwOrS7Jw0tQzCcP8a7gcOunO9Zr3ArgH-4Ur0VRWxIH4GaDksCBKdx1JdXFUToqG5Ben-FNyAzxkVxtuuwYMCbT1I3-8mCoj7nTtYw
+RequestId:
+  in: header
+  name: x-uetr
+  description: >-
+    This is the UETR, a unique ID generated for each Credit Transfer (pacs.008) used for message tracking purposes.
+    This header is required for the following ISO specs:
+      - pacs.008
+      - pacs.004 (post-R1 scope)
+      - pacs.028
+      - camt.029 (post-R1 scope)
+      - camt.056 (post-R1 scope)
+      - camt.006
+    Note that this header may be required in new ISO messages that are not listed above in future releases, the list will be updated per release.
+  schema: 
+    type: string
+    minLength: 1
+    maxLength: 36
+  required: false 
+  example: eb6305c9-1f7f-49de-aed0-16487c27b42d
