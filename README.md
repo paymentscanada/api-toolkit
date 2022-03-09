@@ -7,7 +7,7 @@ Code samples are designed to demonstrate how to make API calls to our APIs, usin
 * [angular](angular): Uses the angular http class to make calls to the sandbox APIs.
 * [kotlin](kotlin): Uses OkHttp and Retrofit2 to make calls to the sandbox APIs.
 * [nodejs](nodejs): Sample nodejs based application that connects to the Payments Canada API and gets a sandbox branch.
-* [payments-rail-angular](payments-rail-angular): This is a sample angular application that connects to the Payments Canada API and retrieves the data from the fictionalized APIs.
+* [payments-rail-angular](payments-rail-angular): This is a sample angular application that connects to the Payments Canada API and retrieves the data from the fictionalized payments rail APIs.
 * [postman collection](postman-collection): Intended to be imported by Postman, has sample APIs for FIF and CCIN extracts.
 * [swagger-oas](swagger-oas): A collection of swagger/openAPI specifications for APIs available on our developer portal.  
 

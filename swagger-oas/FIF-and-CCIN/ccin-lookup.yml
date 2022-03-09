@@ -1,0 +1,122 @@
+swagger: '2.0'
+info:
+  description: API to retrieve ccin extract data.  This is the same data previously provided by the weekly extract files from CCIN.
+  version: '1.0'
+  title: CCIN Output API
+host: api.payments.ca
+basePath: /
+tags:
+  - name: ccin-extract-resource
+    description: Ccin Extract Resource
+schemes:
+  - https
+paths:
+  /api/v1/ccins/{ccin}:
+    get:
+      tags:
+        - ccin-extract-resource
+      summary: Returns a single extract record by CCIN
+      operationId: getCcinByIdUsingGET
+      produces:
+        - application/vnd.ccin.api.v1+json
+      parameters:
+        - name: asAtDate
+          in: query
+          description: Setting this parameter will retrieve the most recent extract prior to the date sent in. Format expected is yyyy-MM-dd
+          required: false
+          type: string
+          format: date
+          allowEmptyValue: false
+        - name: ccin
+          in: path
+          description: ccin
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Master_Extract_Record'
+      deprecated: false
+definitions:
+  Master_Extract_Record:
+    type: object
+    properties:
+      acceptableMediaType:
+        type: string
+        description: The acceptable meda type for the given ccin, 1 is PAPER and 2 is PAPER & ELECTRONIC, maximum of 9 characters
+        enum:
+          - '1'
+          - '2'
+      address1:
+        type: string
+        description: The first address line for the given record, derived from 2 line address and city, maximum 43 characters
+      address2:
+        type: string
+        description: The second address line for the given record, derived from 2 line address and city, maximum 43 characters
+      address3:
+        type: string
+        description: The third address line for the given record, derived from 2 line address and city, maximum 43 characters
+      address4:
+        type: string
+        description: The fourth address line for the given record, derived from 2 line address and city, maximum 43 characters
+      ccin:
+        type: string
+        description: The CCIN for this record
+      countryCode:
+        type: string
+        description: The country code for the given record, maximum of 20 characters
+        enum:
+          - CANADA
+          - UNITED STATES
+      cycleDate:
+        type: string
+        format: date
+        description: The cycle date that this data belongs to
+      cycleNumber:
+        type: integer
+        format: int32
+        description: The cycle number that this data belongs to
+      dateCcinIssued:
+        type: string
+        format: date
+        description: The date the CCIN was issued
+      effectiveFrom:
+        type: string
+        format: date
+        description: The effective from date
+      leadFiName:
+        type: string
+        description: The Lead financial institution name for the given record, maximum of 40 characters
+      leadFiNum:
+        type: integer
+        format: int32
+        description: The Lead financial institution number for the given record, maximum of 4 characters
+      postal:
+        type: string
+        description: The postal/zip code the given record, maximum of 9 characters
+      provCode:
+        type: string
+        description: The province for the given record, maximum of 2 characters
+      returnCheckDprn:
+        type: string
+        description: The return DPRN for a check, maximum of 9 characters
+      shortname:
+        type: string
+        description: The short name for the given record, maximum 40 characters
+      sicCode:
+        type: string
+        description: The SIC code for the given
+      status:
+        type: string
+        description: 'The status for a given record. The values are: A is ACTIVE, I is INACTIVE, D is DELETED, P is PENDING'
+        enum:
+          - I
+          - A
+          - D
+          - P
+      statusDate:
+        type: string
+        format: date
+        description: The date the current status was set for the given record
+    title: Master Extract Record

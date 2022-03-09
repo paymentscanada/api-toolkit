@@ -1,0 +1,266 @@
+swagger: '2.0'
+info:
+  description: API to retrieve ccin extract data.  This is the same data previously provided by the weekly extract files from CCIN.
+  version: '1.0'
+  title: CCIN Output API
+host: api.payments.ca
+basePath: /
+tags:
+  - name: master-extract-resource
+    description: Master Extract Resource
+  - name: update-extract-resource
+    description: Update Extract Resource
+schemes:
+  - https
+paths:
+  /api/v1/extracts/master:
+    get:
+      tags:
+        - master-extract-resource
+      summary: Retrieve the master extract
+      operationId: getMasterExtractUsingGET
+      produces:
+        - application/vnd.ccin.api.v1+json
+      parameters:
+        - name: allRecords
+          in: query
+          required: false
+          type: boolean
+        - name: asAtDate
+          in: query
+          description: Setting this parameter will retrieve the most recent extract prior to the date sent in. Format expected is yyyy-MM-dd
+          required: false
+          type: string
+          format: date
+          allowEmptyValue: false
+        - name: filter
+          in: query
+          description: filter
+          required: false
+          type: string
+        - name: limit
+          in: query
+          description: How many records to retrieve
+          required: false
+          type: integer
+          format: int32
+        - name: page
+          in: query
+          description: Start page to get the data for the dataset
+          required: false
+          type: integer
+          format: int32
+        - name: sortField
+          in: query
+          description: The field to sort on
+          required: false
+          type: string
+        - name: sortOrder
+          in: query
+          description: The direction to sort on, true for ascending
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Master_Extract_Record'
+      deprecated: false
+  /api/v1/extracts/updated:
+    get:
+      tags:
+        - update-extract-resource
+      summary: Get the Update Extract for the most recent cycle
+      operationId: getUpdateExtractUsingGET
+      produces:
+        - application/vnd.ccin.api.v1+json
+      parameters:
+        - name: allRecords
+          in: query
+          required: false
+          type: boolean
+        - name: endDate
+          in: query
+          description: Setting this parameter will set the end date to retrieve data for. Format expected is yyyy-MM-dd
+          required: false
+          type: string
+          format: date
+          allowEmptyValue: false
+        - name: limit
+          in: query
+          description: How many records to retrieve
+          required: false
+          type: integer
+          format: int32
+        - name: page
+          in: query
+          description: Start page to get the data for the dataset
+          required: false
+          type: integer
+          format: int32
+        - name: sortField
+          in: query
+          description: The field to sort on
+          required: false
+          type: string
+        - name: sortOrder
+          in: query
+          description: The direction to sort on, true for ascending
+          required: false
+          type: boolean
+        - name: startDate
+          in: query
+          description: Setting this parameter will set the start date to retrieve data for. Format expected is yyyy-MM-dd
+          required: false
+          type: string
+          format: date
+          allowEmptyValue: false
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Update_Extract_Record'
+      deprecated: false
+definitions:
+  Master_Extract_Record:
+    type: object
+    properties:
+      acceptableMediaType:
+        type: string
+        description: The acceptable meda type for the given ccin, 1 is PAPER and 2 is PAPER & ELECTRONIC, maximum of 9 characters
+        enum:
+          - '1'
+          - '2'
+      address1:
+        type: string
+        description: The first address line for the given record, derived from 2 line address and city, maximum 43 characters
+      address2:
+        type: string
+        description: The second address line for the given record, derived from 2 line address and city, maximum 43 characters
+      address3:
+        type: string
+        description: The third address line for the given record, derived from 2 line address and city, maximum 43 characters
+      address4:
+        type: string
+        description: The fourth address line for the given record, derived from 2 line address and city, maximum 43 characters
+      ccin:
+        type: string
+        description: The CCIN for this record
+      countryCode:
+        type: string
+        description: The country code for the given record, maximum of 20 characters
+        enum:
+          - CANADA
+          - UNITED STATES
+      cycleDate:
+        type: string
+        format: date
+        description: The cycle date that this data belongs to
+      cycleNumber:
+        type: integer
+        format: int32
+        description: The cycle number that this data belongs to
+      dateCcinIssued:
+        type: string
+        format: date
+        description: The date the CCIN was issued
+      effectiveFrom:
+        type: string
+        format: date
+        description: The effective from date
+      leadFiName:
+        type: string
+        description: The Lead financial institution name for the given record, maximum of 40 characters
+      leadFiNum:
+        type: integer
+        format: int32
+        description: The Lead financial institution number for the given record, maximum of 4 characters
+      postal:
+        type: string
+        description: The postal/zip code the given record, maximum of 9 characters
+      provCode:
+        type: string
+        description: The province for the given record, maximum of 2 characters
+      returnCheckDprn:
+        type: string
+        description: The return DPRN for a check, maximum of 9 characters
+      shortname:
+        type: string
+        description: The short name for the given record, maximum 40 characters
+      sicCode:
+        type: string
+        description: The SIC code for the given
+      status:
+        type: string
+        description: 'The status for a given record. The values are: A is ACTIVE, I is INACTIVE, D is DELETED, P is PENDING'
+        enum:
+          - I
+          - A
+          - D
+          - P
+      statusDate:
+        type: string
+        format: date
+        description: The date the current status was set for the given record
+    title: Master Extract Record
+  Update_Extract_Record:
+    type: object
+    properties:
+      acceptableMediaType:
+        $ref: '#/definitions/Value_Changed'
+      action:
+        type: string
+        description: 'The action performed on the CCIN. The values are: A - Added, C - Changed, D- Deleted'
+        enum:
+          - A
+          - C
+          - D
+      address1:
+        $ref: '#/definitions/Value_Changed'
+      address2:
+        $ref: '#/definitions/Value_Changed'
+      address3:
+        $ref: '#/definitions/Value_Changed'
+      address4:
+        $ref: '#/definitions/Value_Changed'
+      ccin:
+        type: string
+      countryCode:
+        $ref: '#/definitions/Value_Changed'
+      cycleDate:
+        type: string
+        format: date
+        description: The cycle date that this data belongs to
+      dateCcinIssued:
+        $ref: '#/definitions/Value_Changed'
+      leadFi:
+        $ref: '#/definitions/Value_Changed'
+      postal:
+        $ref: '#/definitions/Value_Changed'
+      provCode:
+        $ref: '#/definitions/Value_Changed'
+      returnCheckDprn:
+        $ref: '#/definitions/Value_Changed'
+      shortname:
+        $ref: '#/definitions/Value_Changed'
+      sicCode:
+        $ref: '#/definitions/Value_Changed'
+      status:
+        $ref: '#/definitions/Value_Changed'
+      statusDate:
+        $ref: '#/definitions/Value_Changed'
+    title: Update Extract Record
+  Value_Changed:
+    type: object
+    properties:
+      changed:
+        type: boolean
+        description: Determines if the field value was changed
+      value:
+        type: object
+        description: The object that may have been, typically a string
+    title: Value changed
