@@ -22,7 +22,7 @@
     "@angular/router": "~11.2.13",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "ngx-highlightjs": "^4.1.2",
     "ngx-moment": "^5.0.0",
     "rxjs": "~6.6.0",
