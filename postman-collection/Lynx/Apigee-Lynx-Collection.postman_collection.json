@@ -1,0 +1,568 @@
+{
+	"info": {
+		"_postman_id": "a91da82b-b49d-4976-894e-343e74f9a604",
+		"name": "Apigee-Lynx-Connectivity-Test-Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5879365"
+	},
+	"item": [
+		{
+			"name": "Apigee Token Generation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"var accessToken = jsonData.access_token;\r",
+							"pm.collectionVariables.set(\"token\", accessToken);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{secret}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{apikey}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://{{env}}/lynx/token",
+					"protocol": "https",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"lynx",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Apigee Funds Settlements (API 02 - Fund Settlement Instruction List)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 (FI) or 403 (Non-FI) or 503 (When Service is in Adhoc State)\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,403,503]);\r",
+							"});\r",
+							"\r",
+							"if (pm.response.code === 403) {\r",
+							"    pm.test(\"Check the Response Body for HTTP Status Code 403\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('\"code\":403');\r",
+							"});\r",
+							"}\r",
+							"\r",
+							"if (pm.response.code === 503) {\r",
+							"    pm.test(\"Check the Response Body for HTTP Status Code 503\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('\"code\":503');\r",
+							"});\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Accept",
+						"value": "application/payments.api.article+json;version=1.0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{env}}/lynx/funds-settlements",
+					"protocol": "https",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"lynx",
+						"funds-settlements"
+					],
+					"query": [
+						{
+							"key": "beneficiary-bank-bic",
+							"value": "AAQAQAQAQAQAQAQAQAQAQ",
+							"disabled": true
+						},
+						{
+							"key": "agreement-number-lom",
+							"value": "1000",
+							"disabled": true
+						},
+						{
+							"key": "priority",
+							"value": "1000",
+							"disabled": true
+						},
+						{
+							"key": "pcrn",
+							"value": "ABCD1234567",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Apigee Fund Settlement Detail (API 03 - Fund Settlement Instruction Detail)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 (FI) or 403 (Non-FI) or 503 (When Service is in Adhoc State)\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,403,503]);\r",
+							"});\r",
+							"\r",
+							"if (pm.response.code === 403) {\r",
+							"    pm.test(\"Check the Response Body for HTTP Status Code 403\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('\"code\":403');\r",
+							"});\r",
+							"}\r",
+							"\r",
+							"if (pm.response.code === 503) {\r",
+							"    pm.test(\"Check the Response Body for HTTP Status Code 503\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('\"code\":503');\r",
+							"});\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Accept",
+						"value": "application/payments.api.article+json;version=1.0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{env}}/lynx/fund-settlement-detail",
+					"protocol": "https",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"lynx",
+						"fund-settlement-detail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Apigee Fund Settlement Detail - Originator Ref Number (API 03 - Fund Settlement Instruction Detail)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 (FI) or 403 (Non-FI) or 503 (When Service is in Adhoc State)\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,403,503]);\r",
+							"});\r",
+							"\r",
+							"if (pm.response.code === 403) {\r",
+							"    pm.test(\"Check the Response Body for HTTP Status Code 403\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('\"code\":403');\r",
+							"});\r",
+							"}\r",
+							"\r",
+							"if (pm.response.code === 503) {\r",
+							"    pm.test(\"Check the Response Body for HTTP Status Code 503\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('\"code\":503');\r",
+							"});\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Accept",
+						"value": "application/payments.api.article+json;version=1.0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{env}}/lynx/fund-settlement-detail/orf/:{originator-ref-number}",
+					"protocol": "https",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"lynx",
+						"fund-settlement-detail",
+						"orf",
+						":{originator-ref-number}"
+					],
+					"variable": [
+						{
+							"key": "{originator-ref-number}",
+							"value": "Testing12345678"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Apigee Account Transfer (API 04: Intra Account Transfer List)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 (FI) or 403 (Non-FI) or 503 (When Service is in Adhoc State)\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,403,503]);\r",
+							"});\r",
+							"\r",
+							"if (pm.response.code === 403) {\r",
+							"    pm.test(\"Check the Response Body for HTTP Status Code 403\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('\"code\":403');\r",
+							"});\r",
+							"}\r",
+							"\r",
+							"if (pm.response.code === 503) {\r",
+							"    pm.test(\"Check the Response Body for HTTP Status Code 503\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('\"code\":503');\r",
+							"});\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/payments.api.article+json;version=1.0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{env}}/lynx/account-transfers",
+					"protocol": "https",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"lynx",
+						"account-transfers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Apigee Settlement Stats (API 06: Consolidated Settlement Statistics)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 (FI) or 403 (Non-FI) or 503 (When Service is in Adhoc State)\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,403,503]);\r",
+							"});\r",
+							"\r",
+							"if (pm.response.code === 403) {\r",
+							"    pm.test(\"Check the Response Body for HTTP Status Code 403\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('\"code\":403');\r",
+							"});\r",
+							"}\r",
+							"\r",
+							"if (pm.response.code === 503) {\r",
+							"    pm.test(\"Check the Response Body for HTTP Status Code 503\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('\"code\":503');\r",
+							"});\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Accept",
+						"value": "application/payments.api.article+json;version=1.0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{env}}/lynx/settlement-stats",
+					"protocol": "https",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"lynx",
+						"settlement-stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Apigee Dashboard Participant View (API 07: Dashboard Data Snapshot)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 (FI) or 403 (Non-FI) or 503 (When Service is in Adhoc State)\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,403,503]);\r",
+							"});\r",
+							"\r",
+							"if (pm.response.code === 403) {\r",
+							"    pm.test(\"Check the Response Body for HTTP Status Code 403\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('\"code\":403');\r",
+							"});\r",
+							"}\r",
+							"\r",
+							"if (pm.response.code === 503) {\r",
+							"    pm.test(\"Check the Response Body for HTTP Status Code 503\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('\"code\":503');\r",
+							"});\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/payments.api.article+json;version=1.0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{env}}/lynx/dashboard/participant-view",
+					"protocol": "https",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"lynx",
+						"dashboard",
+						"participant-view"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Apigee Dashboard Participants  (API 07: Dashboard Data Snapshot)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 (Non-FI) or 403 (FI) or 503 (When Service is in Adhoc State)\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,403,503]);\r",
+							"});\r",
+							"\r",
+							"if (pm.response.code === 403) {\r",
+							"    pm.test(\"Check the Response Body for HTTP Status Code 403\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('\"code\":403');\r",
+							"});\r",
+							"}\r",
+							"\r",
+							"if (pm.response.code === 503) {\r",
+							"    pm.test(\"Check the Response Body for HTTP Status Code 503\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('\"code\":503');\r",
+							"});\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Accept",
+						"value": "application/payments.api.article+json;version=1.0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{env}}/lynx/dashboard/participants",
+					"protocol": "https",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"lynx",
+						"dashboard",
+						"participants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Apigee Recon (API 13: Reconciliation data for settled transactions)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400 or 503\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([400,503]);\r",
+							"});\r",
+							"\r",
+							"if (pm.response.code === 400) {\r",
+							"    pm.test(\"Check the Response Body for HTTP Status Code 400\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('\"code\":400');\r",
+							"});\r",
+							"}\r",
+							"\r",
+							"if (pm.response.code === 503) {\r",
+							"    pm.test(\"Check the Response Body for HTTP Status Code 503\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('\"code\":503');\r",
+							"});\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Accept",
+						"value": "application/payments.api.article+json;version=1.0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{env}}/lynx/recon",
+					"protocol": "https",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"lynx",
+						"recon"
+					],
+					"query": [
+						{
+							"key": "participant-fi-bic",
+							"value": "PTSAZAEE002",
+							"disabled": true
+						},
+						{
+							"key": "account-number",
+							"value": "111",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
