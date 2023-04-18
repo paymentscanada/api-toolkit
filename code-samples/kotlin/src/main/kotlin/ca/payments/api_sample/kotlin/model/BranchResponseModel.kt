@@ -3,7 +3,7 @@ package ca.payments.api_sample.kotlin.model
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-class BranchResponseModel(
+data class BranchResponseModel(
     val branchClassification: String?,
     val branchDomicile: String?,
     val civicAddress: String?,

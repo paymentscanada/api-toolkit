@@ -1,13 +1,11 @@
-val okhttp_version: String by project
-val retrofit_version: String by project
-val coroutines_version: String by project
+val openfeign_version: String by project
 val jackson_version: String by project
 val slf4j_version: String by project
 val logback_version: String by project
 
 
 plugins {
-    kotlin("jvm") version "1.3.61"
+    kotlin("jvm") version "1.8.10"
     application
 }
 
@@ -18,27 +16,23 @@ repositories {
     mavenCentral()
 }
 
-application {
-    mainClassName = "ca.payments.api_sample.kotlin.MainKt"
-}
-
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
-    implementation("com.squareup.okhttp3:okhttp:$okhttp_version")
-    implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
-    implementation("com.squareup.retrofit2:converter-jackson:$retrofit_version")
+
+    implementation("io.github.openfeign:feign-kotlin:$openfeign_version")
+    implementation("io.github.openfeign:feign-okhttp:$openfeign_version")
+    implementation("io.github.openfeign:feign-slf4j:$openfeign_version")
+    implementation("io.github.openfeign:feign-jackson:$openfeign_version")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jackson_version")
-    implementation("org.slf4j:slf4j-api:$slf4j_version")
+
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("ch.qos.logback:logback-core:$logback_version")
 }
 
-tasks {
-    compileKotlin {
-        kotlinOptions.jvmTarget = "1.8"
-    }
-    compileTestKotlin {
-        kotlinOptions.jvmTarget = "1.8"
-    }
+kotlin {
+    jvmToolchain(11)
+}
+
+application {
+    mainClass.set("ca.payments.api_sample.kotlin.MainKt")
 }
