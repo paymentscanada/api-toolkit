@@ -1,7 +1,7 @@
-const client = require('./rest-client');
-const config = require('./config');
+import client from './rest-client.js';
+import config from './config.js';
 
-module.exports = {
+const extract = {
     getMaster: () => {
         const promise = Promise.resolve();
 
@@ -26,3 +26,4 @@ module.exports = {
 }
 
 
+export default extract;

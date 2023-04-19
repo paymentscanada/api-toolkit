@@ -1,5 +1,5 @@
-const config = require('./config');
-const fetch = require('node-fetch');
+import config from './config.js';
+import fetch from 'node-fetch';
 
 const restClient = {
     getToken: (keys) => {
@@ -55,4 +55,4 @@ const restClient = {
     }
 };
 
-module.exports = restClient;
+export default restClient;

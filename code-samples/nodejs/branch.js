@@ -1,7 +1,7 @@
-const client = require('./rest-client');
-const config = require('./config');
+import client from './rest-client.js';
+import config from './config.js';
 
-module.exports = {
+const branch = {
     getBranches: (dprn) => {
         const promise = Promise.resolve();
 
@@ -24,3 +24,5 @@ module.exports = {
             });
     }
 }
+
+export default branch;
