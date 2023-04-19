@@ -8,9 +8,5 @@ FIF Branch Sandbox Samples
 * [nodejs](nodejs): Sample nodejs based application that connects to the Payments Canada API and gets a sandbox branch.
 
 
-Payments Rail Samples
-* [payments-rail-angular](payments-rail-angular): This is a sample angular application that connects to the Payments Canada API and retrieves the data from the fictionalized payments rail APIs.
-
-
 ## License
 The Payments Canada API Samples are released under the MIT License.
