@@ -2,6 +2,7 @@
   "name": "nodejs-api-sample",
   "version": "1.0.0",
   "description": "Payments Canada Branch API sample for NodeJS",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -9,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-fetch": "^2.6.1",
-    "yargs": "^17.0.1"
+    "node-fetch": "^3.3.1",
+    "yargs": "^17.7.1"
   }
 }

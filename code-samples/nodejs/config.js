@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
     branchKeys: {
         apiConsumerKey: 'REPLACE_WITH_CONSUMER_KEY',
         apiConsumerSecret: 'REPLACE_WITH_CONSUMER_SECRET',
@@ -9,3 +9,5 @@ module.exports = {
     },
     apiBaseUrl: 'https://api.payments.ca',
 };
+
+export default config;

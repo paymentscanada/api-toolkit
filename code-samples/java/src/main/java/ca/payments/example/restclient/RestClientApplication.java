@@ -14,6 +14,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
+import java.util.Optional;
 
 import static java.lang.System.exit;
 
@@ -49,10 +50,10 @@ public class RestClientApplication implements CommandLineRunner {
 		RestTemplate restTemplate = new RestTemplate();
 
 		//call the bearer token method and generate a bearer token
-		String bearer = getBearerToken(restTemplate);
+		Optional<String> bearer = getBearerToken(restTemplate);
 
 		//call API and print out API details
-		printBranchDetails(restTemplate, bearer);
+		bearer.ifPresent(b -> printBranchDetails(restTemplate, b));
 	}
 
 	/**
@@ -86,7 +87,7 @@ public class RestClientApplication implements CommandLineRunner {
 	 * @param restTemplate Spring RestTemplate to facilitate making REST calls to the APIs
 	 * @return a String that represents the bearer token
 	 */
-	public String getBearerToken(RestTemplate restTemplate){
+	public Optional<String> getBearerToken(RestTemplate restTemplate){
 		//base URL for the access token URL
 		String gateway_auth_url = "https://api.payments.ca/accesstoken";
 
@@ -107,8 +108,9 @@ public class RestClientApplication implements CommandLineRunner {
 		//make the POST to get the object which contains the access token
 		ResponseEntity<AccessTokenModel> respEntity = restTemplate.exchange(gateway_auth_url, HttpMethod.POST, entity, AccessTokenModel.class);
 
-		log.info("Bearer token: " + respEntity.toString());
-		return respEntity.getBody().getAccessToken();
+		log.info("Bearer token: " + respEntity);
+		return Optional.ofNullable(respEntity.getBody())
+				.map(AccessTokenModel::getAccessToken);
 	}
 
 }
