@@ -1,0 +1,603 @@
+# RTR C&S ISO 20022 JSON Schema BankToCustomerAccountReportV08 (camt.052.001.08)
+components:
+  schemas:
+    AccountIdentification4Choice__1:
+      type: object
+      description: Specifies the unique identification of an account as assigned by the account servicer.
+      additionalProperties: true
+      properties:
+        other:
+          description: 'Unique identification of an account, as assigned by the account servicer, using an identification scheme.'
+          $ref: '#/components/schemas/GenericAccountIdentification1__1'
+      required:
+        - other
+    AccountReport25__1:
+      type: object
+      description: Provides further details of the account report.
+      additionalProperties: false
+      properties:
+        identification:
+          description: 'Unique identification, as assigned by the account servicer, to unambiguously identify the account report.'
+          type: string
+          minLength: 1
+          maxLength: 35
+        from_to_date:
+          description: Range of time between a start date and an end date for which the account report is issued.
+          $ref: '#/components/schemas/DateTimePeriod1'
+        account:
+          description: Unambiguous identification of the account to which credit and debit entries are made.
+          $ref: '#/components/schemas/CashAccount39__1'
+        balance:
+          type: array
+          description: Set of elements used to define the balance as a numerical representation of the net increases and decreases in an account at a specific point in time.
+          items:
+            $ref: '#/components/schemas/CashBalance8__1'
+        transactions_summary:
+          description: Provides summary information on entries.
+          $ref: '#/components/schemas/TotalTransactions6__1'
+        entry:
+          type: array
+          description: 'Specifies an entry in the report. Usage: At least one reference must be provided to identify the entry and its underlying transaction(s).  Usage Rule: In case of a Payments R-transaction the creditor / debtor referenced of the original payment initiation messages is also used for reporting of the R-transaction. The original debtor/creditor in the reporting of R-Transactions is not inverted.  Following elements all defined in the TransactionDetails in RelatedParties or RelatedAgents are impacted by this usage rule: Creditor, UltimateCreditor, CreditorAccount, CreditorAgent, Debtor, UltimateDebtor, DebtorAccount and DebtorAgent. '
+          items:
+            $ref: '#/components/schemas/ReportEntry10__1'
+      required:
+        - identification
+        - from_to_date
+        - account
+    ActiveOrHistoricCurrencyAndAmount:
+      type: object
+      description: A number of monetary units specified in an active or a historic currency where the unit of currency is explicit and compliant with ISO 4217.
+      additionalProperties: false
+      properties:
+        currency:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode'
+        amount:
+          type: number
+          minimum: 0
+      required:
+        - currency
+        - amount
+    ActiveOrHistoricCurrencyCode:
+      type: string
+      pattern: '^[A-Z]{3,3}$'
+      description: 'A code allocated to a currency by a Maintenance Agency under an international identification scheme, as described in the latest edition of the international standard ISO 4217 "Codes for the representation of currencies and funds".'
+    BalanceType10Choice__1:
+      type: object
+      description: Specifies the balance type.
+      additionalProperties: true
+      properties:
+        proprietary:
+          description: 'Balance type, in a proprietary format.'
+          type: string
+          minLength: 1
+          maxLength: 35
+      required:
+        - proprietary
+    BalanceType13__1:
+      type: object
+      description: Set of elements used to define the balance type and sub-type.
+      additionalProperties: false
+      properties:
+        code_or_proprietary:
+          description: Coded or proprietary format balance type.
+          $ref: '#/components/schemas/BalanceType10Choice__1'
+      required:
+        - code_or_proprietary
+    BankToCustomerAccountReportV08:
+      type: object
+      description: "Scope\r\nThe BankToCustomerAccountReport message is sent by the account servicer to an account owner or to a party authorised by the account owner to receive the message. It can be used to inform the account owner, or authorised party, of the entries reported to the account, and/or to provide the owner with balance information on the account at a given point in time.\r\nUsage\r\nThe BankToCustomerAccountReport message can contain reports for more than one account. It provides information for cash management and/or reconciliation. It can be used to:\r\n- report pending and booked items;\r\n- provide balance information.\r\nIt can include underlying details of transactions that have been included in the entry.\r\nIt is possible that the receiver of the message is not the account owner, but a party entitled by the account owner to receive the account information (also known as recipient).\r\nFor a statement, the Bank-to-Customer Account Statement message should be used."
+      additionalProperties: false
+      properties:
+        group_header:
+          description: Common information for the message.
+          $ref: '#/components/schemas/GroupHeader81__1'
+        report:
+          type: array
+          description: Reports on a cash account.
+          items:
+            $ref: '#/components/schemas/AccountReport25__1'
+      required:
+        - group_header
+        - report
+    BankTransactionCodeStructure4__1:
+      type: object
+      description: Set of elements used to identify the type or operations code of a transaction entry.
+      additionalProperties: false
+      properties:
+        proprietary:
+          description: 'Bank transaction code in a proprietary form, as defined by the issuer.'
+          $ref: '#/components/schemas/ProprietaryBankTransactionCodeStructure1__1'
+      required:
+        - proprietary
+    BranchAndFinancialInstitutionIdentification6__1:
+      type: object
+      description: Unique and unambiguous identification of a financial institution or a branch of a financial institution.
+      additionalProperties: false
+      properties:
+        financial_institution_identification:
+          description: 'Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme.'
+          $ref: '#/components/schemas/FinancialInstitutionIdentification18__1'
+      required:
+        - financial_institution_identification
+    BranchAndFinancialInstitutionIdentification6__2:
+      type: object
+      description: Unique and unambiguous identification of a financial institution or a branch of a financial institution.
+      additionalProperties: false
+      properties:
+        financial_institution_identification:
+          description: 'Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme.'
+          $ref: '#/components/schemas/FinancialInstitutionIdentification18__2'
+      required:
+        - financial_institution_identification
+    BranchAndFinancialInstitutionIdentification6__3:
+      type: object
+      description: Unique and unambiguous identification of a financial institution or a branch of a financial institution.
+      additionalProperties: false
+      properties:
+        financial_institution_identification:
+          description: 'Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme.'
+          $ref: '#/components/schemas/FinancialInstitutionIdentification18__3'
+      required:
+        - financial_institution_identification
+    CashAccount39__1:
+      type: object
+      description: Provides the details to identify an account.
+      additionalProperties: false
+      properties:
+        identification:
+          description: Unique and unambiguous identification for the account between the account owner and the account servicer.
+          $ref: '#/components/schemas/AccountIdentification4Choice__1'
+        name:
+          description: "Name of the account, as assigned by the account servicing institution, in agreement with the account owner in order to provide an additional means of identification of the account.  Usage: The account name is different from the account owner name. The account name is used in certain user communities to provide a means of identifying the account, in addition to the account owner's identity and the account number."
+          type: string
+          minLength: 1
+          maxLength: 70          
+        servicer:
+          description: 'Party that manages the account on behalf of the account owner, that is manages the registration and booking of entries on the account, calculates balances on the account and provides information about the account.'
+          $ref: '#/components/schemas/BranchAndFinancialInstitutionIdentification6__1'
+      required:
+        - identification
+    CashBalance8__1:
+      type: object
+      description: Set of elements used to define the balance details.
+      additionalProperties: false
+      properties:
+        type:
+          description: Specifies the nature of a balance.
+          $ref: '#/components/schemas/BalanceType13__1'
+        amount:
+          description: Amount of money of the cash balance.
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyAndAmount'
+        credit_debit_indicator:
+          description: 'Indicates whether the balance is a credit or a debit balance.  Usage: A zero balance is considered to be a credit balance.'
+          $ref: '#/components/schemas/CreditDebitCode'
+        date:
+          description: Indicates the date (and time) of the balance.
+          $ref: '#/components/schemas/DateAndDateTime2Choice__1'
+      required:
+        - type
+        - amount
+        - credit_debit_indicator
+        - date
+    ClearingSystemMemberIdentification2__1:
+      type: object
+      description: 'Unique identification, as assigned by a clearing system, to unambiguously identify a member of the clearing system.'
+      additionalProperties: false
+      properties:
+        member_identification:
+          description: Identification of a member of a clearing system.
+          type: string
+          minLength: 1
+          maxLength: 35
+      required:
+        - member_identification
+    CreditDebitCode:
+      type: string
+      description: |-
+        Specifies if an operation is an increase or a decrease.
+        *`CRDT`-Operation is an increase.
+        *`DBIT`-Operation is a decrease.
+      enum:
+        - CRDT
+        - DBIT
+    DateAndDateTime2Choice__1:
+      type: object
+      description: Choice between a date or a date and time format.
+      additionalProperties: true
+      properties:
+        date_time:
+          description: Specified date and time.
+          $ref: "common.yaml#/components/schemas/ISODateTime"
+      required:
+        - date_time
+    DateTimePeriod1:
+      type: object
+      description: 'Time span defined by a start date and time, and an end date and time.'
+      additionalProperties: false
+      properties:
+        from_date_time:
+          description: Date and time at which the period starts.
+          $ref: "common.yaml#/components/schemas/ISODateTime"
+        to_date_time:
+          description: Date and time at which the period ends.
+          $ref: "common.yaml#/components/schemas/ISODateTime"
+      required:
+        - from_date_time
+        - to_date_time
+    DecimalNumber:
+      type: string
+      description: 'Number of objects represented as a decimal number, for example 0.75 or 45.6.'
+      maxLength: 19
+    EntryDetails9__1:
+      type: object
+      description: Identifies the underlying transaction(s) and/or batched entries.
+      additionalProperties: false
+      properties:
+        transaction_details:
+          description: Provides information on the underlying transaction(s).
+          $ref: '#/components/schemas/EntryTransaction10__1'
+      required:
+        - transaction_details
+    EntryStatus1Choice__1:
+      type: object
+      description: Specifies the status of an entry on the books of the account servicer.
+      additionalProperties: true
+      properties:
+        proprietary:
+          description: 'Entry status, in a proprietary form.'
+          type: string
+          minLength: 1
+          maxLength: 35
+      required:
+        - proprietary
+    EntryTransaction10__1:
+      type: object
+      description: Identifies the underlying transaction.
+      additionalProperties: false
+      properties:
+        references:
+          description: Provides the identification of the underlying transaction.
+          $ref: '#/components/schemas/TransactionReferences6__1'
+        related_parties:
+          description: Set of elements used to identify the parties related to the underlying transaction.
+          $ref: '#/components/schemas/TransactionParties6__1'
+        related_agents:
+          description: Set of elements used to identify the agents related to the underlying transaction.
+          $ref: '#/components/schemas/TransactionAgents5__1'
+        related_dates:
+          description: Set of elements used to identify the dates related to the underlying transactions.
+          $ref: '#/components/schemas/TransactionDates3__1'
+        additional_transaction_information:
+          description: Further details of the transaction.
+          type: string
+          minLength: 1
+          maxLength: 500
+      required:
+        - references
+    FinancialInstitutionIdentification18__1:
+      type: object
+      description: Specifies the details to identify a financial institution.
+      additionalProperties: false
+      properties:
+        clearing_system_member_identification:
+          description: Information used to identify a member within a clearing system.
+          $ref: '#/components/schemas/ClearingSystemMemberIdentification2__1'
+        name:
+          description: Name by which an agent is known and which is usually used to identify that agent.
+          type: string
+          minLength: 1
+          maxLength: 140
+      required:
+        - clearing_system_member_identification
+        - name
+    FinancialInstitutionIdentification18__2:
+      type: object
+      description: Specifies the details to identify a financial institution.
+      additionalProperties: false
+      properties:
+        clearing_system_member_identification:
+          description: Information used to identify a member within a clearing system.
+          $ref: '#/components/schemas/ClearingSystemMemberIdentification2__1'
+        name:
+          description: Name by which an agent is known and which is usually used to identify that agent.
+          type: string
+          minLength: 1
+          maxLength: 140
+      required:
+        - clearing_system_member_identification
+    FinancialInstitutionIdentification18__3:
+      type: object
+      description: Specifies the details to identify a financial institution.
+      additionalProperties: false
+      properties:
+        clearing_system_member_identification:
+          description: Information used to identify a member within a clearing system.
+          $ref: '#/components/schemas/ClearingSystemMemberIdentification2__1'
+        name:
+          description: Name by which an agent is known and which is usually used to identify that agent.
+          type: string
+          minLength: 1
+          maxLength: 140
+    GenericAccountIdentification1__1:
+      type: object
+      description: Information related to a generic account identification.
+      additionalProperties: false
+      properties:
+        identification:
+          description: Identification assigned by an institution.
+          type: string
+          minLength: 1
+          maxLength: 34
+      required:
+        - identification
+    GenericOrganisationIdentification1__1:
+      type: object
+      description: Information related to an identification of an organisation.
+      additionalProperties: false
+      properties:
+        identification:
+          description: Identification assigned by an institution.
+          type: string
+          minLength: 1
+          maxLength: 35
+      required:
+        - identification
+    GroupHeader81__1:
+      type: object
+      description: Provides further details on the message.
+      additionalProperties: false
+      properties:
+        message_identification:
+          description: 'Point to point reference, as assigned by the account servicing institution, and sent to the account owner or the party authorised to receive the message, to unambiguously identify the message. Usage: The account servicing institution has to make sure that MessageIdentification is unique per account owner for a pre-agreed period.'
+          type: string
+          minLength: 1
+          maxLength: 35
+        creation_date_time:
+          description: Date and time at which the message was created.
+          $ref: "common.yaml#/components/schemas/ISODateTime"
+      required:
+        - message_identification
+        - creation_date_time
+    NumberAndSumOfTransactions1__1:
+      type: object
+      description: Set of elements providing the total sum of entries.
+      additionalProperties: false
+      properties:
+        number_of_entries:
+          description: Number of individual entries included in the report.
+          type: string
+          pattern: '^[0-9]{1,15}$'
+        sum:
+          description: Total of all individual entries included in the report.
+          $ref: '#/components/schemas/DecimalNumber'
+      required:
+        - number_of_entries
+        - sum
+    NumberAndSumOfTransactions4__1:
+      type: object
+      description: Set of elements providing the total sum of entries.
+      additionalProperties: false
+      properties:
+        number_of_entries:
+          description: Number of individual entries included in the report.
+          type: string
+          pattern: '^[0-9]{1,15}$'
+      required:
+        - number_of_entries
+    OrganisationIdentification29__1:
+      type: object
+      description: Unique and unambiguous way to identify an organisation.
+      additionalProperties: false
+      properties:
+        other:
+          description: 'Unique identification of an organisation, as assigned by an institution, using an identification scheme.'
+          $ref: '#/components/schemas/GenericOrganisationIdentification1__1'
+      required:
+        - other
+    Party38Choice__1:
+      type: object
+      description: Nature or use of the account.
+      additionalProperties: true
+      properties:
+        organisation_identification:
+          description: Unique and unambiguous way to identify an organisation.
+          $ref: '#/components/schemas/OrganisationIdentification29__1'
+      required:
+        - organisation_identification
+    Party40Choice__1:
+      type: object
+      description: 'Identification of a person, an organisation or a financial institution.'
+      additionalProperties: true
+      properties:
+        party:
+          description: Identification of a person or an organisation.
+          $ref: '#/components/schemas/PartyIdentification135__1'
+      required:
+        - party
+    PartyIdentification135__1:
+      type: object
+      description: Specifies the identification of a person or an organisation.
+      additionalProperties: false
+      properties:
+        identification:
+          description: Unique and unambiguous identification of a party.
+          $ref: '#/components/schemas/Party38Choice__1'
+      required:
+        - identification
+    ProprietaryAgent4__1:
+      type: object
+      description: Identifies a proprietary party.
+      additionalProperties: false
+      properties:
+        type:
+          description: Specifies the type of proprietary agent.
+          type: string
+          minLength: 1
+          maxLength: 35
+        agent:
+          description: Organisation established primarily to provide financial services.
+          $ref: '#/components/schemas/BranchAndFinancialInstitutionIdentification6__3'
+      required:
+        - type
+        - agent
+    ProprietaryBankTransactionCodeStructure1__1:
+      type: object
+      description: Set of elements to fully identify a proprietary bank transaction code.
+      additionalProperties: false
+      properties:
+        code:
+          description: Proprietary bank transaction code to identify the underlying transaction.
+          $ref: '#/components/schemas/Max35Text'
+      required:
+        - code
+    ProprietaryDate3__1:
+      type: object
+      description: Set of elements used to identify a proprietary date.
+      additionalProperties: false
+      properties:
+        type:
+          description: Specifies the type of date.
+          type: string
+          minLength: 1
+          maxLength: 35
+        date:
+          description: Date in ISO format.
+          $ref: '#/components/schemas/DateAndDateTime2Choice__1'
+      required:
+        - type
+        - date
+    ProprietaryParty5__1:
+      type: object
+      description: Identifies a proprietary party.
+      additionalProperties: false
+      properties:
+        type:
+          description: Specifies the type of proprietary party.
+          type: string
+          enum:
+            - Exchange
+        party:
+          description: Proprietary party.
+          $ref: '#/components/schemas/Party40Choice__1'
+      required:
+        - type
+        - party
+    ProprietaryReference1:
+      type: object
+      description: Set of elements to identify a proprietary reference.
+      additionalProperties: false
+      properties:
+        type:
+          description: Identifies the type of reference reported.
+          type: string
+          minLength: 1
+          maxLength: 35
+        reference:
+          description: Proprietary reference specification related to the underlying transaction.
+          type: string
+          minLength: 1
+          maxLength: 35
+      required:
+        - type
+        - reference
+    ReportEntry10__1:
+      type: object
+      description: Provides further details on an entry in the report.
+      additionalProperties: false
+      properties:
+        amount:
+          description: Amount of money in the cash entry.
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyAndAmount'
+        credit_debit_indicator:
+          description: Indicates whether the entry is a credit or a debit entry.
+          $ref: '#/components/schemas/CreditDebitCode'
+        status:
+          description: Status of an entry on the books of the account servicer.
+          $ref: '#/components/schemas/EntryStatus1Choice__1'
+        value_date:
+          description: 'Date and time at which assets become available to the account owner in case of a credit entry, or cease to be available to the account owner in case of a debit entry. Usage: If entry status is pending and value date is present, then the value date refers to an expected/requested value date. For entries subject to availability/float and for which availability information is provided, the value date must not be used. In this case the availability component identifies the number of availability days.'
+          $ref: '#/components/schemas/DateAndDateTime2Choice__1'
+        bank_transaction_code:
+          description: Set of elements used to fully identify the type of underlying transaction resulting in an entry.
+          $ref: '#/components/schemas/BankTransactionCodeStructure4__1'
+        entry_details:
+          description: Provides details on the entry.
+          $ref: '#/components/schemas/EntryDetails9__1'
+      required:
+        - amount
+        - credit_debit_indicator
+        - status
+        - bank_transaction_code
+    TotalTransactions6__1:
+      type: object
+      description: Set of elements used to provide summary information on entries.
+      additionalProperties: false
+      properties:
+        total_entries:
+          description: Specifies the total number and sum of debit and credit entries.
+          $ref: '#/components/schemas/NumberAndSumOfTransactions4__1'
+        total_credit_entries:
+          description: Specifies the total number and sum of credit entries.
+          $ref: '#/components/schemas/NumberAndSumOfTransactions1__1'
+        total_debit_entries:
+          description: Specifies the total number and sum of debit entries.
+          $ref: '#/components/schemas/NumberAndSumOfTransactions1__1'
+      required:
+        - total_entries
+        - total_credit_entries
+        - total_debit_entries
+    TransactionAgents5__1:
+      type: object
+      description: Provides further details on the agents specific to the individual transaction.
+      additionalProperties: false
+      properties:
+        debtor_agent:
+          description: Financial institution servicing an account for the debtor.
+          $ref: '#/components/schemas/BranchAndFinancialInstitutionIdentification6__2'
+        creditor_agent:
+          description: Financial institution servicing an account for the creditor.
+          $ref: '#/components/schemas/BranchAndFinancialInstitutionIdentification6__2'
+        proprietary:
+          type: array
+          maxItems: 2
+          description: Proprietary agent related to the underlying transaction.
+          items:
+            $ref: '#/components/schemas/ProprietaryAgent4__1'
+    TransactionDates3__1:
+      type: object
+      description: Set of elements used to provide information on the dates related to the underlying individual transaction.
+      additionalProperties: false
+      properties:
+        proprietary:
+          description: Proprietary date related to the underlying transaction.
+          $ref: '#/components/schemas/ProprietaryDate3__1'
+      required:
+        - proprietary
+    TransactionParties6__1:
+      type: object
+      description: Provides further details on the parties specific to the individual transaction.
+      additionalProperties: false
+      properties:
+        proprietary:
+          description: Proprietary party related to the underlying transaction.
+          $ref: '#/components/schemas/ProprietaryParty5__1'
+      required:
+        - proprietary
+    TransactionReferences6__1:
+      type: object
+      description: Identifies the underlying transaction.
+      additionalProperties: false
+      properties:
+        uetr:
+          description: Universally unique identifier to provide an end-to-end reference of a payment transaction.
+          $ref: "common.yaml#/components/schemas/UUIDv4Identifier"
+        clearing_system_reference:
+          description: 'Unique reference, as assigned by a clearing system, to unambiguously identify the instruction. Usage: In case there are technical limitations to pass on multiple references, the end-to-end identification must be passed on throughout the entire end-to-end chain.'
+          type: string
+          minLength: 1
+          maxLength: 35
+        proprietary:
+          description: Proprietary reference related to the underlying transaction.
+          $ref: '#/components/schemas/ProprietaryReference1'
+      required:
+        - proprietary

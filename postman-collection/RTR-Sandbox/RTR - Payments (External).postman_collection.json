@@ -1,0 +1,463 @@
+{
+	"info": {
+		"_postman_id": "930c29a8-9408-4cef-85b8-a3a9cdad3519",
+		"name": "RTR - Payments (External)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15735376",
+		"_collection_link": "https://paymentscanada.postman.co/workspace/RTR-Sandbox~64abf577-0e87-40c4-9c7f-193781ed6f9e/collection/5879365-930c29a8-9408-4cef-85b8-a3a9cdad3519?action=share&source=collection_link&creator=15735376"
+	},
+	"item": [
+		{
+			"name": "Token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.payments.ca/accesstoken",
+					"protocol": "https",
+					"host": [
+						"api",
+						"payments",
+						"ca"
+					],
+					"path": [
+						"accesstoken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Payment",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require('moment');",
+							"pm.environment.set(\"CurrentDateTime\", moment.utc().toJSON());"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"business_application_header\": {\n        \"from\": {\n                \"financial_institution_identification\": {\n                        \"financial_institution_identification\": {\n                                \"clearing_system_member_identification\": {\n                                        \"member_identification\": \"111\"\n                                }\n                        }\n                }\n        },\n        \"to\": {\n                \"organisation_identification\": {\n                        \"identification\": {\n                                \"organisation_identification\": {\n                                        \"other\": {\n                                                \"identification\": \"RTR\"\n                                        }\n                                }\n                        }\n                }\n        },\n        \"business_message_identifier\": \"12345678900001\",\n        \"message_definition_identifier\": \"pacs.008.001.08\",\n        \"creation_date\": \"2025-05-06T09:30:47.999Z\"\n    },\n    \"fi_to_fi_customer_credit_transfer\": {\n        \"group_header\": {\n                \"message_identification\": \"12345678900001\",\n                \"creation_date_time\": \"2025-05-06T09:30:47.999Z\",\n                \"number_of_transactions\": \"1\",\n                \"settlement_information\": {\n                        \"settlement_method\": \"CLRG\",\n                        \"clearing_system\": {\n                                \"code\": \"RTR\"\n                        }\n                }\n        },\n        \"credit_transfer_transaction_information\": {\n            \"payment_identification\": {\n                    \"end_to_end_identification\": \"1234567890111\",\n                    \"uetr\": \"eb6305c9-1f7f-49de-aed0-16487c27b41d\"\n            },\n            \"payment_type_information\": {\n                    \"local_instrument\": {\n                            \"proprietary\": \"RTREXCHANGE\"\n                    }\n            },\n            \"interbank_settlement_amount\": {\n                    \"currency\": \"CAD\",\n                    \"amount\": 100\n            },\n            \"interbank_settlement_date\": \"2025-05-06\",\n            \"charge_bearer\": \"SLEV\",\n            \"instructing_agent\": {\n                    \"financial_institution_identification\": {\n                            \"clearing_system_member_identification\": {\n                                    \"member_identification\": \"111\"\n                            }\n                    }\n            },\n            \"instructed_agent\": {\n                    \"financial_institution_identification\": {\n                            \"clearing_system_member_identification\": {\n                                    \"member_identification\": \"999\"\n                            }\n                    }\n            },\n            \"debtor\": {\n                    \"name\": \"Mr. Zhang\"\n            },\n            \"debtor_account\": {\n                    \"identification\": {\n                            \"other\": {\n                                    \"identification\": \"12345-123456\"\n                            }\n                    }\n            },\n            \"debtor_agent\": {\n                    \"financial_institution_identification\": {\n                            \"clearing_system_member_identification\": {\n                                    \"member_identification\": \"111\"\n                            }\n                    }\n            },\n            \"creditor_agent\": {\n                    \"financial_institution_identification\": {\n                            \"clearing_system_member_identification\": {\n                                    \"member_identification\": \"999\"\n                            }\n                    }\n            },\n            \"creditor\": {\n                    \"name\": \"Ms. Chloé\"\n            },\n            \"creditor_account\": {\n                    \"identification\": {\n                            \"other\": {\n                                    \"identification\": \"54321-654321\"\n                            }\n                    }\n            }\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.payments.ca/rtr-sandbox/payments",
+					"protocol": "https",
+					"host": [
+						"api",
+						"payments",
+						"ca"
+					],
+					"path": [
+						"rtr-sandbox",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Status (ACSP) - With Instructing and Instructed",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require('moment');",
+							"pm.environment.set(\"CurrentDateTime\", moment.utc().toJSON());"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"business_application_header\": {\n        \"from\": {\n            \"financial_institution_identification\": {\n                \"financial_institution_identification\": {\n                    \"clearing_system_member_identification\": {\n                        \"member_identification\": \"111\"\n                    }\n                }\n            }\n        },\n        \"to\": {\n            \"organisation_identification\": {\n                \"identification\": {\n                    \"organisation_identification\": {\n                        \"other\": {\n                            \"identification\": \"RTR\"\n                        }\n                    }\n                }\n            }\n        },\n        \"business_message_identifier\": \"12345678999990\",\n        \"message_definition_identifier\": \"pacs.028.001.03\",\n        \"creation_date\": \"2025-05-06T09:32:47.999Z\"\n    },\n    \"fi_to_fi_payment_status_request\": {\n        \"group_header\": {\n            \"message_identification\": \"12345678999990\",\n            \"creation_date_time\": \"2025-05-06T09:32:47.999Z\"\n        },\n        \"transaction_information\": {\n            \"original_group_information\": {\n                \"original_message_identification\": \"12345678900001\",\n                \"original_message_name_identification\": \"pacs.008.001.08\"\n            },\n            \"original_end_to_end_identification\": \"1234567890111\",\n            \"original_uetr\": \"eb6305c9-1f7f-49de-aed0-16487c27b41d\",\n            \"instructing_agent\": {\n                \"financial_institution_identification\": {\n                    \"clearing_system_member_identification\": {\n                        \"member_identification\": \"111\"\n                    }\n                }\n            },\n            \"instructed_agent\": {\n                \"financial_institution_identification\": {\n                    \"clearing_system_member_identification\": {\n                        \"member_identification\": \"999\"\n                    }\n                }\n            }\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.payments.ca/rtr-sandbox/payments/status",
+					"protocol": "https",
+					"host": [
+						"api",
+						"payments",
+						"ca"
+					],
+					"path": [
+						"rtr-sandbox",
+						"payments",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Interest Report (ACSP)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require('moment');",
+							"pm.environment.set(\"CurrentDateTime\", moment.utc().toJSON());"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"business_application_header\": {\n        \"from\": {\n            \"financial_institution_identification\": {\n                \"financial_institution_identification\": {\n                    \"clearing_system_member_identification\": {\n                        \"member_identification\": \"001\"\n                    }\n                }\n            }\n        },\n        \"to\": {\n            \"organisation_identification\": {\n                \"identification\": {\n                    \"organisation_identification\": {\n                        \"other\": {\n                            \"identification\": \"RCS\"\n                        }\n                    }\n                }\n            }\n        },\n        \"business_message_identifier\": \"9876543210001\",\n        \"message_definition_identifier\": \"camt.003.001.07\",\n        \"creation_date\": \"2025-05-06T00:00:00.009Z\"\n    },\n    \"get_account\": {\n        \"message_header\": {\n            \"message_identification\": \"9876543210001\",\n            \"creation_date_time\": \"2025-05-06T00:00:00.009Z\"\n        },\n        \"account_query_definition\": {\n            \"account_criteria\": {\n                \"query_name\": \"001_IntRep_20250506001\"\n            }\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.payments.ca/rtr-sandbox/interest-report",
+					"protocol": "https",
+					"host": [
+						"api",
+						"payments",
+						"ca"
+					],
+					"path": [
+						"rtr-sandbox",
+						"interest-report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Balance Report (ACSP) - DSP Balance report: End of Recon Cycle Balance",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require('moment');",
+							"pm.environment.set(\"CurrentDateTime\", moment.utc().toJSON());"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"business_application_header\": {\n        \"from\": {\n            \"financial_institution_identification\": {\n                \"financial_institution_identification\": {\n                    \"clearing_system_member_identification\": {\n                        \"member_identification\": \"001\"\n                    }\n                }\n            }\n        },\n        \"to\": {\n            \"organisation_identification\": {\n                \"identification\": {\n                    \"organisation_identification\": {\n                        \"other\": {\n                            \"identification\": \"RCS\"\n                        }\n                    }\n                }\n            }\n        },\n        \"business_message_identifier\": \"9876543211111\",\n        \"message_definition_identifier\": \"camt.003.001.07\",\n        \"creation_date\": \"2025-05-06T14:02:00.009Z\"\n    },\n    \"get_account\": {\n        \"message_header\": {\n            \"message_identification\": \"9876543211111\",\n            \"creation_date_time\": \"2025-05-06T14:02:00.009Z\"\n        },\n        \"account_query_definition\": {\n            \"account_criteria\": {\n                \"query_name\": \"001_BalReport_20250506001\"\n            }\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.payments.ca/rtr-sandbox/payment-capacity-balance-report",
+					"protocol": "https",
+					"host": [
+						"api",
+						"payments",
+						"ca"
+					],
+					"path": [
+						"rtr-sandbox",
+						"payment-capacity-balance-report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Balance Report (ACSP) - DSP and DSP as SA Balance report: Current Balance",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require('moment');",
+							"pm.environment.set(\"CurrentDateTime\", moment.utc().toJSON());"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"business_application_header\": {\n        \"from\": {\n            \"financial_institution_identification\": {\n                \"financial_institution_identification\": {\n                    \"clearing_system_member_identification\": {\n                        \"member_identification\": \"002\"\n                    }\n                }\n            }\n        },\n        \"to\": {\n            \"organisation_identification\": {\n                \"identification\": {\n                    \"organisation_identification\": {\n                        \"other\": {\n                            \"identification\": \"RCS\"\n                        }\n                    }\n                }\n            }\n        },\n        \"business_message_identifier\": \"9876543211112\",\n        \"message_definition_identifier\": \"camt.003.001.07\",\n        \"creation_date\": \"2025-05-06T14:02:00.009Z\"\n    },\n    \"get_account\": {\n        \"message_header\": {\n            \"message_identification\": \"9876543211115\",\n            \"creation_date_time\": \"2025-05-06T14:02:00.009Z\"\n        },\n        \"account_query_definition\": {\n            \"account_criteria\": {\n                \"query_name\": \"002_CurBalReport\"\n            }\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.payments.ca/rtr-sandbox/payment-capacity-balance-report",
+					"protocol": "https",
+					"host": [
+						"api",
+						"payments",
+						"ca"
+					],
+					"path": [
+						"rtr-sandbox",
+						"payment-capacity-balance-report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inbound Heartbeat (ACSP) - RDP",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require('moment');",
+							"pm.environment.set(\"CurrentDateTime\", moment.utc().toJSON());"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"business_application_header\": {\n        \"from\": {\n            \"financial_institution_identification\": {\n                \"financial_institution_identification\": {\n                    \"clearing_system_member_identification\": {\n                        \"member_identification\": \"111\"\n                    }\n                }\n            }\n        },\n        \"to\": {\n            \"organisation_identification\": {\n                \"identification\": {\n                    \"organisation_identification\": {\n                        \"other\": {\n                            \"identification\": \"RTR\"\n                        }\n                    }\n                }\n            }\n        },\n        \"business_message_identifier\": \"01112021000047001\",\n        \"message_definition_identifier\": \"admi.004.001.02\",\n        \"creation_date\": \"2025-05-06T00:00:47.001Z\"\n    },\n    \"system_event_notification\": {\n        \"event_information\": {\n            \"event_code\": \"HBRT\",\n            \"event_description\": \"1234567890001\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.payments.ca/rtr-sandbox/inbound-heartbeat",
+					"protocol": "https",
+					"host": [
+						"api",
+						"payments",
+						"ca"
+					],
+					"path": [
+						"rtr-sandbox",
+						"inbound-heartbeat"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "tokenName",
+				"value": "Token",
+				"type": "string"
+			},
+			{
+				"key": "challengeAlgorithm",
+				"value": "S256",
+				"type": "string"
+			},
+			{
+				"key": "scope",
+				"value": "client_credentials",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "client_credentials",
+				"type": "string"
+			},
+			{
+				"key": "clientSecret",
+				"value": "{{CONSUMER_SECRET}}",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "{{CONSUMER_KEY}}",
+				"type": "string"
+			},
+			{
+				"key": "authUrl",
+				"value": "https://api.payments.ca/accesstoken",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "client_authentication",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "https://api.payments.ca/accesstoken",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var uuid = require('uuid');",
+					"var uuidWithoutDashes = uuid.v4().replaceAll('-','');",
+					"postman.setEnvironmentVariable('uuidForCnSRef', uuidWithoutDashes);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

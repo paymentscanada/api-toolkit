@@ -1,0 +1,31 @@
+# RTR C&S ISO 20022 JSON Schema MessageReject (admi.004.001.02))
+components:
+  schemas:
+    SystemEventNotificationV02:
+      type: object
+      description: "Scope\r\nThe SystemEventNotification message is sent by a central system to notify the occurrence of an event in a central system.\r\nUsage\r\nThe message can be used by a central settlement system to inform its participants of an event that is going to occur in the system, for instance that the system will be down at a certain time, etc."
+      additionalProperties: false
+      properties:
+        event_information:
+          description: Detailed information about a system event.
+          $ref: "#/components/schemas/Event2__1"
+      required:
+        - event_information
+    Event2__1:
+      type: object
+      description: Provides information on an event that happened in a system.
+      additionalProperties: false
+      properties:
+        event_code:
+          type: string
+          description: Proprietary code used to specify an event that occurred in a system.
+          minLength: 1
+          maxLength: 4
+        event_description:
+          type: string
+          description: Free text used to describe an event which occurred in a system.
+          minLength: 1
+          maxLength: 350
+      required:
+        - event_code
+        - event_description

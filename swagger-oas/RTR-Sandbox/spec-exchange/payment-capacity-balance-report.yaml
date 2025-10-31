@@ -1,0 +1,219 @@
+openapi: 3.0.3
+info:
+  title: "Payment Capacity Balance Report"
+  description: |
+    These APIs calls the C&S system to generate an balance report.
+
+    # Pre-requisites:
+    1. Create an app with the `rtr-sandbox-product` on the [Developer Portal](https://developer.payments.ca/)
+    2. Mark down the `Consumer Key` and `Consumer Secret`
+
+    # Calling this API on this page
+    1. Click the Authorize button.
+    2. Fill in the username with your Consumer Key and fill in the password with your Consumer Secret.
+    3. Click Authorize.
+    4. Expand the appropraite API and click "Try it out".
+    5. Fill in the appropriate details in the body.
+    6. Click "Execute"
+    7. The server response will be found under the curl call.
+  version: 1.1.0
+servers:
+  - url: "https://api.payments.ca/rtr-sandbox" #Review
+    description: Sandbox Environment #Review
+
+paths:
+  /payment-capacity-balance-report:
+    post:
+      tags:
+        - report
+      description: This service can be used by the Participants to retrieve the Balance Report. Message format - ISO 20022 camt.003.001.07 with BAH ISO 20022 head.001.001.02
+      parameters:
+        - $ref: "#/components/parameters/x-jws-signature"
+        - $ref: "#/components/parameters/traceability-id"
+      requestBody:
+        content:
+          application/vnd.api.v1+json:
+            schema:
+              $ref: "#/components/schemas/BalanceRequest"
+        required: true
+      security:
+        - oAuth:
+            - client_credentials
+      responses:
+        "200":
+          description: ISO 20022 camt.004.001.08 (or) ISO 20022 admi.002.001.01, with BAH - ISO 20022 head.001.001.02
+          content:
+            application/vnd.api.v1+json:
+              schema:
+                $ref: "#/components/schemas/BalanceResponse"
+          headers:
+            x-jws-signature:
+              $ref: "#/components/parameters/x-jws-signature"
+            traceability-id:
+              $ref: "#/components/parameters/traceability-id"
+        "401":
+          description: Unauthorized
+        "429":
+          description: Too Many Requests
+        "500":
+          description: Internal Server Error
+          headers:
+            traceability-id:
+              $ref: "#/components/parameters/traceability-id"
+
+components:
+  securitySchemes:
+    oAuth:
+      type: oauth2
+      description: This API uses OAuth 2 with the implicit grant flow. (The access token expires in 5 minutes)
+      flows:
+        clientCredentials: # <---- OAuth flow(authorizationCode, implicit, password or clientCredentials)
+          tokenUrl: https://api.payments.ca/accesstoken
+          scopes:
+            client_credentials: Required to get credentials for the API call
+  parameters:
+    x-jws-signature:
+      in: header
+      name: x-jws-signature
+      description: "JSON Web Signature (JWS) of the payload"
+      schema:
+        type: string
+        minLength: 1
+        example: "eyJjcml0IjpbImlhdCJdLCJpYXQiOjE2MzcyNzIxMzUyNTIsImFsZyI6IlJTMjU2Iiwia2lkIjoic2lnbi1rZXktY2EwMDAwMDEtMDAxIn0.V7skMzl3rUZK7N5pYVlicNt3TWXNBZyX-rtNV7n5rOc.hBDcIL9ptXWfOsg2pRSTy5dzFsowqjvE0G8dglODTSFpRM-iL1khjomuaYx_LnZV_lTnwkfMHknLdJuG5ucM7gpTZ98a1egjTcQisWHRO0fCr-sxqZXusGIB-hgAnB16Fn9UtdNdzsl447C0c3sSmytYn6eeMu5c6RWVrq-xB5KD9_JGexpyTw3IBvXavpd7h7QgnNzmcdWjV0yVXh74x4gmD8hTSbRkv54MYzap2BSFXLgxCwOrS7Jw0tQzCcP8a7gcOunO9Zr3ArgH-4Ur0VRWxIH4GaDksCBKdx1JdXFUToqG5Ben-FNyAzxkVxtuuwYMCbT1I3-8mCoj7nTtYw"
+      required: true
+    traceability-id:
+      in: header
+      name: traceability-id
+      description: Unique Id that can be used to trace the request.
+      schema:
+        type: string
+        format: uuid
+        example: "93334d98-e1d0-4158-a1f7-302b22af4f6d"
+      required: true
+
+  schemas:
+    BalanceRequest:
+      type: object
+      properties:
+        get_account:
+          $ref: "#/components/schemas/GetAccountV07"
+        business_application_header:
+          $ref: "#/components/schemas/BusinessApplicationHeaderV02"
+      required:
+        - get_account
+        - business_application_header
+
+    BalanceResponse:
+      type: object
+      oneOf:
+        - type: object
+          properties:
+            return_account:
+              $ref: "#/components/schemas/ReturnAccountV08"
+          required:
+            - return_account
+        - type: object
+          properties:
+            message_reject:
+              $ref: "#/components/schemas/MessageReject"
+          required:
+            - message_reject
+      properties:
+        business_application_header:
+          $ref: "#/components/schemas/BusinessApplicationHeaderV02"
+      required:
+        - business_application_header
+
+    #Business Application Header Schemas
+    BusinessApplicationHeaderV02:
+      $ref: "iso_models/head_002.yaml#/components/schemas/BusinessApplicationHeaderV02"
+    BranchAndFinancialInstitutionIdentification6__head_1:
+      $ref: "iso_models/head_002.yaml#/components/schemas/BranchAndFinancialInstitutionIdentification6__1"
+    ClearingSystemMemberIdentification2__head_1:
+      $ref: "iso_models/head_002.yaml#/components/schemas/ClearingSystemMemberIdentification2__1"
+    FinancialInstitutionIdentification18__head_1:
+      $ref: "iso_models/head_002.yaml#/components/schemas/FinancialInstitutionIdentification18__1"
+    GenericOrganisationIdentification1__1:
+      $ref: "iso_models/head_002.yaml#/components/schemas/GenericOrganisationIdentification1__1"
+    OrganisationIdentification29__1:
+      $ref: "iso_models/head_002.yaml#/components/schemas/OrganisationIdentification29__1"
+    Party38Choice__1:
+      $ref: "iso_models/head_002.yaml#/components/schemas/Party38Choice__1"
+    Party44Choice__1:
+      $ref: "iso_models/head_002.yaml#/components/schemas/Party44Choice__1"
+    PartyIdentification135__1:
+      $ref: "iso_models/head_002.yaml#/components/schemas/PartyIdentification135__1"
+
+    # CAMT.003 Schemas
+    GetAccountV07:
+      $ref: "iso_models/camt_003.yaml#/components/schemas/GetAccountV07"
+    MessageHeader9__1:
+      $ref: "iso_models/camt_003.yaml#/components/schemas/MessageHeader9__1"
+    AccountQuery3__1:
+      $ref: "iso_models/camt_003.yaml#/components/schemas/AccountQuery3__1"
+    AccountCriteria3Choice__1:
+      $ref: "iso_models/camt_003.yaml#/components/schemas/AccountCriteria3Choice__1"
+
+    # CAMT.004 Schemas
+    ReturnAccountV08:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/ReturnAccountV08"
+    GenericAccountIdentification1__1:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/GenericAccountIdentification1__1"
+    CashAccount37__1:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/CashAccount37__1"
+    AccountReport24__1:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/AccountReport24__1"
+    ErrorHandling5__1:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/ErrorHandling5__1"
+    AccountIdentification4Choice__1:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/AccountIdentification4Choice__1"
+    AccountOrBusinessError4Choice__1:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/AccountOrBusinessError4Choice__1"
+    GenericIdentification1__1:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/GenericIdentification1__1"
+    FinancialInstitutionIdentification18__camt004_1:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/FinancialInstitutionIdentification18__1"
+    ActiveOrHistoricCurrencyCode:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/ActiveOrHistoricCurrencyCode"
+    BranchAndFinancialInstitutionIdentification6__camt004_1:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/BranchAndFinancialInstitutionIdentification6__1"
+    CashBalance13__1:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/CashBalance13__1"
+    ImpliedCurrencyAndAmount:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/ImpliedCurrencyAndAmount"
+    CreditDebitCode:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/CreditDebitCode"
+    BalanceType11Choice__1:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/BalanceType11Choice__1"
+    DateAndDateTime2Choice__1:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/DateAndDateTime2Choice__1"
+    BalanceRestrictionType1__1:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/BalanceRestrictionType1__1"
+    ExternalSystemErrorHandling1Code:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/ExternalSystemErrorHandling1Code"
+    ErrorHandling3Choice:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/ErrorHandling3Choice"
+    ClearingSystemMemberIdentification2__camt_1:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/ClearingSystemMemberIdentification2__1"
+    OriginalBusinessQuery1__1:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/OriginalBusinessQuery1__1"
+    MessageHeader7__1:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/MessageHeader7__1"
+    AccountOrOperationalError4Choice__1:
+      $ref: "iso_models/camt_004.yaml#/components/schemas/AccountOrOperationalError4Choice__1"
+
+    # ADMI.002 Schemas
+    MessageReference:
+      $ref: "iso_models/admi_002.yaml#/components/schemas/MessageReference"
+    MessageReject:
+      $ref: "iso_models/admi_002.yaml#/components/schemas/MessageReject"
+    RejectionReason:
+      $ref: "iso_models/admi_002.yaml#/components/schemas/RejectionReason"
+
+    # Common Schemas
+    ISODateTime:
+      $ref: "iso_models/common.yaml#/components/schemas/ISODateTime"
+    UUIDv4Identifier:
+      $ref: "iso_models/common.yaml#/components/schemas/UUIDv4Identifier"
+    ISODate:
+      $ref: "iso_models/common.yaml#/components/schemas/ISODate"

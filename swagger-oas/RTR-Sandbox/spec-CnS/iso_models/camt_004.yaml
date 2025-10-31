@@ -1,0 +1,327 @@
+# RTR C&S ISO 20022 JSON Schema ReturnAccountV08 (camt.004.001.08)
+components:
+  schemas:
+    AccountIdentification4Choice__1:
+      type: object
+      description: Specifies the unique identification of an account as assigned by the account servicer.
+      additionalProperties: false
+      properties:
+        other:
+          description: "Unique identification of an account, as assigned by the account servicer, using an identification scheme."
+          $ref: "#/components/schemas/GenericAccountIdentification1__1"
+      required:
+        - other
+    AccountOrBusinessError4Choice__1:
+      type: object
+      description: Choice between account details or a business error when the requested data cannot be retrieved.
+      additionalProperties: false
+      properties:
+        account:
+          description: Requested information on the account.
+          $ref: "#/components/schemas/CashAccount37__1"
+      required:
+        - account
+    AccountOrOperationalError4Choice__1:
+      type: object
+      description: Choice between account details or an operational error when the requested data cannot be retrieved.
+      additionalProperties: false
+      oneOf:
+        - type: object
+          additionalProperties: false
+          properties:
+            account_report:
+              type: array
+              description: Reports either on the account information or on a business error.
+              items:
+                $ref: "#/components/schemas/AccountReport24__1"
+          required:
+            - account_report
+        - type: object
+          additionalProperties: false
+          properties:
+            operational_error:
+              description: Indicates that an operational error has been issued during the processing of the related request.
+              $ref: "#/components/schemas/ErrorHandling5__1"
+          required:
+            - operational_error
+    AccountReport24__1:
+      type: object
+      description: Reports either on the account information or on a business error.
+      additionalProperties: false
+      properties:
+        account_identification:
+          description: Unique and unambiguous identification for the account between the account owner and the account servicer.
+          $ref: "#/components/schemas/AccountIdentification4Choice__1"
+        account_or_error:
+          description: Requested information on the account or business error when information has not been found.
+          $ref: "#/components/schemas/AccountOrBusinessError4Choice__1"
+      required:
+        - account_identification
+        - account_or_error
+    ActiveOrHistoricCurrencyCode:
+      type: string
+      pattern: "^[A-Z]{3,3}$"
+      description: 'A code allocated to a currency by a Maintenance Agency under an international identification scheme, as described in the latest edition of the international standard ISO 4217 "Codes for the representation of currencies and funds".'
+    BalanceRestrictionType1__1:
+      type: object
+      description: Type providing further information on balance restrictions.
+      additionalProperties: false
+      properties:
+        type:
+          description: "Type of the restriction, for example, selling restriction, buying restriction, placing restriction."
+          $ref: "#/components/schemas/GenericIdentification1__1"
+        description:
+          type: string
+          description: Description of the restriction.
+          minLength: 1
+          maxLength: 140
+      required:
+        - type
+        - description
+    BalanceType11Choice__1:
+      type: object
+      description: Specifies the balance details.
+      additionalProperties: false
+      properties:
+        proprietary:
+          type: string
+          description: "Specifies the nature of a balance, in a proprietary form."
+          minLength: 1
+          maxLength: 35
+      required:
+        - proprietary
+    BranchAndFinancialInstitutionIdentification6__1:
+      type: object
+      description: Unique and unambiguous identification of a financial institution or a branch of a financial institution.
+      additionalProperties: false
+      properties:
+        financial_institution_identification:
+          description: "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme."
+          $ref: "#/components/schemas/FinancialInstitutionIdentification18__1"
+      required:
+        - financial_institution_identification
+    CashAccount37__1:
+      type: object
+      description: Account to or from which a cash entry is made.
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          description: "Name of the account. It provides an additional means of identification, and is designated by the account servicer in agreement with the account owner."
+          minLength: 1
+          maxLength: 70
+        currency:
+          description: Specifies the currency of the cash account.
+          $ref: "#/components/schemas/ActiveOrHistoricCurrencyCode"
+        servicer:
+          description: Servicer of the account which is being queried.
+          $ref: "#/components/schemas/BranchAndFinancialInstitutionIdentification6__1"
+        multilateral_balance:
+          type: array
+          description: Balance is calculated with regard to many members in the system.
+          items:
+            $ref: "#/components/schemas/CashBalance13__1"
+      required:
+        - name
+        - currency
+        - multilateral_balance
+    CashBalance13__1:
+      type: object
+      description: Balance details for a cash account.
+      additionalProperties: false
+      properties:
+        amount:
+          description: Currency and amount of money of the cash balance.
+          $ref: "#/components/schemas/ImpliedCurrencyAndAmount"
+        credit_debit_indicator:
+          description: Indicates whether the balance is a credit or a debit balance. A zero balance is considered to be a credit balance.
+          $ref: "#/components/schemas/CreditDebitCode"
+        type:
+          description: Specifies the nature of a balance.
+          $ref: "#/components/schemas/BalanceType11Choice__1"
+        value_date:
+          description: Date and time at which the balance is or will be available.
+          $ref: "#/components/schemas/DateAndDateTime2Choice__1"
+        restriction_type:
+          description: Type providing further information on balance restrictions.
+          $ref: "#/components/schemas/BalanceRestrictionType1__1"
+      required:
+        - amount
+        - credit_debit_indicator
+        - type
+        - value_date
+    ClearingSystemMemberIdentification2__1:
+      type: object
+      description: "Unique identification, as assigned by a clearing system, to unambiguously identify a member of the clearing system."
+      additionalProperties: false
+      properties:
+        member_identification:
+          type: string
+          description: Identification of a member of a clearing system.
+          minLength: 1
+          maxLength: 35
+      required:
+        - member_identification
+    CreditDebitCode:
+      type: string
+      description: |-
+        Specifies if an operation is an increase or a decrease.
+        *`CRDT`-Operation is an increase.
+        *`DBIT`-Operation is a decrease.
+      enum:
+        - CRDT
+        - DBIT
+    DateAndDateTime2Choice__1:
+      type: object
+      description: Choice between a date or a date and time format.
+      additionalProperties: false
+      properties:
+        date_time:
+          description: Specified date and time.
+          $ref: "common.yaml#/components/schemas/ISODateTime"
+      required:
+        - date_time
+    ErrorHandling3Choice:
+      type: object
+      description: Specifies the choice between the listed and the proprietary error codes.
+      additionalProperties: false
+      oneOf:
+        - type: object
+          additionalProperties: false
+          properties:
+            code:
+              description: "Specification of the error, in coded form."
+              $ref: "#/components/schemas/ExternalSystemErrorHandling1Code"
+          required:
+            - code
+        - type: object
+          additionalProperties: false
+          properties:
+            proprietary:
+              type: string
+              description: "Specification of the error, in free format."
+              minLength: 1
+              maxLength: 35
+          required:
+            - proprietary
+    ErrorHandling5__1:
+      type: object
+      description: Specifies the error resulting from the processing of a request.
+      additionalProperties: false
+      properties:
+        error:
+          description: "Specification of the error, in coded or proprietary form."
+          $ref: "#/components/schemas/ErrorHandling3Choice"
+      required:
+        - error
+    ExternalSystemErrorHandling1Code:
+      type: string
+      minLength: 1
+      maxLength: 4
+      description: "Specifies the error code as generated by the system in the response, as published in an external balance type code set.\r\nExternal code sets can be downloaded from www.iso20022.org."
+    FinancialInstitutionIdentification18__1:
+      type: object
+      description: Specifies the details to identify a financial institution.
+      additionalProperties: false
+      properties:
+        clearing_system_member_identification:
+          description: Information used to identify a member within a clearing system.
+          $ref: "#/components/schemas/ClearingSystemMemberIdentification2__1"
+        name:
+          type: string
+          description: Name by which an agent is known and which is usually used to identify that agent.
+          minLength: 1
+          maxLength: 140
+      required:
+        - clearing_system_member_identification
+        - name
+    GenericAccountIdentification1__1:
+      type: object
+      description: Information related to a generic account identification.
+      additionalProperties: false
+      properties:
+        identification:
+          type: string
+          description: Identification assigned by an institution.
+          minLength: 1
+          maxLength: 34
+      required:
+        - identification
+    GenericIdentification1__1:
+      type: object
+      description: "Information related to an identification, for example party identification or account identification."
+      additionalProperties: false
+      properties:
+        identification:
+          type: string
+          description: Identification assigned by an institution.
+          minLength: 1
+          maxLength: 35
+      required:
+        - identification
+    ImpliedCurrencyAndAmount:
+      type: number
+      description: >-
+        Number of monetary units specified in a currency where the unit of
+        currency is implied by the context and compliant with ISO 4217. The
+        decimal separator is a dot.
+
+        Note: a zero amount is considered a positive amount.
+      minimum: 0
+    MessageHeader7__1:
+      type: object
+      description: "Set of characteristics, such as the identification or the creation date and time, specific to the message."
+      additionalProperties: false
+      properties:
+        message_identification:
+          type: string
+          description: "Point to point reference, as assigned by the sender, to unambiguously identify the message. Usage: The sender has to make sure that MessageIdentification is unique for a pre-agreed period."
+          minLength: 1
+          maxLength: 35
+        creation_date_time:
+          description: Date and time at which the message was created.
+          $ref: "common.yaml#/components/schemas/ISODateTime"
+        original_business_query:
+          description: Unique identification of the original query message.
+          $ref: "#/components/schemas/OriginalBusinessQuery1__1"
+        query_name:
+          type: string
+          description: Recalls the criteria (search and return criteria) defined in a preceding query.
+          minLength: 1
+          maxLength: 35
+      required:
+        - message_identification
+        - creation_date_time
+        - query_name
+    OriginalBusinessQuery1__1:
+      type: object
+      description: "Unique identification, as assigned by the original requestor, to unambiguously identify the business query message."
+      additionalProperties: false
+      properties:
+        message_identification:
+          type: string
+          description: "Point to point reference, as assigned by the original initiating party, to unambiguously identify the original query message."
+          minLength: 1
+          maxLength: 35
+        message_name_identification:
+          type: string
+          description: Specifies the query message name identifier to which the message refers.
+          minLength: 1
+          maxLength: 35
+      required:
+        - message_identification
+        - message_name_identification
+    ReturnAccountV08:
+      type: object
+      description: "Scope\nThe ReturnAccount message is sent by the transaction administrator to a member.\nIt is used to provide information on the details of one or more accounts held at the transaction administrator, including information on the balances.\nThe Return Account message can be sent as a response to a related GetAccount message (pull mode) or initiated by the transaction administrator (push mode). The push of information can take place either at prearranged times or as a warning or alarm when a problem has occurred.\nUsage\nAt any time during the operating hours of the system, the member can query the transaction administrator to get information about the account(s) that the transaction administrator maintains for the member.\nFor example, this may be necessary in order to perform the appropriate liquidity management and the necessary funds transfers between accounts.\nThe member can request information about accounts through a series of criteria, corresponding to the known information stored at the transaction administrator.\nThe query can concern one or more specific accounts, accounts of a particular identification, or a particular type. The purpose of the query may be to obtain one or more types of balance.\nThe transaction administrator may also send a ReturnAccount message with pre-defined information, at times previously agreed with the member, or to warn the member about a particular problem that may have arisen and which needs attention.\nThe message from the transaction administrator can contain information based on the following elements: \n- account identification\n- account name\n- account type (this is used when the account identification represents, for example, a group of accounts)\n- currency of the account (this is used for example when the account identification represents a group of account in various currencies, or when it is a multi-currency account with one single identifier)\n- type of balance (if not present in the GetAccount message, all balances will be reported)\n- bilateral or multilateral limits\n- related counterparty (when the limit or balance is bilateral)\n- balance value date (if not present in the GetAccount message, the ReturnAccount message will contain the latest available balance)\n- number of payments to the additional account information on the generic design of the Get/Return messages can be found in the section How to Use the Cash Management Messages."
+      additionalProperties: false
+      properties:
+        message_header:
+          description: Common business identification for the message.
+          $ref: "#/components/schemas/MessageHeader7__1"
+        report_or_error:
+          description: Reports on accounts.
+          $ref: "#/components/schemas/AccountOrOperationalError4Choice__1"
+      required:
+        - message_header
+        - report_or_error

@@ -1,0 +1,88 @@
+# RTR C&S ISO 20022 JSON Schema GetTransactionV08 (camt.005.001.08)
+components:
+  schemas:
+    GetTransactionV08:
+      type: object
+      description: "Scope\r\nThe GetTransaction message is sent by a member to the transaction administrator.\r\nIt is used to request information about payment instructions held at the transaction administrator. Payment instructions are either sent by the member, debiting or crediting its account at the transaction administrator or received by the transaction administrator, crediting or debiting the member's account.\r\nUsage\r\nFollowing normal business flows, transactions registered by the transaction administrator may be queued for later settlement (because of insufficient funds available, or because of risk or liquidity limits, etc.). A transaction may have a series of statuses. These can be transient (such as pending or related types) and final (such as rejected, revoked and/or settled).\r\nMembers of a system need to have information about the payments queue(s) and must have the ability to take action (that is, to cancel or modify the transaction(s) to be settled). Note, however, that actions by a member will always concern transactions in a transient status.\r\nAt any time during the operating hours of the system, the member can query the transaction administrator to get information about transactions, whatever their status.\r\nThese requests will concern either all transactions, all transactions with a particular status or a specific transaction.\r\nThe member can request information about transactions through a series of criteria, corresponding to the known information stored at the transaction administrator, based on the following elements:\r\n- provenance or destination of the payment (payment to/payment from)\r\n- transaction reference\r\n- transfer value date\r\n- payment instruction reference\r\n- payment instruction status, as registered at the transaction administrator\r\n- instructed amount and/or currency\r\n- interbank settlement amount and/or currency\r\n- credit/debit indicator of the payment instruction/transaction\r\n- SWIFT FIN payment message used for the payment instruction\r\n- priority of the payment transaction\r\n- period in which the payment instruction should be processed (processing validity time)\r\n- instructions given, related to the processing of the transaction\r\n- type of payment instructed\r\n- account identification (entries booked to a specific account)\r\n- entry amount and/or currency\r\n- entry debit/credit indicator (if absent, all entries should be reported)."
+      additionalProperties: false
+      properties:
+        message_header:
+          description: Common business identification for the message.
+          $ref: "#/components/schemas/MessageHeader9__1"
+        transaction_query_definition:
+          description: Defines the transaction query criteria.
+          $ref: "#/components/schemas/TransactionQuery5__1"
+      required:
+        - message_header
+        - transaction_query_definition
+    MessageHeader9__1:
+      type: object
+      description: "Set of characteristics, such as the identification or the creation date and time, specific to the message."
+      additionalProperties: false
+      properties:
+        message_identification:
+          type: string
+          description: "Point to point reference, as assigned by the sender, to unambiguously identify the message. Usage: The sender has to make sure that MessageIdentification is unique for a pre-agreed period."
+          minLength: 1
+          maxLength: 35
+        creation_date_time:
+          description: Date and time at which the message was created.
+          $ref: "common.yaml#/components/schemas/ISODateTime"
+      required:
+        - message_identification
+        - creation_date_time
+    PaymentSearch8__1:
+      type: object
+      description: Defines the criteria used to search for a payment.
+      additionalProperties: false
+      properties:
+        transaction_identification:
+          type: string
+          description: "Unique identification, as assigned by the first instructing agent, to unambiguously identify the transaction that is passed on, unchanged, throughout the entire interbank chain. Usage: The transaction identification can be used for reconciliation, tracking or to link tasks relating to the transaction on the interbank level. The instructing agent has to make sure that the transaction identification is unique for a pre-agreed period. Usage: this is the former PaymentInstructionReference."
+          minLength: 1
+          maxLength: 35
+        end_to_end_identification:
+          type: string
+          description: "Unique identification, as assigned by the initiating party, to unambiguously identify the transaction. This identification is passed on, unchanged, throughout the entire end-to-end chain. Usage: The end-to-end identification can be used for reconciliation or to link tasks relating to the transaction. It can be included in several messages related to the transaction. Usage: this is the former RelatedReference."
+          minLength: 1
+          maxLength: 35
+    TransactionCriteria5Choice__1:
+      type: object
+      description: Defines the information that is searched either implicitly by recalling a previous query or explicitly by defining the criteria.
+      additionalProperties: false
+      properties:
+        new_criteria:
+          description: Explicitly defines the query criteria.
+          $ref: "#/components/schemas/TransactionCriteria8__1"
+      required:
+        - new_criteria
+    TransactionCriteria8__1:
+      type: object
+      description: Defines the criteria which are used to search for a transaction and to report on the transaction. A name may be given to the new query.
+      additionalProperties: false
+      properties:
+        search_criteria:
+          description: Defines the criteria on which the information is extracted.
+          $ref: "#/components/schemas/TransactionSearchCriteria8__1"
+      required:
+        - search_criteria
+    TransactionQuery5__1:
+      type: object
+      description: Defines the query criteria.
+      additionalProperties: false
+      properties:
+        transaction_criteria:
+          description: Defines the payment transaction query criteria.
+          $ref: "#/components/schemas/TransactionCriteria5Choice__1"
+      required:
+        - transaction_criteria
+    TransactionSearchCriteria8__1:
+      type: object
+      description: Defines the criteria which are used to search for a payment transaction.
+      additionalProperties: false
+      properties:
+        payment_search:
+          description: Defines the criteria which are used to search for a payment.
+          $ref: "#/components/schemas/PaymentSearch8__1"
+      required:
+        - payment_search

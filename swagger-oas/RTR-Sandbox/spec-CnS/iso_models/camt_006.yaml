@@ -1,0 +1,255 @@
+# RTR C&S ISO 20022 JSON Schema ReturnTransaction (camt.006.001.08)
+components:
+  schemas:
+    ReturnTransaction:
+      type: object
+      description: "Scope\r\nThe ReturnTransaction message is sent by the transaction administrator to a member of the system.\r\nIt is used to provide information on transactions and booked entries held at the transaction administrator.\r\nThe Return Transaction message can be sent as a response to a related GetTransaction message (pull mode) or initiated by the transaction administrator (push mode). The push of information can take place either at prearranged times or as a warning or alarm when a problem has occurred.\r\nUsage\r\nFollowing normal business flows, transactions registered by the transaction administrator may be queued for later settlement (because of insufficient funds available, because of risk or liquidity limits, etc.). A transaction may have a series of statuses. These can be transient (such as pending or related types) and final (such as rejected or settled).\r\nMembers of a system need to receive information about the payments queue(s) and must have the ability to take action (that is, cancel or modify the transaction(s) to be settled). Note, however, that actions by a member will always concern transactions in a transient status.\r\nAt any time during operating hours of the system, the member can query the transaction administrator to get information about transactions, whatever their status.\r\nThese requests will concern either all transactions, all transactions within a particular status or a specific transaction.\r\nThe member can request information about transactions through a series of criteria, corresponding to the known information stored within the transaction administrator. Based on the criteria received within the request, the transaction administrator will select items that match the request and report them to the requester.\r\nThe transaction administrator may also send a ReturnTransaction message with pre-defined information at times previously agreed with the member or to warn the member about a particular problem that may have arisen and which needs attention.\r\nThe message from the transaction administrator can contain information based on the following elements:\r\n- provenance or destination of the payment (payment to/payment from)\r\n- transaction reference\r\n- transfer value date\r\n- payment instruction reference\r\n- payment instruction status, as registered at the transaction administrator\r\n- instructed amount and/or currency\r\n- interbank settlement amount and/or currency\r\n- credit/debit indicator of the payment instruction/transaction\r\n- message used for the payment instruction\r\n- priority of the payment transaction\r\n- period in which the payment instruction should be processed (processing validity time)\r\n- instructions given, related to the processing of the transaction\r\n- type of payment instructed\r\n- account identification (entries booked to a specific account)\r\n- entry amount and/or currency\r\n- entry debit/credit indicator (if absent, all entries should be reported)\r\n- status of the entry (pending, booked.)\r\n- entry date and time\r\n- currency of the account\r\n- type of the account\r\n- entry reference\r\n- entry date\r\n- transfer reason\r\n- details related to the status of the payment instruction\r\nAn element that is particular to the Get/Return Transaction pair is the Statement Report. When a GetTransaction message is sent requesting a statement report, the related ReturnTransaction message will provide a pre-defined set of return criteria per transaction. The information returned contains the following details for each transaction:\r\n- value date\r\n- entry date\r\n- debit/credit code\r\n- entry amount\r\n- method of payment (payment instrument or message type)\r\n- entry reference\r\n- transaction reference\r\n- supplementary details\r\nAdditional information on the generic design of the Get/Return messages can be found in the section How to Use the Cash Management Messages."
+      additionalProperties: false
+      properties:
+        message_header:
+          description: Common business identification for the message.
+          $ref: "#/components/schemas/ResponseMessageHeader"
+        report_or_error:
+          description: Reports on transactions.
+          $ref: "#/components/schemas/TransactionReportOrErrorChoice"
+      required:
+        - message_header
+        - report_or_error
+
+    DateAndDateTimeChoice:
+      type: object
+      description: Choice between a date or a date and time format.
+      additionalProperties: false
+      properties:
+        date_time:
+          description: Specified date and time.
+          $ref: "common.yaml#/components/schemas/ISODateTime"
+      required:
+        - date_time
+    ErrorHandlingChoice:
+      type: object
+      description: Specifies the choice between the listed and the proprietary error codes.
+      additionalProperties: false
+      oneOf:
+        - type: object
+          additionalProperties: false
+          properties:
+            code:
+              description: "Specification of the error, in coded form."
+              $ref: "#/components/schemas/ExternalSystemErrorHandlingCode"
+          required:
+            - code
+        - type: object
+          additionalProperties: false
+          properties:
+            proprietary:
+              description: "Specification of the error, in free format."
+              type: string
+              minLength: 1
+              maxLength: 35
+          required:
+            - proprietary
+    ErrorHandling:
+      type: object
+      description: Specifies the error resulting from the processing of a request.
+      additionalProperties: false
+      properties:
+        error:
+          description: "Specification of the error, in coded or proprietary form."
+          $ref: "#/components/schemas/ErrorHandlingChoice"
+      required:
+        - error
+    ExternalSystemErrorHandlingCode:
+      type: string
+      minLength: 1
+      maxLength: 4
+      description: "Specifies the error code as generated by the system in the response, as published in an external balance type code set.\r\nExternal code sets can be downloaded from www.iso20022.org."
+    ResponseMessageHeader:
+      type: object
+      description: "Set of characteristics, such as the identification or the creation date and time, specific to the message."
+      additionalProperties: false
+      properties:
+        message_identification:
+          description: "Point to point reference, as assigned by the sender, to unambiguously identify the message. Usage: The sender has to make sure that MessageIdentification is unique for a pre-agreed period."
+          type: string
+          minLength: 1
+          maxLength: 35
+        creation_date_time:
+          description: Date and time at which the message was created.
+          $ref: "common.yaml#/components/schemas/ISODateTime"
+        original_business_query:
+          description: Unique identification of the original query message.
+          $ref: "#/components/schemas/OriginalBusinessQuery"
+      required:
+        - message_identification
+        - creation_date_time
+        - original_business_query
+    OriginalBusinessQuery:
+      type: object
+      description: "Unique identification, as assigned by the original requestor, to unambiguously identify the business query message."
+      additionalProperties: false
+      properties:
+        message_identification:
+          description: "Point to point reference, as assigned by the original initiating party, to unambiguously identify the original query message."
+          type: string
+          minLength: 1
+          maxLength: 35
+        message_name_identification:
+          description: Specifies the query message name identifier to which the message refers.
+          type: string
+          minLength: 1
+          maxLength: 35
+      required:
+        - message_identification
+        - message_name_identification
+    PaymentIdentificationChoice:
+      type: object
+      description: Choice between ways of identifying a payment instruction by its references and business identification.
+      additionalProperties: false
+      properties:
+        transaction_identification:
+          description: "Unique identification, as assigned by the first instructing agent, to unambiguously identify the transaction that is passed on, unchanged, throughout the entire interbank chain. Usage: The transaction identification can be used for reconciliation, tracking or to link tasks relating to the transaction on the interbank level. The instructing agent has to make sure that the transaction identification is unique for a pre-agreed period. Usage: this is the former PaymentInstructionReference element."
+          type: string
+          minLength: 1
+          maxLength: 35
+      required:
+        - transaction_identification
+    PaymentInstruction:
+      type: object
+      description: Provides details on the payment instruction.
+      additionalProperties: false
+      properties:
+        status:
+          description: Detailed information about the status of a transfer.  .
+          $ref: "#/components/schemas/PaymentStatus"
+        type:
+          description: "Type, or nature, of the payment, such as express payment. ."
+          $ref: "#/components/schemas/PaymentTypeChoice"
+        end_to_end_identification:
+          description: "Unique identification, as assigned by the initiating party, to unambiguously identify the transaction. This identification is passed on, unchanged, throughout the entire end-to-end chain. Usage: The end-to-end identification can be used for reconciliation or to link tasks relating to the transaction. It can be included in several messages related to the transaction. Usage: This is the former related reference."
+          type: string
+          minLength: 1
+          maxLength: 35
+      required:
+        - status
+        - type
+        - end_to_end_identification
+    PaymentStatus:
+      type: object
+      description: Payment status details.
+      additionalProperties: false
+      properties:
+        code:
+          description: "Status of a transfer, in coded form, as assigned by the transaction administrator."
+          $ref: "#/components/schemas/PaymentStatusCodeChoice"
+        date_time:
+          description: Date and time at which the status was assigned to the transfer.
+          $ref: "#/components/schemas/DateAndDateTimeChoice"
+        reason:
+          description: Reason provided for the status of a transfer.
+          $ref: "#/components/schemas/PaymentStatusReasonChoice"
+      required:
+        - code
+        - date_time
+    PaymentStatusCodeChoice:
+      type: object
+      description: Choice between a list of pending statuses or final statuses.
+      additionalProperties: false
+      properties:
+        rtgs:
+          description: Qualifies further the RTGS status.
+          type: string
+          minLength: 1
+          maxLength: 4
+          pattern: "^[a-zA-Z0-9]{1,4}$"
+      required:
+        - rtgs
+    PaymentStatusReasonChoice:
+      type: object
+      description: Reason for the status of the payment transaction.
+      additionalProperties: false
+      properties:
+        proprietary:
+          description: Defines a free text proprietary reason.
+          type: string
+          minLength: 1
+          maxLength: 35
+      required:
+        - proprietary
+    PaymentTypeChoice:
+      type: object
+      description: Choice between a payment type from a predefined list and a proprietary payment type.
+      additionalProperties: false
+      properties:
+        proprietary:
+          description: Payment type that is not included in a predefined list.
+          type: string
+          minLength: 1
+          maxLength: 35
+      required:
+        - proprietary
+    Transaction:
+      type: object
+      description: Information related to the payment transaction.
+      additionalProperties: false
+      properties:
+        payment:
+          description: "Instruction to pay an amount of money to an ultimate beneficiary, on behalf of an originator. This instruction may have to be forwarded several times to complete the settlement chain. ."
+          $ref: "#/components/schemas/PaymentInstruction"
+      required:
+        - payment
+    TransactionOrErrorChoice:
+      type: object
+      description: Choice between the transaction details or a business error when the requested data cannot be retrieved.
+      additionalProperties: false
+      properties:
+        transaction:
+          description: Requested information on the payment transaction.
+          $ref: "#/components/schemas/Transaction"
+      required:
+        - transaction
+    TransactionReport:
+      type: object
+      description: Provides details on the payment transactions.
+      additionalProperties: false
+      properties:
+        payment_identification:
+          description: Reference to the instruction related to the payment for which information is requested.
+          $ref: "#/components/schemas/PaymentIdentificationChoice"
+        transaction_or_error:
+          description: Requested information on the payment transaction when information has not been found.
+          $ref: "#/components/schemas/TransactionOrErrorChoice"
+      required:
+        - payment_identification
+        - transaction_or_error
+    TransactionReportOrErrorChoice:
+      type: object
+      description: Choice between transactions and booked entries held at the transaction administrator or an operational error when the requested data cannot be retrieved.
+      additionalProperties: false
+      oneOf:
+        - type: object
+          additionalProperties: false
+          properties:
+            business_report:
+              description: Reports on payment transactions.
+              $ref: "#/components/schemas/Transactions"
+          required:
+            - business_report
+        - type: object
+          additionalProperties: false
+          properties:
+            operational_error:
+              description: Indicates that an operational error has been issued during the processing of the related request.
+              $ref: "#/components/schemas/ErrorHandling"
+          required:
+            - operational_error
+    Transactions:
+      type: object
+      description: Reports on transactions.
+      additionalProperties: false
+      properties:
+        transaction_report:
+          description: Reports either on the transaction information or on a business error.
+          $ref: "#/components/schemas/TransactionReport"
+      required:
+        - transaction_report
