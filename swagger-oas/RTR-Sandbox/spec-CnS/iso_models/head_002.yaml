@@ -1,0 +1,128 @@
+# RTR C&S ISO 20022 JSON Schema BusinessApplicationHeaderV02 (head.001.001.02)
+components:
+  schemas:
+    BranchAndFinancialInstitutionIdentification6__1:
+      type: object
+      description: Unique and unambiguous identification of a financial institution or a branch of a financial institution.
+      additionalProperties: false
+      properties:
+        financial_institution_identification:
+          description: "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme."
+          $ref: "#/components/schemas/FinancialInstitutionIdentification18__1"
+      required:
+        - financial_institution_identification
+    BusinessApplicationHeaderV02:
+      type: object
+      description: "The Business Layer deals with Business Messages. The behaviour of the Business Messages is fully described by the Business Transaction and the structure of the Business Messages is fully described by the Message Definitions and related Message Rules, Rules and Market Practices. All of which are registered in the ISO 20022 Repository.\r\nA single new Business Message (with its accompagnying business application header) is created - by the sending MessagingEndpoint - for each business event; that is each interaction in a Business Transaction. A Business Message adheres to the following principles:\r\n\" A Business Message (and its business application header) must not contain information about the Message Transport System or the mechanics or mechanism of message sending, transportation, or receipt. \r\n\" A Business Message must be comprehensible outside of the context of the Transport Message. That is the Business Message must not require knowledge of the Transport Message to be understood.\r\n\" A Business Message may contain headers, footers, and envelopes that are meaningful for the business. When present, they are treated as any other message content, which means that they are considered part of the Message Definition of the Business Message and as such will be part of the ISO 20022 Repository.\r\n\" A Business Message refers to Business Actors by their Name. Each instance of a Business Actor has one Name. The Business Actor must not be referred to in the Transport Layer.\r\nSpecific usage of this BusinessMessageHeader may be defined by the relevant SEG."
+      additionalProperties: false
+      properties:
+        from:
+          description: "The sending MessagingEndpoint that has created this Business Message for the receiving MessagingEndpoint that will process this Business Message.  Note\tthe sending MessagingEndpoint might be different from the sending address potentially contained in the transport header (as defined in the transport layer)."
+          $ref: "#/components/schemas/Party44Choice__1"
+        to:
+          description: The MessagingEndpoint designated by the sending MessagingEndpoint to be the recipient who will ultimately process this Business Message.  Note the receiving MessagingEndpoint might be different from the receiving address potentially contained in the transport header (as defined in the transport layer).
+          $ref: "#/components/schemas/Party44Choice__1"
+        business_message_identifier:
+          type: string
+          description: Unambiguously identifies the Business Message to the MessagingEndpoint that has created the Business Message.
+          minLength: 1
+          maxLength: 35
+        message_definition_identifier:
+          type: string
+          description: "Contains the MessageIdentifier that defines the BusinessMessage. It must contain a MessageIdentifier published on the ISO 20022 website.  example\tcamt.001.001.03."
+          minLength: 1
+          maxLength: 35
+        creation_date:
+          description: Date and time when this Business Message (header) was created.
+          $ref: "common.yaml#/components/schemas/ISODateTime"
+      required:
+        - from
+        - to
+        - business_message_identifier
+        - message_definition_identifier
+        - creation_date
+    ClearingSystemMemberIdentification2__1:
+      type: object
+      description: "Unique identification, as assigned by a clearing system, to unambiguously identify a member of the clearing system."
+      additionalProperties: false
+      properties:
+        member_identification:
+          description: Identification of a member of a clearing system.
+          type: string
+          minLength: 1
+          maxLength: 35
+      required:
+        - member_identification
+    FinancialInstitutionIdentification18__1:
+      type: object
+      description: Specifies the details to identify a financial institution.
+      additionalProperties: false
+      properties:
+        clearing_system_member_identification:
+          description: Information used to identify a member within a clearing system.
+          $ref: "#/components/schemas/ClearingSystemMemberIdentification2__1"
+      required:
+        - clearing_system_member_identification
+    GenericOrganisationIdentification1__1:
+      type: object
+      description: Information related to an identification of an organisation.
+      additionalProperties: false
+      properties:
+        identification:
+          type: string
+          description: Identification assigned by an institution.
+          minLength: 1
+          maxLength: 35
+      required:
+        - identification
+    OrganisationIdentification29__1:
+      type: object
+      description: Unique and unambiguous way to identify an organisation.
+      additionalProperties: false
+      properties:
+        other:
+          description: "Unique identification of an organisation, as assigned by an institution, using an identification scheme."
+          $ref: "#/components/schemas/GenericOrganisationIdentification1__1"
+      required:
+        - other
+    Party38Choice__1:
+      type: object
+      description: Nature or use of the account.
+      additionalProperties: false
+      properties:
+        organisation_identification:
+          description: Unique and unambiguous way to identify an organisation.
+          $ref: "#/components/schemas/OrganisationIdentification29__1"
+      required:
+        - organisation_identification
+    Party44Choice__1:
+      type: object
+      description: "Identification of a person, an organisation or a financial institution."
+      additionalProperties: false
+      oneOf:
+        - type: object
+          additionalProperties: false
+          properties:
+            organisation_identification:
+              description: Identification of a person or an organisation.
+              $ref: "#/components/schemas/PartyIdentification135__1"
+          required:
+            - organisation_identification
+        - type: object
+          additionalProperties: false
+          properties:
+            financial_institution_identification:
+              description: Identification of a financial institution.
+              $ref: "#/components/schemas/BranchAndFinancialInstitutionIdentification6__1"
+          required:
+            - financial_institution_identification
+    PartyIdentification135__1:
+      type: object
+      description: Specifies the identification of a person or an organisation.
+      additionalProperties: false
+      properties:
+        identification:
+          description: Unique and unambiguous identification of a party.
+          $ref: "#/components/schemas/Party38Choice__1"
+      required:
+        - identification

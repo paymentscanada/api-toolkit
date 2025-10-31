@@ -1,0 +1,217 @@
+---
+# Generated-By: OA3 Linker Tool
+# Input-File: R1-Inbound/R1-Inbound-Exchange-HeartbeatAPI.yml
+# Options: --encoding=utf-8; --log-level=DEBUG; --oa3fix; --overwrite
+# -----
+openapi: 3.0.3
+info:
+  title: Inbound Exchange Heartbeat API
+  description: |
+    Payments Related Endpoints for RTR Exchange, including Credit Transfer, and associated Enquiries.
+
+    # Pre-requisites:
+    1. Create an app with the `rtr-sandbox-product` on the [Developer Portal](https://developer.payments.ca/)
+    2. Mark down the `Consumer Key` and `Consumer Secret`
+
+    # Calling this API on this page
+    1. Click the Authorize button.
+    2. Fill in the username with your Consumer Key and fill in the password with your Consumer Secret.
+    3. Click Authorize.
+    4. Expand the appropraite API and click "Try it out".
+    5. Fill in the appropriate details in the body.
+    6. Click "Execute"
+    7. The server response will be found under the curl call.
+  version: 1.1.0
+servers:
+  - url: "https://api.payments.ca/rtr-sandbox" #Review
+    description: Sandbox Environment #Review
+
+paths:
+  /inbound-heartbeat: #admi.004 - admi.011
+    parameters:
+      - $ref: "#/components/parameters/TraceabilityId"
+      - $ref: "#/components/parameters/Signature"
+      - $ref: "#/components/parameters/RequestId"
+    post:
+      summary: Receive Heartbeat Request
+      description:
+        This service is used to receive heartbeat requests from participating
+        systems (e.g. Exchange) using ISO 20022 admi.004 message format.
+      tags:
+        - application level heartbeat
+      security:
+        - oAuth:
+            - client_credentials
+      requestBody:
+        content:
+          application/vnd.api.v1+json:
+            schema:
+              $ref: "#/components/schemas/ReceiveHeartbeat"
+      responses:
+        "400": { $ref: "#/components/responses/400-bad-request" }
+        "401": { $ref: "#/components/responses/401-unauthorized" }
+        "403": { $ref: "#/components/responses/403-forbidden" }
+        "404": { $ref: "#/components/responses/404-not-found" }
+        "429": { $ref: "#/components/responses/429-too-many-requests" }
+        "500": { $ref: "#/components/responses/500-internal-server-error" }
+        "503": { $ref: "#/components/responses/503-service-unavailable" }
+        "200":
+          description: Heartbeat Response Sent by Exchange
+          headers:
+            x-jws-signature:
+              $ref: "#/components/headers/x-jws-signature"
+            traceability-id:
+              $ref: "#/components/parameters/TraceabilityId"
+          content:
+            application/vnd.api.v1+json:
+              schema:
+                $ref: "#/components/schemas/AdmiResponse"
+
+components:
+  securitySchemes:
+    oAuth:
+      type: oauth2
+      description: This API uses OAuth 2 with the implicit grant flow. (The access token expires in 5 minutes)
+      flows:
+        clientCredentials: # <---- OAuth flow(authorizationCode, implicit, password or clientCredentials)
+          tokenUrl: https://api.payments.ca/accesstoken
+          scopes:
+            client_credentials: Required to get credentials for the API call
+  headers:
+    x-jws-signature:
+      description: >-
+        The JWS signature of response payload.
+      schema:
+        type: string
+        minLength: 1
+      required: true
+      example: eyJjcml0IjpbImlhdCJdLCJpYXQiOjE2MzcyNzIxMzUyNTIsImFsZyI6IlJTMjU2Iiwia2lkIjoic2lnbi1rZXktY2EwMDAwMDEtMDAxIn0.V7skMzl3rUZK7N5pYVlicNt3TWXNBZyX-rtNV7n5rOc.hBDcIL9ptXWfOsg2pRSTy5dzFsowqjvE0G8dglODTSFpRM-iL1khjomuaYx_LnZV_lTnwkfMHknLdJuG5ucM7gpTZ98a1egjTcQisWHRO0fCr-sxqZXusGIB-hgAnB16Fn9UtdNdzsl447C0c3sSmytYn6eeMu5c6RWVrq-xB5KD9_JGexpyTw3IBvXavpd7h7QgnNzmcdWjV0yVXh74x4gmD8hTSbRkv54MYzap2BSFXLgxCwOrS7Jw0tQzCcP8a7gcOunO9Zr3ArgH-4Ur0VRWxIH4GaDksCBKdx1JdXFUToqG5Ben-FNyAzxkVxtuuwYMCbT1I3-8mCoj7nTtYw
+
+  parameters:
+    RequestId:
+      in: header
+      name: x-uetr
+      description: >-
+        This is the UETR, a unique ID generated for each Credit Transfer (pacs.008)
+        used for message tracking purposes.
+        This header is required for the following ISO specs:
+          - pacs.008
+          - pacs.004 (post-R1 scope)
+          - pacs.028
+          - camt.029 (post-R1 scope)
+          - camt.056 (post-R1 scope)
+          - camt.006
+        Note that this header may be required in new ISO messages that are not listed
+        above in future releases, the list will be updated per release.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 36
+      required: false
+      example: eb6305c9-1f7f-49de-aed0-16487c27b42d
+    Signature:
+      in: header
+      name: x-jws-signature
+      description: >-
+        The JWS signature of request payload.
+      schema:
+        type: string
+        minLength: 1
+      required: true
+      example: eyJjcml0IjpbImlhdCJdLCJpYXQiOjE2MzcyNzIxMzUyNTIsImFsZyI6IlJTMjU2Iiwia2lkIjoic2lnbi1rZXktY2EwMDAwMDEtMDAxIn0.V7skMzl3rUZK7N5pYVlicNt3TWXNBZyX-rtNV7n5rOc.hBDcIL9ptXWfOsg2pRSTy5dzFsowqjvE0G8dglODTSFpRM-iL1khjomuaYx_LnZV_lTnwkfMHknLdJuG5ucM7gpTZ98a1egjTcQisWHRO0fCr-sxqZXusGIB-hgAnB16Fn9UtdNdzsl447C0c3sSmytYn6eeMu5c6RWVrq-xB5KD9_JGexpyTw3IBvXavpd7h7QgnNzmcdWjV0yVXh74x4gmD8hTSbRkv54MYzap2BSFXLgxCwOrS7Jw0tQzCcP8a7gcOunO9Zr3ArgH-4Ur0VRWxIH4GaDksCBKdx1JdXFUToqG5Ben-FNyAzxkVxtuuwYMCbT1I3-8mCoj7nTtYw
+    TraceabilityId:
+      description: >-
+        A unique identifier per RTR Exchange API call for purpose of tracing a request
+        through all systems. For example, traceability-id must be UUID.
+        All the messages sent to other systems will have the same traceability-id
+        as the message that originated them.
+      in: header
+      name: traceability-id
+      schema:
+        type: string
+        format: uuid
+      required: true
+      example: e23d32eb-c7f2-4836-a314-557efe95a525
+  responses:
+    400-bad-request:
+      description: Bad Request - Validation Errors
+      headers:
+        traceability-id:
+          $ref: "#/components/parameters/TraceabilityId"
+      content:
+        application/vnd.api.v1+json:
+          schema:
+            $ref: "types.yaml#/ErrorModel"
+    401-unauthorized:
+      description: Unauthorized
+      headers:
+        traceability-id:
+          $ref: "#/components/parameters/TraceabilityId"
+    403-forbidden:
+      description: Forbidden
+      content:
+        application/vnd.api.v1+json:
+          schema:
+            $ref: "types.yaml#/ErrorModel"
+    404-not-found:
+      description: Resources Not Found
+    429-too-many-requests:
+      description: Too many requests; blocked due to rate limiting.
+    500-internal-server-error:
+      description: Internal Server Error
+      headers:
+        traceability-id:
+          $ref: "#/components/parameters/TraceabilityId"
+      content:
+        application/vnd.api.v1+json:
+          schema:
+            $ref: "types.yaml#/ErrorModel"
+    503-service-unavailable:
+      description:
+        Service Unavailable - The server cannot handle the request for
+        a service due to temporary maintenance.
+
+  schemas:
+    AdmiResponse:
+      allOf:
+        - $ref: "#/components/schemas/IsoHeader"
+        - oneOf:
+            - $ref: "#/components/schemas/SyntaxError"
+            - $ref: "#/components/schemas/HeartbeatResponse"
+
+    HeartbeatResponse: #admi.011
+      description: admi.011 message wrapper
+      type: object
+      required:
+        - system_event_acknowledgement
+      properties:
+        system_event_acknowledgement:
+          $ref: "SystemEventAcknowledgementV01.yaml#/definitions/system_event_acknowledgement"
+
+    IsoHeader:
+      type: object
+      required:
+        - business_application_header
+      properties:
+        business_application_header:
+          $ref: "BusinessApplicationHeaderV02.yaml#/definitions/business_application_header"
+
+    ReceiveHeartbeat: #admi.004
+      description: admi.004 message wrapper
+      allOf:
+        - $ref: "#/components/schemas/IsoHeader"
+        - type: object
+          required:
+            - system_event_notification
+          properties:
+            system_event_notification:
+              $ref: "SystemEventNotificationV02.yaml#/definitions/system_event_notification"
+
+    SyntaxError: #admi.002
+      description: admi.002 message wrapper for syntax errors in API request payload.
+      type: object
+      required:
+        - message_reject
+      properties:
+        message_reject:
+          $ref: "MessageRejectV01.yaml#/definitions/message_reject"

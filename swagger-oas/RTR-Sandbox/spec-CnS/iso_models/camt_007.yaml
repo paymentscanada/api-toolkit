@@ -1,0 +1,154 @@
+# RTR C&S ISO 20022 JSON Schema ModifyTransactionV08 (camt.007.001.08)
+components:
+  schemas:
+    BranchAndFinancialInstitutionIdentification6__1:
+      type: object
+      description: Unique and unambiguous identification of a financial institution or a branch of a financial institution.
+      additionalProperties: false
+      properties:
+        financial_institution_identification:
+          description: "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme."
+          $ref: "#/components/schemas/FinancialInstitutionIdentification18__1"
+      required:
+        - financial_institution_identification
+    ClearingSystemMemberIdentification2__1:
+      type: object
+      description: "Unique identification, as assigned by a clearing system, to unambiguously identify a member of the clearing system."
+      additionalProperties: false
+      properties:
+        member_identification:
+          type: string
+          description: Identification of a member of a clearing system.
+          minLength: 1
+          maxLength: 35
+      required:
+        - member_identification
+    FinancialInstitutionIdentification18__1:
+      type: object
+      description: Specifies the details to identify a financial institution.
+      additionalProperties: false
+      properties:
+        clearing_system_member_identification:
+          description: Information used to identify a member within a clearing system.
+          $ref: "#/components/schemas/ClearingSystemMemberIdentification2__1"
+      required:
+        - clearing_system_member_identification
+    ImpliedCurrencyAndAmount:
+      type: number
+      description: >-
+        Number of monetary units specified in a currency where the unit of currency
+        is implied by the context and compliant with ISO 4217. The decimal
+        separator is a dot.
+
+        Note: a zero amount is considered a positive amount.
+      minimum: 0
+    LongPaymentIdentification2__1:
+      type: object
+      description: Identifies a payment instruction by a set of characteristics (as per EBA system requirements) which provides an unambiguous identification of the instruction.
+      additionalProperties: false
+      properties:
+        transaction_identification:
+          type: string
+          description: "Unique identification, as assigned by the first instructing agent, to unambiguously identify the transaction that is passed on, unchanged, throughout the entire interbank chain. Usage: The transaction identification can be used for reconciliation, tracking or to link tasks relating to the transaction on the interbank level. The instructing agent has to make sure that the transaction identification is unique for a pre-agreed period. Usage: this is the former PaymentInstructionReference element."
+          minLength: 1
+          maxLength: 35
+        inter_bank_settlement_amount:
+          description: Amount of money moved between the instructing agent and the instructed agent.
+          $ref: "#/components/schemas/ImpliedCurrencyAndAmount"
+        inter_bank_settlement_date:
+          description: Date on which the amount of money ceases to be available to the agent that owes it and when the amount of money becomes available to the agent to which it is due.
+          $ref: "common.yaml#/components/schemas/ISODate"
+        instructing_agent:
+          description: Agent that instructs the next party in the chain to carry out the (set of) instruction(s).
+          $ref: "#/components/schemas/BranchAndFinancialInstitutionIdentification6__1"
+        instructed_agent:
+          description: Agent that is instructed by the previous party in the chain to carry out the (set of) instruction(s).
+          $ref: "#/components/schemas/BranchAndFinancialInstitutionIdentification6__1"
+        end_to_end_identification:
+          type: string
+          description: "Unique identification, as assigned by the initiating party, to unambiguously identify the transaction. This identification is passed on, unchanged, throughout the entire end-to-end chain. Usage: The end-to-end identification can be used for reconciliation or to link tasks relating to the transaction. It can be included in several messages related to the transaction. Usage: this is the former RelatedReference."
+          minLength: 1
+          maxLength: 35
+      required:
+        - transaction_identification
+        - inter_bank_settlement_amount
+        - inter_bank_settlement_date
+        - instructing_agent
+        - instructed_agent
+        - end_to_end_identification
+    MessageHeader1__1:
+      type: object
+      description: "Set of characteristics, such as the identification or the creation date and time, specific to the message."
+      additionalProperties: false
+      properties:
+        message_identification:
+          type: string
+          description: "Point to point reference, as assigned by the sender, to unambiguously identify the message. Usage: The sender has to make sure that MessageIdentification is unique for a pre-agreed period."
+          minLength: 1
+          maxLength: 35
+        creation_date_time:
+          description: Date and time at which the message was created.
+          $ref: "common.yaml#/components/schemas/ISODateTime"
+      required:
+        - message_identification
+        - creation_date_time
+    ModifyTransactionV08:
+      type: object
+      description: "Scope\r\nThe ModifyTransaction message is sent by a member to the transaction administrator.\r\nIt is used to request one modification in one payment instruction held at the transaction administrator and sent by the member, debiting or crediting its account at the transaction administrator.\r\nUsage\r\nFollowing normal business flows, transactions registered by the transaction administrator may be queued for later settlement (because of insufficient funds available, or because of risk or liquidity limits, etc.). A transaction may have a series of statuses. These can be transient (such as pending or related types) and final (such as rejected, revoked and/or settled).\r\nMembers of a system need to have information about the payments queue(s) and must have the ability to take action (that is, to cancel or modify the transaction(s) to be settled). Note, however, that actions by a member will always concern transactions in a transient status.\r\nFor this reason, at any time during the operating hours of the system, the member can request modifications to the features of transient transactions.\r\nThe member will submit a message requesting modifications in one or more of the following criteria:\r\n- instruction given, related to the processing of the transaction\r\n- type of payment instructed\r\n- priority of payment period in which the payment instruction should be processed (processing validity time)\r\nThe ModifyTransaction message will contain the new values that the member wants to see applied to the features of the transaction identified in the message.\r\nBased on the criteria received within the ModifyTransaction message, the transaction administrator will execute or reject the requested modifications.\r\nThe transaction administrator may send a Receipt message as a reply to the ModifyTransaction request.\r\nTo verify the outcome of the request, the member may submit a GetTransaction message with the appropriate search criteria."
+      additionalProperties: false
+      properties:
+        message_header:
+          description: Common business identification for the message.
+          $ref: "#/components/schemas/MessageHeader1__1"
+        modification:
+          description: Identifies the list of modifications to be executed.
+          $ref: "#/components/schemas/TransactionModification5__1"
+      required:
+        - message_header
+        - modification
+    PaymentIdentification6Choice__1:
+      type: object
+      description: Choice between ways of identifying a payment instruction by its references and business identification.
+      additionalProperties: false
+      properties:
+        long_business_identification:
+          description: Business identification of the payment instruction given by the clearing agent.
+          $ref: "#/components/schemas/LongPaymentIdentification2__1"
+      required:
+        - long_business_identification
+    PaymentInstruction33__1:
+      type: object
+      description: Provides details on the payment instruction.
+      additionalProperties: false
+      properties:
+        priority:
+          description: Urgency or order of importance that the originator would like the recipient of the payment instruction to apply to the processing of the payment instruction. .
+          $ref: "#/components/schemas/Priority1Choice__1"
+      required:
+        - priority
+    Priority1Choice__1:
+      type: object
+      description: Priority is expressed as a code or a text.
+      additionalProperties: false
+      properties:
+        proprietary:
+          type: string
+          description: Priority code bilaterally agreed between parties.
+          minLength: 1
+          maxLength: 35
+      required:
+        - proprietary
+    TransactionModification5__1:
+      type: object
+      description: Contains the requested modifications.
+      additionalProperties: false
+      properties:
+        payment_identification:
+          description: Reference to the instruction related to the payment for which a modification is requested.
+          $ref: "#/components/schemas/PaymentIdentification6Choice__1"
+        new_payment_value_set:
+          description: New payment values.
+          $ref: "#/components/schemas/PaymentInstruction33__1"
+      required:
+        - payment_identification
+        - new_payment_value_set

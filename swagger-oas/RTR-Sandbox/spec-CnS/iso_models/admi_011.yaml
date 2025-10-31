@@ -1,0 +1,37 @@
+# RTR C&S ISO 20022 JSON Schema SystemEventAcknowledgementV01 (admi.011.001.01)
+components:
+  schemas:
+    SystemEventAcknowledgementV01:
+      type: object
+      description: "The SystemEventAcknowledgement message is sent by a participant of a central system to the central system to acknowledge the notification of an occurrence of an event in a central system.\r\n"
+      additionalProperties: false
+      properties:
+        message_identification:
+          type: string
+          description: "Unique and unambiguous identifier for the message, as assigned by the sender."
+          minLength: 1
+          maxLength: 35
+        acknowledgement_details:
+          description: Details of the system event being acknowledged.
+          $ref: "#/components/schemas/Event1__1"
+      required:
+        - message_identification
+        - acknowledgement_details
+    Event1__1:
+      type: object
+      description: Provides information on an event that happened in a system.
+      additionalProperties: false
+      properties:
+        event_code:
+          type: string
+          description: Proprietary code used to specify an event that occurred in a system.
+          minLength: 1
+          maxLength: 4
+        event_description:
+          type: string
+          description: Free text used to describe an event which occurred in a system.
+          minLength: 1
+          maxLength: 350
+      required:
+        - event_code
+        - event_description

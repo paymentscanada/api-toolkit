@@ -1,0 +1,97 @@
+x-linker-objects:
+  standard:
+    - $ref: "#/TraceabilityId"
+  payment-engine:
+    - $ref: "#/TraceabilityId"
+    - $ref: "#/Signature"
+    - $ref: "#/RequestId"
+  view-transaction:
+    - $ref: "#/TraceabilityId"
+    - $ref: "#/RequestorFI"
+  registry-participant-list:
+    - $ref: "#/TraceabilityId"
+    - $ref: "#/PageSize"
+    - $ref: "#/PageNumber"
+    - $ref: "#/Active"
+
+TraceabilityId:
+  description: >-
+    A unique identifier per RTR Exchange API call for purpose of tracing a request through all systems. For example, traceability-id must be UUID.
+    All the messages sent to other systems will have the same traceability-id as the message that originated them.
+  in: header
+  name: traceability-id
+  schema:
+    type: string
+    format: uuid
+  required: true
+  example: e23d32eb-c7f2-4836-a314-557efe95a525
+Signature:
+  in: header
+  name: x-jws-signature
+  description: >-
+    The JWS signature of request payload.
+  schema:
+    type: string
+    minLength: 1
+  required: true
+  example: eyJjcml0IjpbImlhdCJdLCJpYXQiOjE2MzcyNzIxMzUyNTIsImFsZyI6IlJTMjU2Iiwia2lkIjoic2lnbi1rZXktY2EwMDAwMDEtMDAxIn0.V7skMzl3rUZK7N5pYVlicNt3TWXNBZyX-rtNV7n5rOc.hBDcIL9ptXWfOsg2pRSTy5dzFsowqjvE0G8dglODTSFpRM-iL1khjomuaYx_LnZV_lTnwkfMHknLdJuG5ucM7gpTZ98a1egjTcQisWHRO0fCr-sxqZXusGIB-hgAnB16Fn9UtdNdzsl447C0c3sSmytYn6eeMu5c6RWVrq-xB5KD9_JGexpyTw3IBvXavpd7h7QgnNzmcdWjV0yVXh74x4gmD8hTSbRkv54MYzap2BSFXLgxCwOrS7Jw0tQzCcP8a7gcOunO9Zr3ArgH-4Ur0VRWxIH4GaDksCBKdx1JdXFUToqG5Ben-FNyAzxkVxtuuwYMCbT1I3-8mCoj7nTtYw
+RequestId:
+  in: header
+  name: x-uetr
+  description: >-
+    This is the UETR, a unique ID generated for each Credit Transfer (pacs.008) used for message tracking purposes.
+    This header is required for the following ISO specs:
+      - pacs.008
+      - pacs.004 (post-R1 scope)
+      - pacs.028
+      - camt.029 (post-R1 scope)
+      - camt.056 (post-R1 scope)
+      - camt.006
+    Note that this header may be required in new ISO messages that are not listed above in future releases, the list will be updated per release.
+  schema:
+    type: string
+    minLength: 1
+    maxLength: 36
+  required: false
+  example: eb6305c9-1f7f-49de-aed0-16487c27b42d
+RequestorFI:
+  in: header
+  name: requestor-fi
+  description: >-
+    requestor-fi
+  schema:
+    type: string
+    minLength: 1
+    maxLength: 36
+  required: true
+  example: TDCA56320
+PageSize:
+  in: header
+  name: PageSize
+  description: >-
+    Optional element that specifies the number of records requested to be returned per response (page) When this element is not present, 
+    the API will apply a system wide defined limit for that specific service.
+  schema:
+    type: string
+  required: false
+  example: 300
+PageNumber:
+  in: header
+  name: PageNumber
+  description: >-
+    Optional element that specifies the page number to be returned.When this element is not present, 
+    the API will return records from page 0 (i.e. the first page).
+  schema:
+    type: string
+  required: false
+  example: 0
+Active:
+  in: header
+  name: Active
+  description: >-
+    The Active or Inactive status of the Participant.  Leave blank to get both Active and Inactive Participants. 
+    If true, the Participant is active. If false, the Participant is inactive.
+  schema:
+    type: string
+  required: false
+  example: null, true, false

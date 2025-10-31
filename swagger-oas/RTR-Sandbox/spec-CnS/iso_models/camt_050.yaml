@@ -1,0 +1,167 @@
+# RTR C&S ISO 20022 JSON Schema LiquidityCreditTransfer (camt.050.001.05)
+components:
+  schemas:
+    LiquidityCreditTransferV05:
+      type: object
+      description: "Scope\r\nThe LiquidityCreditTransfer message is sent by a member to the transaction administrator.\r\nIt is used to request a transfer of funds between two accounts belonging to the same member or the same group of accounts, and being held at the transaction administrator.\r\nUsage\r\nAt any time during the operating hours of the system, and to perform the appropriate liquidity management, the member can request the transaction administrator to execute the transfer of funds between two accounts that the transaction administrator maintains for the member. For instance, this may be an action resulting from a Get/Return Account pair of messages.\r\nThe LiquidityCreditTransfer message can be used when the transactions to/from the member are unbalanced in value for the business day, or to unlock pending transactions at the end of day.\r\nThe member can request the transfer by identifying the accounts stored at the transaction administrator:\r\n- If the accounts involved in the requested transfer are known without doubt to the transaction administrator, it is possible to indicate only the type of the account to be credited.\r\n- If, on the contrary, more clarity is desired, it is possible to identify the accounts from and to which the funds should be transferred.\r\nNote that transfers are processed only when the balance in the account to be debited is sufficient to pass the liquidity transfer instruction and remain positive. Based on the criteria received within the LiquidityCreditTransfer message, the transaction administrator will execute or reject the requested transfer.\r\nIn principle, the transaction administrator may send a Receipt message as a reply to the liquidity transfer request. To verify the outcome of the request, the member may submit a GetTransaction or GetAccount message with the appropriate search criteria."
+      additionalProperties: false
+      properties:
+        message_header:
+          description: Common business identification for the message.
+          $ref: "#/components/schemas/MessageHeader1__1"
+        liquidity_credit_transfer:
+          description: Details of the liquidity credit transfer.
+          $ref: "#/components/schemas/LiquidityCreditTransfer2__1"
+      required:
+        - message_header
+        - liquidity_credit_transfer
+    MessageHeader1__1:
+      type: object
+      description: "Set of characteristics, such as the identification or the creation date and time, specific to the message."
+      additionalProperties: false
+      properties:
+        message_identification:
+          type: string
+          description: "Point to point reference, as assigned by the sender, to unambiguously identify the message. Usage: The sender has to make sure that MessageIdentification is unique for a pre-agreed period."
+          minLength: 1
+          maxLength: 35
+        creation_date_time:
+          description: Date and time at which the message was created.
+          $ref: "common.yaml#/components/schemas/ISODateTime"
+      required:
+        - message_identification
+        - creation_date_time
+    AccountIdentification4Choice__1:
+      type: object
+      description: Specifies the unique identification of an account as assigned by the account servicer.
+      additionalProperties: false
+      properties:
+        other:
+          description: "Unique identification of an account, as assigned by the account servicer, using an identification scheme."
+          $ref: "#/components/schemas/GenericAccountIdentification1__1"
+      required:
+        - other
+    GenericAccountIdentification1__1:
+      type: object
+      description: Information related to a generic account identification.
+      additionalProperties: false
+      properties:
+        identification:
+          description: Identification assigned by an institution.
+          type: string
+          minLength: 1
+          maxLength: 34
+      required:
+        - identification
+    Amount2Choice__1:
+      type: object
+      description: Choice between an amount with or without the currency.
+      additionalProperties: false
+      properties:
+        amount_with_currency:
+          description: Number of monetary units specified in a currency where the unit of currency is explicit.
+          $ref: "#/components/schemas/ActiveCurrencyAndAmount"
+      required:
+        - amount_with_currency
+    ActiveCurrencyAndAmount:
+      type: object
+      description: A number of monetary units specified in an active currency where the unit of currency is explicit and compliant with ISO 4217.
+      additionalProperties: false
+      properties:
+        currency:
+          $ref: "#/components/schemas/ActiveCurrencyCode"
+        amount:
+          type: number
+          minimum: 0
+      required:
+        - currency
+        - amount
+    ActiveCurrencyCode:
+      type: string
+      pattern: "^[A-Z]{3,3}$"
+      description: 'A code allocated to a currency by a Maintenance Agency under an international identification scheme as described in the latest edition of the international standard ISO 4217 "Codes for the representation of currencies and funds".'
+    BranchAndFinancialInstitutionIdentification6__1:
+      type: object
+      description: Unique and unambiguous identification of a financial institution or a branch of a financial institution.
+      additionalProperties: false
+      properties:
+        financial_institution_identification:
+          description: "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme."
+          $ref: "#/components/schemas/FinancialInstitutionIdentification18__1"
+      required:
+        - financial_institution_identification
+    CashAccount38__1:
+      type: object
+      description: Provides the details to identify an account.
+      additionalProperties: false
+      properties:
+        identification:
+          description: Unique and unambiguous identification for the account between the account owner and the account servicer.
+          $ref: "#/components/schemas/AccountIdentification4Choice__1"
+      required:
+        - identification
+    ClearingSystemMemberIdentification2__1:
+      type: object
+      description: "Unique identification, as assigned by a clearing system, to unambiguously identify a member of the clearing system."
+      additionalProperties: false
+      properties:
+        member_identification:
+          type: string
+          description: Identification of a member of a clearing system.
+          minLength: 1
+          maxLength: 35
+      required:
+        - member_identification
+    FinancialInstitutionIdentification18__1:
+      type: object
+      description: Specifies the details to identify a financial institution.
+      additionalProperties: false
+      properties:
+        clearing_system_member_identification:
+          description: Information used to identify a member within a clearing system.
+          $ref: "#/components/schemas/ClearingSystemMemberIdentification2__1"
+      required:
+        - clearing_system_member_identification
+    LiquidityCreditTransfer2__1:
+      type: object
+      description: "Provides details specific to the liquidity credit transfer, used to transfer an amount of money from the debtor to the creditor, where both are financial institutions."
+      additionalProperties: false
+      properties:
+        liquidity_transfer_identification:
+          description: Used to uniquely identify the liquidity transfer.
+          $ref: "#/components/schemas/PaymentIdentification8__1"
+        creditor:
+          description: Owner of the account to be credited.
+          $ref: "#/components/schemas/BranchAndFinancialInstitutionIdentification6__1"
+        creditor_account:
+          description: Account to be credited as a result of a transfer of liquidity.
+          $ref: "#/components/schemas/CashAccount38__1"
+        transferred_amount:
+          description: Amount of money that the transaction administrator transfers from one account to another.
+          $ref: "#/components/schemas/Amount2Choice__1"
+        debtor:
+          description: Owner of the account to be debited.
+          $ref: "#/components/schemas/BranchAndFinancialInstitutionIdentification6__1"
+        debtor_account:
+          description: Account to be debited as a result of a transfer of liquidity.
+          $ref: "#/components/schemas/CashAccount38__1"
+      required:
+        - liquidity_transfer_identification
+        - creditor
+        - transferred_amount
+        - debtor
+    PaymentIdentification8__1:
+      type: object
+      description: Set of elements used to provide further means of referencing a payment transaction.
+      additionalProperties: false
+      properties:
+        end_to_end_identification:
+          type: string
+          description: "Unique identification assigned by the initiating party to unambiguously identify the transaction. This identification is passed on, unchanged, throughout the entire end-to-end chain.  Usage: The end-to-end identification can be used for reconciliation or to link tasks relating to the transaction. It can be included in several messages related to the transaction."
+          minLength: 1
+          maxLength: 35
+        uetr:
+          description: Universally unique identifier to provide an end-to-end reference of a payment transaction.
+          $ref: "common.yaml#/components/schemas/UUIDv4Identifier"
+      required:
+        - end_to_end_identification

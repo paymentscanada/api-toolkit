@@ -1,0 +1,55 @@
+# RTR C&S ISO 20022 JSON Schema GetAccountV07 (camt.003.001.07)
+components:
+  schemas:
+    AccountCriteria3Choice__1:
+      type: object
+      description: Defines the information that is searched either implicitly by recalling a previous query or explicitly by defining the criteria.
+      additionalProperties: false
+      properties:
+        query_name:
+          type: string
+          description: Recalls the criteria (search and return criteria) defined in a preceding query.
+          minLength: 1
+          maxLength: 35
+      required:
+        - query_name
+    AccountQuery3__1:
+      type: object
+      description: Specification of the query criteria.
+      additionalProperties: false
+      properties:
+        account_criteria:
+          description: Defines the account query criteria.
+          $ref: "#/components/schemas/AccountCriteria3Choice__1"
+      required:
+        - account_criteria
+    GetAccountV07:
+      type: object
+      description: "Scope\r\nThe GetAccount message is sent by a member to the transaction administrator.\r\nIt is used to request information on the details of one or more accounts held at the transaction administrator, including information on the balances.\r\nUsage\r\nAt any time during the operating hours of the system, the member can query the transaction administrator to get information about the account(s) that the transaction administrator maintains for the member.\r\nFor example, this may be necessary in order to perform the appropriate liquidity management and the funds transfers between accounts.\r\nThe member can request information about accounts through a series of criteria, corresponding to the known information stored at the transaction administrator.\r\nThe query can concern one or more specific accounts, accounts of a particular identification, or a particular type. The purpose of the query may be to obtain one or more types of balance.\r\nThe member can request information based on the following elements:\r\n- account identification\r\n- account type (this element can be used to refine the query when the account identification represents, for example, a group of accounts)\r\n- balance type (if not present, all balances are requested)\r\n- type of counterparty: bilateral or multilateral (note that, by default, a balance is multilateral unless a particular counterparty is specified)\r\n- identification of the counterparty when a bilateral balance is requested\r\n- balance value date (if not present in the GetAccount message, the ReturnAccount message will contain the latest available balance)\r\nThis message will be answered by a ReturnAccount message.\r\nAdditional information on the generic design of the Get/Return messages can be found in the section How to Use the Cash Management Messages."
+      additionalProperties: false
+      properties:
+        message_header:
+          description: Common business identification for the message.
+          $ref: "#/components/schemas/MessageHeader9__1"
+        account_query_definition:
+          description: Defines the account query criteria.
+          $ref: "#/components/schemas/AccountQuery3__1"
+      required:
+        - message_header
+        - account_query_definition
+    MessageHeader9__1:
+      type: object
+      description: "Set of characteristics, such as the identification or the creation date and time, specific to the message."
+      additionalProperties: false
+      properties:
+        message_identification:
+          type: string
+          description: "Point to point reference, as assigned by the sender, to unambiguously identify the message. Usage: The sender has to make sure that MessageIdentification is unique for a pre-agreed period."
+          minLength: 1
+          maxLength: 35
+        creation_date_time:
+          description: Date and time at which the message was created.
+          $ref: "common.yaml#/components/schemas/ISODateTime"
+      required:
+        - message_identification
+        - creation_date_time

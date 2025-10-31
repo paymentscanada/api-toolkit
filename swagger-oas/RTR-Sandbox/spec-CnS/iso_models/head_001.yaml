@@ -1,0 +1,831 @@
+components:
+  schemas:
+    AddressType2Code:
+      type: string
+      description: |-
+        Specifies the type of address.
+        *`ADDR`-Address is the complete postal address.
+        *`PBOX`-Address is a postal office (PO) box.
+        *`HOME`-Address is the home address.
+        *`BIZZ`-Address is the business address.
+        *`MLTO`-Address is the address to which mail is sent.
+        *`DLVY`-Address is the address to which delivery is to take place.
+      enum:
+        - ADDR
+        - PBOX
+        - HOME
+        - BIZZ
+        - MLTO
+        - DLVY
+    AddressType3Choice:
+      type: object
+      description: Choice of formats for the type of address.
+      additionalProperties: false
+      oneOf:
+        - type: object
+          additionalProperties: false
+          properties:
+            code:
+              description: Type of address expressed as a code.
+              $ref: "#/components/schemas/AddressType2Code"
+          required:
+            - code
+        - type: object
+          additionalProperties: false
+          properties:
+            proprietary:
+              description: Type of address expressed as a proprietary code.
+              $ref: "#/components/schemas/GenericIdentification30"
+          required:
+            - proprietary
+    AnyBICDec2014Identifier:
+      type: string
+      description: 'Code allocated to a financial or non-financial institution by the ISO 9362 Registration Authority, as described in ISO 9362: 2014 - "Banking - Banking telecommunication messages - Business identifier code (BIC)".'
+      pattern: "^[A-Z0-9]{4,4}[A-Z]{2,2}[A-Z0-9]{2,2}([A-Z0-9]{3,3}){0,1}$"
+    BICFIDec2014Identifier:
+      type: string
+      description: 'Code allocated to a financial institution by the ISO 9362 Registration Authority as described in ISO 9362: 2014 - "Banking - Banking telecommunication messages - Business identifier code (BIC)".'
+      pattern: "^[A-Z0-9]{4,4}[A-Z]{2,2}[A-Z0-9]{2,2}([A-Z0-9]{3,3}){0,1}$"
+    BranchAndFinancialInstitutionIdentification6:
+      type: object
+      description: Unique and unambiguous identification of a financial institution or a branch of a financial institution.
+      additionalProperties: false
+      properties:
+        financial_institution_identification:
+          description: "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme."
+          $ref: "#/components/schemas/FinancialInstitutionIdentification18"
+        branch_identification:
+          description: "Identifies a specific branch of a financial institution.  Usage: This component should be used in case the identification information in the financial institution component does not provide identification up to branch level."
+          $ref: "#/components/schemas/BranchData3"
+      required:
+        - financial_institution_identification
+    BranchData3:
+      type: object
+      description: Information that locates and identifies a specific branch of a financial institution.
+      additionalProperties: false
+      properties:
+        identification:
+          type: string
+          description: Unique and unambiguous identification of a branch of a financial institution.
+          minLength: 1
+          maxLength: 35
+        lei:
+          description: Legal entity identification for the branch of the financial institution.
+          $ref: "#/components/schemas/LEIIdentifier"
+        name:
+          type: string
+          description: Name by which an agent is known and which is usually used to identify that agent.
+          minLength: 1
+          maxLength: 140
+        postal_address:
+          description: "Information that locates and identifies a specific address, as defined by postal services."
+          $ref: "#/components/schemas/PostalAddress24"
+    BusinessApplicationHeader5__1:
+      type: object
+      description: "Specifies the Business Application Header of the Business Message.\r\nCan be used when replying to a query; can also be used when canceling or amending."
+      additionalProperties: false
+      properties:
+        character_set:
+          description: Contains the character set of the text-based elements used in the Business Message.
+          $ref: "#/components/schemas/UnicodeChartsCode"
+        from:
+          description: "The sending MessagingEndpoint that has created this Business Message for the receiving MessagingEndpoint that will process this Business Message.  Note\tthe sending MessagingEndpoint might be different from the sending address potentially contained in the transport header (as defined in the transport layer)."
+          $ref: "#/components/schemas/Party44Choice"
+        to:
+          description: The MessagingEndpoint designated by the sending MessagingEndpoint to be the recipient who will ultimately process this Business Message.  Note the receiving MessagingEndpoint might be different from the receiving address potentially contained in the transport header (as defined in the transport layer).
+          $ref: "#/components/schemas/Party44Choice"
+        business_message_identifier:
+          description: Unambiguously identifies the Business Message to the MessagingEndpoint that has created the Business Message.
+          type: string
+          minLength: 1
+          maxLength: 35
+        message_definition_identifier:
+          description: "Contains the MessageIdentifier that defines the BusinessMessage. It must contain a MessageIdentifier published on the ISO 20022 website.  example\tcamt.001.001.03."
+          type: string
+          minLength: 1
+          maxLength: 35
+        business_service:
+          description: "Specifies the business service agreed between the two MessagingEndpoints under which rules this Business Message is exchanged.  To be used when there is a choice of processing services or processing service levels. Example: E&I."
+          type: string
+          minLength: 1
+          maxLength: 35
+        creation_date:
+          description: 'Date and time when this Business Message (header) was created. Note Times must be normalized, using the "Z" annotation.'
+          $ref: "common.yaml#/components/schemas/ISODateTime"
+        copy_duplicate:
+          description: "Indicates whether the message is a Copy, a Duplicate or a copy of a duplicate of a previously sent ISO 20022 Message."
+          $ref: "#/components/schemas/CopyDuplicate1Code"
+        possible_duplicate:
+          description: 'Flag indicating if the Business Message exchanged between the MessagingEndpoints is possibly a duplicate.  If the receiving MessagingEndpoint did not receive the original, then this Business Message should be processed as if it were the original.   If the receiving MessagingEndpoint did receive the original, then it should perform necessary actions to avoid processing this Business Message again.  This will guarantee business idempotent behaviour.  NOTE: this is named "PossResend" in FIX - this is an application level resend not a network level retransmission.'
+          $ref: "#/components/schemas/YesNoIndicator"
+        priority:
+          description: Relative indication of the processing precedence of the message over a (set of) Business Messages with assigned priorities.
+          $ref: "#/components/schemas/BusinessMessagePriorityCode"
+      required:
+        - from
+        - to
+        - business_message_identifier
+        - message_definition_identifier
+        - creation_date
+    BusinessApplicationHeaderV02:
+      type: object
+      description: "The Business Layer deals with Business Messages. The behaviour of the Business Messages is fully described by the Business Transaction and the structure of the Business Messages is fully described by the Message Definitions and related Message Rules, Rules and Market Practices. All of which are registered in the ISO 20022 Repository.\r\nA single new Business Message (with its accompagnying business application header) is created - by the sending MessagingEndpoint - for each business event; that is each interaction in a Business Transaction. A Business Message adheres to the following principles:\r\n\" A Business Message (and its business application header) must not contain information about the Message Transport System or the mechanics or mechanism of message sending, transportation, or receipt. \r\n\" A Business Message must be comprehensible outside of the context of the Transport Message. That is the Business Message must not require knowledge of the Transport Message to be understood.\r\n\" A Business Message may contain headers, footers, and envelopes that are meaningful for the business. When present, they are treated as any other message content, which means that they are considered part of the Message Definition of the Business Message and as such will be part of the ISO 20022 Repository.\r\n\" A Business Message refers to Business Actors by their Name. Each instance of a Business Actor has one Name. The Business Actor must not be referred to in the Transport Layer.\r\nSpecific usage of this BusinessMessageHeader may be defined by the relevant SEG."
+      additionalProperties: false
+      properties:
+        from:
+          description: "The sending MessagingEndpoint that has created this Business Message for the receiving MessagingEndpoint that will process this Business Message.  Note\tthe sending MessagingEndpoint might be different from the sending address potentially contained in the transport header (as defined in the transport layer)."
+          $ref: "#/components/schemas/Party44Choice__1"
+        to:
+          description: The MessagingEndpoint designated by the sending MessagingEndpoint to be the recipient who will ultimately process this Business Message.  Note the receiving MessagingEndpoint might be different from the receiving address potentially contained in the transport header (as defined in the transport layer).
+          $ref: "#/components/schemas/Party44Choice__1"
+        business_message_identifier:
+          description: Unambiguously identifies the Business Message to the MessagingEndpoint that has created the Business Message.
+          type: string
+          minLength: 1
+          maxLength: 35
+        message_definition_identifier:
+          description: "Contains the MessageIdentifier that defines the BusinessMessage. It must contain a MessageIdentifier published on the ISO 20022 website.  example\tcamt.001.001.03."
+          type: string
+          minLength: 1
+          maxLength: 35
+        business_service:
+          description: "Specifies the business service agreed between the two MessagingEndpoints under which rules this Business Message is exchanged.  To be used when there is a choice of processing services or processing service levels. Example: E&I."
+          type: string
+          minLength: 1
+          maxLength: 35
+        creation_date:
+          description: Date and time when this Business Message (header) was created.
+          $ref: "common.yaml#/components/schemas/ISODateTime"
+        copy_duplicate:
+          description: "Indicates whether the message is a Copy, a Duplicate or a copy of a duplicate of a previously sent ISO 20022 Message."
+          $ref: "#/components/schemas/CopyDuplicate1Code__1"
+        related:
+          description: Specifies the Business Application Header(s) of the Business Message(s) to which this Business Message relates. Can be used when replying to a query; can also be used when canceling or amending.
+          $ref: "#/components/schemas/BusinessApplicationHeader5__1"
+      required:
+        - from
+        - to
+        - business_message_identifier
+        - message_definition_identifier
+        - creation_date
+    BusinessMessagePriorityCode:
+      type: string
+      description: "Specifies the priority levels for the BusinessMessage.\r\nThe different priorities are typically user / service / implementation dependent. The semantics of the different values for a Mesage (Set) need to be defined by the relevant user community (SEG.)."
+    ClearingSystemIdentification2Choice:
+      type: object
+      description: Choice of a clearing system identifier.
+      additionalProperties: false
+      oneOf:
+        - type: object
+          additionalProperties: false
+          properties:
+            code:
+              description: "Identification of a clearing system, in a coded form as published in an external list."
+              $ref: "#/components/schemas/ExternalClearingSystemIdentification1Code"
+          required:
+            - code
+        - type: object
+          additionalProperties: false
+          properties:
+            proprietary:
+              type: string
+              description: "Identification code for a clearing system, that has not yet been identified in the list of clearing systems."
+              minLength: 1
+              maxLength: 35
+          required:
+            - proprietary
+    ClearingSystemMemberIdentification2:
+      type: object
+      description: "Unique identification, as assigned by a clearing system, to unambiguously identify a member of the clearing system."
+      additionalProperties: false
+      properties:
+        clearing_system_identification:
+          description: Specification of a pre-agreed offering between clearing agents or the channel through which the payment instruction is processed.
+          $ref: "#/components/schemas/ClearingSystemIdentification2Choice"
+        member_identification:
+          type: string
+          description: Identification of a member of a clearing system.
+          minLength: 1
+          maxLength: 35
+      required:
+        - member_identification
+    Contact4:
+      type: object
+      description: Specifies the details of the contact person.
+      additionalProperties: false
+      properties:
+        name_prefix:
+          description: Specifies the terms used to formally address a person.
+          $ref: "#/components/schemas/NamePrefix2Code"
+        name:
+          type: string
+          description: Name by which an agent is known and which is usually used to identify that agent.
+          minLength: 1
+          maxLength: 140
+        phone_number:
+          description: "Collection of information that identifies a phone number, as defined by telecom services."
+          $ref: "#/components/schemas/PhoneNumber"
+        mobile_number:
+          description: "Collection of information that identifies a mobile phone number, as defined by telecom services."
+          $ref: "#/components/schemas/PhoneNumber"
+        fax_number:
+          description: "Collection of information that identifies a FAX number, as defined by telecom services."
+          $ref: "#/components/schemas/PhoneNumber"
+        email_address:
+          type: string
+          description: Address for electronic mail (e-mail).
+          minLength: 1
+          maxLength: 2048
+        email_purpose:
+          type: string
+          description: Purpose for which an email address may be used.
+          minLength: 1
+          maxLength: 35
+        job_title:
+          type: string
+          description: Title of the function.
+          minLength: 1
+          maxLength: 35
+        responsibility:
+          type: string
+          description: Role of a person in an organisation.
+          minLength: 1
+          maxLength: 35
+        department:
+          type: string
+          description: Identification of a division of a large organisation or building.
+          minLength: 1
+          maxLength: 70
+        other:
+          type: array
+          description: Contact details in another form.
+          items:
+            $ref: "#/components/schemas/OtherContact1"
+        preferred_method:
+          description: Preferred method used to reach the contact.
+          $ref: "#/components/schemas/PreferredContactMethod1Code"
+    CopyDuplicate1Code:
+      type: string
+      description: >-
+        Specifies if this document is a copy, a duplicate, or a duplicate of
+        a copy.
+
+        *`CODU`-Message is being sent as a copy to a party other than the account
+        owner, for information purposes and the message is a duplicate of a message
+        previously sent.
+
+        *`COPY`-Message is being sent as a copy to a party other than the account
+        owner, for information purposes.
+
+        *`DUPL`-Message is for information/confirmation purposes. It is a duplicate
+        of a message previously sent.
+      enum:
+        - CODU
+        - COPY
+        - DUPL
+    CopyDuplicate1Code__1:
+      type: string
+      description: >-
+        Specifies if this document is a copy, a duplicate, or a duplicate of
+        a copy.
+
+        *`DUPL`-Message is for information/confirmation purposes. It is a duplicate
+        of a message previously sent.
+      enum:
+        - DUPL
+    CountryCode:
+      type: string
+      pattern: "^[A-Z]{2,2}$"
+      description: "Code to identify a country, a dependency, or another area of particular geopolitical interest, on the basis of country names obtained from the United Nations (ISO 3166, Alpha-2 code)."
+    DateAndPlaceOfBirth1:
+      type: object
+      description: Date and place of birth of a person.
+      additionalProperties: false
+      properties:
+        birth_date:
+          description: Date on which a person is born.
+          $ref: "common.yaml#/components/schemas/ISODate"
+        province_of_birth:
+          type: string
+          description: Province where a person was born.
+          minLength: 1
+          maxLength: 35
+        city_of_birth:
+          type: string
+          description: City where a person was born.
+          minLength: 1
+          maxLength: 35
+        country_of_birth:
+          description: Country where a person was born.
+          $ref: "#/components/schemas/CountryCode"
+      required:
+        - birth_date
+        - city_of_birth
+        - country_of_birth
+    Exact4AlphaNumericText:
+      type: string
+      description: Specifies an alphanumeric string with a length of 4 characters.
+      pattern: "^[a-zA-Z0-9]{4}$"
+    ExternalClearingSystemIdentification1Code:
+      type: string
+      minLength: 1
+      maxLength: 5
+      description: "Specifies the clearing system identification code, as published in an external clearing system identification code list.\r\nExternal code sets can be downloaded from www.iso20022.org."
+    ExternalFinancialInstitutionIdentification1Code:
+      type: string
+      minLength: 1
+      maxLength: 4
+      description: "Specifies the external financial institution identification scheme name code in the format of character string with a maximum length of 4 characters.\r\nThe list of valid codes is an external code list published separately.\r\nExternal code sets can be downloaded from www.iso20022.org."
+    ExternalOrganisationIdentification1Code:
+      type: string
+      minLength: 1
+      maxLength: 4
+      description: "Specifies the external organisation identification scheme name code in the format of character string with a maximum length of 4 characters.\r\nThe list of valid codes is an external code list published separately.\r\nExternal code sets can be downloaded from www.iso20022.org."
+    ExternalPersonIdentification1Code:
+      type: string
+      minLength: 1
+      maxLength: 4
+      description: "Specifies the external person identification scheme name code in the format of character string with a maximum length of 4 characters.\r\nThe list of valid codes is an external code list published separately.\r\nExternal code sets can be downloaded from www.iso20022.org."
+    FinancialIdentificationSchemeName1Choice:
+      type: object
+      description: Sets of elements to identify a name of the organisation identification scheme.
+      additionalProperties: false
+      oneOf:
+        - type: object
+          additionalProperties: false
+          properties:
+            code:
+              description: "Name of the identification scheme, in a coded form as published in an external list."
+              $ref: "#/components/schemas/ExternalFinancialInstitutionIdentification1Code"
+          required:
+            - code
+        - type: object
+          additionalProperties: false
+          properties:
+            proprietary:
+              type: string
+              description: "Name of the identification scheme, in a free text form."
+              minLength: 1
+              maxLength: 35
+          required:
+            - proprietary
+    FinancialInstitutionIdentification18:
+      type: object
+      description: Specifies the details to identify a financial institution.
+      additionalProperties: false
+      properties:
+        bicfi:
+          description: 'Code allocated to a financial institution by the ISO 9362 Registration Authority as described in ISO 9362 "Banking - Banking telecommunication messages - Business identifier code (BIC)".'
+          $ref: "#/components/schemas/BICFIDec2014Identifier"
+        clearing_system_member_identification:
+          description: Information used to identify a member within a clearing system.
+          $ref: "#/components/schemas/ClearingSystemMemberIdentification2"
+        lei:
+          description: Legal entity identifier of the financial institution.
+          $ref: "#/components/schemas/LEIIdentifier"
+        name:
+          type: string
+          description: Name by which an agent is known and which is usually used to identify that agent.
+          minLength: 1
+          maxLength: 140
+        postal_address:
+          description: "Information that locates and identifies a specific address, as defined by postal services."
+          $ref: "#/components/schemas/PostalAddress24"
+        other:
+          description: "Unique identification of an agent, as assigned by an institution, using an identification scheme."
+          $ref: "#/components/schemas/GenericFinancialIdentification1"
+    GenericFinancialIdentification1:
+      type: object
+      description: Information related to an identification of a financial institution.
+      additionalProperties: false
+      properties:
+        identification:
+          type: string
+          description: Unique and unambiguous identification of a person.
+          minLength: 1
+          maxLength: 35
+        scheme_name:
+          description: Name of the identification scheme.
+          $ref: "#/components/schemas/FinancialIdentificationSchemeName1Choice"
+        issuer:
+          type: string
+          description: Entity that assigns the identification.
+          minLength: 1
+          maxLength: 35
+      required:
+        - identification
+    GenericIdentification30:
+      type: object
+      description: "Information related to an identification, for example, party identification or account identification."
+      additionalProperties: false
+      properties:
+        identification:
+          description: "Proprietary information, often a code, issued by the data source scheme issuer."
+          $ref: "#/components/schemas/Exact4AlphaNumericText"
+        issuer:
+          type: string
+          description: Entity that assigns the identification.
+          minLength: 1
+          maxLength: 35
+        scheme_name:
+          type: string
+          description: Short textual description of the scheme.
+          minLength: 1
+          maxLength: 35
+      required:
+        - identification
+        - issuer
+    GenericOrganisationIdentification1:
+      type: object
+      description: Information related to an identification of an organisation.
+      additionalProperties: false
+      properties:
+        identification:
+          type: string
+          description: Identification assigned by an institution.
+          minLength: 1
+          maxLength: 35
+        scheme_name:
+          description: Name of the identification scheme.
+          $ref: "#/components/schemas/OrganisationIdentificationSchemeName1Choice"
+        issuer:
+          type: string
+          description: Entity that assigns the identification.
+          minLength: 1
+          maxLength: 35
+      required:
+        - identification
+    GenericOrganisationIdentification1__1:
+      type: object
+      description: Information related to an identification of an organisation.
+      additionalProperties: false
+      properties:
+        identification:
+          type: string
+          description: Identification assigned by an institution.
+          minLength: 1
+          maxLength: 35
+      required:
+        - identification
+    GenericPersonIdentification1:
+      type: object
+      description: Information related to an identification of a person.
+      additionalProperties: false
+      properties:
+        identification:
+          type: string
+          description: Unique and unambiguous identification of a person.
+          minLength: 1
+          maxLength: 35
+        scheme_name:
+          description: Name of the identification scheme.
+          $ref: "#/components/schemas/PersonIdentificationSchemeName1Choice"
+        issuer:
+          type: string
+          description: Entity that assigns the identification.
+          minLength: 1
+          maxLength: 35
+      required:
+        - identification
+    LEIIdentifier:
+      type: string
+      description: 'Legal Entity Identifier is a code allocated to a party as described in ISO 17442 "Financial Services - Legal Entity Identifier (LEI)".'
+      pattern: "^[A-Z0-9]{18,18}[0-9]{2,2}$"
+    NamePrefix2Code:
+      type: string
+      description: |-
+        Specifies the terms used to formally address a person.
+        *`DOCT`-Title of the person is Doctor or Dr.
+        *`MADM`-Title of the person is Madam.
+        *`MISS`-Title of the person is Miss.
+        *`MIST`-Title of the person is Mister or Mr.
+        *`MIKS`-Title of the person is gender neutral (Mx).
+      enum:
+        - DOCT
+        - MADM
+        - MISS
+        - MIST
+        - MIKS
+    OrganisationIdentification29:
+      type: object
+      description: Unique and unambiguous way to identify an organisation.
+      additionalProperties: false
+      properties:
+        any_bic:
+          description: Business identification code of the organisation.
+          $ref: "#/components/schemas/AnyBICDec2014Identifier"
+        lei:
+          description: Legal entity identification as an alternate identification for a party.
+          $ref: "#/components/schemas/LEIIdentifier"
+        other:
+          type: array
+          description: "Unique identification of an organisation, as assigned by an institution, using an identification scheme."
+          items:
+            $ref: "#/components/schemas/GenericOrganisationIdentification1"
+    OrganisationIdentification29__1:
+      type: object
+      description: Unique and unambiguous way to identify an organisation.
+      additionalProperties: false
+      properties:
+        other:
+          description: "Unique identification of an organisation, as assigned by an institution, using an identification scheme."
+          $ref: "#/components/schemas/GenericOrganisationIdentification1__1"
+      required:
+        - other
+    OrganisationIdentificationSchemeName1Choice:
+      type: object
+      description: Sets of elements to identify a name of the organisation identification scheme.
+      additionalProperties: false
+      oneOf:
+        - type: object
+          additionalProperties: false
+          properties:
+            code:
+              description: "Name of the identification scheme, in a coded form as published in an external list."
+              $ref: "#/components/schemas/ExternalOrganisationIdentification1Code"
+          required:
+            - code
+        - type: object
+          additionalProperties: false
+          properties:
+            proprietary:
+              description: "Name of the identification scheme, in a free text form."
+              type: string
+              minLength: 1
+              maxLength: 35
+          required:
+            - proprietary
+    OtherContact1:
+      type: object
+      description: Communication device number or electronic address used for communication.
+      additionalProperties: false
+      properties:
+        channel_type:
+          type: string
+          description: Method used to contact the financial institution’s contact for the specific tax region.
+          minLength: 1
+          maxLength: 4
+        identification:
+          type: string
+          description: Communication value such as phone number or email address.
+          minLength: 1
+          maxLength: 128
+      required:
+        - channel_type
+    Party38Choice:
+      type: object
+      description: Nature or use of the account.
+      additionalProperties: false
+      oneOf:
+        - type: object
+          additionalProperties: false
+          properties:
+            organisation_identification:
+              description: Unique and unambiguous way to identify an organisation.
+              $ref: "#/components/schemas/OrganisationIdentification29"
+          required:
+            - organisation_identification
+        - type: object
+          additionalProperties: false
+          properties:
+            private_identification:
+              description: "Unique and unambiguous identification of a person, for example a passport."
+              $ref: "#/components/schemas/PersonIdentification13"
+          required:
+            - private_identification
+    Party38Choice__1:
+      type: object
+      description: Nature or use of the account.
+      additionalProperties: false
+      properties:
+        organisation_identification:
+          description: Unique and unambiguous way to identify an organisation.
+          $ref: "#/components/schemas/OrganisationIdentification29__1"
+      required:
+        - organisation_identification
+    Party44Choice:
+      type: object
+      description: "Identification of a person, an organisation or a financial institution."
+      additionalProperties: false
+      oneOf:
+        - type: object
+          additionalProperties: false
+          properties:
+            organisation_identification:
+              description: Identification of a person or an organisation.
+              $ref: "#/components/schemas/PartyIdentification135"
+          required:
+            - organisation_identification
+        - type: object
+          additionalProperties: false
+          properties:
+            financial_institution_identification:
+              description: Identification of a financial institution.
+              $ref: "#/components/schemas/BranchAndFinancialInstitutionIdentification6"
+          required:
+            - financial_institution_identification
+    Party44Choice__1:
+      type: object
+      description: "Identification of a person, an organisation or a financial institution."
+      additionalProperties: false
+      properties:
+        organisation_identification:
+          description: Identification of a person or an organisation.
+          $ref: "#/components/schemas/PartyIdentification135__1"
+      required:
+        - organisation_identification
+    PartyIdentification135:
+      type: object
+      description: Specifies the identification of a person or an organisation.
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          description: Name by which a party is known and which is usually used to identify that party.
+          minLength: 1
+          maxLength: 140
+        postal_address:
+          description: "Information that locates and identifies a specific address, as defined by postal services."
+          $ref: "#/components/schemas/PostalAddress24"
+        identification:
+          description: Unique and unambiguous identification of a party.
+          $ref: "#/components/schemas/Party38Choice"
+        country_of_residence:
+          description: "Country in which a person resides (the place of a person's home). In the case of a company, it is the country from which the affairs of that company are directed."
+          $ref: "#/components/schemas/CountryCode"
+        contact_details:
+          description: Set of elements used to indicate how to contact the party.
+          $ref: "#/components/schemas/Contact4"
+    PartyIdentification135__1:
+      type: object
+      description: Specifies the identification of a person or an organisation.
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          description: Name by which a party is known and which is usually used to identify that party.
+          minLength: 1
+          maxLength: 140
+        identification:
+          description: Unique and unambiguous identification of a party.
+          $ref: "#/components/schemas/Party38Choice__1"
+      required:
+        - identification
+    PersonIdentification13:
+      type: object
+      description: Unique and unambiguous way to identify a person.
+      additionalProperties: false
+      properties:
+        date_and_place_of_birth:
+          description: Date and place of birth of a person.
+          $ref: "#/components/schemas/DateAndPlaceOfBirth1"
+        other:
+          type: array
+          description: "Unique identification of a person, as assigned by an institution, using an identification scheme."
+          items:
+            $ref: "#/components/schemas/GenericPersonIdentification1"
+    PersonIdentificationSchemeName1Choice:
+      type: object
+      description: Sets of elements to identify a name of the identification scheme.
+      additionalProperties: false
+      oneOf:
+        - type: object
+          additionalProperties: false
+          properties:
+            code:
+              description: "Name of the identification scheme, in a coded form as published in an external list."
+              $ref: "#/components/schemas/ExternalPersonIdentification1Code"
+          required:
+            - code
+        - type: object
+          additionalProperties: false
+          properties:
+            proprietary:
+              description: "Name of the identification scheme, in a free text form."
+              type: string
+              minLength: 1
+              maxLength: 35
+          required:
+            - proprietary
+    PhoneNumber:
+      type: string
+      description: >-
+        The collection of information which identifies a specific phone or FAX
+        number as defined by telecom services.
+
+        It consists of a "+" followed by the country code (from 1 to 3 characters)
+        then a "-" and finally, any combination of numbers, "(", ")", "+" and "-"
+        (up to 30 characters).
+      pattern: "^\\+[0-9]{1,3}-[0-9()+\\-]{1,30}$"
+    PostalAddress24:
+      type: object
+      description: "Information that locates and identifies a specific address, as defined by postal services."
+      additionalProperties: false
+      properties:
+        address_type:
+          description: Identifies the nature of the postal address.
+          $ref: "#/components/schemas/AddressType3Choice"
+        department:
+          description: Identification of a division of a large organisation or building.
+          type: string
+          minLength: 1
+          maxLength: 70
+        sub_department:
+          description: Identification of a sub-division of a large organisation or building.
+          type: string
+          minLength: 1
+          maxLength: 70
+        street_name:
+          description: Name of a street or thoroughfare.
+          type: string
+          minLength: 1
+          maxLength: 70
+        building_number:
+          type: string
+          description: Number that identifies the position of a building on a street.
+          minLength: 1
+          maxLength: 16
+        building_name:
+          description: Name of the building or house.
+          type: string
+          minLength: 1
+          maxLength: 35
+        floor:
+          type: string
+          description: Floor or storey within a building.
+          minLength: 1
+          maxLength: 70
+        post_box:
+          type: string
+          description: "Numbered box in a post office, assigned to a person or organisation, where letters are kept until called for."
+          minLength: 1
+          maxLength: 16
+        room:
+          type: string
+          description: Building room number.
+          minLength: 1
+          maxLength: 70
+        post_code:
+          type: string
+          description: Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.
+          minLength: 1
+          maxLength: 16
+        town_name:
+          description: "Name of a built-up area, with defined boundaries, and a local government."
+          type: string
+          minLength: 1
+          maxLength: 35
+        town_location_name:
+          description: Specific location name within the town.
+          type: string
+          minLength: 1
+          maxLength: 35
+        district_name:
+          description: Identifies a subdivision within a country sub-division.
+          type: string
+          minLength: 1
+          maxLength: 35
+        country_sub_division:
+          description: "Identifies a subdivision of a country such as state, region, county."
+          type: string
+          minLength: 1
+          maxLength: 35
+        country:
+          description: Nation with its own government.
+          $ref: "#/components/schemas/CountryCode"
+        address_line:
+          type: array
+          maxItems: 7
+          description: "Information that locates and identifies a specific address, as defined by postal services, presented in free format text."
+          items:
+            type: string
+            minLength: 1
+            maxLength: 70
+    PreferredContactMethod1Code:
+      type: string
+      description: >-
+        Preferred method used to reach the individual contact within an
+        organisation.
+
+        *`LETT`-Preferred method used to reach the contact is per letter.
+
+        *`MAIL`-Preferred method used to reach the contact is per email.
+
+        *`PHON`-Preferred method used to reach the contact is per phone.
+
+        *`FAXX`-Preferred method used to reach the contact is per fax.
+
+        *`CELL`-Preferred method used to reach the contact is per mobile or cell
+        phone.
+      enum:
+        - LETT
+        - MAIL
+        - PHON
+        - FAXX
+        - CELL
+    UnicodeChartsCode:
+      type: string
+      description: "codelist containing the names of the UNICODE code block name as specified on http://unicode.org/Public/UNIDATA/Blocks.txt."
+    YesNoIndicator:
+      type: boolean
+      description: 'Indicates a "Yes" or "No" type of answer for an element.'

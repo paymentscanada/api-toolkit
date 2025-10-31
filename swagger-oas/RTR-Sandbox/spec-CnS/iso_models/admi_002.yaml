@@ -1,0 +1,46 @@
+# RTR C&S ISO 20022 JSON Schema MessageReject (admi.002.001.01)
+components:
+  schemas:
+    MessageReference:
+      type: object
+      description: Message reference of relevance to the present message.
+      additionalProperties: false
+      properties:
+        reference:
+          description: Business reference of the present message assigned by the party issuing the message. This reference must be unique amongst all messages of the same name sent by the same party.
+          type: string
+          minLength: 1
+          maxLength: 35
+      required:
+        - reference
+    MessageReject:
+      type: object
+      description: "Scope\r\nThe MessageReject message is sent by a central system to notify the rejection of a previously received message.\r\nUsage\r\nThe message provides specific information about the rejection reason."
+      additionalProperties: false
+      properties:
+        related_reference:
+          description: Refers to the identification of the message previously received and for which the rejection is notified.
+          $ref: "#/components/schemas/MessageReference"
+        reason:
+          description: General information about the reason of the message rejection.
+          $ref: "#/components/schemas/RejectionReason"
+      required:
+        - related_reference
+        - reason
+    RejectionReason:
+      type: object
+      description: General information about the reason of the rejection.
+      additionalProperties: false
+      properties:
+        rejecting_party_reason:
+          description: Reason of the rejection provided by the rejecting party.
+          type: string
+          minLength: 1
+          maxLength: 35
+        additional_data:
+          description: Additional information related to the rejection and meant to allow for the precise identification of the rejection reason. This could include a copy of the rejected message in part or in full.
+          type: string
+          minLength: 1
+          maxLength: 20000
+      required:
+        - rejecting_party_reason
