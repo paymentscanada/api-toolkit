@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "a91da82b-b49d-4976-894e-343e74f9a604",
+		"_postman_id": "7cbef0b8-cb5b-46ed-b62f-e4a30bfbaafb",
 		"name": "Apigee-Lynx-Connectivity-Test-Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "5879365"
+		"_exporter_id": "5879365",
+		"_collection_link": "https://paymentscanada.postman.co/workspace/Lynx~da60be88-2ce5-4772-a91f-4cdc5f511ced/collection/5879365-7cbef0b8-cb5b-46ed-b62f-e4a30bfbaafb?action=share&source=collection_link&creator=5879365"
 	},
 	"item": [
 		{
@@ -21,7 +22,9 @@
 							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -42,13 +45,7 @@
 					]
 				},
 				"method": "POST",
-				"header": [
-					{
-						"key": "x-api-key",
-						"value": "{{apikey}}",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "urlencoded",
 					"urlencoded": [
@@ -96,7 +93,9 @@
 							"});\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -105,8 +104,8 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"type": "text",
-						"value": "Bearer {{token}}"
+						"value": "Bearer {{token}}",
+						"type": "text"
 					},
 					{
 						"key": "Accept",
@@ -126,8 +125,8 @@
 					],
 					"query": [
 						{
-							"key": "beneficiary-bank-bic",
-							"value": "AAQAQAQAQAQAQAQAQAQAQ",
+							"key": "originating-fi-bic",
+							"value": "PTSAZADD",
 							"disabled": true
 						},
 						{
@@ -173,7 +172,9 @@
 							"});\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -182,8 +183,8 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"type": "text",
-						"value": "Bearer {{token}}"
+						"value": "Bearer {{token}}",
+						"type": "text"
 					},
 					{
 						"key": "Accept",
@@ -192,7 +193,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{env}}/lynx/fund-settlement-detail",
+					"raw": "https://{{env}}/lynx/fund-settlement-detail?settlement-bank-bic=PTSAZADD",
 					"protocol": "https",
 					"host": [
 						"{{env}}"
@@ -200,6 +201,13 @@
 					"path": [
 						"lynx",
 						"fund-settlement-detail"
+					],
+					"query": [
+						{
+							"key": "settlement-bank-bic",
+							"value": "PTSAZADD",
+							"description": "Required"
+						}
 					]
 				}
 			},
@@ -228,7 +236,9 @@
 							"});\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -237,8 +247,8 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"type": "text",
-						"value": "Bearer {{token}}"
+						"value": "Bearer {{token}}",
+						"type": "text"
 					},
 					{
 						"key": "Accept",
@@ -247,7 +257,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{env}}/lynx/fund-settlement-detail/orf/:{originator-ref-number}",
+					"raw": "https://{{env}}/lynx/fund-settlement-detail/orf/:{originator-ref-number}?settlement-bank-bic=PTSAZADD&originator-bic=PTSAZADD",
 					"protocol": "https",
 					"host": [
 						"{{env}}"
@@ -257,6 +267,18 @@
 						"fund-settlement-detail",
 						"orf",
 						":{originator-ref-number}"
+					],
+					"query": [
+						{
+							"key": "settlement-bank-bic",
+							"value": "PTSAZADD",
+							"description": "Required"
+						},
+						{
+							"key": "originator-bic",
+							"value": "PTSAZADD",
+							"description": "Required"
+						}
 					],
 					"variable": [
 						{
@@ -355,8 +377,8 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"type": "text",
-						"value": "Bearer {{token}}"
+						"value": "Bearer {{token}}",
+						"type": "text"
 					},
 					{
 						"key": "Accept",
@@ -466,8 +488,8 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"type": "text",
-						"value": "Bearer {{token}}"
+						"value": "Bearer {{token}}",
+						"type": "text"
 					},
 					{
 						"key": "Accept",
@@ -513,7 +535,9 @@
 							"});\r",
 							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -522,8 +546,8 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"type": "text",
-						"value": "Bearer {{token}}"
+						"value": "Bearer {{token}}",
+						"type": "text"
 					},
 					{
 						"key": "Accept",
@@ -532,7 +556,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{env}}/lynx/recon",
+					"raw": "https://{{env}}/lynx/recon?participant-fi-bic=PTSAZAEE002",
 					"protocol": "https",
 					"host": [
 						"{{env}}"
@@ -545,7 +569,7 @@
 						{
 							"key": "participant-fi-bic",
 							"value": "PTSAZAEE002",
-							"disabled": true
+							"description": "Required"
 						},
 						{
 							"key": "account-number",
